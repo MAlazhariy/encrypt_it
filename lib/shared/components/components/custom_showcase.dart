@@ -34,7 +34,7 @@ class CustomShowcase extends StatelessWidget {
         fontWeight: FontWeight.w500,
       ),
       radius: BorderRadius.circular(10.sp),
-      overlayOpacity: 0,
+      overlayOpacity: 0.5,
       child: child,
     );
   }

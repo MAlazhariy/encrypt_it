@@ -22,8 +22,10 @@ void main() async {
 
   RequestConfiguration config = RequestConfiguration(
     testDeviceIds: <String>['4A92A9DE35E8C65AF79B64ABF57D1274'],
+    // a539cc08-fef2-4e5d-b4fd-4b7dbe141840
   );
-  MobileAds.instance.updateRequestConfiguration(config);
+  // MobileAds.instance.updateRequestConfiguration(config);
+  MobileAds.instance.initialize();
 
   // prevent device orientation changes & force portrait
   SystemChrome.setPreferredOrientations(

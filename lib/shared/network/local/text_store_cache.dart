@@ -32,19 +32,19 @@ class TextStoreCache{
   static final Box _box = Hive.box('myBox');
 
 
-  static Map getGroups(){
+  static Map? getGroups(){
     return _box.get('myBox',defaultValue: {})['groups'];
   }
 
   static String getGroupName(int index){
-    return getGroups().keys.toList()[index];
+    return getGroups()!.keys.toList()[index];
   }
 
   static String getTitleFromGroup({
     required String groupName,
     required int index,
 }){
-    return getGroups()[groupName].keys.toList()[index];
+    return getGroups()![groupName].keys.toList()[index];
   }
 
 
@@ -118,8 +118,8 @@ class TextStoreCache{
         groups[groupName].addAll({deletedTitle: deletedTitleValue});
       } else {
         // get current title and value
-        final String currentTitle = getGroups()[groupName].keys.toList()[index];
-        final String currentValue = getGroups()[groupName].values.toList()[index];
+        final String currentTitle = getGroups()![groupName].keys.toList()[index];
+        final String currentValue = getGroups()![groupName].values.toList()[index];
 
         // remove title
         groups[groupName].remove(currentTitle);
