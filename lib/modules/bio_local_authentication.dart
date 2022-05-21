@@ -53,7 +53,7 @@ class LocalAuthApi {
       );
     } on PlatformException {
       log('PlatformException');
-      return false;
+      return true;
     } catch (e){
       log('exception in authenticate method: ${e.toString()}');
       return false;

@@ -3,6 +3,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+bool authenticated = false;
+
 void changeLang(BuildContext context){
   if(currentLang(context)=='ar'){
     context.locale = const Locale('en');
