@@ -109,7 +109,7 @@ class HomeScreen extends StatelessWidget {
               // this fuction paste the text in its field
               // and password in its field at once.
               void pasteAll() {
-                FlutterClipboard.paste().then((value) {
+                FlutterClipboard.paste().then((value){
                   // ensure if value contains ciphertext & password
                   if (value.startsWith('Ciphertext: "') &&
                       value.contains('\nPassword: "')) {
@@ -319,7 +319,7 @@ class HomeScreen extends StatelessWidget {
                                                 : true;
 
                                             // todo: important handle bio
-                                            if(isAuthenticated)  {
+                                            if (isAuthenticated)  {
                                               showCustomDialog(
                                                 context: context,
                                                 title: 'choose_message'.tr(),
