@@ -70,6 +70,18 @@ void showRateDialog(BuildContext context) {
 
                 /// rate button
                 MaterialButton(
+                  color: redColor,
+                  textColor: contrastColor,
+
+                  elevation: 0,
+                  highlightElevation: 0,
+                  focusElevation: 0,
+                  disabledElevation: 0,
+                  hoverElevation: 0,
+                  onPressed: (){
+                    rateOpenGoogle();
+                    Navigator.pop(context);
+                  },
                   child: Container(
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(
@@ -92,18 +104,6 @@ void showRateDialog(BuildContext context) {
                       ],
                     ),
                   ),
-                  color: redColor,
-                  textColor: contrastColor,
-
-                  elevation: 0,
-                  highlightElevation: 0,
-                  focusElevation: 0,
-                  disabledElevation: 0,
-                  hoverElevation: 0,
-                  onPressed: (){
-                    rateOpenGoogle();
-                    Navigator.pop(context);
-                  },
                 ),
 
                 Row(
@@ -112,14 +112,6 @@ void showRateDialog(BuildContext context) {
                     Expanded(
                       flex: 3,
                       child: MaterialButton(
-                        child: Text(
-                          'remind_later'.tr(),
-                          style: TextStyle(
-                            color: redColor,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 10.5.sp,
-                          ),
-                        ),
                         onPressed: (){
                           Navigator.pop(context);
                         },
@@ -137,6 +129,14 @@ void showRateDialog(BuildContext context) {
                               bottomStart: Radius.circular(12.sp),
                             )
                         ),
+                        child: Text(
+                          'remind_later'.tr(),
+                          style: TextStyle(
+                            color: redColor,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 10.5.sp,
+                          ),
+                        ),
                       ),
                     ),
 
@@ -144,15 +144,6 @@ void showRateDialog(BuildContext context) {
                     Expanded(
                       flex: 2,
                       child: MaterialButton(
-                        child: Text(
-                          'no_thanks'.tr(),
-                          style: TextStyle(
-                            color: redColor.withAlpha(210),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 10.5.sp,
-                          ),
-                        ),
-
                         elevation: 0,
                         highlightElevation: 0,
                         focusElevation: 0,
@@ -171,6 +162,14 @@ void showRateDialog(BuildContext context) {
                           RateCache.appRatedSuccessfully();
                           Navigator.pop(context);
                         },
+                        child: Text(
+                          'no_thanks'.tr(),
+                          style: TextStyle(
+                            color: redColor.withAlpha(210),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 10.5.sp,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -190,15 +189,15 @@ void showRateDialog(BuildContext context) {
 
 Future<void> showInAppRate() async {
 
-  final InAppReview _inAppReview = InAppReview.instance;
-  if (await _inAppReview.isAvailable()) {
-    _inAppReview.requestReview();
+  final InAppReview inAppReview = InAppReview.instance;
+  if (await inAppReview.isAvailable()) {
+    inAppReview.requestReview();
   }
 
 }
 
 void rateOpenGoogle(){
-  final InAppReview _inAppReview = InAppReview.instance;
-  _inAppReview.openStoreListing();
+  final InAppReview inAppReview = InAppReview.instance;
+  inAppReview.openStoreListing();
   RateCache.appRatedSuccessfully();
 }

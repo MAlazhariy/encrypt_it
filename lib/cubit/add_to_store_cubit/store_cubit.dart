@@ -9,7 +9,7 @@ class StoreCubit extends Cubit<StoreStates>{
   var titleFormKey = GlobalKey<FormState>();
 
   bool isGroupChoosedFromDropMenu = true;
-  String choosedGroup;
+  String? choosedGroup;
   String groupName = '';
   String title = '';
   bool isGroupCompleted = false;

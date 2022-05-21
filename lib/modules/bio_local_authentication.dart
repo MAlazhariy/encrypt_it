@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+
 
 import 'dart:developer';
 
@@ -8,6 +8,8 @@ import 'package:local_auth/auth_strings.dart';
 import 'package:local_auth/local_auth.dart';
 
 class LocalAuthApi {
+  // todo: important unit test
+  // todo: important to test
 
   static final _auth = LocalAuthentication();
   static final AndroidAuthMessages _androidStrings = AndroidAuthMessages(
@@ -38,10 +40,11 @@ class LocalAuthApi {
 
 
   static Future<bool> authenticate() async {
-    final bool _isAvailable = await hasBiometrics();
-    if (!_isAvailable) return false;
+    final isAvailable = await hasBiometrics();
+    if (!isAvailable) return false;
 
     try {
+      // ignore: deprecated_member_use
       return await _auth.authenticateWithBiometrics(
         useErrorDialogs: true,
         stickyAuth: true,

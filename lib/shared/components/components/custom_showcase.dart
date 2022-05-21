@@ -5,23 +5,22 @@ import 'package:sizer/sizer.dart';
 
 class CustomShowcase extends StatelessWidget {
   const CustomShowcase({
-    @required this.globalKey,
-    @required this.description,
-    @required this.child,
+    required this.globalKey,
+    required this.description,
+    required this.child,
     this.title,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final Widget child;
   final GlobalKey globalKey;
   final String description;
-  final String title;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
     return Showcase(
       key: globalKey,
-      child: child,
       title: title,
       description: description,
       titleTextStyle: TextStyle(
@@ -36,6 +35,7 @@ class CustomShowcase extends StatelessWidget {
       ),
       radius: BorderRadius.circular(10.sp),
       overlayOpacity: 0,
+      child: child,
     );
   }
 }

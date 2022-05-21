@@ -8,33 +8,39 @@ import 'package:flutter/material.dart';
 class Decoding {
   Decoding();
 
-  String decoder(String message, String password, BuildContext context, bool _isEncrypt) {
+  String decoder({
+    required String message,
+    required String password,
+    required BuildContext context,
+    required bool isEncrypt,
+  }) {
     /// encrypt algorithm
-    if (_isEncrypt) {
-      return V06(message, password, context, _isEncrypt).encrypt();
+    if (isEncrypt) {
+      return V06(message, password, context, isEncrypt).encrypt();
     }
 
     /// decrypt filter conditions
-    String _version = message.substring(message.length - 2, message.length);
-    String _messageWithoutVersion = message.substring(0, message.length -2);
+    String version = message.substring(message.length - 2, message.length);
+    String messageWithoutVersion = message.substring(0, message.length - 2);
 
-    if(_version == '06'){
-      return V06(_messageWithoutVersion, password, context, _isEncrypt).decrypt();
-    } else if(_version == '05'){
-      return V05(_messageWithoutVersion, password, context, _isEncrypt).decrypt();
+    if (version == '06') {
+      return V06(messageWithoutVersion, password, context, isEncrypt)
+          .decrypt();
+    } else if (version == '05') {
+      return V05(messageWithoutVersion, password, context, isEncrypt)
+          .decrypt();
     }
 
     // else
     try {
-      int _versionNumber = int.parse(_version);
-      if(_versionNumber > 5){
+      int versionNumber = int.parse(version);
+      if (versionNumber > 5) {
         return 'later_version_warning_title'.tr();
       } else {
         return 'version_not_found'.tr();
       }
-    } catch (e){
+    } catch (e) {
       return 'version_not_found'.tr();
     }
-
   }
 }

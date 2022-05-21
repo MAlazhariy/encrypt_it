@@ -13,7 +13,7 @@ class AppCubit extends Cubit<AppStates>{
   bool isPasswordHidden = true;
   IconData passwordIcon = Icons.visibility;
   /// You can know which current field that the user is on through this variable
-  _Fields currentTextField = _Fields.none;
+  Fields currentTextField = Fields.none;
   PackageInfo appInfo = PackageInfo(appName: 'appName'.tr(), packageName: '', version: '   ', buildNumber: '');
 
   static AppCubit get(BuildContext context){
@@ -30,30 +30,30 @@ class AppCubit extends Cubit<AppStates>{
 
   // current field functions
   void setCurrentFieldToText(){
-    currentTextField = _Fields.text;
+    currentTextField = Fields.text;
     emit(AppOnTextState());
   }
   bool get isCurrentFieldText{
-    return currentTextField == _Fields.text;
+    return currentTextField == Fields.text;
   }
 
   void setCurrentFieldToPassword(){
-    currentTextField = _Fields.password;
+    currentTextField = Fields.password;
     emit(AppOnPasswordState());
   }
   bool get isCurrentFieldPassword{
-    return currentTextField == _Fields.password;
+    return currentTextField == Fields.password;
   }
 
   void setCurrentFieldToNoneAndInactivated(){
-    currentTextField = _Fields.noneAndInactivatedFields;
+    currentTextField = Fields.noneAndInactivatedFields;
     emit(AppOnNoneInactivatedState());
   }
   bool get isCurrentFieldNoneAndInactivated{
-    return currentTextField == _Fields.noneAndInactivatedFields;
+    return currentTextField == Fields.noneAndInactivatedFields;
   }
   void setCurrentFieldToNone(){
-    currentTextField = _Fields.none;
+    currentTextField = Fields.none;
     emit(AppOnNoneState());
   }
 
@@ -96,7 +96,7 @@ class AppCubit extends Cubit<AppStates>{
     isButtonsActive = false;
 
     // set current field to none
-    currentTextField = _Fields.none;
+    currentTextField = Fields.none;
     emit(AppClearAllState());
   }
 
@@ -104,7 +104,7 @@ class AppCubit extends Cubit<AppStates>{
 
 
 
-enum _Fields {
+enum Fields {
   /// When user be in the main text field (encrypted and plain text field)
   text,
   /// When user be in the password field

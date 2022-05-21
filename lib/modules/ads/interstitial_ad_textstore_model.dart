@@ -1,12 +1,11 @@
 import 'dart:developer';
-
-import 'package:encryption_app/models/ads/ad_helper.dart';
+import 'package:encryption_app/modules/ads/ad_helper.dart';
 import 'package:encryption_app/shared/network/local/operation_counter_cache.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class AdInterstitial{
+class AdInterstitial {
 
-  static InterstitialAd _interstitialAd;
+  static late InterstitialAd _interstitialAd;
   static bool isAdReady = false;
   static const int _maxFailedLoadAttempts = 1;
   static int _numBannerLoadAttempts = 0;

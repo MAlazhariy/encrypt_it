@@ -10,7 +10,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 /// board pages
 class BoardPage1 extends StatelessWidget {
-  const BoardPage1({Key key}) : super(key: key);
+  const BoardPage1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class BoardPage1 extends StatelessWidget {
 }
 
 class BoardPage2 extends StatelessWidget {
-  const BoardPage2({Key key}) : super(key: key);
+  const BoardPage2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +120,7 @@ class BoardPage2 extends StatelessWidget {
 }
 
 class BoardPage3 extends StatelessWidget {
-  const BoardPage3({Key key}) : super(key: key);
+  const BoardPage3({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -166,13 +166,13 @@ class BoardPage3 extends StatelessWidget {
 
 /// On boarding screen widget
 class OnBoardScreen extends StatefulWidget {
-  const OnBoardScreen({Key key}) : super(key: key);
+  const OnBoardScreen({Key? key}) : super(key: key);
 
   @override
-  _OnBoardScreenState createState() => _OnBoardScreenState();
+  OnBoardScreenState createState() => OnBoardScreenState();
 }
 
-class _OnBoardScreenState extends State<OnBoardScreen> {
+class OnBoardScreenState extends State<OnBoardScreen> {
 
   double currentIndex = 0;
   bool isLast = false;
@@ -251,30 +251,6 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
               LayoutBuilder(
                 builder: (_, constraints){
                   return MaterialButton(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          isLast ? 'get_started'.tr() : 'next'.tr(),
-                          style: TextStyle(
-                            color: contrastColor,
-                            fontSize: 12.sp,
-                            fontWeight:
-                            isLast ? FontWeight.w600 : FontWeight.w500,
-                          ),
-                        ),
-
-                        if(!isLast)
-                          SizedBox(width: 2.sp,),
-
-                        if(!isLast)
-                          const Icon(
-                            Icons.navigate_next,
-                            color: contrastColor,
-                          ),
-                      ],
-                    ),
                     autofocus: true,
 
                     onPressed: (){
@@ -307,6 +283,30 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                     ),
                     splashColor: contrastColor.withAlpha(25),
                     highlightColor: contrastColor.withAlpha(10),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          isLast ? 'get_started'.tr() : 'next'.tr(),
+                          style: TextStyle(
+                            color: contrastColor,
+                            fontSize: 12.sp,
+                            fontWeight:
+                            isLast ? FontWeight.w600 : FontWeight.w500,
+                          ),
+                        ),
+
+                        if(!isLast)
+                          SizedBox(width: 2.sp,),
+
+                        if(!isLast)
+                          const Icon(
+                            Icons.navigate_next,
+                            color: contrastColor,
+                          ),
+                      ],
+                    ),
                   );
                 },
               ),

@@ -1,18 +1,18 @@
 import 'dart:developer';
+import 'package:encryption_app/modules/ads/ad_helper.dart';
 import 'package:encryption_app/shared/network/local/operation_counter_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '../../models/ads/ad_helper.dart';
 
 class AdBanner extends StatefulWidget {
-  const AdBanner({Key key}) : super(key: key);
+  const AdBanner({Key? key}) : super(key: key);
 
   @override
-  _AdBannerState createState() => _AdBannerState();
+  AdBannerState createState() => AdBannerState();
 }
 
-class _AdBannerState extends State<AdBanner> {
-  BannerAd bannerAd;
+class AdBannerState extends State<AdBanner> {
+  late BannerAd bannerAd;
   bool _isAdReady = false;
   final AdSize _adSize = AdSize.banner;
   final int maxFailedLoadAttempts = 2;
@@ -58,12 +58,13 @@ class _AdBannerState extends State<AdBanner> {
 
   @override
   Widget build(BuildContext context) {
+    // todo: test me
     if(_isAdReady && OperationCounterCache.getCounter()>=2){
       return Container(
         height: _adSize.height.toDouble(),
         width: _adSize.width.toDouble(),
-        child: AdWidget(ad: bannerAd),
         alignment: Alignment.center,
+        child: AdWidget(ad: bannerAd),
       );
     }
 

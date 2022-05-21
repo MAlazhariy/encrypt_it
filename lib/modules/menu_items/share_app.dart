@@ -7,7 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShareAppMenuItem extends StatelessWidget {
-  const ShareAppMenuItem({Key key}) : super(key: key);
+  const ShareAppMenuItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +15,20 @@ class ShareAppMenuItem extends StatelessWidget {
       title: 'share_app'.tr(),
       icon: Icons.share,
       onTap: (){
-        String _welcomePassword = '123';
-        String _encryptedWelcomeText = Decoding().decoder('welcome_text'.tr(), _welcomePassword, context, true);
-        String _shareMessage = 'share_app_message'.tr(namedArgs: {'encrypted_text': _encryptedWelcomeText, 'password': _welcomePassword});
+        String welcomePassword = '123';
+        String encryptedWelcomeText = Decoding().decoder(
+          isEncrypt: true,
+          password: welcomePassword,
+          context: context,
+          message: 'welcome_text'.tr(),
+        );
+        String shareMessage = 'share_app_message'.tr(namedArgs: {'encrypted_text': encryptedWelcomeText, 'password': welcomePassword});
 
-        // FlutterClipboard.copy(_shareMessage);
+        // FlutterClipboard.copy(shareMessage);
         FlutterClipboard.copy(Links.appOnGooglePlay);
 
         Share.share(
-          _shareMessage,
+          shareMessage,
           subject: 'Encrypt it',
         );
       },

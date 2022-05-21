@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 void customAlertDialog({
-  @required BuildContext context,
-  @required String title,
-  String alertDescription,
-  @required IconData alertIcon,
+  required BuildContext context,
+  required String title,
+  required String alertDescription,
+  required IconData alertIcon,
   List <Widget> buttons = const <Widget>[],
 }){
   showDialog(

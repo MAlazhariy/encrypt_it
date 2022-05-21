@@ -9,12 +9,10 @@ import 'package:encryption_app/shared/network/local/on_board_cache.dart';
 import 'package:encryption_app/shared/styles/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sizer/sizer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'layout/home_screen.dart';
-import 'cubit/app_cubit/observer.dart';
 
 
 void main() async {
@@ -32,7 +30,7 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]
   );
 
-  Bloc.observer = MyBlocObserver();
+  // Bloc.observer = MyBlocObserver();
   await EasyLocalization.ensureInitialized();
 
   await Hive.initFlutter();
@@ -50,7 +48,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
 
   @override

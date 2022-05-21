@@ -20,7 +20,7 @@ String currentLang(BuildContext context){
 class Links{
   // static const String contactUs = 'https://m.me/encryptitapp';
   static String mailUs({
-    @required String subject,
+    required String subject,
     String body = '',
 }) {
     const String email = 'encryptitapp@gmail.com';

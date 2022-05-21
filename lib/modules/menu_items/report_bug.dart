@@ -8,7 +8,7 @@ import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ReportABugMenuItem extends StatelessWidget {
-  const ReportABugMenuItem(this.appVersion,{Key key}) : super(key: key);
+  const ReportABugMenuItem(this.appVersion,{Key? key}) : super(key: key);
 
   final String appVersion;
 
@@ -25,6 +25,7 @@ class ReportABugMenuItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
+                width: double.infinity,
                 child: Center(
                   child: Icon(
                     Icons.assistant_outlined,
@@ -32,7 +33,6 @@ class ReportABugMenuItem extends StatelessWidget {
                     color: Colors.grey[300],
                   ),
                 ),
-                width: double.infinity,
               ),
               SizedBox(height: 15.sp,),
               Text(
@@ -51,7 +51,7 @@ class ReportABugMenuItem extends StatelessWidget {
               title: 'contact_us'.tr(),
               onPressed: () async {
                 await launch(Links.mailUs(
-                  subject: 'report_bug'.tr() + ' - ' + appVersion,
+                  subject: '${'report_bug'.tr()} - $appVersion',
                 )).then((value) {
                   Navigator.pop(context);
                 });

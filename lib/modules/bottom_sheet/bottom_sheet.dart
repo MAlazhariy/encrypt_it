@@ -13,13 +13,13 @@ import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-Function onPressMainButton({
-  @required AppCubit cubit,
-  @required BuildContext context,
-  @required bool isEncrypt,
-  @required String msg,
-  @required String pass,
-  @required GlobalKey<ScaffoldState> scaffoldKey,
+void Function()? onPressMainButton({
+  required AppCubit cubit,
+  required BuildContext context,
+  required bool isEncrypt,
+  required String msg,
+  required String pass,
+  required GlobalKey<ScaffoldState> scaffoldKey,
 }) {
   if (cubit.isButtonsActive) {
     return () {
@@ -35,7 +35,12 @@ Function onPressMainButton({
       // decoding the text & set result in cubit
       // to show in bottom sheet
       cubit.setTextResult(
-        Decoding().decoder(msg, pass, context, isEncrypt),
+        Decoding().decoder(
+          context: context,
+          message: msg,
+          password: pass,
+          isEncrypt: isEncrypt,
+        ),
       );
 
       bottomSheetFilter(
@@ -82,7 +87,8 @@ void openBottomSheet(
     GlobalKey<ScaffoldState> scaffoldKey,
     BuildContext context,
     ) {
-      scaffoldKey.currentState.showBottomSheet((context){
+  // todo: test this widget
+      scaffoldKey.currentState?.showBottomSheet((context){
           return BottomSheetWidget(
             cubit,
             isEncrypt,
@@ -96,7 +102,7 @@ void openBottomSheet(
 
 
 class BottomSheetWidget extends StatelessWidget {
-  const BottomSheetWidget( this.cubit, this.isEncrypt, this.password, {Key key}) : super(key: key);
+  const BottomSheetWidget( this.cubit, this.isEncrypt, this.password, {Key? key}) : super(key: key);
 
   final AppCubit cubit;
   final bool isEncrypt;
@@ -135,7 +141,7 @@ class BottomSheetWidget extends StatelessWidget {
           // action title ['encrypt' or 'decrypt']
           SizedBox(height: 9.5.sp,),
           Text(
-            isEncrypt ? 'encrypted text'.tr() + ' :' : 'decrypted message'.tr() + ' :',
+            isEncrypt ? '${'encrypted text'.tr()} :' : '${'decrypted message'.tr()} :',
             style: TextStyle(
               color: lightGrayColor,
               fontWeight: FontWeight.w400,

@@ -1,18 +1,17 @@
 import 'dart:developer';
-
-import 'package:encryption_app/models/ads/ad_helper.dart';
+import 'package:encryption_app/modules/ads/ad_helper.dart';
 import 'package:encryption_app/shared/network/local/operation_counter_cache.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdInterstitialBottomSheet {
 
-  static InterstitialAd _interstitialAd;
+  static InterstitialAd? _interstitialAd;
   static bool isAdReady = false;
 
 
-  static void loadInterstitialAd(){
+  static Future<void> loadInterstitialAd() async {
     if(OperationCounterCache.getCounter()>=5){
-      InterstitialAd.load(
+      await InterstitialAd.load(
         adUnitId: AdHelper.bottomSheetInterstitialAdId,
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
@@ -28,9 +27,12 @@ class AdInterstitialBottomSheet {
     }
   }
 
-  static void showInterstitialAd(){
+  static void showInterstitialAd() async {
+    if(_interstitialAd == null) {
+      await loadInterstitialAd();
+    }
     if(isAdReady){
-      _interstitialAd.show();
+      _interstitialAd?.show();
     }
   }
 
