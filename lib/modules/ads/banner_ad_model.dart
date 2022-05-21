@@ -31,10 +31,10 @@ class AdBannerState extends State<AdBanner> {
 
         onAdFailedToLoad: (ad,err){
           log('bannerAd failed to load: ${err.message}');
-          _numBannerLoadAttempts += 1;
-          if (_numBannerLoadAttempts <= maxFailedLoadAttempts) {
-            _createBannerAd();
-          }
+          // _numBannerLoadAttempts += 1;
+          // if (_numBannerLoadAttempts <= maxFailedLoadAttempts) {
+          //   _createBannerAd();
+          // }
         },
       ),
       request: const AdRequest(),

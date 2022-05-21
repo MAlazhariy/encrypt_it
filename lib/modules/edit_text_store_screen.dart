@@ -17,7 +17,7 @@ class EditTextStoreScreen extends StatefulWidget {
 
 class EditTextStoreScreenState extends State<EditTextStoreScreen> {
 
-  Map groups = TextStoreCache.getGroups();
+  Map? groups = TextStoreCache.getGroups();
   String? choosedGroup;
 
   void deleteGroup(){
@@ -25,8 +25,8 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
     assert(choosedGroup == null,'choosed group can not be null when deleting group');
 
     final String deletedGroupName = choosedGroup!;
-    final Map deletedGroupValue = TextStoreCache.getGroups()[deletedGroupName];
-    final int deletedGroupIndex = TextStoreCache.getGroups().keys.toList().indexOf(deletedGroupName);
+    final Map deletedGroupValue = TextStoreCache.getGroups()![deletedGroupName];
+    final int deletedGroupIndex = TextStoreCache.getGroups()!.keys.toList().indexOf(deletedGroupName);
 
     setState(() {
       showCustomDialog(
@@ -108,7 +108,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
         validator: (String? value){
           if(value!.isEmpty){
             return 'can_not_empty'.tr();
-          } else if (TextStoreCache.getGroups().containsKey(value)){
+          } else if (TextStoreCache.getGroups()!.containsKey(value)){
             return 'group_already_exists'.tr();
           } else if(value.length >= 30){
             return 'too_big_title'.tr();
@@ -209,7 +209,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
             return 'can_not_empty'.tr();
           } else if(value.length >= 30){
             return 'too_big_title'.tr();
-          } else if (TextStoreCache.getGroups()[choosedGroup].containsKey(value)){
+          } else if (TextStoreCache.getGroups()![choosedGroup].containsKey(value)){
             return 'title_already_exists'.tr();
           }
 
@@ -254,7 +254,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
   Widget build(BuildContext context) {
 
     List<String> dropdownItems = List.generate(
-        TextStoreCache.getGroups().length,
+        TextStoreCache.getGroups()!.length,
         (index) =>  TextStoreCache.getGroupName(index),
     );
 
@@ -450,7 +450,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
 
                     // show choosed group' titles
                     if(choosedGroup != null)
-                      for (int index = 0; index < TextStoreCache.getGroups()[choosedGroup].length; index++)
+                      for (int index = 0; index < TextStoreCache.getGroups()![choosedGroup].length; index++)
                         Padding(
                           padding: EdgeInsets.symmetric(
                             vertical: 2.sp,
@@ -499,11 +499,11 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                   shape: const CircleBorder(),
                                   child: IconButton(
                                     onPressed: (){
-                                      final String deletedTitle = TextStoreCache.getGroups()[choosedGroup].keys.toList()[index];
-                                      final String deletedTitleValue = TextStoreCache.getGroups()[choosedGroup].values.toList()[index];
+                                      final String deletedTitle = TextStoreCache.getGroups()![choosedGroup].keys.toList()[index];
+                                      final String deletedTitleValue = TextStoreCache.getGroups()![choosedGroup].values.toList()[index];
                                       final int deletedIndex = index;
 
-                                      final bool isLastTitleInGroup = TextStoreCache.getGroups()[choosedGroup].keys.toList().length == 1;
+                                      final bool isLastTitleInGroup = TextStoreCache.getGroups()![choosedGroup].keys.toList().length == 1;
 
                                       if(isLastTitleInGroup){
                                         deleteGroup();

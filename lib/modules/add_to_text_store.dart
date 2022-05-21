@@ -32,7 +32,7 @@ class ContentDesign extends StatelessWidget {
   ContentDesign({Key? key, required this.encryptedText}) : super(key: key);
 
   final String encryptedText;
-  Map storeGroups = TextStoreCache.getGroups();
+  Map? storeGroups = TextStoreCache.getGroups();
 
 
   var titleCtrl = TextEditingController();
@@ -95,7 +95,7 @@ class ContentDesign extends StatelessWidget {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        storeGroups.isNotEmpty
+                        storeGroups?.isNotEmpty??false
                             ? Text('${'or'.tr()} ')
                             : Container(),
 
@@ -252,16 +252,20 @@ class GroupDropDown extends StatelessWidget {
 
   final StoreCubit cubit;
   final TextEditingController groupCtrl;
-  Map storeGroups = TextStoreCache.getGroups();
+  Map? storeGroups = TextStoreCache.getGroups();
 
   @override
   Widget build(BuildContext context) {
     String? group = cubit.choosedGroup;
 
+    if(storeGroups == null){
+      return Container();
+    }
+
     List<String> dropdownItems = List.generate(
-        storeGroups.keys.length,
+        storeGroups?.keys.length??0,
             (index) {
-          final String groupName = storeGroups.keys.toList()[index];
+          final String groupName = storeGroups!.keys.toList()[index];
           return groupName;
         });
 
@@ -330,7 +334,7 @@ class GroupTextForm extends StatelessWidget {
   final GlobalKey<FormState> groupFormKey;
   final TextEditingController groupCtrl;
   final StoreCubit cubit;
-  final Map storeGroup = TextStoreCache.getGroups();
+  final Map? storeGroup = TextStoreCache.getGroups();
 
   @override
   Widget build(BuildContext context) {
@@ -371,10 +375,12 @@ class GroupTextForm extends StatelessWidget {
         validator: (String? value){
           if(cubit.groupName.isEmpty && value!.isEmpty){
             return 'must_choose_group'.tr();
-          } else if (storeGroup.containsKey(value)){
+          } else if (storeGroup == null){
+            return null;
+          } else if (storeGroup!.containsKey(value)){
             // return 'group_already_exists'.tr();
             return null;
-          } else if (value!.length >= 30 && !cubit.isGroupChoosedFromDropMenu){
+          } else if (value!.length >= 35 && !cubit.isGroupChoosedFromDropMenu){
             return 'too_big_title'.tr();
           } else {
             return null;
@@ -390,7 +396,7 @@ class TitleTextForm extends StatelessWidget {
 
   final TextEditingController titleCtrl;
   final StoreCubit cubit;
-  final Map storeGroup = TextStoreCache.getGroups();
+  final Map? storeGroup = TextStoreCache.getGroups();
 
   @override
   Widget build(BuildContext context) {
@@ -428,9 +434,9 @@ class TitleTextForm extends StatelessWidget {
           // ignore: unnecessary_null_comparison
           } else if(storeGroup == null){
             return null;
-          } else if (storeGroup[cubit.groupName] == null){
+          } else if (storeGroup![cubit.groupName] == null){
             return null;
-          } else if (storeGroup[cubit.groupName].containsKey(value)){
+          } else if (storeGroup![cubit.groupName].containsKey(value)){
             return 'title_already_exists'.tr();
           }
 

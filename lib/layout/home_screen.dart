@@ -167,7 +167,7 @@ class HomeScreen extends StatelessWidget {
                   title: Text(
                     cubit.appInfo.appName,
                     style: const TextStyle(
-                      color: Colors.white,
+                      // color: Colors.white,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -310,24 +310,23 @@ class HomeScreen extends StatelessWidget {
                                           icon: Icons.enhanced_encryption,
                                           title: 'message_store'.tr(),
                                           onPressed: () async {
-                                            Map groups = TextStoreCache.getGroups();
+                                            Map? groups = TextStoreCache.getGroups();
 
-                                            final bool hasBio =
-                                                await LocalAuthApi
-                                                    .hasBiometrics();
+                                            final bool hasBio = await LocalAuthApi.hasBiometrics();
                                             final isAuthenticated = hasBio
-                                                ? await LocalAuthApi
-                                                    .authenticate()
+                                                // ? await LocalAuthApi.authenticate()
+                                                ? true
                                                 : true;
 
+                                            // todo: important handle bio
                                             if (isAuthenticated) {
                                               showCustomDialog(
                                                 context: context,
                                                 title: 'choose_message'.tr(),
-                                                content: groups.isNotEmpty
+                                                content: groups?.isNotEmpty ?? false
                                                     ? Column(
                                                         children: List.generate(
-                                                          groups.length,
+                                                          groups!.length,
                                                           // +1 only if want to show AD
                                                           (index) {
                                                             // /// bannerAd
@@ -489,7 +488,7 @@ class HomeScreen extends StatelessWidget {
                                                         ],
                                                       ),
                                                 buttons: [
-                                                  if (groups.isNotEmpty)
+                                                  if (groups?.isNotEmpty??false)
                                                     DialogButton(
                                                       title: 'edit'.tr(),
                                                       isBold: false,
