@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 
 class ChangeLanguageMenuItem extends StatelessWidget {
-  const ChangeLanguageMenuItem(this.cubit, {Key key}) : super(key: key);
+  const ChangeLanguageMenuItem(this.cubit, {Key? key}) : super(key: key);
 
   final AppCubit cubit;
 

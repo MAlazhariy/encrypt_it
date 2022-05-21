@@ -5,32 +5,32 @@ import 'package:sizer/sizer.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
-    Key key,
-    @required this.theKey,
-    @required this.controller,
+    Key? key,
+    required this.theKey,
+    required this.controller,
     this.isPassword = false,
-    @required this.onChange,
+    required this.onChange,
     this.validator,
     this.showShadow = true,
     this.onTab,
     this.hintText,
     this.labelText,
-    @required this.prefixIcon,
+    required this.prefixIcon,
     this.suffixIcon,
     this.obscureText = false,
-    @required this.isEnabled,
+    required this.isEnabled,
   }) : super(key: key);
 
   final GlobalKey<FormState> theKey;
   final TextEditingController controller;
   final bool isPassword;
-  final Function onChange;
-  final FormFieldValidator<String> validator;
-  final Function onTab;
-  final String hintText;
-  final String labelText;
+  final void Function(String)? onChange;
+  final String? Function(String?)? validator;
+  final void Function()? onTab;
+  final String? hintText;
+  final String? labelText;
   final Icon prefixIcon;
-  final Widget suffixIcon;
+  final Widget? suffixIcon;
   final bool obscureText;
   final bool isEnabled;
   final bool showShadow;

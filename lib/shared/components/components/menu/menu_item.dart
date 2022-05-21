@@ -4,11 +4,11 @@ import 'package:sizer/sizer.dart';
 
 class MenuItemWidget extends StatelessWidget {
   const MenuItemWidget({
-    Key key,
-    @required this.onTap,
-    @required this.title,
+    Key? key,
+    required this.onTap,
+    required this.title,
     this.subtitle = '',
-    @required this.icon,
+    required this.icon,
 
   }) : super(key: key);
 

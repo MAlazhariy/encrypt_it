@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 /*
@@ -42,22 +41,22 @@ class TextStoreCache{
   }
 
   static String getTitleFromGroup({
-    @required String groupName,
-    @required int index,
+    required String groupName,
+    required int index,
 }){
     return getGroups()[groupName].keys.toList()[index];
   }
 
 
   static void addTextToGroup({
-    @required String group,
-    @required String title,
-    @required String encryptedText,
+    required String group,
+    required String title,
+    required String encryptedText,
   }){
 
     Map myBox = _box.get('myBox',defaultValue: {});
 
-    Map groups = myBox['groups'];
+    Map? groups = myBox['groups'];
     // if groups is null give it an initial value
     groups??= {group:{}};
 
@@ -73,8 +72,8 @@ class TextStoreCache{
 
 
   static void deleteTitle({
-    @required String groupName,
-    @required String title,
+    required String groupName,
+    required String title,
 }){
     Map myBox = _box.get('myBox');
 
@@ -85,10 +84,10 @@ class TextStoreCache{
   }
 
   static void restoreTitle({
-    @required String groupName,
-    @required String deletedTitle,
-    @required String deletedTitleValue,
-    @required int index,
+    required String groupName,
+    required String deletedTitle,
+    required String deletedTitleValue,
+    required int index,
   }){
     Map myBox = _box.get('myBox');
 
@@ -135,7 +134,7 @@ class TextStoreCache{
   }
 
   static void deleteGroup({
-    @required String groupName,
+    required String groupName,
   }){
     Map myBox = _box.get('myBox');
 
@@ -146,9 +145,9 @@ class TextStoreCache{
   }
 
   static void restoreGroup({
-    @required String groupName,
-    @required Map groupValue,
-    @required int groupIndex,
+    required String groupName,
+    required Map groupValue,
+    required int groupIndex,
   }){
     Map myBox = _box.get('myBox');
 
@@ -196,8 +195,8 @@ class TextStoreCache{
 
 
 static void changeGroupName({
-  @required String groupName,
-  @required String newName,
+  required String groupName,
+  required String newName,
 }){
   Map myBox = _box.get('myBox');
 
@@ -252,9 +251,9 @@ static void changeGroupName({
 }
 
   static void changeTitleName({
-    @required String groupName,
-    @required String oldTitleName,
-    @required String newName,
+    required String groupName,
+    required String oldTitleName,
+    required String newName,
   }){
     Map myBox = _box.get('myBox');
 

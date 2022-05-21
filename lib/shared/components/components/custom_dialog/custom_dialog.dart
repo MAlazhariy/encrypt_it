@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 void showCustomDialog({
-  @required BuildContext context,
-  @required String title,
-  @required Widget content,
+  required BuildContext context,
+  required String title,
+  required Widget content,
   List <Widget> buttons = const <Widget>[],
 }){
   showDialog(

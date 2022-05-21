@@ -4,7 +4,7 @@ import 'package:encryption_app/shared/components/components/menu/menu_group_item
 import 'package:flutter/material.dart';
 
 class ThanksGroup extends StatelessWidget {
-  const ThanksGroup(this.cubit,{Key key}) : super(key: key);
+  const ThanksGroup(this.cubit,{Key? key}) : super(key: key);
 
   final AppCubit cubit;
 

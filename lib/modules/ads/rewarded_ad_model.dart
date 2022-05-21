@@ -1,12 +1,13 @@
-import 'dart:developer';
+// ignore_for_file: deprecated_member_use
 
-import 'package:encryption_app/cubit/cubit.dart';
-import 'package:encryption_app/models/ads/ad_helper.dart';
+import 'dart:developer';
+import 'package:encryption_app/cubit/app_cubit/cubit.dart';
+import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdRewarded{
 
-  static RewardedAd _rewardedAd;
+  static late RewardedAd _rewardedAd;
   static bool _isAdReady = false;
   static bool adShowed = false;
 
@@ -14,7 +15,7 @@ class AdRewarded{
     adShowed = false;
 
     RewardedAd.load(
-      adUnitId: AdHelper.rewardedAdUnitId,
+      adUnitId: RewardedAd.testAdUnitId,
       request: const AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (ad){
@@ -29,7 +30,7 @@ class AdRewarded{
 
   }
 
-  static void showAd(AppCubit cubit){
+  static void showAd(BuildContext context){
 
     if(_isAdReady){
       _rewardedAd.show(
@@ -44,7 +45,7 @@ class AdRewarded{
     _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (ad){
         log('ad dismissed');
-        cubit.buttonsPressable(true);
+        AppCubit.get(context).setButtonsPressable(true);
         ad.dispose();
       },
       onAdFailedToShowFullScreenContent: (ad, error){

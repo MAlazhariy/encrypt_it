@@ -14,8 +14,8 @@ import 'custom_undefined_chars_alert_dialog.dart';
 
 // encryption alert dialogs
 void invalidCharactersAlert({
-  @required BuildContext context,
-  @required String undefinedChars,
+  required BuildContext context,
+  required String undefinedChars,
 }){
   customUndefinedCharsAlertDialog(
     context: context,
@@ -82,7 +82,7 @@ void invalidCharactersAlert({
                 ),
                 recognizer: TapGestureRecognizer()..onTap = () async {
                   await launch(Links.mailUs(
-                    subject: 'report_bug'.tr() + ' - ' + 'undefined_chars'.tr(),
+                    subject: '${'report_bug'.tr()} - ${'undefined_chars'.tr()}',
                   ));
                 },
               ),

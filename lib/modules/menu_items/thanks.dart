@@ -10,7 +10,7 @@ import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ThanksMenuItem extends StatelessWidget {
-  const ThanksMenuItem(this.appVersion, {Key key}) : super(key: key);
+  const ThanksMenuItem(this.appVersion, {Key? key}) : super(key: key);
 
   final String appVersion;
 
@@ -27,6 +27,7 @@ class ThanksMenuItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
+                width: double.infinity,
                 child: Center(
                   child: Icon(
                     Icons.favorite_outlined,
@@ -34,7 +35,6 @@ class ThanksMenuItem extends StatelessWidget {
                     size: 20.sp,
                   ),
                 ),
-                width: double.infinity,
               ),
               SizedBox(
                 height: 15.sp,
@@ -49,6 +49,8 @@ class ThanksMenuItem extends StatelessWidget {
               ),
               const Divider(),
               Container(
+                width: double.infinity,
+                color: bGColor.withAlpha(15),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: 5.sp,
@@ -63,8 +65,6 @@ class ThanksMenuItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                width: double.infinity,
-                color: bGColor.withAlpha(15),
               ),
               const Divider(),
               SizedBox(
@@ -118,7 +118,7 @@ class ThanksMenuItem extends StatelessWidget {
                 isBold: true,
                 onPressed: () async {
                   await launch(Links.mailUs(
-                    subject: 'report_bug'.tr() + ' - ' + appVersion,
+                    subject: '${'report_bug'.tr()} - $appVersion',
                   )).then((value) {
                     Navigator.pop(context);
                   });

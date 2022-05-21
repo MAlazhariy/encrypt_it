@@ -2,7 +2,7 @@ import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 
 class MenuGroupItems extends StatelessWidget {
-  const MenuGroupItems(this.items, {Key key}) : super(key: key);
+  const MenuGroupItems(this.items, {Key? key}) : super(key: key);
 
   final List<Widget> items;
 

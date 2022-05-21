@@ -4,7 +4,7 @@ import 'package:encryption_app/shared/components/components/rate_app.dart';
 import 'package:flutter/material.dart';
 
 class RateAppMenuItem extends StatelessWidget {
-  const RateAppMenuItem({Key key}) : super(key: key);
+  const RateAppMenuItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,7 @@ import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TextResultFilterWidget extends StatelessWidget {
-  const TextResultFilterWidget(this.cubit, this.isEncrypt, {Key key}) : super(key: key);
+  const TextResultFilterWidget(this.cubit, this.isEncrypt, {Key? key}) : super(key: key);
 
   final AppCubit cubit;
   final bool isEncrypt;
@@ -31,7 +33,8 @@ class TextResultFilterWidget extends StatelessWidget {
 
 
 class EncryptedResultWidget extends StatelessWidget {
-  const EncryptedResultWidget(this.cubit, {Key key}) : super(key: key);
+  const EncryptedResultWidget(this.cubit, {Key? key}) : super(key: key);
+
 
   final AppCubit cubit;
 
@@ -60,7 +63,7 @@ class EncryptedResultWidget extends StatelessWidget {
 }
 
 class DecryptedResultWidget extends StatelessWidget {
-  const DecryptedResultWidget(this.cubit, {Key key}) : super(key: key);
+  const DecryptedResultWidget(this.cubit, {Key? key}) : super(key: key);
 
   final AppCubit cubit;
 
@@ -98,7 +101,7 @@ class DecryptedResultWidget extends StatelessWidget {
   }
 }
 class LargeResultWidget extends StatelessWidget {
-  const LargeResultWidget(this.cubit, {Key key}) : super(key: key);
+  const LargeResultWidget(this.cubit, {Key? key}) : super(key: key);
 
   final AppCubit cubit;
 

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 void showToast({
-  @required String title,
+  required String title,
   int mSeconds = 1500,
-  @required Color textColor,
-  @required Color contentFillColor,
+  required Color textColor,
+  required Color contentFillColor,
 }) {
   BotToast.showText(
     text: title,

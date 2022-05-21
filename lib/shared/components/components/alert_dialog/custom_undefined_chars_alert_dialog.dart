@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 void customUndefinedCharsAlertDialog({
-  @required BuildContext context,
-  @required String title,
-  Widget content,
-  @required IconData alertIcon,
+  required BuildContext context,
+  required String title,
+  required Widget content,
+  required IconData alertIcon,
   List <Widget> buttons = const <Widget>[],
 }){
   showDialog(

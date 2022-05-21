@@ -6,10 +6,10 @@ import 'package:sizer/sizer.dart';
 
 class DialogButton extends StatelessWidget {
   const DialogButton({
-    Key key,
-    @required this.title,
+    Key? key,
+    required this.title,
     this.isBold = false,
-    @required this.onPressed,
+    required this.onPressed,
     this.color = mainColor,
   }) : super(key: key);
   final String title;
@@ -20,12 +20,6 @@ class DialogButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-      child: Text(
-        title,
-        style: TextStyle(
-          fontWeight: isBold ? FontWeight.w700 : FontWeight.w500,
-        ),
-      ),
       onPressed: onPressed,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.sp),
@@ -39,6 +33,12 @@ class DialogButton extends StatelessWidget {
       focusElevation: 0,
       highlightElevation: 0,
       hoverElevation: 0,
+      child: Text(
+        title,
+        style: TextStyle(
+          fontWeight: isBold ? FontWeight.w700 : FontWeight.w500,
+        ),
+      ),
     );
   }
 }

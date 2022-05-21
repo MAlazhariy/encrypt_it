@@ -29,7 +29,7 @@ class AddToTextStore{
 }
 
 class ContentDesign extends StatelessWidget {
-  ContentDesign({Key key, @required this.encryptedText}) : super(key: key);
+  ContentDesign({Key? key, required this.encryptedText}) : super(key: key);
 
   final String encryptedText;
   Map storeGroups = TextStoreCache.getGroups();
@@ -56,7 +56,6 @@ class ContentDesign extends StatelessWidget {
         builder: (BuildContext context, state){
 
           StoreCubit cubit = StoreCubit.get(context);
-          storeGroups??={};
 
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -97,7 +96,7 @@ class ContentDesign extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         storeGroups.isNotEmpty
-                            ? Text('or'.tr() + ' ')
+                            ? Text('${'or'.tr()} ')
                             : Container(),
 
                         Expanded(
@@ -120,7 +119,7 @@ class ContentDesign extends StatelessWidget {
                 title: 'next'.tr(),
                 isBold: true,
                 onPressed: (){
-                  if(cubit.groupFormKey.currentState.validate()) cubit.setCompleteGroup();
+                  if(cubit.groupFormKey.currentState!.validate()) cubit.setCompleteGroup();
                 },
               )
                   : Container(),
@@ -130,7 +129,7 @@ class ContentDesign extends StatelessWidget {
                 Align(
                   alignment: AlignmentDirectional.centerStart,
                   child: Text(
-                    'type_the_title'.tr() + '',
+                    'type_the_title'.tr(),
                     style: const TextStyle(
                       color: darkGrayColor,
                     ),
@@ -162,7 +161,7 @@ class ContentDesign extends StatelessWidget {
                 child: SizedBox(
                   width: 50.w,
                   child: Text(
-                    'encrypted text'.tr() + ': ' + encryptedText,
+                    '${'encrypted text'.tr()}: $encryptedText',
                     style: _infoStyle,
                   ),
                 ),
@@ -175,7 +174,7 @@ class ContentDesign extends StatelessWidget {
                     child: SizedBox(
                     width: 50.w,
                     child: Text(
-                      'the_group'.tr() + ': ${cubit.groupName}',
+                      '${'the_group'.tr()}: ${cubit.groupName}',
                       style: _infoStyle,
                     ),
                   ),
@@ -188,7 +187,7 @@ class ContentDesign extends StatelessWidget {
                   child: SizedBox(
                     width: 50.w,
                     child: Text(
-                      'the_title'.tr() + ': ${cubit.title}',
+                      '${'the_title'.tr()}: ${cubit.title}',
                       style: _infoStyle,
                     ),
                   ),
@@ -218,7 +217,7 @@ class ContentDesign extends StatelessWidget {
                           title: 'done'.tr(),
                           isBold: true,
                           onPressed: () {
-                            if(cubit.titleFormKey.currentState.validate() && cubit.groupFormKey.currentState.validate()){
+                            if(cubit.titleFormKey.currentState!.validate() && cubit.groupFormKey.currentState!.validate()){
                               onSuccessfulAdd(
                                   context: context,
                                   textTitle: titleCtrl.text,
@@ -246,9 +245,9 @@ class ContentDesign extends StatelessWidget {
 
 class GroupDropDown extends StatelessWidget {
   GroupDropDown({
-    Key key,
-    @required this.cubit,
-    @required this.groupCtrl,
+    Key? key,
+    required this.cubit,
+    required this.groupCtrl,
   }) : super(key: key);
 
   final StoreCubit cubit;
@@ -257,14 +256,10 @@ class GroupDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String group = cubit.choosedGroup;
-
-    if(storeGroups == null){
-      return Container();
-    }
+    String? group = cubit.choosedGroup;
 
     List<String> dropdownItems = List.generate(
-        storeGroups.keys.length ??0,
+        storeGroups.keys.length,
             (index) {
           final String groupName = storeGroups.keys.toList()[index];
           return groupName;
@@ -314,10 +309,10 @@ class GroupDropDown extends StatelessWidget {
         }).toList(),
 
         onChanged: (value){
-          cubit.changeChoosedGroup(value);
+          cubit.changeChoosedGroup(value!);
           cubit.setGroupName(value);
           groupCtrl.text = '';
-          cubit.groupFormKey.currentState.validate();
+          cubit.groupFormKey.currentState!.validate();
         },
       ),
     );
@@ -326,10 +321,10 @@ class GroupDropDown extends StatelessWidget {
 }
 class GroupTextForm extends StatelessWidget {
   GroupTextForm({
-    Key key,
-    @required this.groupFormKey,
-    @required this.groupCtrl,
-    @required this.cubit,
+    Key? key,
+    required this.groupFormKey,
+    required this.groupCtrl,
+    required this.cubit,
   }) : super(key: key);
 
   final GlobalKey<FormState> groupFormKey;
@@ -339,7 +334,7 @@ class GroupTextForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool _enabled = !cubit.isGroupChoosedFromDropMenu;
+    final bool enabled = !cubit.isGroupChoosedFromDropMenu;
 
     return Form(
       key: groupFormKey,
@@ -366,22 +361,20 @@ class GroupTextForm extends StatelessWidget {
           cubit.setGroupName(groupCtrl.text);
         },
         onChanged: (value){
-          bool _ = groupFormKey.currentState.validate();
+          groupFormKey.currentState!.validate();
 
-          // if(groupFormKey.currentState.validate())
+          // if(groupFormKey.currentState!.validate())
           cubit.setGroupName(value);
         },
-        readOnly: !_enabled,
+        readOnly: !enabled,
         textAlign: TextAlign.start,
-        validator: (String value){
-          if(cubit.groupName.isEmpty && value.isEmpty){
+        validator: (String? value){
+          if(cubit.groupName.isEmpty && value!.isEmpty){
             return 'must_choose_group'.tr();
-          } else if(storeGroup == null){
-            return null;
           } else if (storeGroup.containsKey(value)){
             // return 'group_already_exists'.tr();
             return null;
-          } else if (value.length >= 30 && !cubit.isGroupChoosedFromDropMenu){
+          } else if (value!.length >= 30 && !cubit.isGroupChoosedFromDropMenu){
             return 'too_big_title'.tr();
           } else {
             return null;
@@ -393,7 +386,7 @@ class GroupTextForm extends StatelessWidget {
 }
 
 class TitleTextForm extends StatelessWidget {
-  TitleTextForm({Key key, @required this.titleCtrl, @required this.cubit,}) : super(key: key);
+  TitleTextForm({Key? key, required this.titleCtrl, required this.cubit,}) : super(key: key);
 
   final TextEditingController titleCtrl;
   final StoreCubit cubit;
@@ -422,16 +415,17 @@ class TitleTextForm extends StatelessWidget {
         ),
         autofocus: true,
         onChanged: (value){
-          if(cubit.titleFormKey.currentState.validate()){
+          if(cubit.titleFormKey.currentState!.validate()){
             cubit.setTitle(value);
           }
         },
         textAlign: TextAlign.center,
-        validator: (String value){
-          if(value.isEmpty){
+        validator: (String? value){
+          if(value!.isEmpty){
             return 'can_not_empty'.tr();
           } else if(value.length >= 30){
             return 'too_big_title'.tr();
+          // ignore: unnecessary_null_comparison
           } else if(storeGroup == null){
             return null;
           } else if (storeGroup[cubit.groupName] == null){
@@ -449,11 +443,11 @@ class TitleTextForm extends StatelessWidget {
 
 
 void onSuccessfulAdd({
-  @required BuildContext context,
-  @required String textTitle,
-  @required String groupName,
-  @required String messageResult,
-  @required StoreCubit cubit,
+  required BuildContext context,
+  required String textTitle,
+  required String groupName,
+  required String messageResult,
+  required StoreCubit cubit,
 }){
   TextStoreCache.addTextToGroup(
     title: textTitle,

@@ -4,21 +4,21 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'ad_helper.dart';
 
 class AdNative extends StatefulWidget {
-  const AdNative({Key key}) : super(key: key);
+  const AdNative({Key? key}) : super(key: key);
 
   @override
-  _AdNativeState createState() => _AdNativeState();
+  AdNativeState createState() => AdNativeState();
 }
 
-class _AdNativeState extends State<AdNative> {
-  NativeAd nativeAd;
+class AdNativeState extends State<AdNative> {
+  NativeAd? nativeAd;
   bool _isAdReady = false;
 
   // final AdSize _adSize = AdSize(width: 50.w.toInt(), height: 41.6.w.toInt(),);
   final int maxFailedLoadAttempts = 2;
   int _numBannerLoadAttempts = 0;
 
-  void _createNativeAd(){
+  void _createNativeAd() async {
     nativeAd = NativeAd(
       adUnitId: AdHelper.nativeAdId,
       factoryId: "listTile",
@@ -41,7 +41,7 @@ class _AdNativeState extends State<AdNative> {
       request: const AdRequest(),
     );
 
-    nativeAd.load();
+    await nativeAd!.load();
   }
 
   @override
@@ -52,14 +52,14 @@ class _AdNativeState extends State<AdNative> {
 
   @override
   void dispose() {
-    nativeAd.dispose();
+    nativeAd?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
 
-    if(_isAdReady){
+    if(_isAdReady && nativeAd != null){
       return Column(
         children: [
           // SizedBox(height: 8.sp,),
@@ -68,8 +68,8 @@ class _AdNativeState extends State<AdNative> {
           Container(
             // height: 30.w,
             // width: 60.w,
-            child: AdWidget(ad: nativeAd),
             alignment: Alignment.center,
+            child: AdWidget(ad: nativeAd!),
           ),
 
           const Divider(),

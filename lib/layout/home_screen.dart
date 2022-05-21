@@ -26,7 +26,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:sizer/sizer.dart';
 
-
 // ignore: use_key_in_widget_constructors, must_be_immutable
 class HomeScreen extends StatelessWidget {
   var textKey = GlobalKey<FormState>();
@@ -43,19 +42,18 @@ class HomeScreen extends StatelessWidget {
   final GlobalKey _encryptButtonShowcase = GlobalKey();
   final GlobalKey _decryptButtonShowcase = GlobalKey();
 
-
   final GlobalKey _textStoreShowcase = GlobalKey();
   final GlobalKey _pasteShowcase = GlobalKey();
   final GlobalKey _clearShowcase = GlobalKey();
   final GlobalKey _clearAllShowcase = GlobalKey();
 
-
   @override
   Widget build(BuildContext context) {
-
     return ShowCaseWidget(
       autoPlay: false,
-      autoPlayDelay: const Duration(seconds: 5,),
+      autoPlayDelay: const Duration(
+        seconds: 5,
+      ),
       builder: Builder(
         builder: (_) => BlocProvider(
           create: (context) => AppCubit(),
@@ -69,44 +67,48 @@ class HomeScreen extends StatelessWidget {
               }
 
               // main showcase
-              if(state is AppGetVersionState && !ShowCaseCache.isMainShowCaseViewed()) {
-
-                WidgetsBinding.instance.addPostFrameCallback((_) =>
-                    Future.delayed(const Duration(milliseconds: 100), () => ShowCaseWidget.of(context).startShowCase([
+              if (state is AppGetVersionState &&
+                  !ShowCaseCache.isMainShowCaseViewed()) {
+                WidgetsBinding.instance.addPostFrameCallback(
+                  (_) => Future.delayed(
+                    const Duration(milliseconds: 100),
+                    () => ShowCaseWidget.of(context)?.startShowCase([
                       _textFieldShowcase,
                       _passwordFieldShowcase,
                       _encryptButtonShowcase,
                       _decryptButtonShowcase
-                    ]),)
+                    ]),
+                  ),
                 );
 
                 ShowCaseCache.mainShowCaseViewed();
               }
 
               // text field showcase
-              if (cubit.isCurrentFieldText && !ShowCaseCache.isButtonsShowCaseViewed()){
-                WidgetsBinding.instance.addPostFrameCallback((_) =>
-                    ShowCaseWidget.of(context).startShowCase([
-                      _pasteShowcase,
-                      _clearShowcase,
-                      _clearAllShowcase,
-                      _textStoreShowcase,
-                    ]),
+              if (cubit.isCurrentFieldText &&
+                  !ShowCaseCache.isButtonsShowCaseViewed()) {
+                WidgetsBinding.instance.addPostFrameCallback(
+                  (_) => ShowCaseWidget.of(context)?.startShowCase([
+                    _pasteShowcase,
+                    _clearShowcase,
+                    _clearAllShowcase,
+                    _textStoreShowcase,
+                  ]),
                 );
 
                 ShowCaseCache.buttonsShowCaseViewed();
               }
 
-
               // this function activate or deactivate main buttons
               void activeButtons([validate = true]) {
-                cubit.setButtonsPressable(
-                    (messageCtrl.text.isNotEmpty && passCtrl.text.isNotEmpty && validate));
+                cubit.setButtonsPressable((messageCtrl.text.isNotEmpty &&
+                    passCtrl.text.isNotEmpty &&
+                    validate));
               }
 
               // this fuction paste the text in its field
               // and password in its field at once.
-              void pasteAll(){
+              void pasteAll() {
                 FlutterClipboard.paste().then((value) {
                   // ensure if value contains ciphertext & password
                   if (value.startsWith('Ciphertext: "') &&
@@ -121,27 +123,22 @@ class HomeScreen extends StatelessWidget {
                         value.indexOf('\nPassword: "') + 12,
                         value.lastIndexOf('"'));
 
-                    activeButtons(passKey.currentState.validate());
+                    activeButtons(passKey.currentState!.validate());
 
                     /// set cursor to the end of text field
-                    messageCtrl.selection =
-                        TextSelection.fromPosition(
-                            TextPosition(
-                                offset: messageCtrl
-                                    .text.length));
+                    messageCtrl.selection = TextSelection.fromPosition(
+                        TextPosition(offset: messageCtrl.text.length));
 
                     /// Show successful toast
                     BotToast.showText(
                       text: 'pasted success'.tr(),
-                      duration: const Duration(
-                          milliseconds: 800),
+                      duration: const Duration(milliseconds: 800),
                       contentColor: contrastColor,
                       textStyle: const TextStyle(
                         color: mainColor,
                         fontWeight: FontWeight.w600,
                       ),
-                      borderRadius:
-                      BorderRadius.circular(12.sp),
+                      borderRadius: BorderRadius.circular(12.sp),
                       clickClose: true,
                     );
                   } else {
@@ -161,7 +158,6 @@ class HomeScreen extends StatelessWidget {
                   }
                 });
               }
-
 
               return Scaffold(
                 key: scaffoldKey,
@@ -185,7 +181,10 @@ class HomeScreen extends StatelessWidget {
                 resizeToAvoidBottomInset: false,
 
                 body: Padding(
-                  padding: EdgeInsets.only(right: 6.w, left: 6.w,),
+                  padding: EdgeInsets.only(
+                    right: 6.w,
+                    left: 6.w,
+                  ),
                   child: Column(
                     children: [
                       Expanded(
@@ -200,7 +199,8 @@ class HomeScreen extends StatelessWidget {
                               CustomShowcase(
                                 globalKey: _textFieldShowcase,
                                 title: 'showcase_text_field_title'.tr(),
-                                description: 'showcase_text_field_description'.tr(),
+                                description:
+                                    'showcase_text_field_description'.tr(),
                                 child: CustomTextField(
                                   theKey: textKey,
                                   controller: messageCtrl,
@@ -215,7 +215,8 @@ class HomeScreen extends StatelessWidget {
                                   onTab: () {
                                     cubit.setCurrentFieldToText();
                                   },
-                                  isEnabled: (!cubit.isCurrentFieldNoneAndInactivated),
+                                  isEnabled:
+                                      (!cubit.isCurrentFieldNoneAndInactivated),
                                 ),
                               ),
                               if (cubit.isCurrentFieldText)
@@ -230,27 +231,29 @@ class HomeScreen extends StatelessWidget {
                                       CustomShowcase(
                                         globalKey: _clearAllShowcase,
                                         // title: 'clear all'.tr(),
-                                        description: 'showcase_clearAll_description'.tr(),
+                                        description:
+                                            'showcase_clearAll_description'
+                                                .tr(),
                                         child: TextFieldQuickActions(
                                             icon: Icons.clear_rounded,
                                             title: 'clear all'.tr(),
+                                            onPressed: () {
+                                              messageCtrl.text = '';
+                                              passCtrl.text = '';
 
-                                          onPressed: () {
-                                            messageCtrl.text = '';
-                                            passCtrl.text = '';
+                                              activeButtons(passKey.currentState!
+                                                  .validate());
+                                              cubit.clearAllFields();
 
-                                            activeButtons(passKey.currentState.validate());
-                                            cubit.clearAllFields();
-
-                                            dismissKeyboard(context);
-                                          }
-                                        ),
+                                              dismissKeyboard(context);
+                                            }),
                                       ),
 
                                       /// clear
                                       CustomShowcase(
                                         globalKey: _clearShowcase,
-                                        description: 'showcase_clear_description'.tr(),
+                                        description:
+                                            'showcase_clear_description'.tr(),
                                         // title: 'clear'.tr(),
                                         child: TextFieldQuickActions(
                                           icon: Icons.highlight_remove_outlined,
@@ -268,15 +271,18 @@ class HomeScreen extends StatelessWidget {
                                       CustomShowcase(
                                         globalKey: _pasteShowcase,
                                         // title: 'paste'.tr(),
-                                        description: 'showcase_paste_description'.tr(),
+                                        description:
+                                            'showcase_paste_description'.tr(),
                                         child: TextFieldQuickActions(
                                           icon: Icons.paste_outlined,
                                           title: 'paste'.tr(),
                                           // paste in password field on single press
                                           onPressed: () {
-                                            FlutterClipboard.paste().then((value) {
+                                            FlutterClipboard.paste()
+                                                .then((value) {
                                               messageCtrl.text = value;
-                                              activeButtons(passKey.currentState.validate());
+                                              activeButtons(passKey.currentState!
+                                                  .validate());
 
                                               messageCtrl.selection =
                                                   TextSelection.fromPosition(
@@ -296,156 +302,217 @@ class HomeScreen extends StatelessWidget {
                                       /// text store
                                       CustomShowcase(
                                         globalKey: _textStoreShowcase,
-                                        description: 'showcase_text_store_description'.tr(),
+                                        description:
+                                            'showcase_text_store_description'
+                                                .tr(),
                                         title: 'message_store'.tr(),
                                         child: TextFieldQuickActions(
                                           icon: Icons.enhanced_encryption,
                                           title: 'message_store'.tr(),
-
                                           onPressed: () async {
                                             Map groups = TextStoreCache.getGroups();
-                                            groups??={};
 
-                                            final bool _hasBio = await LocalAuthApi.hasBiometrics();
-                                            final _isAuthenticated =
-                                            _hasBio ? await LocalAuthApi.authenticate() : true;
+                                            final bool hasBio =
+                                                await LocalAuthApi
+                                                    .hasBiometrics();
+                                            final isAuthenticated = hasBio
+                                                ? await LocalAuthApi
+                                                    .authenticate()
+                                                : true;
 
-                                            if (_isAuthenticated) {
-
+                                            if (isAuthenticated) {
                                               showCustomDialog(
                                                 context: context,
                                                 title: 'choose_message'.tr(),
                                                 content: groups.isNotEmpty
                                                     ? Column(
-                                                  children: List.generate(groups.length??0, // +1 only if want to show AD
-                                                        (index){
-                                                      // /// bannerAd
-                                                      // if(index==groups.length){
-                                                      //   return const AdNative();
-                                                      // }
+                                                        children: List.generate(
+                                                          groups.length,
+                                                          // +1 only if want to show AD
+                                                          (index) {
+                                                            // /// bannerAd
+                                                            // if(index==groups.length){
+                                                            //   return const AdNative();
+                                                            // }
 
-                                                      final String groupName = groups.keys.toList()[index];
-                                                      final Map group = groups[groupName];
+                                                            final String
+                                                                groupName =
+                                                                groups.keys
+                                                                        .toList()[
+                                                                    index];
+                                                            final Map group =
+                                                                groups[
+                                                                    groupName];
 
-                                                      // groups
-                                                      return ExpansionTile(
-                                                        title: Text(
-                                                          groupName,
-                                                          style: const TextStyle(
-                                                            fontWeight: FontWeight.w600,
-                                                          ),
-                                                        ),
-                                                        collapsedIconColor: bGColor,
-                                                        collapsedTextColor: bGColor,
-                                                        iconColor: mainColor,
-                                                        textColor: mainColor,
-                                                        backgroundColor: mainColor.withAlpha(15),
-                                                        children: List.generate(group.length,
-                                                                (index) {
-                                                              String title = group.keys.toList()[index];
-                                                              String storedEncryptedText = group.values.toList()[index];
-
-                                                              // group titles
-                                                              return Container(
-                                                                width: double.infinity,
-                                                                padding: EdgeInsets.symmetric(
-                                                                  horizontal: 15.sp,
+                                                            // groups
+                                                            return ExpansionTile(
+                                                              title: Text(
+                                                                groupName,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
                                                                 ),
-                                                                child: Row(
-                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child: TextButton(
-                                                                        onPressed: (){
-                                                                          messageCtrl.text = storedEncryptedText;
-                                                                          activeButtons();
-                                                                          Navigator.pop(context);
-                                                                        },
-                                                                        child: Align(
-                                                                          alignment: AlignmentDirectional.centerStart,
-                                                                          child: Text(
-                                                                            title,
-                                                                            style: TextStyle(
-                                                                              color: darkGrayColor,
-                                                                              fontWeight: FontWeight.w500,
-                                                                              fontSize: 11.sp,
+                                                              ),
+                                                              collapsedIconColor:
+                                                                  bGColor,
+                                                              collapsedTextColor:
+                                                                  bGColor,
+                                                              iconColor:
+                                                                  mainColor,
+                                                              textColor:
+                                                                  mainColor,
+                                                              backgroundColor:
+                                                                  mainColor
+                                                                      .withAlpha(
+                                                                          15),
+                                                              children:
+                                                                  List.generate(
+                                                                      group
+                                                                          .length,
+                                                                      (index) {
+                                                                String title = group
+                                                                        .keys
+                                                                        .toList()[
+                                                                    index];
+                                                                String
+                                                                    storedEncryptedText =
+                                                                    group.values
+                                                                            .toList()[
+                                                                        index];
+
+                                                                // group titles
+                                                                return Container(
+                                                                  width: double
+                                                                      .infinity,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .symmetric(
+                                                                    horizontal:
+                                                                        15.sp,
+                                                                  ),
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            messageCtrl.text =
+                                                                                storedEncryptedText;
+                                                                            activeButtons();
+                                                                            Navigator.pop(context);
+                                                                          },
+                                                                          child:
+                                                                              Align(
+                                                                            alignment:
+                                                                                AlignmentDirectional.centerStart,
+                                                                            child:
+                                                                                Text(
+                                                                              title,
+                                                                              style: TextStyle(
+                                                                                color: darkGrayColor,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 11.sp,
+                                                                              ),
                                                                             ),
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                    // copy
-                                                                    IconButton(
-                                                                      icon: const Icon(
-                                                                        Icons.copy,
-                                                                        color: lightGrayColor,
+                                                                      // copy
+                                                                      IconButton(
+                                                                        icon:
+                                                                            const Icon(
+                                                                          Icons
+                                                                              .copy,
+                                                                          color:
+                                                                              lightGrayColor,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          FlutterClipboard.copy(
+                                                                              storedEncryptedText);
+
+                                                                          showToast(
+                                                                            title:
+                                                                                'msg copied'.tr(),
+                                                                            textColor:
+                                                                                contrastColor,
+                                                                            contentFillColor:
+                                                                                mainColor,
+                                                                          );
+                                                                        },
+                                                                        iconSize:
+                                                                            13.sp,
+                                                                        color:
+                                                                            darkGrayColor,
+                                                                        padding:
+                                                                            EdgeInsets.zero,
                                                                       ),
-                                                                      onPressed: (){
-                                                                        FlutterClipboard.copy(storedEncryptedText);
-
-                                                                        showToast(
-                                                                          title: 'msg copied'.tr(),
-                                                                          textColor: contrastColor,
-                                                                          contentFillColor: mainColor,
-                                                                        );
-                                                                      },
-                                                                      iconSize: 13.sp,
-                                                                      color: darkGrayColor,
-                                                                      padding: EdgeInsets.zero,
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              );
-
-                                                            }),
-                                                      );
-
-                                                    },
-                                                  ),
-                                                )
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              }),
+                                                            );
+                                                          },
+                                                        ),
+                                                      )
                                                     : Column(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.add_box,
-                                                      color: lightGrayColor,
-                                                      size: 50.sp,
-                                                    ),
-                                                    Text(
-                                                      'add_store_message'.tr(),
-                                                      style: TextStyle(
-                                                        color: Colors.grey[500],
-                                                        fontSize: 12.sp,
-                                                        // height: 0.9.sp,
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.add_box,
+                                                            color:
+                                                                lightGrayColor,
+                                                            size: 50.sp,
+                                                          ),
+                                                          Text(
+                                                            'add_store_message'
+                                                                .tr(),
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .grey[500],
+                                                              fontSize: 12.sp,
+                                                              // height: 0.9.sp,
+                                                            ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ],
                                                       ),
-                                                      textAlign: TextAlign.center,
-                                                    ),
-                                                  ],
-                                                ),
                                                 buttons: [
-                                                  if(groups.isNotEmpty)
+                                                  if (groups.isNotEmpty)
                                                     DialogButton(
                                                       title: 'edit'.tr(),
                                                       isBold: false,
-                                                      onPressed: (){
+                                                      onPressed: () {
                                                         Navigator.pop(context);
 
-                                                        Navigator.push(context, MaterialPageRoute(
-                                                          builder: (context) => const EditTextStoreScreen(),
-                                                        ));
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  const EditTextStoreScreen(),
+                                                            ));
                                                       },
                                                     ),
                                                   DialogButton(
                                                     title: 'back'.tr(),
-                                                    onPressed: (){
+                                                    onPressed: () {
                                                       Navigator.pop(context);
                                                     },
                                                   ),
                                                 ],
                                               );
                                             }
-
                                           },
                                         ),
                                       ),
@@ -453,28 +520,32 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
 
-                              SizedBox(height: 15.sp,),
+                              SizedBox(
+                                height: 15.sp,
+                              ),
 
                               /// password field
                               CustomShowcase(
                                 globalKey: _passwordFieldShowcase,
                                 title: 'showcase_password_field_title'.tr(),
-                                description: 'showcase_password_field_description'.tr(),
+                                description:
+                                    'showcase_password_field_description'.tr(),
                                 child: CustomTextField(
                                   theKey: passKey,
                                   controller: passCtrl,
                                   hintText: 'pass here'.tr(),
-                                  validator: (value){
-                                    String _undefined = V06('', passCtrl.text, context, true).getUndefinedChars(value);
-                                    if (_undefined.isNotEmpty){
-                                      return 'undefined_chars_title'.tr(args: [_undefined]);
+                                  validator: (value) {
+                                    String undefined =
+                                        V06('', passCtrl.text, context, true).getUndefinedChars(value!);
+                                    if (undefined.isNotEmpty) {
+                                      return 'undefined_chars_title'.tr(args: [undefined]);
                                     }
                                     return null;
                                   },
                                   showShadow: passValidate,
-
                                   onChange: (value) {
-                                    passValidate = passKey.currentState.validate();
+                                    passValidate =
+                                        passKey.currentState!.validate();
                                     activeButtons(passValidate);
                                   },
                                   prefixIcon: Icon(
@@ -495,7 +566,8 @@ class HomeScreen extends StatelessWidget {
                                   onTab: () {
                                     cubit.setCurrentFieldToPassword();
                                   },
-                                  isEnabled: (!cubit.isCurrentFieldNoneAndInactivated),
+                                  isEnabled:
+                                      (!cubit.isCurrentFieldNoneAndInactivated),
                                 ),
                               ),
                               if (cubit.isCurrentFieldPassword)
@@ -505,7 +577,6 @@ class HomeScreen extends StatelessWidget {
                                     alignment: WrapAlignment.end,
                                     direction: Axis.horizontal,
                                     verticalDirection: VerticalDirection.up,
-
                                     children: [
                                       /// clear all
                                       TextFieldQuickActions(
@@ -513,7 +584,8 @@ class HomeScreen extends StatelessWidget {
                                           messageCtrl.text = '';
                                           passCtrl.text = '';
 
-                                          activeButtons(passKey.currentState.validate());
+                                          activeButtons(
+                                              passKey.currentState!.validate());
                                           cubit.clearAllFields();
 
                                           dismissKeyboard(context);
@@ -526,10 +598,10 @@ class HomeScreen extends StatelessWidget {
                                       TextFieldQuickActions(
                                         icon: Icons.highlight_remove_outlined,
                                         title: 'clear'.tr(),
-
                                         onPressed: () {
                                           passCtrl.text = '';
-                                          activeButtons(passKey.currentState.validate());
+                                          activeButtons(
+                                              passKey.currentState!.validate());
 
                                           dismissKeyboard(context);
                                         },
@@ -541,15 +613,17 @@ class HomeScreen extends StatelessWidget {
                                         title: 'paste'.tr(),
                                         // paste in text field on single press
                                         onPressed: () {
-                                          FlutterClipboard.paste().then((value) {
+                                          FlutterClipboard.paste()
+                                              .then((value) {
                                             passCtrl.text = value;
-                                            activeButtons(passKey.currentState.validate());
+                                            activeButtons(passKey.currentState!
+                                                .validate());
 
                                             passCtrl.selection =
                                                 TextSelection.fromPosition(
                                                     TextPosition(
-                                                        offset:
-                                                        passCtrl.text.length));
+                                                        offset: passCtrl
+                                                            .text.length));
                                           });
                                         },
 
@@ -562,7 +636,9 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
 
-                              SizedBox(height: 4.h,),
+                              SizedBox(
+                                height: 4.h,
+                              ),
 
                               /// Encrypt & Decrypt buttons
                               Wrap(
@@ -570,12 +646,13 @@ class HomeScreen extends StatelessWidget {
                                 direction: Axis.horizontal,
                                 spacing: 8.sp,
                                 runSpacing: 9.sp,
-
                                 children: [
                                   // encrypt
                                   CustomShowcase(
                                     globalKey: _encryptButtonShowcase,
-                                    description: 'showcase_encrypt_button_description'.tr(),
+                                    description:
+                                        'showcase_encrypt_button_description'
+                                            .tr(),
                                     child: SizedBox(
                                       child: MainButton(
                                         onPressed: onPressMainButton(
@@ -590,10 +667,13 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+
                                   /// decrypt
                                   CustomShowcase(
                                     globalKey: _decryptButtonShowcase,
-                                    description: 'showcase_decrypt_button_description'.tr(),
+                                    description:
+                                        'showcase_decrypt_button_description'
+                                            .tr(),
                                     child: SizedBox(
                                       child: MainButton(
                                         onPressed: onPressMainButton(
@@ -610,12 +690,13 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 4.h,),
+                              SizedBox(
+                                height: 4.h,
+                              ),
                             ],
                           ),
                         ),
                       ),
-
                       const AdBanner(),
                     ],
                   ),
@@ -628,5 +709,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-

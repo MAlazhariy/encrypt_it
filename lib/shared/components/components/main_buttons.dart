@@ -7,12 +7,12 @@ import 'package:sizer/sizer.dart';
 
 class MainButton extends StatelessWidget {
   const MainButton({
-    @required this.onPressed,
-    @required this.isEncrypt,
-    Key key
+    required this.onPressed,
+    required this.isEncrypt,
+    Key? key
   }) : super(key: key);
 
-  final Function onPressed;
+  final void Function()? onPressed;
   final bool isEncrypt;
 
   @override

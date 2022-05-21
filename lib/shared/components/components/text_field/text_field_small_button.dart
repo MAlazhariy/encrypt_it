@@ -6,14 +6,14 @@ import 'package:sizer/sizer.dart';
 
 class TextFieldQuickActions extends StatelessWidget {
   const TextFieldQuickActions({
-    @required this.title,
-    @required this.onPressed,
-    @required this.icon,
+    required this.title,
+    required this.onPressed,
+    required this.icon,
     this.onLongPress,
-    Key key,
+    Key? key,
   }) : super(key: key);
-  final Function onPressed;
-  final Function onLongPress;
+  final void Function()? onPressed;
+  final void Function()? onLongPress;
   final IconData icon;
   final String title;
 
@@ -48,7 +48,7 @@ class _ButtonDesign extends StatelessWidget {
   const _ButtonDesign(
       this.icon,
       this.title,
-      {Key key}
+      {Key? key}
       ) : super(key: key);
 
   final IconData icon;

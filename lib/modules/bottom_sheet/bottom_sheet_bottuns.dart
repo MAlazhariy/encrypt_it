@@ -10,9 +10,8 @@ import 'package:sizer/sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class BottomSheetButtons extends StatelessWidget {
-  const BottomSheetButtons(
-      this.textResult, this.password, this.isEncrypt,
-      {Key key})
+  const BottomSheetButtons(this.textResult, this.password, this.isEncrypt,
+      {Key? key})
       : super(key: key);
 
   final String textResult;
@@ -31,14 +30,13 @@ class BottomSheetButtons extends StatelessWidget {
   }
 }
 
-
 class CustomDivider extends StatelessWidget {
-  const CustomDivider(this.isEncrypt, {Key key}) : super(key: key);
+  const CustomDivider(this.isEncrypt, {Key? key}) : super(key: key);
   final bool isEncrypt;
 
   @override
   Widget build(BuildContext context) {
-    if(isEncrypt){
+    if (isEncrypt) {
       return const Divider(
         thickness: 2,
         height: 0,
@@ -50,10 +48,7 @@ class CustomDivider extends StatelessWidget {
 }
 
 class AddToStoreButton extends StatelessWidget {
-  AddToStoreButton(
-      this.isEncrypt,
-      this.textResult,
-      {Key key})
+  AddToStoreButton(this.isEncrypt, this.textResult, {Key? key})
       : super(key: key);
 
   final bool isEncrypt;
@@ -61,31 +56,28 @@ class AddToStoreButton extends StatelessWidget {
 
   final GlobalKey _addToTextStoreShowcase = GlobalKey();
 
-  void _showAddToTextStoreCase(BuildContext context){
-
-    if(!ShowCaseCache.isAddTextStoreShowCaseViewed()){
-      WidgetsBinding.instance.addPostFrameCallback((_) =>
-          Future.delayed(const Duration(milliseconds: 500), () => ShowCaseWidget.of(context).startShowCase([
-            _addToTextStoreShowcase,
-          ]),)
-      );
+  void _showAddToTextStoreCase(BuildContext context) {
+    if (!ShowCaseCache.isAddTextStoreShowCaseViewed()) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => Future.delayed(
+            const Duration(milliseconds: 500),
+            () => ShowCaseWidget.of(context)?.startShowCase([
+              _addToTextStoreShowcase,
+            ]),
+          ));
 
       ShowCaseCache.addTextStoreShowCaseViewed();
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
-    if(isEncrypt){
-
+    if (isEncrypt) {
       _showAddToTextStoreCase(context);
 
       return CustomShowcase(
         globalKey: _addToTextStoreShowcase,
         title: 'add_to_storage'.tr(),
         description: 'showcase_add_to_store_description'.tr(),
-
         child: MaterialButton(
           elevation: 0,
           highlightElevation: 0,
@@ -124,11 +116,7 @@ class AddToStoreButton extends StatelessWidget {
 }
 
 class CopyButton extends StatelessWidget {
-  const CopyButton(
-      this.textResult,
-      this.password,
-      this.isEncrypt,
-      {Key key})
+  const CopyButton(this.textResult, this.password, this.isEncrypt, {Key? key})
       : super(key: key);
 
   final String textResult;
@@ -196,6 +184,3 @@ class CopyButton extends StatelessWidget {
     );
   }
 }
-
-
-

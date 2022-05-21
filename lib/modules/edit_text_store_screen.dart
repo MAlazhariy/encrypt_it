@@ -8,35 +8,39 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:sizer/sizer.dart';
 
 class EditTextStoreScreen extends StatefulWidget {
-  const EditTextStoreScreen({Key key}) : super(key: key);
+  const EditTextStoreScreen({Key? key}) : super(key: key);
 
   @override
-  _EditTextStoreScreenState createState() => _EditTextStoreScreenState();
+  EditTextStoreScreenState createState() => EditTextStoreScreenState();
 }
 
 
-class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
+class EditTextStoreScreenState extends State<EditTextStoreScreen> {
 
   Map groups = TextStoreCache.getGroups();
-  String choosedGroup;
+  String? choosedGroup;
 
   void deleteGroup(){
-    final String deletedGroupName = choosedGroup;
+    // todo: important to test this unit
+    assert(choosedGroup == null,'choosed group can not be null when deleting group');
+
+    final String deletedGroupName = choosedGroup!;
     final Map deletedGroupValue = TextStoreCache.getGroups()[deletedGroupName];
     final int deletedGroupIndex = TextStoreCache.getGroups().keys.toList().indexOf(deletedGroupName);
 
     setState(() {
       showCustomDialog(
         context: context,
-        title: 'delete'.tr() + ' $deletedGroupName',
+        title: '${'delete'.tr()} $deletedGroupName',
         content: Text(
-          'sure_to_delete_group'.tr(args: [deletedGroupName]),
+          'sure_to_delete_group'.tr(args: [deletedGroupName],
+          ),
         ),
         buttons: [
           DialogButton(
             title: 'delete'.tr(),
             onPressed: (){
-              TextStoreCache.deleteGroup(groupName: choosedGroup);
+              TextStoreCache.deleteGroup(groupName: choosedGroup!);
               Navigator.pop(context);
               setState(() {
                 choosedGroup = null;
@@ -89,9 +93,10 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
   }
 
   void editGroupName(){
+    // todo: important to test this unit
     TextEditingController messageTitleController = TextEditingController();
     var formGroupKey = GlobalKey<FormState>();
-    final String oldGroupName = choosedGroup;
+    final String oldGroupName = choosedGroup!;
 
     // show dialog to get new name from dialog
     showCustomDialog(
@@ -100,8 +105,8 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
       content: _CustomInputTextForm(
         formGroupKey: formGroupKey,
         messageTitleController: messageTitleController,
-        validator: (String value){
-          if(value.isEmpty){
+        validator: (String? value){
+          if(value!.isEmpty){
             return 'can_not_empty'.tr();
           } else if (TextStoreCache.getGroups().containsKey(value)){
             return 'group_already_exists'.tr();
@@ -124,7 +129,7 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
         DialogButton(
           title: 'done'.tr(),
           onPressed: (){
-            if(formGroupKey.currentState.validate()){
+            if(formGroupKey.currentState!.validate()){
               final String newGroupName = messageTitleController.text;
 
               TextStoreCache.changeGroupName(
@@ -145,18 +150,18 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
   }
 
   void deleteTitle({
-  @required String deletedTitle,
-  @required String deletedTitleValue,
-  @required int deletedIndex,
+  required String deletedTitle,
+  required String deletedTitleValue,
+  required int deletedIndex,
 }){
     setState(() {
       TextStoreCache.deleteTitle(
-        groupName: choosedGroup,
+        groupName: choosedGroup!,
         title: deletedTitle,
       );
     });
 
-    // show snack bar to restore deleted group
+    // show snack bar to restore deleted title
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -172,7 +177,7 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
           label: 'undo'.tr(),
           onPressed: (){
             TextStoreCache.restoreTitle(
-              groupName: choosedGroup,
+              groupName: choosedGroup!,
               deletedTitle: deletedTitle,
               deletedTitleValue: deletedTitleValue,
               index: deletedIndex,
@@ -188,7 +193,7 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
     TextEditingController messageTitleController = TextEditingController();
     var formGroupKey = GlobalKey<FormState>();
     final String oldTitleName = TextStoreCache.getTitleFromGroup(
-      groupName: choosedGroup,
+      groupName: choosedGroup!,
       index: index,
     );
 
@@ -199,8 +204,8 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
       content: _CustomInputTextForm(
         formGroupKey: formGroupKey,
         messageTitleController: messageTitleController,
-        validator: (String value){
-          if(value.isEmpty){
+        validator: (String? value){
+          if(value!.isEmpty){
             return 'can_not_empty'.tr();
           } else if(value.length >= 30){
             return 'too_big_title'.tr();
@@ -223,11 +228,11 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
         DialogButton(
           title: 'done'.tr(),
           onPressed: (){
-            if(formGroupKey.currentState.validate()){
+            if(formGroupKey.currentState!.validate()){
               String newTitleName = messageTitleController.text;
 
               TextStoreCache.changeTitleName(
-                groupName: choosedGroup,
+                groupName: choosedGroup!,
                 oldTitleName: oldTitleName,
                 newName: newTitleName,
               );
@@ -248,9 +253,8 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
   @override
   Widget build(BuildContext context) {
 
-    groups??={};
     List<String> dropdownItems = List.generate(
-        TextStoreCache.getGroups().length??0,
+        TextStoreCache.getGroups().length,
         (index) =>  TextStoreCache.getGroupName(index),
     );
 
@@ -478,7 +482,7 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                     alignment: AlignmentDirectional.centerStart,
                                     child: Text(
                                       TextStoreCache.getTitleFromGroup(
-                                        groupName: choosedGroup,
+                                        groupName: choosedGroup!,
                                         index: index,
                                       ),
                                       style: TextStyle(
@@ -492,6 +496,7 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
 
                                 /// delete title
                                 Material(
+                                  shape: const CircleBorder(),
                                   child: IconButton(
                                     onPressed: (){
                                       final String deletedTitle = TextStoreCache.getGroups()[choosedGroup].keys.toList()[index];
@@ -521,11 +526,11 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                     splashColor: lightGrayColor.withAlpha(80),
                                     highlightColor: lightGrayColor.withAlpha(40),
                                   ),
-                                  shape: const CircleBorder(),
                                 ),
 
                                 /// edit title name
                                 Material(
+                                  shape: const CircleBorder(),
                                   child: IconButton(
                                     onPressed: (){
                                       editTitleName(index);
@@ -539,7 +544,6 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                     splashColor: lightGrayColor.withAlpha(80),
                                     highlightColor: lightGrayColor.withAlpha(40),
                                   ),
-                                  shape: const CircleBorder(),
                                 ),
                               ],
                             ),
@@ -559,14 +563,6 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
                 top: 5.sp,
               ),
               child: MaterialButton(
-                child: Text(
-                  'done'.tr(),
-                  style: TextStyle(
-                    color: contrastColor,
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
                 onPressed: (){
                   Navigator.pop(context);
                 },
@@ -580,6 +576,14 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
                 ),
                 splashColor: contrastColor.withAlpha(25),
                 highlightColor: contrastColor.withAlpha(10),
+                child: Text(
+                  'done'.tr(),
+                  style: TextStyle(
+                    color: contrastColor,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
             ),
           ],
@@ -594,10 +598,10 @@ class _EditTextStoreScreenState extends State<EditTextStoreScreen> {
 
 class _CustomInputTextForm extends StatefulWidget {
   const _CustomInputTextForm({
-    Key key,
-    @required this.formGroupKey,
-    @required this.messageTitleController,
-    @required this.validator,
+    Key? key,
+    required this.formGroupKey,
+    required this.messageTitleController,
+    required this.validator,
   }) : super(key: key);
 
   final GlobalKey<FormState> formGroupKey;
@@ -642,7 +646,7 @@ class _CustomInputTextFormState extends State<_CustomInputTextForm> {
           ),
         ),
         onChanged: (value){
-          if(widget.formGroupKey.currentState.validate()){
+          if(widget.formGroupKey.currentState!.validate()){
           }
         },
         textAlign: TextAlign.center,
