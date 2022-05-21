@@ -319,7 +319,7 @@ class HomeScreen extends StatelessWidget {
                                                 : true;
 
                                             // todo: important handle bio
-                                            if (isAuthenticated)  {
+                                            if(isAuthenticated)  {
                                               showCustomDialog(
                                                 context: context,
                                                 title: 'choose_message'.tr(),
