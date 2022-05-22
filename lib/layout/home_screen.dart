@@ -110,7 +110,7 @@ class HomeScreen extends StatelessWidget {
               // this fuction paste the text in its field
               // and password in its field at once.
               void pasteAll() {
-                FlutterClipboard.paste().then((value){
+                FlutterClipboard.paste().then((value) {
                   // ensure if value contains ciphertext & password
                   if (value.startsWith('Ciphertext: "') &&
                       value.contains('\nPassword: "')) {
@@ -242,7 +242,8 @@ class HomeScreen extends StatelessWidget {
                                               messageCtrl.text = '';
                                               passCtrl.text = '';
 
-                                              activeButtons(passKey.currentState!
+                                              activeButtons(passKey
+                                                  .currentState!
                                                   .validate());
                                               cubit.clearAllFields();
 
@@ -282,7 +283,8 @@ class HomeScreen extends StatelessWidget {
                                             FlutterClipboard.paste()
                                                 .then((value) {
                                               messageCtrl.text = value;
-                                              activeButtons(passKey.currentState!
+                                              activeButtons(passKey
+                                                  .currentState!
                                                   .validate());
 
                                               messageCtrl.selection =
@@ -304,16 +306,16 @@ class HomeScreen extends StatelessWidget {
                                       CustomShowcase(
                                         globalKey: _textStoreShowcase,
                                         description:
-                                            'showcase_text_store_description'
-                                                .tr(),
+                                            'showcase_text_store_description'.tr(),
                                         title: 'message_store'.tr(),
                                         child: TextFieldQuickActions(
                                           icon: Icons.enhanced_encryption,
                                           title: 'message_store'.tr(),
                                           onPressed: () async {
-                                            Map? groups = TextStoreCache.getGroups();
+                                            Map? groups =
+                                                TextStoreCache.getGroups();
 
-                                            if(!authenticated){
+                                            if (!authenticated) {
                                               final bool hasBio = await LocalAuthApi.hasBiometrics();
                                               authenticated = hasBio
                                                   ? await LocalAuthApi.authenticate()
@@ -321,176 +323,175 @@ class HomeScreen extends StatelessWidget {
                                             }
 
                                             // todo: important handle bio
-                                            if(authenticated)  {
+                                            if (authenticated) {
                                               showCustomDialog(
                                                 context: context,
                                                 title: 'choose_message'.tr(),
-                                                content: groups?.isNotEmpty ?? false
-                                                    ? Column(
-                                                        children: List.generate(
-                                                          groups!.length,
-                                                          // +1 only if want to show AD
-                                                          (index) {
-                                                            // /// bannerAd
-                                                            // if(index==groups.length){
-                                                            //   return const AdNative();
-                                                            // }
+                                                content:
+                                                    groups?.isNotEmpty ?? false
+                                                        ? Column(
+                                                            children:
+                                                                List.generate(
+                                                              groups!.length,
+                                                              // +1 only if want to show AD
+                                                              (index) {
+                                                                // /// bannerAd
+                                                                // if(index==groups.length){
+                                                                //   return const AdNative();
+                                                                // }
 
-                                                            final String
-                                                                groupName =
-                                                                groups.keys
-                                                                        .toList()[
-                                                                    index];
-                                                            final Map group =
-                                                                groups[
-                                                                    groupName];
-
-                                                            // groups
-                                                            return ExpansionTile(
-                                                              title: Text(
-                                                                groupName,
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                ),
-                                                              ),
-                                                              collapsedIconColor:
-                                                                  bGColor,
-                                                              collapsedTextColor:
-                                                                  bGColor,
-                                                              iconColor:
-                                                                  mainColor,
-                                                              textColor:
-                                                                  mainColor,
-                                                              backgroundColor:
-                                                                  mainColor
-                                                                      .withAlpha(
-                                                                          15),
-                                                              children:
-                                                                  List.generate(
-                                                                      group
-                                                                          .length,
-                                                                      (index) {
-                                                                String title = group
-                                                                        .keys
-                                                                        .toList()[
-                                                                    index];
-                                                                String
-                                                                    storedEncryptedText =
-                                                                    group.values
+                                                                final String
+                                                                    groupName =
+                                                                    groups.keys
                                                                             .toList()[
                                                                         index];
+                                                                final Map
+                                                                    group =
+                                                                    groups[
+                                                                        groupName];
 
-                                                                // group titles
-                                                                return Container(
-                                                                  width: double
-                                                                      .infinity,
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .symmetric(
-                                                                    horizontal:
-                                                                        15.sp,
+                                                                // groups
+                                                                return ExpansionTile(
+                                                                  title: Text(
+                                                                    groupName,
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                    ),
                                                                   ),
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Expanded(
-                                                                        child:
-                                                                            TextButton(
-                                                                          onPressed:
-                                                                              () {
-                                                                            messageCtrl.text =
-                                                                                storedEncryptedText;
-                                                                            activeButtons();
-                                                                            Navigator.pop(context);
-                                                                          },
-                                                                          child:
-                                                                              Align(
-                                                                            alignment:
-                                                                                AlignmentDirectional.centerStart,
+                                                                  collapsedIconColor:
+                                                                      bGColor,
+                                                                  collapsedTextColor:
+                                                                      bGColor,
+                                                                  iconColor:
+                                                                      mainColor,
+                                                                  textColor:
+                                                                      mainColor,
+                                                                  backgroundColor:
+                                                                      mainColor
+                                                                          .withAlpha(
+                                                                              15),
+                                                                  children: List
+                                                                      .generate(
+                                                                          group
+                                                                              .length,
+                                                                          (index) {
+                                                                    String
+                                                                        title =
+                                                                        group
+                                                                            .keys
+                                                                            .toList()[index];
+                                                                    String
+                                                                        storedEncryptedText =
+                                                                        group
+                                                                            .values
+                                                                            .toList()[index];
+
+                                                                    // group titles
+                                                                    return Container(
+                                                                      width: double
+                                                                          .infinity,
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .symmetric(
+                                                                        horizontal:
+                                                                            15.sp,
+                                                                      ),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Expanded(
                                                                             child:
-                                                                                Text(
-                                                                              title,
-                                                                              style: TextStyle(
-                                                                                color: darkGrayColor,
-                                                                                fontWeight: FontWeight.w500,
-                                                                                fontSize: 11.sp,
+                                                                                TextButton(
+                                                                              onPressed: () {
+                                                                                messageCtrl.text = storedEncryptedText;
+                                                                                activeButtons();
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                              child: Align(
+                                                                                alignment: AlignmentDirectional.centerStart,
+                                                                                child: Text(
+                                                                                  title,
+                                                                                  style: TextStyle(
+                                                                                    color: darkGrayColor,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    fontSize: 11.sp,
+                                                                                  ),
+                                                                                ),
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                        ),
-                                                                      ),
-                                                                      // copy
-                                                                      IconButton(
-                                                                        icon:
-                                                                            const Icon(
-                                                                          Icons
-                                                                              .copy,
-                                                                          color:
-                                                                              lightGrayColor,
-                                                                        ),
-                                                                        onPressed:
-                                                                            () {
-                                                                          FlutterClipboard.copy(
-                                                                              storedEncryptedText);
+                                                                          // copy
+                                                                          IconButton(
+                                                                            icon:
+                                                                                const Icon(
+                                                                              Icons.copy,
+                                                                              color: lightGrayColor,
+                                                                            ),
+                                                                            onPressed:
+                                                                                () {
+                                                                              FlutterClipboard.copy(storedEncryptedText);
 
-                                                                          showToast(
-                                                                            title:
-                                                                                'msg copied'.tr(),
-                                                                            textColor:
-                                                                                contrastColor,
-                                                                            contentFillColor:
-                                                                                mainColor,
-                                                                          );
-                                                                        },
-                                                                        iconSize:
-                                                                            13.sp,
-                                                                        color:
-                                                                            darkGrayColor,
-                                                                        padding:
-                                                                            EdgeInsets.zero,
+                                                                              showToast(
+                                                                                title: 'msg copied'.tr(),
+                                                                                textColor: contrastColor,
+                                                                                contentFillColor: mainColor,
+                                                                              );
+                                                                            },
+                                                                            iconSize:
+                                                                                13.sp,
+                                                                            color:
+                                                                                darkGrayColor,
+                                                                            padding:
+                                                                                EdgeInsets.zero,
+                                                                          ),
+                                                                        ],
                                                                       ),
-                                                                    ],
-                                                                  ),
+                                                                    );
+                                                                  }),
                                                                 );
-                                                              }),
-                                                            );
-                                                          },
-                                                        ),
-                                                      )
-                                                    : Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Icon(
-                                                            Icons.add_box,
-                                                            color:
-                                                                lightGrayColor,
-                                                            size: 50.sp,
-                                                          ),
-                                                          Text(
-                                                            'add_store_message'
-                                                                .tr(),
-                                                            style: TextStyle(
-                                                              color: Colors
-                                                                  .grey[500],
-                                                              fontSize: 12.sp,
-                                                              // height: 0.9.sp,
+                                                              },
                                                             ),
-                                                            textAlign: TextAlign
-                                                                .center,
+                                                          )
+                                                        : Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Icon(
+                                                                Icons.add_box,
+                                                                color:
+                                                                    lightGrayColor,
+                                                                size: 50.sp,
+                                                              ),
+                                                              Text(
+                                                                'add_store_message'
+                                                                    .tr(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                          .grey[
+                                                                      500],
+                                                                  fontSize:
+                                                                      12.sp,
+                                                                  // height: 0.9.sp,
+                                                                ),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                              ),
+                                                            ],
                                                           ),
-                                                        ],
-                                                      ),
                                                 buttons: [
-                                                  if (groups?.isNotEmpty??false)
+                                                  if (groups?.isNotEmpty ??
+                                                      false)
                                                     DialogButton(
                                                       title: 'edit'.tr(),
                                                       isBold: false,
@@ -537,9 +538,11 @@ class HomeScreen extends StatelessWidget {
                                   hintText: 'pass here'.tr(),
                                   validator: (value) {
                                     String undefined =
-                                        V06('', passCtrl.text, context, true).getUndefinedChars(value!);
+                                        V06('', passCtrl.text, context, true)
+                                            .getUndefinedChars(value!);
                                     if (undefined.isNotEmpty) {
-                                      return 'undefined_chars_title'.tr(args: [undefined]);
+                                      return 'undefined_chars_title'
+                                          .tr(args: [undefined]);
                                     }
                                     return null;
                                   },
