@@ -51,3 +51,4 @@ app.*.map.json
 /android/app/proguard-rules.pro
 /android/app/src/main/AndroidManifest.xml
 /lib/modules/ads/ad_helper.dart
+/lib/decoding/encrypt_abstract.dart

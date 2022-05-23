@@ -51,6 +51,7 @@ dependencies:
   google_mobile_ads: ^1.2.0
   showcaseview: ^1.1.4
   local_auth: ^1.1.10
+  mockito: ^5.2.0
 
 
 
