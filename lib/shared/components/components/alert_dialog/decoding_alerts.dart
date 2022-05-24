@@ -81,10 +81,15 @@ void invalidCharactersAlert({
                   decoration: TextDecoration.underline,
                 ),
                 recognizer: TapGestureRecognizer()..onTap = () async {
-                  await launch(Links.mailUs(
-                    subject: '${'report_bug'.tr()} - ${'undefined_chars'.tr()}',
-                  ));
-                },
+                  await launchUrl(
+                      Uri.parse(
+                        Links.mailUs(
+                          subject:
+                              '${'report_bug'.tr()} - ${'undefined_chars'.tr()}',
+                        ),
+                      ),
+                    );
+                  },
               ),
               TextSpan(
                 text: '.',
@@ -168,7 +173,11 @@ void laterVersionAlert(BuildContext context){
       DialogButton(
         title: 'update_app'.tr(),
         onPressed: () async {
-          await launch(Links.appOnGooglePlay).then((value){
+          await launchUrl(
+            Uri.parse(
+              Links.appOnGooglePlay,
+            ),
+          ).then((value){
             Navigator.pop(context);
           });
         },

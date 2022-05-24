@@ -8,12 +8,13 @@ import 'package:flutter/material.dart';
 
 
 class ChangeLanguageMenuItem extends StatelessWidget {
-  const ChangeLanguageMenuItem(this.cubit, {Key? key}) : super(key: key);
+  const ChangeLanguageMenuItem({Key? key}) : super(key: key);
 
-  final AppCubit cubit;
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
+    
     return MenuItemWidget(
       title: 'change lang'.tr(),
       icon: Icons.translate,

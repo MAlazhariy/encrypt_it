@@ -1,45 +1,41 @@
+// ignore_for_file: prefer_for_elements_to_map_fromiterable
+
 /*
 -------------
   'groups' : {
 
-    'group_one' : {
+     'group_one' : {
         'title_one': 'encrypted message one',
         'title_two': 'encrypted message two',
         'title_three': 'encrypted message three',
-        },
+      },
 
-     'group_two' : {
+      'group_two' : {
         'title_one': 'encrypted message one',
         'title_two': 'encrypted message two'
-        },
+      },
 
   }
+-------------
 */
 
-/// var map1 = Map.fromIterable(list, key: (e) => e.name, value: (e) => e.age);
 
 class StoreModel {
-  List<StoreGroupModel>? groups;
-
-  // groups[0].groupName
-  // groupModel.groupName .. group name
-  // groupModel.group .. group content
-  // groupModel.group.title .. group content title
-  // groupModel.group.ciphertext .. group content ciphertext
+  List<GroupModel>? groups;
 
   StoreModel.fromJson(Map? json) {
     if (json != null) {
       groups = List.generate(
         json.length,
             (i) =>
-            StoreGroupModel(
+            GroupModel(
               groupName: json.keys.toList()[i],
-              group: List.generate(
+              groupContent: List.generate(
                 json.values.toList()[i].keys
                     .toList()
                     .length,
                     (index) =>
-                    GroupModel(
+                    GroupContentModel(
                       title: json.values.toList()[i].keys.toList()[index],
                       ciphertext: json.values.toList()[i].values
                           .toList()[index],
@@ -65,8 +61,10 @@ class StoreModel {
       // }
     }
   }
-
-  Map<String, Map> toMap() {
+  Map<String, Map>? toMap() {
+    if(groups == null){
+      return null;
+    }
     return Map.fromIterable(
       groups!,
       key: (e) {
@@ -74,7 +72,7 @@ class StoreModel {
       },
       value: (e) {
         return Map.fromIterable(
-          e.group,
+          e.groupContent,
           key: (x) => x.title,
           value: (x) => x.ciphertext,
         );
@@ -83,21 +81,21 @@ class StoreModel {
   }
 }
 
-class StoreGroupModel {
+class GroupModel {
   String groupName;
-  List<GroupModel> group;
+  List<GroupContentModel> groupContent;
 
-  StoreGroupModel({
+  GroupModel({
     required this.groupName,
-    required this.group,
+    required this.groupContent,
   });
 }
 
-class GroupModel {
+class GroupContentModel {
   String title;
   String ciphertext;
 
-  GroupModel({
+  GroupContentModel({
     required this.title,
     required this.ciphertext,
   });

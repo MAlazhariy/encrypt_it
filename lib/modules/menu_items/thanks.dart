@@ -91,7 +91,11 @@ class ThanksMenuItem extends StatelessWidget {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
-                          await launch(Links.facebookPage);
+                          await launchUrl(
+                            Uri.parse(
+                              Links.facebookPage,
+                            ),
+                          );
                         },
                     ),
                     TextSpan(
@@ -117,9 +121,13 @@ class ThanksMenuItem extends StatelessWidget {
                 title: 'contact_us'.tr(),
                 isBold: true,
                 onPressed: () async {
-                  await launch(Links.mailUs(
-                    subject: '${'report_bug'.tr()} - $appVersion',
-                  )).then((value) {
+                  await launchUrl(
+                    Uri.parse(
+                      Links.mailUs(
+                        subject: '${'report_bug'.tr()} - $appVersion',
+                      ),
+                    ),
+                  ).then((value) {
                     Navigator.pop(context);
                   });
                 }),

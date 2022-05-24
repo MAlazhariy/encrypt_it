@@ -1,7 +1,8 @@
-
+import 'package:encryption_app/models/text_store_model.dart';
+import 'package:encryption_app/modules/text_store/text_store_functions.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
-import 'package:encryption_app/shared/network/local/text_store_cache.dart';
+import 'package:encryption_app/shared/components/constants.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,35 +15,38 @@ class EditTextStoreScreen extends StatefulWidget {
   EditTextStoreScreenState createState() => EditTextStoreScreenState();
 }
 
-
 class EditTextStoreScreenState extends State<EditTextStoreScreen> {
-
-  Map? groups = TextStoreCache.getGroups();
   String? choosedGroup;
+  int? groupIndex;
 
-  void deleteGroup(){
+  void deleteChoosedGroup() {
     // todo: important to test this unit
-    assert(choosedGroup == null,'choosed group can not be null when deleting a group');
+    assert(choosedGroup == null,
+        'choosed group can not be null when deleting a group');
 
-    final String deletedGroupName = choosedGroup!;
-    final Map deletedGroupValue = TextStoreCache.getGroups()![deletedGroupName];
-    final int deletedGroupIndex = TextStoreCache.getGroups()!.keys.toList().indexOf(deletedGroupName);
+    // final String deletedGroupName = choosedGroup!;
+    // final Map deletedGroupValue = TextStoreCache.getGroups()![deletedGroupName];
+    // final int deletedGroupIndex = TextStoreCache.getGroups()!.keys.toList().indexOf(deletedGroupName);
+    final deletedGroupIndex = groupIndex!;
+    final deletedGroup = groups!.groups![deletedGroupIndex];
 
     setState(() {
       showCustomDialog(
         context: context,
-        title: '${'delete'.tr()} $deletedGroupName',
+        title: '${'delete'.tr()} ${deletedGroup.groupName}',
         content: Text(
-          'sure_to_delete_group'.tr(args: [deletedGroupName],
+          'sure_to_delete_group'.tr(
+            args: [deletedGroup.groupName],
           ),
         ),
         buttons: [
           DialogButton(
             title: 'delete'.tr(),
-            onPressed: (){
-              TextStoreCache.deleteGroup(groupName: choosedGroup!);
+            onPressed: () {
+              Groups.deleteGroup(deletedGroupIndex);
               Navigator.pop(context);
               setState(() {
+                groupIndex = null;
                 choosedGroup = null;
               });
 
@@ -50,7 +54,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    'group_deleted'.tr(args: [deletedGroupName]),
+                    'group_deleted'.tr(args: [deletedGroup.groupName]),
                     style: const TextStyle(
                       // color: redColor,
                       fontFamily: 'Cairo',
@@ -62,14 +66,14 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                   action: SnackBarAction(
                     textColor: contrastColor,
                     label: 'undo'.tr(),
-                    onPressed: (){
-                      TextStoreCache.restoreGroup(
-                        groupName: deletedGroupName,
-                        groupValue: deletedGroupValue,
+                    onPressed: () {
+                      Groups.insertGroup(
                         groupIndex: deletedGroupIndex,
+                        groupModel: deletedGroup,
                       );
                       setState(() {
-                        choosedGroup = deletedGroupName;
+                        choosedGroup = deletedGroup.groupName;
+                        groupIndex = Groups.getGroupIndex(deletedGroup.groupName);
                       });
                     },
                   ),
@@ -83,7 +87,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
           ),
           DialogButton(
             title: 'back'.tr(),
-            onPressed: (){
+            onPressed: () {
               Navigator.pop(context);
             },
           ),
@@ -92,11 +96,12 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
     });
   }
 
-  void editGroupName(){
+  void editChoosedGroupName() {
     // todo: important to test this unit
     TextEditingController messageTitleController = TextEditingController();
     var formGroupKey = GlobalKey<FormState>();
-    final String oldGroupName = choosedGroup!;
+
+    final GroupModel group = groups!.groups![groupIndex!];
 
     // show dialog to get new name from dialog
     showCustomDialog(
@@ -105,12 +110,12 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
       content: _CustomInputTextForm(
         formGroupKey: formGroupKey,
         messageTitleController: messageTitleController,
-        validator: (String? value){
-          if(value!.isEmpty){
+        validator: (String? value) {
+          if (value?.isEmpty ?? true) {
             return 'can_not_empty'.tr();
-          } else if (TextStoreCache.getGroups()!.containsKey(value)){
+          } else if (Groups.isGroupExists(group.groupName)) {
             return 'group_already_exists'.tr();
-          } else if(value.length >= 30){
+          } else if (value!.length >= 30) {
             return 'too_big_title'.tr();
           }
 
@@ -125,21 +130,23 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
             Navigator.pop(context);
           },
         ),
+
         /// done
         DialogButton(
           title: 'done'.tr(),
-          onPressed: (){
-            if(formGroupKey.currentState!.validate()){
-              final String newGroupName = messageTitleController.text;
-
-              TextStoreCache.changeGroupName(
-                groupName: oldGroupName,
-                newName: newGroupName,
-              );
-              Navigator.pop(context);
+          onPressed: () {
+            if (formGroupKey.currentState!.validate()) {
+              final newGroupName = messageTitleController.text;
 
               setState(() {
+                Groups.changeGroupName(
+                  groupIndex: groupIndex!,
+                  groupModel: group,
+                  newName: newGroupName,
+                );
+                Navigator.pop(context);
                 choosedGroup = newGroupName;
+                groupIndex = Groups.getGroupIndex(newGroupName);
               });
             }
           },
@@ -150,14 +157,14 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
   }
 
   void deleteTitle({
-  required String deletedTitle,
-  required String deletedTitleValue,
-  required int deletedIndex,
-}){
+    required GroupContentModel content,
+    required int titleIndex,
+  }) {
+
     setState(() {
-      TextStoreCache.deleteTitle(
-        groupName: choosedGroup!,
-        title: deletedTitle,
+      Groups.deleteTitle(
+        groupIndex: groupIndex!,
+        titleIndex: titleIndex,
       );
     });
 
@@ -165,7 +172,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'title_deleted'.tr(args: [deletedTitle]),
+          'title_deleted'.tr(args: [content.title]),
           style: const TextStyle(
             fontFamily: 'Cairo',
             fontWeight: FontWeight.w600,
@@ -175,27 +182,23 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
         action: SnackBarAction(
           textColor: contrastColor,
           label: 'undo'.tr(),
-          onPressed: (){
-            TextStoreCache.restoreTitle(
-              groupName: choosedGroup!,
-              deletedTitle: deletedTitle,
-              deletedTitleValue: deletedTitleValue,
-              index: deletedIndex,
-            );
-            setState(() {});
+          onPressed: () {
+            setState(() {
+              Groups.insertTitle(
+                groupIndex: groupIndex!,
+                titleIndex: titleIndex,
+                content: content,
+              );
+            });
           },
         ),
       ),
     );
   }
 
-  void editTitleName(int index){
+  void editTitleName(int titleIndex) {
     TextEditingController messageTitleController = TextEditingController();
     var formGroupKey = GlobalKey<FormState>();
-    final String oldTitleName = TextStoreCache.getTitleFromGroup(
-      groupName: choosedGroup!,
-      index: index,
-    );
 
     // show dialog to get new name from dialog
     showCustomDialog(
@@ -204,12 +207,12 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
       content: _CustomInputTextForm(
         formGroupKey: formGroupKey,
         messageTitleController: messageTitleController,
-        validator: (String? value){
-          if(value!.isEmpty){
+        validator: (value) {
+          if (value!.isEmpty) {
             return 'can_not_empty'.tr();
-          } else if(value.length >= 30){
+          } else if (value.length >= 35) {
             return 'too_big_title'.tr();
-          } else if (TextStoreCache.getGroups()![choosedGroup].containsKey(value)){
+          } else if (Groups.isTitleExists(title: value, groupIndex: groupIndex!)) {
             return 'title_already_exists'.tr();
           }
 
@@ -224,24 +227,20 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
             Navigator.pop(context);
           },
         ),
+
         /// done
         DialogButton(
           title: 'done'.tr(),
-          onPressed: (){
-            if(formGroupKey.currentState!.validate()){
-              String newTitleName = messageTitleController.text;
-
-              TextStoreCache.changeTitleName(
-                groupName: choosedGroup!,
-                oldTitleName: oldTitleName,
-                newName: newTitleName,
-              );
-
+          onPressed: () {
+            if (formGroupKey.currentState!.validate()) {
               setState(() {
+                Groups.editTitle(
+                  groupIndex: groupIndex!,
+                  titleIndex: titleIndex,
+                  newTitle: messageTitleController.text,
+                );
                 Navigator.pop(context);
               });
-
-
             }
           },
           isBold: true,
@@ -252,17 +251,13 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     List<String> dropdownItems = List.generate(
-        TextStoreCache.getGroups()!.length,
-        (index) =>  TextStoreCache.getGroupName(index),
+      groups?.groups?.length ?? 0,
+      (groupIndex) => groups!.groups![groupIndex].groupName,
     );
-
-
 
     return Scaffold(
       backgroundColor: const Color(0xFFFAFAFA),
-
       appBar: AppBar(
         title: Text(
           'edit_text_store'.tr(),
@@ -271,7 +266,6 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
         foregroundColor: mainColor,
         elevation: 2,
       ),
-
       body: Padding(
         padding: EdgeInsetsDirectional.only(
           top: 15.sp,
@@ -286,11 +280,10 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
-
-                    if(choosedGroup==null)
+                    if (choosedGroup == null)
                       Text(
-                      'choose_group_to_edit_text_store'.tr(),
-                    ),
+                        'choose_group_to_edit_text_store'.tr(),
+                      ),
 
                     // groups dropDown menu
                     Container(
@@ -318,11 +311,11 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                               color: lightGrayColor,
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w600,
-                              fontFamily: 'Cairo'
-                          ),
+                              fontFamily: 'Cairo'),
                         ),
                         alignment: AlignmentDirectional.centerStart,
-                        isExpanded: true, // fill the parent width
+                        isExpanded: true,
+                        // fill the parent width
                         focusColor: mainColor,
                         underline: Container(),
                         enableFeedback: true,
@@ -330,229 +323,248 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                             color: Colors.grey[900],
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
-                            fontFamily: 'Cairo'
-                        ),
+                            fontFamily: 'Cairo'),
                         autofocus: true,
                         menuMaxHeight: 75.h,
                         dropdownColor: Colors.white,
-                        icon: Icon(Icons.arrow_drop_down, color: lightGrayColor, size: 20.sp,),
-                        items: dropdownItems.map<DropdownMenuItem<String>>((String value) {
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: lightGrayColor,
+                          size: 20.sp,
+                        ),
+                        items: dropdownItems
+                            .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Center(child: Text(value)),
                           );
                         }).toList(),
 
-                        onChanged: (value){
+                        onChanged: (value) {
                           setState(() {
                             choosedGroup = value;
+
+                            value != null
+                                ? groupIndex = Groups.getGroupIndex(value)
+                                : groupIndex = null;
                           });
                         },
                       ),
                     ),
 
-                    SizedBox(height: 10.sp,),
+                    SizedBox(
+                      height: 10.sp,
+                    ),
 
                     // show group actions
-                    if(choosedGroup != null)
+                    if (choosedGroup != null)
                       Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Wrap(
-                        children: [
-                          // edit group name
-                          Card(
-                            color: const Color(0xFFFFFFFF),
-                            elevation: 5,
-                            shadowColor: lightGrayColor.withAlpha(80),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.sp),
-                            ),
-                            child: InkWell(
-                              onTap: (){
-                                editGroupName();
-                              },
-                              splashColor: mainColor.withAlpha(50),
-                              borderRadius: BorderRadius.circular(15.sp),
-                              child: Padding(
-                                padding: EdgeInsets.all(10.sp),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      'edit_group_name'.tr(),
-                                      style: TextStyle(
+                          children: [
+                            // edit group name
+                            Card(
+                              color: const Color(0xFFFFFFFF),
+                              elevation: 5,
+                              shadowColor: lightGrayColor.withAlpha(80),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.sp),
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  editChoosedGroupName();
+                                },
+                                splashColor: mainColor.withAlpha(50),
+                                borderRadius: BorderRadius.circular(15.sp),
+                                child: Padding(
+                                  padding: EdgeInsets.all(10.sp),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        'edit_group_name'.tr(),
+                                        style: TextStyle(
+                                          color: darkGrayColor,
+                                          fontSize: 10.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5.sp,
+                                      ),
+                                      Icon(
+                                        Icons.edit,
                                         color: darkGrayColor,
-                                        fontSize: 10.sp,
+                                        size: 14.sp,
                                       ),
-                                    ),
-                                    SizedBox(width: 5.sp,),
-                                    Icon(
-                                      Icons.edit,
-                                      color: darkGrayColor,
-                                      size: 14.sp,
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
 
-                          // delete the group
-                          Card(
-                            color: const Color(0xFFFFFFFF),
-                            elevation: 5,
-                            shadowColor: lightGrayColor.withAlpha(80),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.sp),
-                            ),
-                            child: InkWell(
-                              onTap: (){
-                                deleteGroup();
-                              },
-                              splashColor: mainColor.withAlpha(50),
-                              borderRadius: BorderRadius.circular(15.sp),
-                              child: Padding(
-                                padding: EdgeInsets.all(10.sp),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      'delete_the_group'.tr(),
-                                      style: TextStyle(
+                            // delete the group
+                            Card(
+                              color: const Color(0xFFFFFFFF),
+                              elevation: 5,
+                              shadowColor: lightGrayColor.withAlpha(80),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.sp),
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  deleteChoosedGroup();
+                                },
+                                splashColor: mainColor.withAlpha(50),
+                                borderRadius: BorderRadius.circular(15.sp),
+                                child: Padding(
+                                  padding: EdgeInsets.all(10.sp),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        'delete_the_group'.tr(),
+                                        style: TextStyle(
+                                          color: redColor,
+                                          fontSize: 10.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5.sp,
+                                      ),
+                                      Icon(
+                                        Icons.delete_outline,
                                         color: redColor,
-                                        fontSize: 10.sp,
+                                        size: 14.sp,
                                       ),
-                                    ),
-                                    SizedBox(width: 5.sp,),
-                                    Icon(
-                                      Icons.delete_outline,
-                                      color: redColor,
-                                      size: 14.sp,
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-
-                        ],
-                    ),
+                          ],
+                        ),
                       ),
 
-                    if(choosedGroup != null)
-                      SizedBox(height: 8.sp,),
+                    if (choosedGroup != null)
+                      SizedBox(
+                        height: 8.sp,
+                      ),
 
-                    if(choosedGroup != null)
-                      const Divider(),
+                    if (choosedGroup != null) const Divider(),
 
-                    if(choosedGroup != null)
-                      SizedBox(height: 10.sp,),
+                    if (choosedGroup != null)
+                      SizedBox(
+                        height: 10.sp,
+                      ),
 
-                    // show choosed group titles
-                    if(choosedGroup != null)
-                      for (int index = 0; index < TextStoreCache.getGroups()![choosedGroup].length; index++)
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 2.sp,
-                          ),
-                          child: Container(
-                            width: double.infinity,
-                            padding: EdgeInsetsDirectional.only(
-                              start: 15.sp,
-                              end: 10.sp,
-                              top: 5.sp,
-                              bottom: 5.sp,
+                    /// Content Titles
+                    if (choosedGroup != null)
+                      ListView.builder(
+                        itemBuilder: (context, titleIndex) {
+                          final GroupContentModel contentModel = groups!.groups![Groups.getGroupIndex(choosedGroup!)].groupContent[titleIndex];
+
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 2.sp,
                             ),
-                            decoration: BoxDecoration(
-                              color: contrastColor,
-                              borderRadius: BorderRadius.circular(15.sp),
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                  color: lightGrayColor.withAlpha(80),
-                                  offset: const Offset(0, 4),
-                                  blurRadius: 7,
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Align(
-                                    alignment: AlignmentDirectional.centerStart,
-                                    child: Text(
-                                      TextStoreCache.getTitleFromGroup(
-                                        groupName: choosedGroup!,
-                                        index: index,
+                            child: Container(
+                              width: double.infinity,
+                              padding: EdgeInsetsDirectional.only(
+                                start: 15.sp,
+                                end: 10.sp,
+                                top: 5.sp,
+                                bottom: 5.sp,
+                              ),
+                              decoration: BoxDecoration(
+                                color: contrastColor,
+                                borderRadius: BorderRadius.circular(15.sp),
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: lightGrayColor.withAlpha(80),
+                                    offset: const Offset(0, 4),
+                                    blurRadius: 7,
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Align(
+                                      alignment:
+                                          AlignmentDirectional.centerStart,
+                                      child: Text(
+                                        contentModel.title,
+                                        style: TextStyle(
+                                          color: darkGrayColor,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 11.sp,
+                                        ),
                                       ),
-                                      style: TextStyle(
-                                        color: darkGrayColor,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 11.sp,
+                                    ),
+                                  ),
+
+                                  /// delete title
+                                  Material(
+                                    shape: const CircleBorder(),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        final bool isLastTitleInGroup = groups!.groups![groupIndex!].groupContent.length ==1;
+
+                                        if (isLastTitleInGroup) {
+                                          deleteChoosedGroup();
+                                        } else {
+                                          deleteTitle(
+                                            titleIndex: titleIndex,
+                                            content: contentModel,
+                                          );
+                                        }
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete_outline,
+                                        color: lightGrayColor,
                                       ),
+                                      splashRadius: 13.sp,
+                                      color: Colors.red,
+                                      splashColor: lightGrayColor.withAlpha(80),
+                                      highlightColor:
+                                          lightGrayColor.withAlpha(40),
                                     ),
                                   ),
-                                ),
 
-                                /// delete title
-                                Material(
-                                  shape: const CircleBorder(),
-                                  child: IconButton(
-                                    onPressed: (){
-                                      final String deletedTitle = TextStoreCache.getGroups()![choosedGroup].keys.toList()[index];
-                                      final String deletedTitleValue = TextStoreCache.getGroups()![choosedGroup].values.toList()[index];
-                                      final int deletedIndex = index;
-
-                                      final bool isLastTitleInGroup = TextStoreCache.getGroups()![choosedGroup].keys.toList().length == 1;
-
-                                      if(isLastTitleInGroup){
-                                        deleteGroup();
-                                      }
-                                      else {
-                                        deleteTitle(
-                                          deletedTitle: deletedTitle,
-                                          deletedTitleValue: deletedTitleValue,
-                                          deletedIndex: deletedIndex,
-                                        );
-                                      }
-
-                                    },
-                                    icon: const Icon(
-                                      Icons.delete_outline,
-                                      color: lightGrayColor,
+                                  /// edit title name
+                                  Material(
+                                    shape: const CircleBorder(),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        editTitleName(titleIndex);
+                                      },
+                                      icon: const Icon(
+                                        Icons.edit,
+                                        color: lightGrayColor,
+                                      ),
+                                      splashRadius: 13.sp,
+                                      color: Colors.red,
+                                      splashColor: lightGrayColor.withAlpha(80),
+                                      highlightColor:
+                                          lightGrayColor.withAlpha(40),
                                     ),
-                                    splashRadius: 13.sp,
-                                    color: Colors.red,
-                                    splashColor: lightGrayColor.withAlpha(80),
-                                    highlightColor: lightGrayColor.withAlpha(40),
                                   ),
-                                ),
-
-                                /// edit title name
-                                Material(
-                                  shape: const CircleBorder(),
-                                  child: IconButton(
-                                    onPressed: (){
-                                      editTitleName(index);
-                                    },
-                                    icon: const Icon(
-                                      Icons.edit,
-                                      color: lightGrayColor,
-                                    ),
-                                    splashRadius: 13.sp,
-                                    color: Colors.red,
-                                    splashColor: lightGrayColor.withAlpha(80),
-                                    highlightColor: lightGrayColor.withAlpha(40),
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        },
+                        itemCount: groups!
+                            .groups![groupIndex!]
+                            .groupContent
+                            .length,
+                      ),
 
-                    if(choosedGroup != null)
-                      SizedBox(height: 10.sp,),
-
+                    if (choosedGroup != null)
+                      SizedBox(
+                        height: 10.sp,
+                      ),
                   ],
                 ),
               ),
@@ -563,7 +575,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                 top: 5.sp,
               ),
               child: MaterialButton(
-                onPressed: (){
+                onPressed: () {
                   Navigator.pop(context);
                 },
                 color: mainColor,
@@ -593,9 +605,6 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
   }
 }
 
-
-
-
 class _CustomInputTextForm extends StatefulWidget {
   const _CustomInputTextForm({
     Key? key,
@@ -613,7 +622,6 @@ class _CustomInputTextForm extends StatefulWidget {
 }
 
 class _CustomInputTextFormState extends State<_CustomInputTextForm> {
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -645,9 +653,8 @@ class _CustomInputTextFormState extends State<_CustomInputTextForm> {
             ),
           ),
         ),
-        onChanged: (value){
-          if(widget.formGroupKey.currentState!.validate()){
-          }
+        onChanged: (value) {
+          if (widget.formGroupKey.currentState!.validate()) {}
         },
         textAlign: TextAlign.center,
         validator: widget.validator,

@@ -10,14 +10,13 @@ import 'menu_items/report_bug.dart';
 import 'menu_items/share_app.dart';
 import 'menu_items/change_language.dart';
 
-
 class MyAppDrawer extends StatelessWidget {
-  const MyAppDrawer(this.cubit, {key}) : super(key: key);
-
-  final AppCubit cubit;
+  const MyAppDrawer({key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
+
     return Theme(
       data: Theme.of(context).copyWith(
         canvasColor: contrastColor,
@@ -30,8 +29,8 @@ class MyAppDrawer extends StatelessWidget {
             const Divider(),
 
             /// change language group
-            MenuGroupItems([
-              ChangeLanguageMenuItem(cubit),
+            const MenuGroupItems([
+              ChangeLanguageMenuItem(),
             ]),
             const Divider(),
 
@@ -39,7 +38,7 @@ class MyAppDrawer extends StatelessWidget {
             MenuGroupItems([
               const RateAppMenuItem(),
               const ShareAppMenuItem(),
-              AboutAppMenuItem(cubit),
+              const AboutAppMenuItem(),
               const DisclaimerMenuItem(),
               ReportABugMenuItem(cubit.appInfo.version),
             ]),
@@ -53,5 +52,3 @@ class MyAppDrawer extends StatelessWidget {
     );
   }
 }
-
-

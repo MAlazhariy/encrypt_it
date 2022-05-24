@@ -4,16 +4,15 @@ import 'package:encryption_app/shared/components/components/menu/menu_group_item
 import 'package:flutter/material.dart';
 
 class ThanksGroup extends StatelessWidget {
-  const ThanksGroup(this.cubit,{Key? key}) : super(key: key);
+  const ThanksGroup({Key? key}) : super(key: key);
 
-  final AppCubit cubit;
 
   @override
   Widget build(BuildContext context) {
       return Column(
         children: [
           MenuGroupItems([
-            ThanksMenuItem(cubit.appInfo.version),
+            ThanksMenuItem(AppCubit.get(context).appInfo.version),
           ]),
           const Divider(),
         ],

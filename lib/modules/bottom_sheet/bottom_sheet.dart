@@ -14,13 +14,14 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 void Function()? onPressMainButton({
-  required AppCubit cubit,
   required BuildContext context,
   required bool isEncrypt,
   required String msg,
   required String pass,
   required GlobalKey<ScaffoldState> scaffoldKey,
 }) {
+  var cubit = AppCubit.get(context);
+
   if (cubit.isButtonsActive) {
     return () {
       // increase operations counter
@@ -43,9 +44,7 @@ void Function()? onPressMainButton({
         ),
       );
 
-      bottomSheetFilter(
-          cubit, context, isEncrypt, msg, pass, scaffoldKey
-      );
+      bottomSheetFilter(context, isEncrypt, msg, pass, scaffoldKey);
     };
   }
 
@@ -53,63 +52,62 @@ void Function()? onPressMainButton({
 }
 
 void bottomSheetFilter(
-    AppCubit cubit,
-    BuildContext context,
-    bool isEncrypt,
-    String msg,
-    String pass,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    ) {
+  BuildContext context,
+  bool isEncrypt,
+  String msg,
+  String pass,
+  GlobalKey<ScaffoldState> scaffoldKey,
+) {
+  var cubit = AppCubit.get(context);
   // decrypt cases
   final bool incorrectPassword = (cubit.textResult == 'invalid password'.tr());
   final bool versionNotFound = (cubit.textResult == 'version_not_found'.tr());
-  final bool laterVersion = (cubit.textResult == 'later_version_warning_title'.tr());
+  final bool laterVersion =
+      (cubit.textResult == 'later_version_warning_title'.tr());
 
-  if(incorrectPassword){
+  if (incorrectPassword) {
     incorrectPasswordAlert(context);
-  }
-  else if(versionNotFound) {
+  } else if (versionNotFound) {
     versionNotFoundAlert(context);
-  }
-  else if (laterVersion) {
+  } else if (laterVersion) {
     laterVersionAlert(context);
-  }
-  else {
-    openBottomSheet(cubit, isEncrypt, pass, scaffoldKey, context);
+  } else {
+    openBottomSheet(isEncrypt, pass, scaffoldKey, context);
   }
 }
 
-
 void openBottomSheet(
-    AppCubit cubit,
-    bool isEncrypt,
-    String pass,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    BuildContext context,
-    ) {
+  bool isEncrypt,
+  String pass,
+  GlobalKey<ScaffoldState> scaffoldKey,
+  BuildContext context,
+) {
   // todo: test this widget
-      scaffoldKey.currentState?.showBottomSheet((context){
+  scaffoldKey.currentState
+      ?.showBottomSheet(
+        (context) {
           return BottomSheetWidget(
-            cubit,
             isEncrypt,
             pass,
           );
         },
-      ).closed.then((_) async {
-        _onCloseBottomSheet(cubit,context);
+      )
+      .closed
+      .then((_) async {
+        _onCloseBottomSheet(context);
       });
 }
 
-
 class BottomSheetWidget extends StatelessWidget {
-  const BottomSheetWidget( this.cubit, this.isEncrypt, this.password, {Key? key}) : super(key: key);
+  const BottomSheetWidget(this.isEncrypt, this.password, {Key? key})
+      : super(key: key);
 
-  final AppCubit cubit;
   final bool isEncrypt;
   final String password;
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -128,7 +126,9 @@ class BottomSheetWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           // small dash
-          SizedBox(height: 13.sp,),
+          SizedBox(
+            height: 13.sp,
+          ),
           Container(
             width: 10.w,
             height: 3.7.sp,
@@ -139,9 +139,13 @@ class BottomSheetWidget extends StatelessWidget {
           ),
 
           // action title ['encrypt' or 'decrypt']
-          SizedBox(height: 9.5.sp,),
+          SizedBox(
+            height: 9.5.sp,
+          ),
           Text(
-            isEncrypt ? '${'encrypted text'.tr()} :' : '${'decrypted message'.tr()} :',
+            isEncrypt
+                ? '${'encrypted text'.tr()} :'
+                : '${'decrypted message'.tr()} :',
             style: TextStyle(
               color: lightGrayColor,
               fontWeight: FontWeight.w400,
@@ -150,37 +154,39 @@ class BottomSheetWidget extends StatelessWidget {
           ),
 
           // text result widget
-          SizedBox(height: 4.5.sp,),
-          TextResultFilterWidget(cubit, isEncrypt),
+          SizedBox(
+            height: 4.5.sp,
+          ),
+          TextResultFilterWidget(isEncrypt),
 
           // bottom buttons
-          SizedBox(height: 12.sp,),
-          BottomSheetButtons(cubit.textResult, password, isEncrypt,),
+          SizedBox(
+            height: 12.sp,
+          ),
+          BottomSheetButtons(
+            cubit.textResult,
+            password,
+            isEncrypt,
+          ),
         ],
       ),
     );
   }
 }
 
-
 void _onCloseBottomSheet(
-    AppCubit cubit,
-    BuildContext context,
-    ) async {
-
-  cubit.setCurrentFieldToNone();
+  BuildContext context,
+) async {
+  AppCubit.get(context).setCurrentFieldToNone();
 
   // show rating application if available
   bool readyShowInAppRate = RateCache.isReadyShowRate(inAppReview: true);
-  if(readyShowInAppRate){
+  if (readyShowInAppRate) {
     await showInAppRate();
-  } else if(RateCache.isReadyShowRate()){
+  } else if (RateCache.isReadyShowRate()) {
     showRateDialog(context);
   } else {
     // show ad
     AdInterstitialBottomSheet.showInterstitialAd();
   }
-
 }
-
-

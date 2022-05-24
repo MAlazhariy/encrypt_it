@@ -8,12 +8,13 @@ import 'package:sizer/sizer.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_item.dart';
 
 class AboutAppMenuItem extends StatelessWidget {
-  const AboutAppMenuItem(this.cubit, {Key? key}) : super(key: key);
+  const AboutAppMenuItem({Key? key}) : super(key: key);
 
-  final AppCubit cubit;
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
+    
     return MenuItemWidget(
       title: 'about_app'.tr(),
       // icon: Icons.perm_device_info,

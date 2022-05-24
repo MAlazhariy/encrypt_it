@@ -19,7 +19,6 @@ import 'shared/components/constants.dart';
 
 
 void main() async {
-
   // insure the future methods are executed first before run app
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -39,16 +38,16 @@ void main() async {
 
   await Hive.initFlutter();
   await Hive.openBox('myBox');
-  
+
   groups = StoreModel.fromJson(TextStoreCache.getGroups());
 
   runApp(
     EasyLocalization(
-        supportedLocales: const[Locale('en'), Locale('ar')],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('en'),
-        useOnlyLangCode: true,
-        child: const MyApp(),
+      supportedLocales: const[Locale('en'), Locale('ar')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      useOnlyLangCode: true,
+      child: const MyApp(),
     ),
   );
 }
@@ -59,12 +58,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Sizer(
-      builder: (context, orientation, deviceType){
-
-
-
+      builder: (context, orientation, deviceType) {
         return MaterialApp(
           // localization methods
           localizationsDelegates: context.localizationDelegates,
@@ -73,14 +68,16 @@ class MyApp extends StatelessWidget {
 
           debugShowCheckedModeBanner: false,
           // locale: DevicePreview.locale(context),
-          builder: (context, myWidget){
+          builder: (context, myWidget) {
             myWidget = BotToastInit()(context, myWidget);
             // myWidget = DevicePreview.appBuilder(context, myWidget);
             return myWidget;
           },
           navigatorObservers: [BotToastNavigatorObserver()],
 
-          home: BoardCache.isBoardSkipped() ? HomeScreen() : const OnBoardScreen(),
+          home: BoardCache.isBoardSkipped()
+              ? HomeScreen()
+              : const OnBoardScreen(),
           // home: false ? HomeScreen() : const OnBoardScreen(),
 
           theme: lightTheme,

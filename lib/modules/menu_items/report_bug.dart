@@ -50,9 +50,13 @@ class ReportABugMenuItem extends StatelessWidget {
             DialogButton(
               title: 'contact_us'.tr(),
               onPressed: () async {
-                await launch(Links.mailUs(
-                  subject: '${'report_bug'.tr()} - $appVersion',
-                )).then((value) {
+                await launchUrl(
+                  Uri.parse(
+                    Links.mailUs(
+                      subject: '${'report_bug'.tr()} - $appVersion',
+                    ),
+                  ),
+                ).then((value) {
                   Navigator.pop(context);
                 });
               },

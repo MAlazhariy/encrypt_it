@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/cubit/app_cubit/states.dart';
-import 'package:encryption_app/decoding/encrypt_abstract.dart';
 import 'package:encryption_app/decoding/versions/version_06.dart';
+import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/modules/bio_local_authentication.dart';
 import 'package:encryption_app/modules/ads/banner_ad_model.dart';
 import 'package:encryption_app/modules/bottom_sheet/bottom_sheet.dart';
@@ -57,294 +59,286 @@ class HomeScreen extends StatelessWidget {
         seconds: 5,
       ),
       builder: Builder(
-        builder: (_) =>
-            BlocProvider(
-              create: (context) => AppCubit(),
-              child: BlocConsumer<AppCubit, AppStates>(
-                listener: (BuildContext context, state) {},
-                builder: (BuildContext context, state) {
-                  AppCubit cubit = AppCubit.get(context);
+        builder: (_) => BlocProvider(
+          create: (context) => AppCubit(),
+          child: BlocConsumer<AppCubit, AppStates>(
+            listener: (BuildContext context, state) {},
+            builder: (BuildContext context, state) {
+              AppCubit cubit = AppCubit.get(context);
 
-                  if (state is AppInitState) {
-                    cubit.getAppInfo();
-                  }
+              if (state is AppInitState) {
+                cubit.getAppInfo();
+              }
 
-                  // main showcase
-                  if (state is AppGetVersionState &&
-                      !ShowCaseCache.isMainShowCaseViewed()) {
-                    WidgetsBinding.instance.addPostFrameCallback(
-                          (_) =>
-                          Future.delayed(
-                            const Duration(milliseconds: 100),
-                                () =>
-                                ShowCaseWidget.of(context)?.startShowCase([
-                                  _textFieldShowcase,
-                                  _passwordFieldShowcase,
-                                  _encryptButtonShowcase,
-                                  _decryptButtonShowcase
-                                ]),
-                          ),
-                    );
+              // main showcase
+              if (state is AppGetVersionState &&
+                  !ShowCaseCache.isMainShowCaseViewed()) {
+                WidgetsBinding.instance.addPostFrameCallback(
+                  (_) => Future.delayed(
+                    const Duration(milliseconds: 100),
+                    () => ShowCaseWidget.of(context)?.startShowCase([
+                      _textFieldShowcase,
+                      _passwordFieldShowcase,
+                      _encryptButtonShowcase,
+                      _decryptButtonShowcase
+                    ]),
+                  ),
+                );
 
-                    ShowCaseCache.mainShowCaseViewed();
-                  }
+                ShowCaseCache.mainShowCaseViewed();
+              }
 
-                  // text field showcase
-                  if (cubit.isCurrentFieldText &&
-                      !ShowCaseCache.isButtonsShowCaseViewed()) {
-                    WidgetsBinding.instance.addPostFrameCallback(
-                          (_) =>
-                          ShowCaseWidget.of(context)?.startShowCase([
-                            _pasteShowcase,
-                            _clearShowcase,
-                            _clearAllShowcase,
-                            _textStoreShowcase,
-                          ]),
-                    );
+              // text field showcase
+              if (cubit.isCurrentFieldText &&
+                  !ShowCaseCache.isButtonsShowCaseViewed()) {
+                WidgetsBinding.instance.addPostFrameCallback(
+                  (_) => ShowCaseWidget.of(context)?.startShowCase([
+                    _pasteShowcase,
+                    _clearShowcase,
+                    _clearAllShowcase,
+                    _textStoreShowcase,
+                  ]),
+                );
 
-                    ShowCaseCache.buttonsShowCaseViewed();
-                  }
+                ShowCaseCache.buttonsShowCaseViewed();
+              }
 
-                  // this function activate or deactivate main buttons
-                  void activeButtons([validate = true]) {
-                    cubit.setButtonsPressable((messageCtrl.text.isNotEmpty &&
-                        passCtrl.text.isNotEmpty &&
-                        validate));
-                  }
+              // this function activate or deactivate main buttons
+              void activeButtons([validate = true]) {
+                cubit.setButtonsPressable((messageCtrl.text.isNotEmpty &&
+                    passCtrl.text.isNotEmpty &&
+                    validate));
+              }
 
-                  // this fuction paste the text in its field
-                  // and password in its field at once.
-                  void pasteAll() {
-                    FlutterClipboard.paste().then((value) {
-                      // ensure if value contains ciphertext & password
-                      if (value.startsWith('Ciphertext: "') &&
-                          value.contains('\nPassword: "')) {
-                        /// paste message in its area
-                        messageCtrl.text = value.substring(
-                            value.indexOf('Ciphertext: "') + 13,
-                            value.indexOf('"\nPassword:'));
+              // this fuction paste the text in its field
+              // and password in its field at once.
+              void pasteAll() {
+                FlutterClipboard.paste().then((value) {
+                  // ensure if value contains ciphertext & password
+                  if (value.startsWith('Ciphertext: "') &&
+                      value.contains('\nPassword: "')) {
+                    /// paste message in its area
+                    messageCtrl.text = value.substring(
+                        value.indexOf('Ciphertext: "') + 13,
+                        value.indexOf('"\nPassword:'));
 
-                        /// paste password in its area
-                        passCtrl.text = value.substring(
-                            value.indexOf('\nPassword: "') + 12,
-                            value.lastIndexOf('"'));
+                    /// paste password in its area
+                    passCtrl.text = value.substring(
+                        value.indexOf('\nPassword: "') + 12,
+                        value.lastIndexOf('"'));
 
-                        activeButtons(passKey.currentState!.validate());
+                    activeButtons(passKey.currentState!.validate());
 
-                        /// set cursor to the end of text field
-                        messageCtrl.selection = TextSelection.fromPosition(
-                            TextPosition(offset: messageCtrl.text.length));
+                    /// set cursor to the end of text field
+                    messageCtrl.selection = TextSelection.fromPosition(
+                        TextPosition(offset: messageCtrl.text.length));
 
-                        /// Show successful toast
-                        BotToast.showText(
-                          text: 'pasted success'.tr(),
-                          duration: const Duration(milliseconds: 800),
-                          contentColor: contrastColor,
-                          textStyle: const TextStyle(
-                            color: mainColor,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          borderRadius: BorderRadius.circular(12.sp),
-                          clickClose: true,
-                        );
-                      } else {
-                        // The copied text does not contain ciphertext & password
-                        // Show fail toast
-                        BotToast.showText(
-                          text: 'fail paste'.tr(),
-                          duration: const Duration(seconds: 3),
-                          contentColor: mainColor,
-                          textStyle: const TextStyle(
-                            color: contrastColor,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          borderRadius: BorderRadius.circular(12.sp),
-                          clickClose: true,
-                        );
-                      }
-                    });
-                  }
-
-                  return Scaffold(
-                    key: scaffoldKey,
-                    backgroundColor: bGColor,
-
-                    appBar: AppBar(
-                      title: Text(
-                        cubit.appInfo.appName,
-                        style: const TextStyle(
-                          // color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                        ),
+                    /// Show successful toast
+                    BotToast.showText(
+                      text: 'pasted success'.tr(),
+                      duration: const Duration(milliseconds: 800),
+                      contentColor: contrastColor,
+                      textStyle: const TextStyle(
+                        color: mainColor,
+                        fontWeight: FontWeight.w600,
                       ),
-                      shadowColor: shadowColor,
-                      centerTitle: true,
+                      borderRadius: BorderRadius.circular(12.sp),
+                      clickClose: true,
+                    );
+                  } else {
+                    // The copied text does not contain ciphertext & password
+                    // Show fail toast
+                    BotToast.showText(
+                      text: 'fail paste'.tr(),
+                      duration: const Duration(seconds: 3),
+                      contentColor: mainColor,
+                      textStyle: const TextStyle(
+                        color: contrastColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      borderRadius: BorderRadius.circular(12.sp),
+                      clickClose: true,
+                    );
+                  }
+                });
+              }
+
+              return Scaffold(
+                key: scaffoldKey,
+                backgroundColor: bGColor,
+
+                appBar: AppBar(
+                  title: Text(
+                    cubit.appInfo.appName,
+                    style: const TextStyle(
+                      // color: Colors.white,
+                      fontWeight: FontWeight.w700,
                     ),
+                  ),
+                  shadowColor: shadowColor,
+                  centerTitle: true,
+                ),
 
-                    drawer: MyAppDrawer(cubit),
+                drawer: const MyAppDrawer(),
 
-                    // makes keyboard shown over the bottom sheet
-                    resizeToAvoidBottomInset: false,
+                // makes keyboard shown over the bottom sheet
+                resizeToAvoidBottomInset: false,
 
-                    body: Padding(
-                      padding: EdgeInsets.only(
-                        right: 6.w,
-                        left: 6.w,
-                      ),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              physics: const BouncingScrollPhysics(),
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 3.h),
+                body: Padding(
+                  padding: EdgeInsets.only(
+                    right: 6.w,
+                    left: 6.w,
+                  ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          physics: const BouncingScrollPhysics(),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 3.h),
 
-                                  // text field
-                                  CustomShowcase(
-                                    globalKey: _textFieldShowcase,
-                                    title: 'showcase_text_field_title'.tr(),
-                                    description:
+                              // text field
+                              CustomShowcase(
+                                globalKey: _textFieldShowcase,
+                                title: 'showcase_text_field_title'.tr(),
+                                description:
                                     'showcase_text_field_description'.tr(),
-                                    child: CustomTextField(
-                                      theKey: textKey,
-                                      controller: messageCtrl,
-                                      hintText: 'msg here'.tr(),
-                                      onChange: (value) {
-                                        activeButtons(passValidate);
-                                      },
-                                      prefixIcon: Icon(
-                                        MyIcons.text,
-                                        size: 16.sp,
-                                      ),
-                                      onTab: () {
-                                        cubit.setCurrentFieldToText();
-                                      },
-                                      isEnabled:
-                                      (!cubit.isCurrentFieldNoneAndInactivated),
-                                    ),
+                                child: CustomTextField(
+                                  theKey: textKey,
+                                  controller: messageCtrl,
+                                  hintText: 'msg here'.tr(),
+                                  onChange: (value) {
+                                    activeButtons(passValidate);
+                                  },
+                                  prefixIcon: Icon(
+                                    MyIcons.text,
+                                    size: 16.sp,
                                   ),
-                                  if (cubit.isCurrentFieldText)
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: Wrap(
-                                        alignment: WrapAlignment.end,
-                                        direction: Axis.horizontal,
-                                        verticalDirection: VerticalDirection.up,
-                                        children: [
-
-                                          /// clear all
-                                          CustomShowcase(
-                                            globalKey: _clearAllShowcase,
-                                            // title: 'clear all'.tr(),
-                                            description:
+                                  onTab: () {
+                                    cubit.setCurrentFieldToText();
+                                  },
+                                  isEnabled:
+                                      (!cubit.isCurrentFieldNoneAndInactivated),
+                                ),
+                              ),
+                              if (cubit.isCurrentFieldText)
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: Wrap(
+                                    alignment: WrapAlignment.end,
+                                    direction: Axis.horizontal,
+                                    verticalDirection: VerticalDirection.up,
+                                    children: [
+                                      /// clear all
+                                      CustomShowcase(
+                                        globalKey: _clearAllShowcase,
+                                        // title: 'clear all'.tr(),
+                                        description:
                                             'showcase_clearAll_description'
                                                 .tr(),
-                                            child: TextFieldQuickActions(
-                                                icon: Icons.clear_rounded,
-                                                title: 'clear all'.tr(),
-                                                onPressed: () {
-                                                  messageCtrl.text = '';
-                                                  passCtrl.text = '';
+                                        child: TextFieldQuickActions(
+                                            icon: Icons.clear_rounded,
+                                            title: 'clear all'.tr(),
+                                            onPressed: () {
+                                              messageCtrl.text = '';
+                                              passCtrl.text = '';
 
-                                                  activeButtons(passKey
-                                                      .currentState!
-                                                      .validate());
-                                                  cubit.clearAllFields();
+                                              activeButtons(passKey
+                                                  .currentState!
+                                                  .validate());
+                                              cubit.clearAllFields();
 
-                                                  dismissKeyboard(context);
-                                                }),
-                                          ),
+                                              dismissKeyboard(context);
+                                            }),
+                                      ),
 
-                                          /// clear
-                                          CustomShowcase(
-                                            globalKey: _clearShowcase,
-                                            description:
+                                      /// clear
+                                      CustomShowcase(
+                                        globalKey: _clearShowcase,
+                                        description:
                                             'showcase_clear_description'.tr(),
-                                            // title: 'clear'.tr(),
-                                            child: TextFieldQuickActions(
-                                              icon: Icons
-                                                  .highlight_remove_outlined,
-                                              title: 'clear'.tr(),
-                                              onPressed: () {
-                                                messageCtrl.text = '';
-                                                activeButtons(passValidate);
+                                        // title: 'clear'.tr(),
+                                        child: TextFieldQuickActions(
+                                          icon: Icons.highlight_remove_outlined,
+                                          title: 'clear'.tr(),
+                                          onPressed: () {
+                                            messageCtrl.text = '';
+                                            activeButtons(passValidate);
 
-                                                dismissKeyboard(context);
-                                              },
-                                            ),
-                                          ),
+                                            dismissKeyboard(context);
+                                          },
+                                        ),
+                                      ),
 
-                                          /// paste
-                                          CustomShowcase(
-                                            globalKey: _pasteShowcase,
-                                            // title: 'paste'.tr(),
-                                            description:
+                                      /// paste
+                                      CustomShowcase(
+                                        globalKey: _pasteShowcase,
+                                        // title: 'paste'.tr(),
+                                        description:
                                             'showcase_paste_description'.tr(),
-                                            child: TextFieldQuickActions(
-                                              icon: Icons.paste_outlined,
-                                              title: 'paste'.tr(),
-                                              // paste in password field on single press
-                                              onPressed: () {
-                                                FlutterClipboard.paste()
-                                                    .then((value) {
-                                                  messageCtrl.text = value;
-                                                  activeButtons(passKey
-                                                      .currentState!
-                                                      .validate());
+                                        child: TextFieldQuickActions(
+                                          icon: Icons.paste_outlined,
+                                          title: 'paste'.tr(),
+                                          // paste in password field on single press
+                                          onPressed: () {
+                                            FlutterClipboard.paste()
+                                                .then((value) {
+                                              messageCtrl.text = value;
+                                              activeButtons(passKey
+                                                  .currentState!
+                                                  .validate());
 
-                                                  messageCtrl.selection =
-                                                      TextSelection
-                                                          .fromPosition(
-                                                          TextPosition(
-                                                              offset: messageCtrl
-                                                                  .text
-                                                                  .length));
-                                                });
-                                              },
+                                              messageCtrl.selection =
+                                                  TextSelection.fromPosition(
+                                                      TextPosition(
+                                                          offset: messageCtrl
+                                                              .text.length));
+                                            });
+                                          },
 
-                                              // on long press .. paste all
-                                              onLongPress: () {
-                                                pasteAll();
-                                              },
-                                            ),
-                                          ),
+                                          // on long press .. paste all
+                                          onLongPress: () {
+                                            pasteAll();
+                                          },
+                                        ),
+                                      ),
 
-                                          /// text store
-                                          CustomShowcase(
-                                            globalKey: _textStoreShowcase,
-                                            description:
+                                      /// text store
+                                      CustomShowcase(
+                                        globalKey: _textStoreShowcase,
+                                        description:
                                             'showcase_text_store_description'
                                                 .tr(),
-                                            title: 'message_store'.tr(),
-                                            child: TextFieldQuickActions(
-                                              icon: Icons.enhanced_encryption,
-                                              title: 'message_store'.tr(),
-                                              onPressed: () async {
-                                                Map? groups =
-                                                TextStoreCache.getGroups();
+                                        title: 'message_store'.tr(),
+                                        child: TextFieldQuickActions(
+                                          icon: Icons.enhanced_encryption,
+                                          title: 'message_store'.tr(),
+                                          onPressed: () async {
+                                            // Map? groups =
+                                            //     TextStoreCache.getGroups();
 
-                                                if (!authenticated) {
-                                                  final bool hasBio =
+                                            if (!authenticated) {
+                                              final bool hasBio =
                                                   await LocalAuthApi
                                                       .hasBiometrics();
-                                                  authenticated = hasBio
-                                                      ? await LocalAuthApi
+                                              authenticated = hasBio
+                                                  ? await LocalAuthApi
                                                       .authenticate()
-                                                      : true;
-                                                }
+                                                  : true;
+                                            }
 
-                                                // todo: important handle bio
-                                                if (authenticated) {
-                                                  showCustomDialog(
-                                                    context: context,
-                                                    title: 'choose_message'
-                                                        .tr(),
-                                                    content: groups?.isNotEmpty??false
+                                            // todo: important handle bio
+                                            if (authenticated) {
+                                              showCustomDialog(
+                                                context: context,
+                                                title: 'choose_message'.tr(),
+                                                content:
+                                                    groups?.groups?.isNotEmpty ?? false
                                                         ? Column(
                                                       children: List.generate(
-                                                        groups!.length,
+                                                        groups!.groups!.length,
                                                         // +1 only if want to show AD
                                                             (index) {
                                                           // /// bannerAd
@@ -352,13 +346,13 @@ class HomeScreen extends StatelessWidget {
                                                           //   return const AdNative();
                                                           // }
 
-                                                          final String groupName = groups.keys.toList()[index];
-                                                          final Map group = groups[groupName];
+                                                          // final String groupName = groups.keys.toList()[index];
+                                                          GroupModel group = groups!.groups![index];
 
                                                           // groups
                                                           return ExpansionTile(
                                                             title: Text(
-                                                              groupName,
+                                                              group.groupName,
                                                               style: const TextStyle(
                                                                 fontWeight: FontWeight.w600,
                                                               ),
@@ -368,9 +362,9 @@ class HomeScreen extends StatelessWidget {
                                                             iconColor: mainColor,
                                                             textColor: mainColor,
                                                             backgroundColor: mainColor.withAlpha(15),
-                                                            children: List.generate(group.length, (index) {
-                                                              String title = group.keys.toList()[index];
-                                                              String storedEncryptedText = group.values.toList()[index];
+                                                            children: List.generate(group.groupContent.length, (index2) {
+                                                              String title = group.groupContent[index2].title;
+                                                              String storedEncryptedText = group.groupContent[index2].ciphertext;
 
                                                               // group titles
                                                               return Container(
@@ -447,234 +441,260 @@ class HomeScreen extends StatelessWidget {
                                                         ),
                                                       ],
                                                     ),
-                                                    buttons: [
-                                                      if (groups?.isNotEmpty ??
-                                                          false)
-                                                        DialogButton(
-                                                          title: 'edit'.tr(),
-                                                          isBold: false,
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
+                                                buttons: [
+                                                  if (groups?.groups?.isNotEmpty ?? false)
+                                                    DialogButton(
+                                                      title: 'edit'.tr(),
+                                                      isBold: false,
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
 
-                                                            Navigator.push(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                  builder: (
-                                                                      context) =>
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
                                                                   const EditTextStoreScreen(),
-                                                                ));
-                                                          },
-                                                        ),
-                                                      DialogButton(
-                                                        title: 'back'.tr(),
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                      ),
-                                                    ],
-                                                  );
-                                                }
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-
-                                  SizedBox(
-                                    height: 15.sp,
-                                  ),
-
-                                  /// password field
-                                  CustomShowcase(
-                                    globalKey: _passwordFieldShowcase,
-                                    title: 'showcase_password_field_title'.tr(),
-                                    description:
-                                    'showcase_password_field_description'.tr(),
-                                    child: CustomTextField(
-                                      theKey: passKey,
-                                      controller: passCtrl,
-                                      hintText: 'pass here'.tr(),
-                                      validator: (value) {
-                                        String undefined =
-                                        V06('', passCtrl.text, context, true)
-                                            .getUndefinedChars(value!);
-                                        if (undefined.isNotEmpty) {
-                                          return 'undefined_chars_title'
-                                              .tr(args: [undefined]);
-                                        }
-                                        return null;
-                                      },
-                                      showShadow: passValidate,
-                                      onChange: (value) {
-                                        passValidate =
-                                            passKey.currentState!.validate();
-                                        activeButtons(passValidate);
-                                      },
-                                      prefixIcon: Icon(
-                                        MyIcons.key_lock,
-                                        size: 16.sp,
-                                      ),
-                                      suffixIcon: IconButton(
-                                        onPressed: () {
-                                          cubit.showAndHidePassword();
-                                        },
-                                        icon: Icon(
-                                          cubit.passwordIcon,
-                                          size: 19.sp,
-                                        ),
-                                      ),
-                                      isPassword: true,
-                                      obscureText: cubit.isPasswordHidden,
-                                      onTab: () {
-                                        cubit.setCurrentFieldToPassword();
-                                      },
-                                      isEnabled:
-                                      (!cubit.isCurrentFieldNoneAndInactivated),
-                                    ),
-                                  ),
-                                  if (cubit.isCurrentFieldPassword)
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: Wrap(
-                                        alignment: WrapAlignment.end,
-                                        direction: Axis.horizontal,
-                                        verticalDirection: VerticalDirection.up,
-                                        children: [
-
-                                          /// clear all
-                                          TextFieldQuickActions(
-                                            onPressed: () {
-                                              messageCtrl.text = '';
-                                              passCtrl.text = '';
-
-                                              activeButtons(
-                                                  passKey.currentState!
-                                                      .validate());
-                                              cubit.clearAllFields();
-
-                                              dismissKeyboard(context);
-                                            },
-                                            icon: Icons.clear_rounded,
-                                            title: 'clear all'.tr(),
-                                          ),
-
-                                          /// clear text field
-                                          TextFieldQuickActions(
-                                            icon: Icons
-                                                .highlight_remove_outlined,
-                                            title: 'clear'.tr(),
-                                            onPressed: () {
-                                              passCtrl.text = '';
-                                              activeButtons(
-                                                  passKey.currentState!
-                                                      .validate());
-
-                                              dismissKeyboard(context);
-                                            },
-                                          ),
-
-                                          /// paste
-                                          TextFieldQuickActions(
-                                            icon: Icons.paste_outlined,
-                                            title: 'paste'.tr(),
-                                            // paste in text field on single press
-                                            onPressed: () {
-                                              FlutterClipboard.paste()
-                                                  .then((value) {
-                                                passCtrl.text = value;
-                                                activeButtons(
-                                                    passKey.currentState!
-                                                        .validate());
-
-                                                passCtrl.selection =
-                                                    TextSelection.fromPosition(
-                                                        TextPosition(
-                                                            offset: passCtrl
-                                                                .text.length));
-                                              });
-                                            },
-
-                                            // on long press .. paste all
-                                            onLongPress: () {
-                                              pasteAll();
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-
-                                  SizedBox(
-                                    height: 4.h,
-                                  ),
-
-                                  /// Encrypt & Decrypt buttons
-                                  Wrap(
-                                    alignment: WrapAlignment.center,
-                                    direction: Axis.horizontal,
-                                    spacing: 8.sp,
-                                    runSpacing: 9.sp,
-                                    children: [
-                                      // encrypt
-                                      CustomShowcase(
-                                        globalKey: _encryptButtonShowcase,
-                                        description:
-                                        'showcase_encrypt_button_description'
-                                            .tr(),
-                                        child: SizedBox(
-                                          child: MainButton(
-                                            onPressed: onPressMainButton(
-                                              cubit: cubit,
-                                              context: context,
-                                              msg: messageCtrl.text,
-                                              pass: passCtrl.text,
-                                              scaffoldKey: scaffoldKey,
-                                              isEncrypt: true,
-                                            ),
-                                            isEncrypt: true,
-                                          ),
-                                        ),
-                                      ),
-
-                                      /// decrypt
-                                      CustomShowcase(
-                                        globalKey: _decryptButtonShowcase,
-                                        description:
-                                        'showcase_decrypt_button_description'
-                                            .tr(),
-                                        child: SizedBox(
-                                          child: MainButton(
-                                            onPressed: onPressMainButton(
-                                              cubit: cubit,
-                                              context: context,
-                                              msg: messageCtrl.text,
-                                              pass: passCtrl.text,
-                                              scaffoldKey: scaffoldKey,
-                                              isEncrypt: false,
-                                            ),
-                                            isEncrypt: false,
-                                          ),
+                                                            ));
+                                                      },
+                                                    ),
+                                                  DialogButton(
+                                                    title: 'back'.tr(),
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            }
+                                          },
                                         ),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 4.h,
+                                ),
+
+                              SizedBox(
+                                height: 15.sp,
+                              ),
+
+                              /// password field
+                              CustomShowcase(
+                                globalKey: _passwordFieldShowcase,
+                                title: 'showcase_password_field_title'.tr(),
+                                description:
+                                    'showcase_password_field_description'.tr(),
+                                child: CustomTextField(
+                                  theKey: passKey,
+                                  controller: passCtrl,
+                                  hintText: 'pass here'.tr(),
+                                  validator: (value) {
+                                    String undefined =
+                                        V06('', passCtrl.text, context)
+                                            .getUndefinedChars(value!);
+                                    if (undefined.isNotEmpty) {
+                                      return 'undefined_chars_title'
+                                          .tr(args: [undefined]);
+                                    }
+                                    return null;
+                                  },
+                                  showShadow: passValidate,
+                                  onChange: (value) {
+                                    passValidate =
+                                        passKey.currentState!.validate();
+                                    activeButtons(passValidate);
+                                  },
+                                  prefixIcon: Icon(
+                                    MyIcons.key_lock,
+                                    size: 16.sp,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      cubit.showAndHidePassword();
+                                    },
+                                    icon: Icon(
+                                      cubit.passwordIcon,
+                                      size: 19.sp,
+                                    ),
+                                  ),
+                                  isPassword: true,
+                                  obscureText: cubit.isPasswordHidden,
+                                  onTab: () {
+                                    cubit.setCurrentFieldToPassword();
+                                  },
+                                  isEnabled:
+                                      (!cubit.isCurrentFieldNoneAndInactivated),
+                                ),
+                              ),
+                              if (cubit.isCurrentFieldPassword)
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: Wrap(
+                                    alignment: WrapAlignment.end,
+                                    direction: Axis.horizontal,
+                                    verticalDirection: VerticalDirection.up,
+                                    children: [
+                                      /// clear all
+                                      TextFieldQuickActions(
+                                        onPressed: () {
+                                          messageCtrl.text = '';
+                                          passCtrl.text = '';
+
+                                          activeButtons(
+                                              passKey.currentState!.validate());
+                                          cubit.clearAllFields();
+
+                                          dismissKeyboard(context);
+                                        },
+                                        icon: Icons.clear_rounded,
+                                        title: 'clear all'.tr(),
+                                      ),
+
+                                      /// clear text field
+                                      TextFieldQuickActions(
+                                        icon: Icons.highlight_remove_outlined,
+                                        title: 'clear'.tr(),
+                                        onPressed: () {
+                                          passCtrl.text = '';
+                                          activeButtons(
+                                              passKey.currentState!.validate());
+
+                                          dismissKeyboard(context);
+                                        },
+                                      ),
+
+                                      /// paste
+                                      TextFieldQuickActions(
+                                        icon: Icons.paste_outlined,
+                                        title: 'paste'.tr(),
+                                        // paste in text field on single press
+                                        onPressed: () {
+                                          FlutterClipboard.paste()
+                                              .then((value) {
+                                            passCtrl.text = value;
+                                            activeButtons(passKey.currentState!
+                                                .validate());
+
+                                            passCtrl.selection =
+                                                TextSelection.fromPosition(
+                                                    TextPosition(
+                                                        offset: passCtrl
+                                                            .text.length));
+                                          });
+                                        },
+
+                                        // on long press .. paste all
+                                        onLongPress: () {
+                                          pasteAll();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                              SizedBox(
+                                height: 4.h,
+                              ),
+
+                              /// Encrypt & Decrypt buttons
+                              Wrap(
+                                alignment: WrapAlignment.center,
+                                direction: Axis.horizontal,
+                                spacing: 8.sp,
+                                runSpacing: 9.sp,
+                                children: [
+                                  // encrypt
+                                  CustomShowcase(
+                                    globalKey: _encryptButtonShowcase,
+                                    description:
+                                        'showcase_encrypt_button_description'
+                                            .tr(),
+                                    child: SizedBox(
+                                      child: MainButton(
+                                        onPressed: onPressMainButton(
+                                          context: context,
+                                          msg: messageCtrl.text,
+                                          pass: passCtrl.text,
+                                          scaffoldKey: scaffoldKey,
+                                          isEncrypt: true,
+                                        ),
+                                        isEncrypt: true,
+                                      ),
+                                    ),
+                                  ),
+
+                                  /// decrypt
+                                  CustomShowcase(
+                                    globalKey: _decryptButtonShowcase,
+                                    description:
+                                        'showcase_decrypt_button_description'
+                                            .tr(),
+                                    child: SizedBox(
+                                      child: MainButton(
+                                        onPressed: onPressMainButton(
+                                          context: context,
+                                          msg: messageCtrl.text,
+                                          pass: passCtrl.text,
+                                          scaffoldKey: scaffoldKey,
+                                          isEncrypt: false,
+                                        ),
+                                        isEncrypt: false,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
-                            ),
+                              SizedBox(
+                                height: 4.h,
+                              ),
+                            ],
                           ),
-                          const AdBanner(),
-                        ],
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ),
+                      TextButton(
+                        onPressed: () {
+                          log(TextStoreCache.getGroups().toString());
+                        },
+                        child: const Text(
+                          'print groups from cache',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+
+                      TextButton(
+                        onPressed: () {
+                          log(groups?.toMap().toString() ??'null');
+                        },
+                        child: const Text(
+                          'print groups from model',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+
+                      if(groups?.groups != null)
+                      TextButton(
+                        onPressed: () {
+                          TextStoreCache.setGroups(groups!.toMap()!);
+                        },
+                        child: const Text(
+                          'save groups to cache from model',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+
+                      const AdBanner(),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

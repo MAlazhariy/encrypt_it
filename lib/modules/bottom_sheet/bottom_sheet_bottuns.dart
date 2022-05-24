@@ -1,5 +1,5 @@
 import 'package:clipboard/clipboard.dart';
-import 'package:encryption_app/modules/add_to_text_store.dart';
+import 'package:encryption_app/modules/add_to_text_store_widget.dart';
 import 'package:encryption_app/shared/components/components/custom_showcase.dart';
 import 'package:encryption_app/shared/components/components/custom_toast.dart';
 import 'package:encryption_app/shared/network/local/showcase_cache.dart';
