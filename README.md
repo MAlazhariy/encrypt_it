@@ -3,7 +3,7 @@
 ### Encrypt It is an application that encrypts texts with complex mathematical equations and specific encryption algorithms with a complete change in the text letters and their arrangement, which gives more protection and security.
 
 
-[<img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google play icon" width="120"/>](https://play.google.com/store/apps/details?id=malazhariy.encryptIt)
+[<img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google play icon" width="130"/>](https://play.google.com/store/apps/details?id=malazhariy.encryptIt)
 
 
 ## What is text encryption?
@@ -41,9 +41,32 @@ UTF-16 is a universal fixed-order encoding, but its use makes it easier to hack 
 
 ---
 
-### Software skills used in this project:
+## Software skills used in this project:
+
+- Flutter with null-safety
 - Testing
     - Unit testing
+- OOP
+- Cubit state management
+- Multi-languages *(Arabic & English)*
+- Class model
+- Local storage with Hive *(CRUD)*
+- Clean code
+- Logic code *(special encryption algorithm)*
+- Biometric authentication
+- Responsive design
+- Handling errors & alerts *(user-level Alert Dialogs)*
+- Git & GitHub *(sure 😂)*
+- Dealing with play console *(Google play)*
+- Google Admob ADs
+    - Banner ad
+    - Interstitial ad
+    - Rewarded ad
+    - Native ad
+- Native splash screen
+- On-boarding screen
+- First-Open showcase
+- Easy UX & Simple UI
 
 
 
