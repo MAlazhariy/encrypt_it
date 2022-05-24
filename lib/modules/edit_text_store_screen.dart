@@ -22,7 +22,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
 
   void deleteGroup(){
     // todo: important to test this unit
-    assert(choosedGroup == null,'choosed group can not be null when deleting group');
+    assert(choosedGroup == null,'choosed group can not be null when deleting a group');
 
     final String deletedGroupName = choosedGroup!;
     final Map deletedGroupValue = TextStoreCache.getGroups()![deletedGroupName];
@@ -448,7 +448,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                     if(choosedGroup != null)
                       SizedBox(height: 10.sp,),
 
-                    // show choosed group' titles
+                    // show choosed group titles
                     if(choosedGroup != null)
                       for (int index = 0; index < TextStoreCache.getGroups()![choosedGroup].length; index++)
                         Padding(

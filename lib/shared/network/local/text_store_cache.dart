@@ -70,6 +70,10 @@ class TextStoreCache{
     _box.put('myBox', {'groups':groups});
   }
 
+  static void setGroups(Map groups){
+    _box.put('myBox', {'groups':groups});
+  }
+
 
   static void deleteTitle({
     required String groupName,

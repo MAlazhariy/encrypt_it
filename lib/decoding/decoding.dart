@@ -16,7 +16,7 @@ class Decoding {
   }) {
     /// encrypt algorithm
     if (isEncrypt) {
-      return V06(message, password, context, isEncrypt).encrypt();
+      return V06(message, password, context).encrypt();
     }
 
     /// decrypt filter conditions
@@ -24,9 +24,9 @@ class Decoding {
     String messageWithoutVersion = message.substring(0, message.length - 2);
 
     if (version == '06') {
-      return V06(messageWithoutVersion, password, context, isEncrypt).decrypt();
+      return V06(messageWithoutVersion, password, context).decrypt();
     } else if (version == '05') {
-      return V05(messageWithoutVersion, password, context, isEncrypt).decrypt();
+      return V05(messageWithoutVersion, password, context).decrypt();
     }
 
     // else

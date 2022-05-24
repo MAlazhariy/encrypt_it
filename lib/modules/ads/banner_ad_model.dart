@@ -16,7 +16,7 @@ class AdBannerState extends State<AdBanner> {
   bool _isAdReady = false;
   final AdSize _adSize = AdSize.banner;
   final int maxFailedLoadAttempts = 2;
-  int _numBannerLoadAttempts = 0;
+  // int _numBannerLoadAttempts = 0;
 
   void _createBannerAd(){
     bannerAd = BannerAd(

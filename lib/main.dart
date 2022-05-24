@@ -5,7 +5,9 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/layout/on_board_screen.dart';
+import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/shared/network/local/on_board_cache.dart';
+import 'package:encryption_app/shared/network/local/text_store_cache.dart';
 import 'package:encryption_app/shared/styles/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +15,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sizer/sizer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'layout/home_screen.dart';
+import 'shared/components/constants.dart';
 
 
 void main() async {
@@ -20,10 +23,9 @@ void main() async {
   // insure the future methods are executed first before run app
   WidgetsFlutterBinding.ensureInitialized();
 
-  RequestConfiguration config = RequestConfiguration(
-    testDeviceIds: <String>['4A92A9DE35E8C65AF79B64ABF57D1274'],
-    // a539cc08-fef2-4e5d-b4fd-4b7dbe141840
-  );
+  // RequestConfiguration config = RequestConfiguration(
+  //   testDeviceIds: <String>['4A92A9DE35E8C65AF79B64ABF57D1274'],
+  // );
   // MobileAds.instance.updateRequestConfiguration(config);
   MobileAds.instance.initialize();
 
@@ -37,6 +39,8 @@ void main() async {
 
   await Hive.initFlutter();
   await Hive.openBox('myBox');
+  
+  groups = StoreModel.fromJson(TextStoreCache.getGroups());
 
   runApp(
     EasyLocalization(

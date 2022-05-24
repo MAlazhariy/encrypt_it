@@ -1,9 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:encryption_app/models/text_store_model.dart';
 import 'package:flutter/material.dart';
 
 bool authenticated = false;
+StoreModel? groups;
 
 void changeLang(BuildContext context){
   if(currentLang(context)=='ar'){

@@ -7,6 +7,7 @@ import 'package:encryption_app/cubit/add_to_store_cubit/store_states.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
 import 'package:encryption_app/shared/components/components/custom_toast.dart';
+import 'package:encryption_app/shared/components/components/dismiss_keyboard.dart';
 import 'package:encryption_app/shared/network/local/text_store_cache.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
@@ -218,6 +219,7 @@ class ContentDesign extends StatelessWidget {
                           isBold: true,
                           onPressed: () {
                             if(cubit.titleFormKey.currentState!.validate() && cubit.groupFormKey.currentState!.validate()){
+                              dismissKeyboard(context);
                               onSuccessfulAdd(
                                   context: context,
                                   textTitle: titleCtrl.text,
