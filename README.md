@@ -22,8 +22,6 @@ Encryption is a process of converting plain text characters into other character
 - Easily store encrypted texts in the ***Text Store*** for easy access at any time later and decrypt them using their password. ⚡
 - Simple interface and ease of use. 🔥👍
 
-  ### [Try the app now!](https://play.google.com/store/apps/details?id=malazhariy.encryptIt)
-
 
 .
 
@@ -33,11 +31,14 @@ Encryption is a process of converting plain text characters into other character
 Although UTF-16 is a character encoding capable of encoding all 1,112,064 valid character code points in Unicode, it has not been used in the application. **but why?!** 🤔
 
 UTF-16 is a universal fixed-order encoding, but its use makes it easier to hack and discover the encryption algorithm, and access the original text as the hacker converts the characters to their encoding in UTF-16 and then tries to access the encryption equation.
-**But if the application uses special algorithms** with a special character arrangement instead of using UTF-16? this makes it difficult for any attempts to decrypt the texts, as the hacker in this case needs to access the number and order of characters used in the encryption process and then try to discover the mathematical equations used in the encryption process.
+**But if the application uses special algorithms** with a special character arrangement instead of using UTF-16 this makes it difficult for any attempts to decrypt the texts, as the hacker in this case needs to access the length and order of characters used in the encryption process and then try to discover the mathematical equations used in the encryption process.
 
 **So I have adopted the second case in my application to give more protection and security in the encryption process.**
 
-[<img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google play icon" width="200"/>](https://play.google.com/store/apps/details?id=malazhariy.encryptIt)
+
+### [Try the app now!](https://play.google.com/store/apps/details?id=malazhariy.encryptIt)
+
+[<img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google play icon" width="210"/>](https://play.google.com/store/apps/details?id=malazhariy.encryptIt)
 
 ---
 
