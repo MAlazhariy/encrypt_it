@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/modules/text_store/text_store_functions.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
@@ -19,10 +21,11 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
   String? choosedGroup;
   int? groupIndex;
 
+  // todo: test this entire widget
+
   void deleteChoosedGroup() {
     // todo: important to test this unit
-    assert(choosedGroup == null,
-        'choosed group can not be null when deleting a group');
+    // assert(choosedGroup == null, 'choosed group can not be null when deleting a group');
 
     // final String deletedGroupName = choosedGroup!;
     // final Map deletedGroupValue = TextStoreCache.getGroups()![deletedGroupName];
@@ -109,12 +112,13 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
       content: _CustomInputTextForm(
         formGroupKey: formGroupKey,
         messageTitleController: messageTitleController,
+        hintText: group.groupName,
         validator: (String? value) {
           if (value?.isEmpty ?? true) {
             return 'can_not_empty'.tr();
-          } else if (Groups.isGroupExists(group.groupName)) {
+          } else if (Groups.isGroupExists(value!)) {
             return 'group_already_exists'.tr();
-          } else if (value!.length >= 30) {
+          } else if (value.length >= 30) {
             return 'too_big_title'.tr();
           }
 
@@ -206,6 +210,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
       content: _CustomInputTextForm(
         formGroupKey: formGroupKey,
         messageTitleController: messageTitleController,
+        hintText: groups!.groups![groupIndex!].groupContent[titleIndex].title,
         validator: (value) {
           if (value!.isEmpty) {
             return 'can_not_empty'.tr();
@@ -342,6 +347,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                         onChanged: (value) {
                           setState(() {
                             choosedGroup = value;
+                            log(choosedGroup.toString());
 
                             value != null
                                 ? groupIndex = Groups.getGroupIndex(value)
@@ -355,7 +361,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                       height: 10.sp,
                     ),
 
-                    // show group actions
+                    // group actions
                     if (choosedGroup != null)
                       Align(
                         alignment: AlignmentDirectional.centerStart,
@@ -558,6 +564,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                             .groups![groupIndex!]
                             .groupContent
                             .length,
+                        shrinkWrap: true,
                       ),
 
                     if (choosedGroup != null)
@@ -568,6 +575,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                 ),
               ),
             ),
+
             // Done button
             Padding(
               padding: EdgeInsetsDirectional.only(
@@ -610,11 +618,13 @@ class _CustomInputTextForm extends StatefulWidget {
     required this.formGroupKey,
     required this.messageTitleController,
     required this.validator,
+    this.hintText,
   }) : super(key: key);
 
   final GlobalKey<FormState> formGroupKey;
   final TextEditingController messageTitleController;
   final FormFieldValidator<String> validator;
+  final String? hintText;
 
   @override
   State<_CustomInputTextForm> createState() => _CustomInputTextFormState();
@@ -629,7 +639,7 @@ class _CustomInputTextFormState extends State<_CustomInputTextForm> {
         controller: widget.messageTitleController,
         autofocus: true,
         decoration: InputDecoration(
-          hintText: 'type_a_new_name'.tr(),
+          hintText: widget.hintText ?? 'type_a_new_name'.tr(),
           hintStyle: const TextStyle(
             color: lightGrayColor,
           ),
