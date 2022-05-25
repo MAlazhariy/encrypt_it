@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sizer/sizer.dart';
 
+import 'ads/interstitial_ad_bottomsheet_model.dart';
+
 class EditTextStoreScreen extends StatefulWidget {
   const EditTextStoreScreen({Key? key}) : super(key: key);
 
@@ -118,7 +120,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
             return 'can_not_empty'.tr();
           } else if (Groups.isGroupExists(value!)) {
             return 'group_already_exists'.tr();
-          } else if (value.length >= 30) {
+          } else if (value.length >= 35) {
             return 'too_big_title'.tr();
           }
 
@@ -251,6 +253,18 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
         ),
       ],
     );
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    AdInterstitialEditStore.loadAd();
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    AdInterstitialEditStore.disposeAd();
   }
 
   @override
@@ -576,7 +590,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
               ),
             ),
 
-            // Done button
+            /// Done
             Padding(
               padding: EdgeInsetsDirectional.only(
                 top: 5.sp,
@@ -584,6 +598,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
               child: MaterialButton(
                 onPressed: () {
                   Navigator.pop(context);
+                  AdInterstitialEditStore.showAd();
                 },
                 color: mainColor,
                 minWidth: 70.w,

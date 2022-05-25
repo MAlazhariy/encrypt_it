@@ -27,8 +27,8 @@ void Function()? onPressMainButton({
       // increase operations counter
       OperationCounterCache.increaseCounter();
 
-      /// load an interstitial ad
-      AdInterstitialBottomSheet.loadInterstitialAd();
+      // load an interstitial ad
+      // AdInterstitialBottomSheet.loadInterstitialAd();
 
       cubit.setCurrentFieldToNone();
       dismissKeyboard(context);
@@ -38,7 +38,7 @@ void Function()? onPressMainButton({
       cubit.setTextResult(
         Decoding().decoder(
           context: context,
-          message: msg,
+          text: msg,
           password: pass,
           isEncrypt: isEncrypt,
         ),
@@ -62,8 +62,7 @@ void bottomSheetFilter(
   // decrypt cases
   final bool incorrectPassword = (cubit.textResult == 'invalid password'.tr());
   final bool versionNotFound = (cubit.textResult == 'version_not_found'.tr());
-  final bool laterVersion =
-      (cubit.textResult == 'later_version_warning_title'.tr());
+  final bool laterVersion = (cubit.textResult == 'later_version_warning_title'.tr());
 
   if (incorrectPassword) {
     incorrectPasswordAlert(context);
@@ -187,6 +186,6 @@ void _onCloseBottomSheet(
     showRateDialog(context);
   } else {
     // show ad
-    AdInterstitialBottomSheet.showInterstitialAd();
+    // AdInterstitialBottomSheet.showInterstitialAd();
   }
 }

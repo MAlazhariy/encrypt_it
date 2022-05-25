@@ -7,7 +7,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdRewarded{
 
-  static late RewardedAd _rewardedAd;
+  static RewardedAd? _rewardedAd;
   static bool _isAdReady = false;
   static bool adShowed = false;
 
@@ -32,8 +32,8 @@ class AdRewarded{
 
   static void showAd(BuildContext context){
 
-    if(_isAdReady){
-      _rewardedAd.show(
+    if(_isAdReady && _rewardedAd != null){
+      _rewardedAd!.show(
           onUserEarnedReward: (ad, rewardItem){
             log('reward item type = ${rewardItem.type}');
             log('reward item amount = ${rewardItem.amount}');
@@ -42,7 +42,7 @@ class AdRewarded{
       );
     }
 
-    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd?.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (ad){
         log('ad dismissed');
         AppCubit.get(context).setButtonsPressable(true);

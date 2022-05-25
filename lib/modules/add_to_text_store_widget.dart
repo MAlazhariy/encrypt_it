@@ -18,7 +18,7 @@ import 'package:sizer/sizer.dart';
 
 class AddToTextStore {
   void add(BuildContext context, String encryptedMessage) {
-    AdInterstitial.loadInterstitialAd();
+    AdInterstitialAddToStore.loadAd();
 
     showCustomDialog(
       context: context,
@@ -461,5 +461,5 @@ void onSuccessfulAdd({
 
   Navigator.pop(context);
 
-  AdInterstitial.showAd();
+  AdInterstitialAddToStore.showAd();
 }
