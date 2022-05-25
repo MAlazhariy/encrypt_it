@@ -58,8 +58,7 @@ class AdBannerState extends State<AdBanner> {
 
   @override
   Widget build(BuildContext context) {
-    // todo: test me
-    if(_isAdReady && OperationCounterCache.getCounter()>=2){
+    if(_isAdReady){
       return Container(
         height: _adSize.height.toDouble(),
         width: _adSize.width.toDouble(),

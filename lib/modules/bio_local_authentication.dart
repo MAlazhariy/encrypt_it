@@ -8,7 +8,6 @@ import 'package:local_auth/auth_strings.dart';
 import 'package:local_auth/local_auth.dart';
 
 class LocalAuthApi {
-  // todo: important unit test
   // todo: important to test
 
   static final _auth = LocalAuthentication();

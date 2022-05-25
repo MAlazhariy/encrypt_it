@@ -97,7 +97,6 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
   }
 
   void editChoosedGroupName() {
-    // todo: important to test this unit
     TextEditingController messageTitleController = TextEditingController();
     var formGroupKey = GlobalKey<FormState>();
 

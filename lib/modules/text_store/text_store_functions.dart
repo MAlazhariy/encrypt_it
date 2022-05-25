@@ -1,7 +1,9 @@
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/shared/components/constants.dart';
+import 'package:encryption_app/shared/network/local/text_store_cache.dart';
 
 class Groups {
+
   static bool isGroupExists(String groupName) {
     return groups?.toMap()?.keys.contains(groupName) ?? false;
   }
@@ -14,8 +16,7 @@ class Groups {
   }
 
   static int getGroupIndex(String groupName) {
-    return groups!.groups!
-        .indexWhere((element) => element.groupName == groupName);
+    return groups!.groups!.indexWhere((element) => element.groupName == groupName);
   }
 
   static void addToExistGroup({
@@ -23,6 +24,7 @@ class Groups {
     required GroupContentModel groupModel,
   }) {
     groups!.groups![getGroupIndex(groupName)].groupContent.add(groupModel);
+    TextStoreCache.setGroups(groups!.toMap()!);
   }
 
   static void addGroup({
@@ -35,6 +37,7 @@ class Groups {
         groupContent: [groupModel],
       ),
     );
+    TextStoreCache.setGroups(groups!.toMap()!);
   }
 
   static void addTextToGroup({
@@ -52,10 +55,13 @@ class Groups {
         groupModel: groupModel,
       );
     }
+
+    TextStoreCache.setGroups(groups!.toMap()!);
   }
 
   static void deleteGroup(int groupIndex) {
     groups!.groups!.removeAt(groupIndex);
+    TextStoreCache.setGroups(groups!.toMap()!);
   }
 
   static void insertGroup({
@@ -63,6 +69,7 @@ class Groups {
     required GroupModel groupModel,
   }) {
     groups!.groups!.insert(groupIndex, groupModel);
+    TextStoreCache.setGroups(groups!.toMap()!);
   }
 
   static void changeGroupName({
@@ -71,6 +78,7 @@ class Groups {
     required String newName,
   }) {
     groups!.groups![groupIndex].groupName = newName;
+    TextStoreCache.setGroups(groups!.toMap()!);
   }
 
   static void deleteTitle({
@@ -78,6 +86,7 @@ class Groups {
     required int titleIndex,
   }) {
     groups!.groups![groupIndex].groupContent.removeAt(titleIndex);
+    TextStoreCache.setGroups(groups!.toMap()!);
   }
 
   static void insertTitle({
@@ -86,6 +95,7 @@ class Groups {
     required GroupContentModel content,
   }) {
     groups!.groups![groupIndex].groupContent.insert(titleIndex, content);
+    TextStoreCache.setGroups(groups!.toMap()!);
   }
 
   static void editTitle({
@@ -94,6 +104,7 @@ class Groups {
     required String newTitle,
   }) {
     groups!.groups![groupIndex].groupContent[titleIndex].title = newTitle;
+    TextStoreCache.setGroups(groups!.toMap()!);
   }
 
 }

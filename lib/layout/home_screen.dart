@@ -21,6 +21,7 @@ import 'package:encryption_app/shared/components/components/main_buttons.dart';
 import 'package:encryption_app/shared/components/components/text_field/text_field_small_button.dart';
 import 'package:encryption_app/shared/components/components/text_field/text_field.dart';
 import 'package:encryption_app/shared/components/constants.dart';
+import 'package:encryption_app/shared/network/local/operation_counter_cache.dart';
 import 'package:encryption_app/shared/network/local/showcase_cache.dart';
 import 'package:encryption_app/shared/network/local/text_store_cache.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
@@ -687,7 +688,8 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
 
-                      const AdBanner(),
+                      if(OperationCounterCache.getCounter()>=2)
+                        const AdBanner(),
                     ],
                   ),
                 ),
