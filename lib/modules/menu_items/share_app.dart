@@ -20,7 +20,7 @@ class ShareAppMenuItem extends StatelessWidget {
           isEncrypt: true,
           password: welcomePassword,
           context: context,
-          message: 'welcome_text'.tr(),
+          text: 'welcome_text'.tr(),
         );
         String shareMessage = 'share_app_message'.tr(namedArgs: {'encrypted_text': encryptedWelcomeText, 'password': welcomePassword});
 

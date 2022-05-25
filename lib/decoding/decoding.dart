@@ -9,30 +9,34 @@ class Decoding {
   Decoding();
 
   String decoder({
-    required String message,
+    required String text,
     required String password,
     required BuildContext context,
     required bool isEncrypt,
   }) {
     /// encrypt algorithm
     if (isEncrypt) {
-      return V06(message, password, context).encrypt();
+      return V06(text, password, context).encrypt();
+    }
+
+    if(text.length <= password.length + 2){
+      return 'version_not_found'.tr();
     }
 
     /// decrypt filter conditions
-    String version = message.substring(message.length - 2, message.length);
-    String messageWithoutVersion = message.substring(0, message.length - 2);
+    String version = text.substring(text.length - 2, text.length);
+    String textWithoutVersion = text.substring(0, text.length - 2);
 
     if (version == '06') {
-      return V06(messageWithoutVersion, password, context).decrypt();
+      return V06(textWithoutVersion, password, context).decrypt();
     } else if (version == '05') {
-      return V05(messageWithoutVersion, password, context).decrypt();
+      return V05(textWithoutVersion, password, context).decrypt();
     }
 
     // else
     try {
       int versionNumber = int.parse(version);
-      if (versionNumber > 5) {
+      if (versionNumber > 6) {
         return 'later_version_warning_title'.tr();
       } else {
         return 'version_not_found'.tr();

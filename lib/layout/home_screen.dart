@@ -651,42 +651,6 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          log(TextStoreCache.getGroups().toString());
-                        },
-                        child: const Text(
-                          'print groups from cache',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-
-                      TextButton(
-                        onPressed: () {
-                          log(groups?.toMap().toString() ??'null');
-                        },
-                        child: const Text(
-                          'print groups from model',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-
-                      if(groups?.groups != null)
-                      TextButton(
-                        onPressed: () {
-                          TextStoreCache.setGroups(groups!.toMap()!);
-                        },
-                        child: const Text(
-                          'save groups to cache from model',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
 
                       if(OperationCounterCache.getCounter()>=2)
                         const AdBanner(),
