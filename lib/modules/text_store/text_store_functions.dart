@@ -12,6 +12,9 @@ class Groups {
     required String title,
     required int groupIndex,
 }) {
+    if(groupIndex == -1){
+      return false;
+    }
     return groups!.groups![groupIndex].groupContent.where((e) => e.title == title).isNotEmpty;
   }
 

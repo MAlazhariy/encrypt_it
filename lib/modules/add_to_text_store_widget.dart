@@ -32,6 +32,7 @@ class ContentDesign extends StatelessWidget {
   ContentDesign({Key? key, required this.encryptedText}) : super(key: key);
 
   final String encryptedText;
+
   // Map? storeGroups = TextStoreCache.getGroups();
 
   var titleCtrl = TextEditingController();
@@ -424,8 +425,9 @@ class TitleTextForm extends StatelessWidget {
           } else if (value.length >= 30) {
             return 'too_big_title'.tr();
           } else if (Groups.isTitleExists(
-              title: value,
-              groupIndex: Groups.getGroupIndex(cubit.groupName))) {
+            title: value,
+            groupIndex: Groups.getGroupIndex(cubit.groupName),
+          )) {
             return 'title_already_exists'.tr();
           }
 
