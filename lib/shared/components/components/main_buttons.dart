@@ -1,69 +1,93 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:sizer/sizer.dart';
 
-
-class MainButton extends StatelessWidget {
-  const MainButton({
-    required this.onPressed,
-    required this.isEncrypt,
-    Key? key
-  }) : super(key: key);
+class MainButton extends StatefulWidget {
+  const MainButton({required this.onPressed, required this.isEncrypt, Key? key})
+      : super(key: key);
 
   final void Function()? onPressed;
   final bool isEncrypt;
 
   @override
+  State<MainButton> createState() => _MainButtonState();
+}
+
+class _MainButtonState extends State<MainButton> {
+  bool isPressed = false;
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      onPressed: onPressed,
-
-      disabledColor: mainColor,
-      disabledTextColor: contrastColor.withAlpha(50),
-
-      color: contrastColor,
-      textColor: isEncrypt ? encryptedTextColor : decryptedTextColor,
-      // textColor: mainColor,
-
-      splashColor: isEncrypt ? encryptedTextColor.withAlpha(40) : decryptedTextColor.withAlpha(40),
-      highlightColor: bGColor.withAlpha(40),
-
-      elevation: 8,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.sp),
-      ),
-
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 1.sp, vertical: 4.sp,),
-
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              width: 20.sp,
-              child: Icon(
-                isEncrypt ? MyIcons.lock_stars : MyIcons.unlock_stars,
-                // size: 19.sp,
+    return GestureDetector(
+      onTap: widget.onPressed,
+      child: Listener(
+        onPointerUp: (_) => setState(()=> isPressed = false),
+        onPointerDown: (_) => setState(()=> isPressed = true),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 50),
+          decoration: BoxDecoration(
+            color: bGColor,
+            borderRadius: BorderRadius.circular(13),
+            boxShadow: widget.onPressed != null && !isPressed
+                ? [
+                    BoxShadow(
+                      color: shadowColor,
+                      offset: const Offset(3, 3),
+                      blurRadius: 4,
+                      spreadRadius: 1,
+                      inset: isPressed,
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: const Offset(-3, -3),
+                      blurRadius: 4,
+                      spreadRadius: 1,
+                      inset: isPressed,
+                    ),
+                  ]
+                : [],
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 17,
+            vertical: 6.5,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                // width: 25,
+                child: Icon(
+                  widget.isEncrypt ? MyIcons.lock_stars : MyIcons.unlock_stars,
+                  size: !isPressed ? 21 : 20,
+                  color: widget.onPressed != null
+                      ? widget.isEncrypt
+                          ? encryptedTextColor
+                          : decryptedTextColor
+                      : Colors.grey.withOpacity(0.40),
+                ),
               ),
-            ),
-            SizedBox(
-              width: 6.5.sp,
-            ),
-            Text(
-              isEncrypt ? 'encrypt'.tr() : 'decrypt'.tr(),
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w700,
+              const SizedBox(width: 7),
+              Text(
+                widget.isEncrypt ? 'encrypt'.tr() : 'decrypt'.tr(),
+                style: TextStyle(
+                  fontSize: !isPressed ? 18 : 17,
+                  fontWeight: FontWeight.w700,
+                  color: widget.onPressed != null
+                      ? widget.isEncrypt
+                          ? encryptedTextColor
+                          : decryptedTextColor
+                      : Colors.grey.withOpacity(0.40),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-
-

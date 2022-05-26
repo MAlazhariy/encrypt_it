@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 const Color mainColor = Colors.deepPurple;
-const Color bGColor = Colors.deepPurpleAccent;
-const Color shadowColor = Color(0xFF3D246F);
+const Color bGColor = Color(0xFFEEEEEE);
+const Color shadowColor = Color(0xFF9E9E9E);
 
 const Color contrastColor = Colors.white;
 const Color lightGrayColor = Color(0xFFB0A8B9);
@@ -15,5 +15,5 @@ const Color decryptedTextColor = Color(0xFF00B397);
 const Color linkColor = Color(0xFF00B397);
 
 // main text fields small buttons
-Color smallButtonsColor = contrastColor.withAlpha(30);
-Color buttonsTitleColor = contrastColor;
+const Color smallButtonsColor = Color(0xFFF0F0F0);
+const Color buttonsTitleColor = mainColor;

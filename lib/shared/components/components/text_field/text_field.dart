@@ -1,5 +1,6 @@
 import 'package:encryption_app/shared/styles/colors.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:sizer/sizer.dart';
 
 
@@ -11,7 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.isPassword = false,
     required this.onChange,
     this.validator,
-    this.showShadow = true,
+    this.validate = true,
     this.onTab,
     this.hintText,
     this.labelText,
@@ -33,20 +34,28 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool obscureText;
   final bool isEnabled;
-  final bool showShadow;
+  final bool validate;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.sp),
-        boxShadow: [
-          if(showShadow)
-            const BoxShadow(
+        borderRadius: BorderRadius.circular(13),
+        boxShadow: const [
+            BoxShadow(
               color: shadowColor,
-              blurRadius: 15,
-              offset: Offset(0,6),
+              offset: Offset(3, 3),
+              blurRadius: 4,
+              spreadRadius: 1,
+              inset: true,
             ),
+          BoxShadow(
+            color: Colors.white,
+            offset: Offset(-3, -3),
+            blurRadius: 4,
+            spreadRadius: 1,
+            inset: true,
+          ),
         ],
       ),
 
@@ -79,50 +88,55 @@ class CustomTextField extends StatelessWidget {
               minWidth: 34.sp,
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.sp),
-              borderSide: const BorderSide(
-                color: Colors.transparent,
+              borderRadius: BorderRadius.circular(13),
+              borderSide: BorderSide(
+                color: validate ? Colors.transparent : redColor,
+                width: 2.5,
               ),
             ),
             disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.sp),
+              borderRadius: BorderRadius.circular(13),
               borderSide: const BorderSide(
                 color: Colors.transparent,
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.sp),
-              borderSide: const BorderSide(
-                color: Colors.transparent,
+              borderRadius: BorderRadius.circular(13),
+              borderSide: BorderSide(
+                color: validate ? Colors.transparent : redColor,
+                width: 2.5,
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.sp),
-              borderSide: const BorderSide(
-                color: Colors.transparent,
+              borderRadius: BorderRadius.circular(13),
+              borderSide: BorderSide(
+                color: validate ? Colors.transparent : redColor,
+                width: 2,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(13.sp),
+              borderRadius: BorderRadius.circular(13),
+              borderSide: const BorderSide(
+                color: redColor,
+                width: 2,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(13),
               borderSide: const BorderSide(
                 color: redColor,
                 width: 2.5,
               ),
             ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.sp),
-              borderSide: const BorderSide(
-                color: redColor,
-                width: 3,
-              ),
-            ),
+
             fillColor: Colors.white,
-            filled: true,
-            errorMaxLines: 3,
-            errorStyle: TextStyle(
-              color: contrastColor,
-              fontSize: 9.3.sp,
-              fontWeight: FontWeight.w600,
+            filled: false,
+            errorMaxLines: null,
+            errorStyle: const TextStyle(
+              height: 0,
+              color: Colors.transparent,
+              fontSize: 0,
+              // fontWeight: FontWeight.w600,
             ),
           ),
         ),

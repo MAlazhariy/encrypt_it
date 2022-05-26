@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
   var passKey = GlobalKey<FormState>();
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  bool passValidate = true;
+  String undefined = '';
 
   TextEditingController messageCtrl = TextEditingController();
   TextEditingController passCtrl = TextEditingController();
@@ -166,18 +166,19 @@ class HomeScreen extends StatelessWidget {
 
               return Scaffold(
                 key: scaffoldKey,
-                backgroundColor: bGColor,
 
                 appBar: AppBar(
                   title: Text(
                     cubit.appInfo.appName,
                     style: const TextStyle(
-                      // color: Colors.white,
-                      fontWeight: FontWeight.w700,
+                      color: lightGrayColor,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   shadowColor: shadowColor,
                   centerTitle: true,
+                  backgroundColor: bGColor,
+                  elevation: 0,
                 ),
 
                 drawer: const MyAppDrawer(),
@@ -211,7 +212,7 @@ class HomeScreen extends StatelessWidget {
                                   controller: messageCtrl,
                                   hintText: 'msg here'.tr(),
                                   onChange: (value) {
-                                    activeButtons(passValidate);
+                                    activeButtons(undefined.isEmpty);
                                   },
                                   prefixIcon: Icon(
                                     MyIcons.text,
@@ -225,12 +226,19 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                               if (cubit.isCurrentFieldText)
-                                SizedBox(
+                                Container(
                                   width: double.infinity,
+                                  margin: const EdgeInsetsDirectional.only(
+                                    top: 15,
+                                    bottom: 10,
+                                    end: 5,
+                                  ),
                                   child: Wrap(
                                     alignment: WrapAlignment.end,
                                     direction: Axis.horizontal,
                                     verticalDirection: VerticalDirection.up,
+                                    spacing: 15,
+                                    runSpacing: 15,
                                     children: [
                                       /// clear all
                                       CustomShowcase(
@@ -245,10 +253,9 @@ class HomeScreen extends StatelessWidget {
                                             onPressed: () {
                                               messageCtrl.text = '';
                                               passCtrl.text = '';
+                                              undefined = '';
 
-                                              activeButtons(passKey
-                                                  .currentState!
-                                                  .validate());
+                                              activeButtons();
                                               cubit.clearAllFields();
 
                                               dismissKeyboard(context);
@@ -266,7 +273,7 @@ class HomeScreen extends StatelessWidget {
                                           title: 'clear'.tr(),
                                           onPressed: () {
                                             messageCtrl.text = '';
-                                            activeButtons(passValidate);
+                                            activeButtons(undefined.isEmpty);
 
                                             dismissKeyboard(context);
                                           },
@@ -474,9 +481,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
 
-                              SizedBox(
-                                height: 15.sp,
-                              ),
+                              const SizedBox(height: 18),
 
                               /// password field
                               CustomShowcase(
@@ -488,21 +493,18 @@ class HomeScreen extends StatelessWidget {
                                   theKey: passKey,
                                   controller: passCtrl,
                                   hintText: 'pass here'.tr(),
-                                  validator: (value) {
-                                    String undefined =
-                                        V06('', passCtrl.text, context)
-                                            .getUndefinedChars(value!);
-                                    if (undefined.isNotEmpty) {
-                                      return 'undefined_chars_title'
-                                          .tr(args: [undefined]);
-                                    }
-                                    return null;
-                                  },
-                                  showShadow: passValidate,
+                                  // validator: (value) {
+                                  //   undefined =
+                                  //       V06('', passCtrl.text, context).getUndefinedChars(value!);
+                                  //   if (undefined.isNotEmpty) {
+                                  //     return 'undefined_chars_title'.tr(args: [undefined]);
+                                  //   }
+                                  //   return null;
+                                  // },
+                                  validate: undefined.isEmpty,
                                   onChange: (value) {
-                                    passValidate =
-                                        passKey.currentState!.validate();
-                                    activeButtons(passValidate);
+                                    undefined = V06('', passCtrl.text, context).getUndefinedChars(value);
+                                    activeButtons(undefined.isEmpty);
                                   },
                                   prefixIcon: Icon(
                                     MyIcons.key_lock,
@@ -526,22 +528,45 @@ class HomeScreen extends StatelessWidget {
                                       (!cubit.isCurrentFieldNoneAndInactivated),
                                 ),
                               ),
+
+                              // error hint
+                              if(undefined.isNotEmpty)
+                                Container(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  padding: const EdgeInsetsDirectional.only(start: 8),
+                                  child: Text(
+                                    'undefined_chars_title'.tr(args: [undefined]),
+                                    style: const TextStyle(
+                                      color: redColor,
+                                      fontSize: 13.5,
+                                      fontWeight: FontWeight.w600
+                                    ),
+                                  ),
+                                ),
+
                               if (cubit.isCurrentFieldPassword)
-                                SizedBox(
+                                Container(
                                   width: double.infinity,
+                                  margin: const EdgeInsetsDirectional.only(
+                                    top: 15,
+                                    bottom: 10,
+                                    end: 5,
+                                  ),
                                   child: Wrap(
                                     alignment: WrapAlignment.end,
                                     direction: Axis.horizontal,
                                     verticalDirection: VerticalDirection.up,
+                                    spacing: 15,
+                                    runSpacing: 15,
                                     children: [
                                       /// clear all
                                       TextFieldQuickActions(
                                         onPressed: () {
                                           messageCtrl.text = '';
                                           passCtrl.text = '';
+                                          undefined = '';
 
-                                          activeButtons(
-                                              passKey.currentState!.validate());
+                                          activeButtons();
                                           cubit.clearAllFields();
 
                                           dismissKeyboard(context);
@@ -550,14 +575,14 @@ class HomeScreen extends StatelessWidget {
                                         title: 'clear all'.tr(),
                                       ),
 
-                                      /// clear text field
+                                      /// clear password field
                                       TextFieldQuickActions(
                                         icon: Icons.highlight_remove_outlined,
                                         title: 'clear'.tr(),
                                         onPressed: () {
                                           passCtrl.text = '';
-                                          activeButtons(
-                                              passKey.currentState!.validate());
+                                          undefined = '';
+                                          activeButtons();
 
                                           dismissKeyboard(context);
                                         },
@@ -572,8 +597,7 @@ class HomeScreen extends StatelessWidget {
                                           FlutterClipboard.paste()
                                               .then((value) {
                                             passCtrl.text = value;
-                                            activeButtons(passKey.currentState!
-                                                .validate());
+                                            activeButtons(undefined.isEmpty);
 
                                             passCtrl.selection =
                                                 TextSelection.fromPosition(
@@ -592,16 +616,14 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
 
-                              SizedBox(
-                                height: 4.h,
-                              ),
+                              const SizedBox(height: 25),
 
                               /// Encrypt & Decrypt buttons
                               Wrap(
                                 alignment: WrapAlignment.center,
                                 direction: Axis.horizontal,
-                                spacing: 8.sp,
-                                runSpacing: 9.sp,
+                                spacing: 17,
+                                runSpacing: 15,
                                 children: [
                                   // encrypt
                                   CustomShowcase(
@@ -623,7 +645,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
 
-                                  /// decrypt
+                                  // decrypt
                                   CustomShowcase(
                                     globalKey: _decryptButtonShowcase,
                                     description:

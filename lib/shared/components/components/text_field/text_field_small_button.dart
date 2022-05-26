@@ -1,10 +1,10 @@
 import 'package:encryption_app/shared/styles/colors.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
+import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:sizer/sizer.dart';
 
 
-
-class TextFieldQuickActions extends StatelessWidget {
+class TextFieldQuickActions extends StatefulWidget {
   const TextFieldQuickActions({
     required this.title,
     required this.onPressed,
@@ -12,31 +12,77 @@ class TextFieldQuickActions extends StatelessWidget {
     this.onLongPress,
     Key? key,
   }) : super(key: key);
+
   final void Function()? onPressed;
   final void Function()? onLongPress;
   final IconData icon;
   final String title;
 
   @override
+  State<TextFieldQuickActions> createState() => _TextFieldQuickActionsState();
+}
+
+class _TextFieldQuickActionsState extends State<TextFieldQuickActions> {
+  bool isPressed = false;
+
+  @override
   Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.onPressed,
+      child: Listener(
+        onPointerUp: (_) => setState(()=> isPressed = false),
+        onPointerDown: (_) => setState(()=> isPressed = true),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 60),
+          decoration: BoxDecoration(
+            color: bGColor,
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: widget.onPressed != null && !isPressed
+                ? [
+              BoxShadow(
+                color: shadowColor.withOpacity(0.55),
+                offset: const Offset(1.7, 1.7),
+                blurRadius: 3,
+                spreadRadius: 1,
+                inset: isPressed,
+              ),
+              BoxShadow(
+                color: Colors.white.withOpacity(0.9),
+                offset: const Offset(-1.7, -1.7),
+                blurRadius: 3,
+                spreadRadius: 1,
+                inset: isPressed,
+              ),
+            ]
+                : [],
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 4,
+          ),
+          child: _ButtonDesign(widget.icon, widget.title),
+        ),
+      ),
+    );
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: 2.3.sp,
+        vertical: 2.5.sp,
         horizontal: 3.5.sp,
       ),
       child: MaterialButton(
-        onPressed: onPressed,
-        onLongPress: onLongPress,
+        onPressed: widget.onPressed,
+        onLongPress: widget.onLongPress,
         color: smallButtonsColor,
         splashColor: mainColor.withAlpha(50),
+        textColor: buttonsTitleColor,
         elevation: 0,
         focusElevation: 0,
         hoverElevation: 0,
         highlightElevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.sp),
+          borderRadius: BorderRadius.circular(10),
         ),
-        child: _ButtonDesign(icon, title),
+        child: _ButtonDesign(widget.icon, widget.title),
       ),
     );
   }

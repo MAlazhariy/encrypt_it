@@ -52,6 +52,7 @@ dependencies:
   showcaseview: ^1.1.4
   local_auth: ^1.1.10
   mockito: ^5.2.0
+  flutter_inset_box_shadow: ^1.0.8
 
 
 
