@@ -50,7 +50,7 @@ class ThanksMenuItem extends StatelessWidget {
               const Divider(),
               Container(
                 width: double.infinity,
-                color: bGColor.withAlpha(15),
+                color: mainColor.withAlpha(8),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: 5.sp,

@@ -39,7 +39,7 @@ class BoardPage1 extends StatelessWidget {
           Text(
             'onBoard_headline_1'.tr(),
             style: TextStyle(
-              color: darkGrayColor,
+              color: Theme.of(context).colorScheme.secondary,
               fontFamily: 'Cairo',
               fontWeight: FontWeight.w600,
               fontSize: 13.sp,
@@ -51,7 +51,7 @@ class BoardPage1 extends StatelessWidget {
           Text(
             'onBoard_subtitle_1'.tr(),
             style: TextStyle(
-              color: lightGrayColor,
+              color: Theme.of(context).colorScheme.onSecondary,
               fontFamily: 'Cairo',
               fontWeight: FontWeight.w500,
               fontSize: 10.sp,
@@ -85,8 +85,8 @@ class BoardPage2 extends StatelessWidget {
               'assets/images/main-animation.gif',
               // 'assets/images/icon.png',
               fit: BoxFit.contain,
-              color: lightGrayColor,
-              // color: darkGrayColor.withAlpha(250),
+              color: Theme.of(context).colorScheme.onSecondary,
+              // color: Theme.of(context).colorScheme.secondary.withAlpha(250),
             ),
           ),
 
@@ -94,7 +94,7 @@ class BoardPage2 extends StatelessWidget {
           Text(
             'onBoard_headline_2'.tr(),
             style: TextStyle(
-              color: darkGrayColor,
+              color: Theme.of(context).colorScheme.secondary,
               fontFamily: 'Cairo',
               fontWeight: FontWeight.w600,
               fontSize: 13.sp,
@@ -106,7 +106,7 @@ class BoardPage2 extends StatelessWidget {
           Text(
             'onBoard_subtitle_2'.tr(),
             style: TextStyle(
-              color: lightGrayColor,
+              color: Theme.of(context).colorScheme.onSecondary,
               fontFamily: 'Cairo',
               fontWeight: FontWeight.w500,
               fontSize: 10.sp,
@@ -163,7 +163,6 @@ class BoardPage3 extends StatelessWidget {
   }
 }
 
-
 /// On boarding screen widget
 class OnBoardScreen extends StatefulWidget {
   const OnBoardScreen({Key? key}) : super(key: key);
@@ -173,7 +172,6 @@ class OnBoardScreen extends StatefulWidget {
 }
 
 class OnBoardScreenState extends State<OnBoardScreen> {
-
   double currentIndex = 0;
   bool isLast = false;
 
@@ -187,9 +185,10 @@ class OnBoardScreenState extends State<OnBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom]);
     return Scaffold(
-      backgroundColor: contrastColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -205,7 +204,7 @@ class OnBoardScreenState extends State<OnBoardScreen> {
               //       child: Text(
               //         !isLast ? 'skip'.tr() : '',
               //         style: TextStyle(
-              //           color: lightGrayColor,
+              //           color: Theme.of(context).colorScheme.onSecondary,
               //           fontSize: 9.sp,
               //           fontWeight: FontWeight.w500,
               //         ),
@@ -235,7 +234,9 @@ class OnBoardScreenState extends State<OnBoardScreen> {
                   onPageChanged: (int value) {
                     setState(() {
                       currentIndex = value.toDouble();
-                      isLast = (currentIndex == boardItems.length - 1) ? true : false;
+                      isLast = (currentIndex == boardItems.length - 1)
+                          ? true
+                          : false;
                     });
                   },
                   itemBuilder: (context, index) {
@@ -249,17 +250,18 @@ class OnBoardScreenState extends State<OnBoardScreen> {
 
               /// main button
               LayoutBuilder(
-                builder: (_, constraints){
+                builder: (_, constraints) {
                   return MaterialButton(
                     autofocus: true,
-
-                    onPressed: (){
+                    onPressed: () {
                       if (isLast) {
                         BoardCache.boardHasOpened();
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => HomeScreen(),),
-                              (route) => false,
+                          MaterialPageRoute(
+                            builder: (context) => HomeScreen(),
+                          ),
+                          (route) => false,
                         );
                       } else {
                         /// go to next page
@@ -273,7 +275,9 @@ class OnBoardScreenState extends State<OnBoardScreen> {
                         });
                       }
                     },
-                    color: isLast ? mainColor : darkGrayColor,
+                    color: isLast
+                        ? mainColor
+                        : Theme.of(context).colorScheme.secondary,
                     minWidth: constraints.maxWidth - 30.w,
                     padding: EdgeInsets.symmetric(
                       vertical: 10.sp,
@@ -281,8 +285,8 @@ class OnBoardScreenState extends State<OnBoardScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.sp),
                     ),
-                    splashColor: contrastColor.withAlpha(25),
-                    highlightColor: contrastColor.withAlpha(10),
+                    splashColor: Colors.white.withAlpha(25),
+                    highlightColor: Colors.white.withAlpha(10),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -290,20 +294,20 @@ class OnBoardScreenState extends State<OnBoardScreen> {
                         Text(
                           isLast ? 'get_started'.tr() : 'next'.tr(),
                           style: TextStyle(
-                            color: contrastColor,
+                            color: Colors.white,
                             fontSize: 12.sp,
                             fontWeight:
-                            isLast ? FontWeight.w600 : FontWeight.w500,
+                                isLast ? FontWeight.w600 : FontWeight.w500,
                           ),
                         ),
-
-                        if(!isLast)
-                          SizedBox(width: 2.sp,),
-
-                        if(!isLast)
+                        if (!isLast)
+                          SizedBox(
+                            width: 2.sp,
+                          ),
+                        if (!isLast)
                           const Icon(
                             Icons.navigate_next,
-                            color: contrastColor,
+                            color: Colors.white,
                           ),
                       ],
                     ),
@@ -311,7 +315,9 @@ class OnBoardScreenState extends State<OnBoardScreen> {
                 },
               ),
 
-              SizedBox(height: 25.sp,),
+              SizedBox(
+                height: 25.sp,
+              ),
 
               /// indicator
               Align(
@@ -319,7 +325,7 @@ class OnBoardScreenState extends State<OnBoardScreen> {
                   controller: boardController,
                   count: boardItems.length,
                   effect: WormEffect(
-                    activeDotColor: lightGrayColor,
+                    activeDotColor: Theme.of(context).colorScheme.onSecondary,
                     dotColor: Colors.grey.withAlpha(90),
                     dotHeight: 2.w,
                     dotWidth: 2.w,
@@ -345,7 +351,4 @@ class OnBoardScreenState extends State<OnBoardScreen> {
       ),
     );
   }
-
-
 }
-

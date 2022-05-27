@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:sizer/sizer.dart';
 
-
 void showRateDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -14,8 +13,8 @@ void showRateDialog(BuildContext context) {
         title: Center(
           child: Text(
             'rate_app'.tr(),
-            style: const TextStyle(
-              color: darkGrayColor,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -29,7 +28,10 @@ void showRateDialog(BuildContext context) {
               children: [
                 /// stars
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 14.sp, vertical: 5.sp,),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 14.sp,
+                    vertical: 5.sp,
+                  ),
                   child: GestureDetector(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +44,7 @@ void showRateDialog(BuildContext context) {
                         ),
                       ),
                     ),
-                    onTap: (){
+                    onTap: () {
                       rateOpenGoogle();
                     },
                   ),
@@ -59,26 +61,27 @@ void showRateDialog(BuildContext context) {
                     child: Text(
                       'rate_app_description'.tr(),
                       style: TextStyle(
-                        color: darkGrayColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         fontSize: 10.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 8.sp,),
+                SizedBox(
+                  height: 8.sp,
+                ),
 
                 /// rate button
                 MaterialButton(
                   color: redColor,
-                  textColor: contrastColor,
-
+                  textColor: Theme.of(context).scaffoldBackgroundColor,
                   elevation: 0,
                   highlightElevation: 0,
                   focusElevation: 0,
                   disabledElevation: 0,
                   hoverElevation: 0,
-                  onPressed: (){
+                  onPressed: () {
                     rateOpenGoogle();
                     Navigator.pop(context);
                   },
@@ -112,10 +115,9 @@ void showRateDialog(BuildContext context) {
                     Expanded(
                       flex: 3,
                       child: MaterialButton(
-                        onPressed: (){
+                        onPressed: () {
                           Navigator.pop(context);
                         },
-
                         elevation: 0,
                         highlightElevation: 0,
                         focusElevation: 0,
@@ -126,9 +128,8 @@ void showRateDialog(BuildContext context) {
                         ),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadiusDirectional.only(
-                              bottomStart: Radius.circular(12.sp),
-                            )
-                        ),
+                          bottomStart: Radius.circular(12.sp),
+                        )),
                         child: Text(
                           'remind_later'.tr(),
                           style: TextStyle(
@@ -153,12 +154,10 @@ void showRateDialog(BuildContext context) {
                           vertical: 2.sp,
                         ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusDirectional.only(
-                            bottomEnd: Radius.circular(12.sp),
-                          )
-                        ),
-
-                        onPressed: (){
+                            borderRadius: BorderRadiusDirectional.only(
+                          bottomEnd: Radius.circular(12.sp),
+                        )),
+                        onPressed: () {
                           RateCache.appRatedSuccessfully();
                           Navigator.pop(context);
                         },
@@ -188,15 +187,13 @@ void showRateDialog(BuildContext context) {
 }
 
 Future<void> showInAppRate() async {
-
   final InAppReview inAppReview = InAppReview.instance;
   if (await inAppReview.isAvailable()) {
     inAppReview.requestReview();
   }
-
 }
 
-void rateOpenGoogle(){
+void rateOpenGoogle() {
   final InAppReview inAppReview = InAppReview.instance;
   inAppReview.openStoreListing();
   RateCache.appRatedSuccessfully();

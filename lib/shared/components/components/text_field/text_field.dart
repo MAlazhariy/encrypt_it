@@ -1,3 +1,5 @@
+import 'package:encryption_app/cubit/app_cubit/cubit.dart';
+import 'package:encryption_app/cubit/material_cubit/material_cubit.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
@@ -38,20 +40,22 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(13),
-        boxShadow: const [
+        boxShadow: [
             BoxShadow(
-              color: shadowColor,
-              offset: Offset(3, 3),
+              color: Theme.of(context).shadowColor,
+              offset: const Offset(3, 3),
               blurRadius: 4,
               spreadRadius: 1,
               inset: true,
             ),
           BoxShadow(
-            color: Colors.white,
-            offset: Offset(-3, -3),
+            color: highLightColor(MaterialCubit.get(context).isDarkMode),
+            offset: const Offset(-3, -3),
             blurRadius: 4,
             spreadRadius: 1,
             inset: true,

@@ -142,7 +142,7 @@ class CopyButton extends StatelessWidget {
         showToast(
           title: 'msg copied'.tr(),
           textColor: mainColor,
-          contentFillColor: contrastColor,
+          contentFillColor: Theme.of(context).colorScheme.onPrimary,
         );
       },
 
@@ -156,7 +156,7 @@ class CopyButton extends StatelessWidget {
 
           showToast(
             title: 'all copied'.tr(),
-            textColor: contrastColor,
+            textColor: Theme.of(context).colorScheme.onPrimary,
             contentFillColor: mainColor,
           );
         }

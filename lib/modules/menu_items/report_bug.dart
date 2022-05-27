@@ -1,3 +1,4 @@
+import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_item.dart';
@@ -8,12 +9,13 @@ import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ReportABugMenuItem extends StatelessWidget {
-  const ReportABugMenuItem(this.appVersion,{Key? key}) : super(key: key);
+  const ReportABugMenuItem({Key? key}) : super(key: key);
 
-  final String appVersion;
 
   @override
   Widget build(BuildContext context) {
+    final String appVersion = AppCubit.get(context).appInfo.version;
+
     return MenuItemWidget(
       title: 'report_bug'.tr(),
       icon: Icons.assistant_outlined,

@@ -69,7 +69,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                   backgroundColor: redColor,
                   elevation: 0,
                   action: SnackBarAction(
-                    textColor: contrastColor,
+                    textColor: Theme.of(context).colorScheme.onPrimary,
                     label: 'undo'.tr(),
                     onPressed: () {
                       Groups.insertGroup(
@@ -78,7 +78,8 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                       );
                       setState(() {
                         choosedGroup = deletedGroup.groupName;
-                        groupIndex = Groups.getGroupIndex(deletedGroup.groupName);
+                        groupIndex =
+                            Groups.getGroupIndex(deletedGroup.groupName);
                       });
                     },
                   ),
@@ -165,7 +166,6 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
     required GroupContentModel content,
     required int titleIndex,
   }) {
-
     setState(() {
       Groups.deleteTitle(
         groupIndex: groupIndex!,
@@ -185,7 +185,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
         ),
         elevation: 0,
         action: SnackBarAction(
-          textColor: contrastColor,
+          textColor: Theme.of(context).colorScheme.onPrimary,
           label: 'undo'.tr(),
           onPressed: () {
             setState(() {
@@ -218,7 +218,8 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
             return 'can_not_empty'.tr();
           } else if (value.length >= 35) {
             return 'too_big_title'.tr();
-          } else if (Groups.isTitleExists(title: value, groupIndex: groupIndex!)) {
+          } else if (Groups.isTitleExists(
+              title: value, groupIndex: groupIndex!)) {
             return 'title_already_exists'.tr();
           }
 
@@ -255,14 +256,19 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
     );
   }
 
+  void doneAndBack() {
+    Navigator.pop(context);
+    AdInterstitialEditStore.showAd();
+  }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     AdInterstitialEditStore.loadAd();
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     AdInterstitialEditStore.disposeAd();
   }
@@ -275,14 +281,19 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
         title: Text(
           'edit_text_store'.tr(),
         ),
-        backgroundColor: const Color(0xFFFAFAFA),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         foregroundColor: mainColor,
-        elevation: 2,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            doneAndBack();
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
       ),
       body: Padding(
         padding: EdgeInsetsDirectional.only(
@@ -299,8 +310,11 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                 child: Column(
                   children: [
                     if (choosedGroup == null)
-                      Text(
-                        'choose_group_to_edit_text_store'.tr(),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 15),
+                        child: Text(
+                          'choose_group_to_edit_text_store'.tr(),
+                        ),
                       ),
 
                     // groups dropDown menu
@@ -310,7 +324,10 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                         borderRadius: BorderRadius.circular(15.sp),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                            color: lightGrayColor.withAlpha(80),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSecondary
+                                .withAlpha(80),
                             offset: const Offset(0, 4),
                             blurRadius: 5,
                           ),
@@ -326,7 +343,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                         hint: Text(
                           'choose_group'.tr(),
                           style: TextStyle(
-                              color: lightGrayColor,
+                              color: Theme.of(context).colorScheme.onSecondary,
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w600,
                               fontFamily: 'Cairo'),
@@ -347,7 +364,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                         dropdownColor: Colors.white,
                         icon: Icon(
                           Icons.arrow_drop_down,
-                          color: lightGrayColor,
+                          color: Theme.of(context).colorScheme.onSecondary,
                           size: 20.sp,
                         ),
                         items: dropdownItems
@@ -385,7 +402,10 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                             Card(
                               color: const Color(0xFFFFFFFF),
                               elevation: 5,
-                              shadowColor: lightGrayColor.withAlpha(80),
+                              shadowColor: Theme.of(context)
+                                  .colorScheme
+                                  .onSecondary
+                                  .withAlpha(80),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.sp),
                               ),
@@ -403,7 +423,9 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                       Text(
                                         'edit_group_name'.tr(),
                                         style: TextStyle(
-                                          color: darkGrayColor,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
                                           fontSize: 10.sp,
                                         ),
                                       ),
@@ -412,7 +434,9 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                       ),
                                       Icon(
                                         Icons.edit,
-                                        color: darkGrayColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
                                         size: 14.sp,
                                       ),
                                     ],
@@ -425,7 +449,10 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                             Card(
                               color: const Color(0xFFFFFFFF),
                               elevation: 5,
-                              shadowColor: lightGrayColor.withAlpha(80),
+                              shadowColor: Theme.of(context)
+                                  .colorScheme
+                                  .onSecondary
+                                  .withAlpha(80),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.sp),
                               ),
@@ -480,7 +507,9 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                     if (choosedGroup != null)
                       ListView.builder(
                         itemBuilder: (context, titleIndex) {
-                          final GroupContentModel contentModel = groups!.groups![Groups.getGroupIndex(choosedGroup!)].groupContent[titleIndex];
+                          final GroupContentModel contentModel = groups!
+                              .groups![Groups.getGroupIndex(choosedGroup!)]
+                              .groupContent[titleIndex];
 
                           return Padding(
                             padding: EdgeInsets.symmetric(
@@ -495,11 +524,14 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                 bottom: 5.sp,
                               ),
                               decoration: BoxDecoration(
-                                color: contrastColor,
+                                color: Theme.of(context).colorScheme.onPrimary,
                                 borderRadius: BorderRadius.circular(15.sp),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                    color: lightGrayColor.withAlpha(80),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary
+                                        .withAlpha(80),
                                     offset: const Offset(0, 4),
                                     blurRadius: 7,
                                   ),
@@ -515,7 +547,9 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                       child: Text(
                                         contentModel.title,
                                         style: TextStyle(
-                                          color: darkGrayColor,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 11.sp,
                                         ),
@@ -528,7 +562,11 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                     shape: const CircleBorder(),
                                     child: IconButton(
                                       onPressed: () {
-                                        final bool isLastTitleInGroup = groups!.groups![groupIndex!].groupContent.length ==1;
+                                        final bool isLastTitleInGroup = groups!
+                                                .groups![groupIndex!]
+                                                .groupContent
+                                                .length ==
+                                            1;
 
                                         if (isLastTitleInGroup) {
                                           deleteChoosedGroup();
@@ -539,15 +577,22 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                           );
                                         }
                                       },
-                                      icon: const Icon(
+                                      icon: Icon(
                                         Icons.delete_outline,
-                                        color: lightGrayColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSecondary,
                                       ),
                                       splashRadius: 13.sp,
                                       color: Colors.red,
-                                      splashColor: lightGrayColor.withAlpha(80),
-                                      highlightColor:
-                                          lightGrayColor.withAlpha(40),
+                                      splashColor: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary
+                                          .withAlpha(80),
+                                      highlightColor: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary
+                                          .withAlpha(40),
                                     ),
                                   ),
 
@@ -558,15 +603,22 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                       onPressed: () {
                                         editTitleName(titleIndex);
                                       },
-                                      icon: const Icon(
+                                      icon: Icon(
                                         Icons.edit,
-                                        color: lightGrayColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSecondary,
                                       ),
                                       splashRadius: 13.sp,
                                       color: Colors.red,
-                                      splashColor: lightGrayColor.withAlpha(80),
-                                      highlightColor:
-                                          lightGrayColor.withAlpha(40),
+                                      splashColor: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary
+                                          .withAlpha(80),
+                                      highlightColor: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary
+                                          .withAlpha(40),
                                     ),
                                   ),
                                 ],
@@ -574,10 +626,8 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                             ),
                           );
                         },
-                        itemCount: groups!
-                            .groups![groupIndex!]
-                            .groupContent
-                            .length,
+                        itemCount:
+                            groups!.groups![groupIndex!].groupContent.length,
                         shrinkWrap: true,
                       ),
 
@@ -597,8 +647,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
               ),
               child: MaterialButton(
                 onPressed: () {
-                  Navigator.pop(context);
-                  AdInterstitialEditStore.showAd();
+                  doneAndBack();
                 },
                 color: mainColor,
                 minWidth: 70.w,
@@ -608,12 +657,12 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.sp),
                 ),
-                splashColor: contrastColor.withAlpha(25),
-                highlightColor: contrastColor.withAlpha(10),
+                splashColor: Colors.white.withAlpha(25),
+                highlightColor: Colors.white.withAlpha(10),
                 child: Text(
                   'done'.tr(),
                   style: TextStyle(
-                    color: contrastColor,
+                    color: Colors.white,
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w700,
                   ),
@@ -655,16 +704,16 @@ class _CustomInputTextFormState extends State<_CustomInputTextForm> {
         autofocus: true,
         decoration: InputDecoration(
           hintText: widget.hintText ?? 'type_a_new_name'.tr(),
-          hintStyle: const TextStyle(
-            color: lightGrayColor,
+          hintStyle: TextStyle(
+            color: Theme.of(context).colorScheme.onSecondary,
           ),
           errorStyle: const TextStyle(
             color: redColor,
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.sp),
-            borderSide: const BorderSide(
-              color: lightGrayColor,
+            borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.onSecondary,
               width: 1.7,
             ),
           ),

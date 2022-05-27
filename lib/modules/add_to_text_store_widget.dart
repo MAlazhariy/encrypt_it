@@ -38,15 +38,16 @@ class ContentDesign extends StatelessWidget {
   var titleCtrl = TextEditingController();
   var groupCtrl = TextEditingController();
 
-  final TextStyle _infoStyle = TextStyle(
-    overflow: TextOverflow.ellipsis,
-    fontSize: 8.sp,
-    color: lightGrayColor,
-    fontWeight: FontWeight.normal,
-  );
-
   @override
   Widget build(BuildContext context) {
+
+    final TextStyle _infoStyle = TextStyle(
+      overflow: TextOverflow.ellipsis,
+      fontSize: 8.sp,
+      color: Theme.of(context).colorScheme.onSecondary,
+      fontWeight: FontWeight.normal,
+    );
+
     return BlocProvider(
       create: (context) => StoreCubit(),
       child: BlocConsumer<StoreCubit, StoreStates>(
@@ -63,8 +64,8 @@ class ContentDesign extends StatelessWidget {
                   // width: 50.w,
                   child: Text(
                     'choose_or_add_group'.tr(),
-                    style: const TextStyle(
-                      color: darkGrayColor,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                 ),
@@ -131,8 +132,8 @@ class ContentDesign extends StatelessWidget {
                   alignment: AlignmentDirectional.centerStart,
                   child: Text(
                     'type_the_title'.tr(),
-                    style: const TextStyle(
-                      color: darkGrayColor,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                 ),
@@ -278,7 +279,7 @@ class GroupDropDown extends StatelessWidget {
         hint: Text(
           'choose_group'.tr(),
           style: TextStyle(
-              color: lightGrayColor,
+              color: Theme.of(context).colorScheme.onSecondary,
               fontSize: 12.sp,
               fontWeight: FontWeight.w600,
               fontFamily: 'Cairo'),
@@ -299,7 +300,7 @@ class GroupDropDown extends StatelessWidget {
         dropdownColor: Colors.white,
         icon: Icon(
           Icons.arrow_drop_down,
-          color: lightGrayColor,
+          color: Theme.of(context).colorScheme.onSecondary,
           size: 20.sp,
         ),
         items: dropdownItems.map<DropdownMenuItem<String>>((String value) {
@@ -455,7 +456,7 @@ void onSuccessfulAdd({
   showToast(
     title: 'added_successfully'.tr(),
     textColor: mainColor,
-    contentFillColor: contrastColor,
+    contentFillColor: Theme.of(context).colorScheme.onPrimary,
     mSeconds: 3000,
   );
 

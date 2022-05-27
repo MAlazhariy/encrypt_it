@@ -9,7 +9,6 @@ class MenuItemWidget extends StatelessWidget {
     required this.title,
     this.subtitle = '',
     required this.icon,
-
   }) : super(key: key);
 
   final GestureTapCallback onTap;
@@ -24,18 +23,16 @@ class MenuItemWidget extends StatelessWidget {
         title,
         style: TextStyle(
             // color: Colors.grey[800],
-            color: darkGrayColor.withAlpha(210),
+            color: Theme.of(context).colorScheme.secondary.withAlpha(210),
             fontSize: 11.sp,
-            fontWeight: FontWeight.w600
-        ),
+            fontWeight: FontWeight.w600),
       ),
       subtitle: subtitle.isNotEmpty ? Text(subtitle) : null,
       leading: Icon(
         icon,
-        color: lightGrayColor,
+        color: Theme.of(context).colorScheme.onSecondary,
       ),
       onTap: onTap,
     );
   }
 }
-

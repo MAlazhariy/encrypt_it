@@ -15,3 +15,5 @@ class AppOnPasswordState extends AppStates {}
 class AppOnNoneState extends AppStates {}
 class AppOnNoneInactivatedState extends AppStates {}
 
+class AppChangeThemeModeState extends AppStates {}
+

@@ -14,7 +14,7 @@ class AppCubit extends Cubit<AppStates>{
   IconData passwordIcon = Icons.visibility;
   /// You can know which current field that the user is on through this variable
   Fields currentTextField = Fields.none;
-  PackageInfo appInfo = PackageInfo(appName: 'appName'.tr(), packageName: '', version: '   ', buildNumber: '');
+  PackageInfo appInfo = PackageInfo(appName: '   '.tr(), packageName: '', version: '   ', buildNumber: '');
 
   static AppCubit get(BuildContext context){
     return BlocProvider.of(context);

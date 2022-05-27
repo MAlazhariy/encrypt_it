@@ -25,12 +25,12 @@ class CustomShowcase extends StatelessWidget {
       description: description,
       titleTextStyle: TextStyle(
         fontSize: 10.sp,
-        color: lightGrayColor,
+        color: Theme.of(context).colorScheme.onSecondary,
         fontWeight: FontWeight.w600,
       ),
       descTextStyle: TextStyle(
         fontSize: 12.sp,
-        color: darkGrayColor,
+        color: Theme.of(context).colorScheme.secondary,
         fontWeight: FontWeight.w500,
       ),
       radius: BorderRadius.circular(10.sp),

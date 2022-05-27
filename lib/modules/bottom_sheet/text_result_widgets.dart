@@ -90,8 +90,8 @@ class DecryptedResultWidget extends StatelessWidget {
           decoration: TextDecoration.underline,
           fontStyle: FontStyle.italic,
         ),
-        highlightedLinkStyle: const TextStyle(
-          color: contrastColor,
+        highlightedLinkStyle: TextStyle(
+          color: Theme.of(context).colorScheme.onPrimary,
           backgroundColor: mainColor,
           fontWeight: FontWeight.w700,
         ),
@@ -134,7 +134,7 @@ class LargeResultWidget extends StatelessWidget {
               fontStyle: FontStyle.italic,
             ),
             highlightedLinkStyle: const TextStyle(
-              color: contrastColor,
+              color: Colors.white,
               backgroundColor: mainColor,
               fontWeight: FontWeight.w700,
             ),

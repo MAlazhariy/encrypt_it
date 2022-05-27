@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
-import 'package:encryption_app/modules/ads/interstitial_ad_bottomsheet_model.dart';
 import 'package:encryption_app/decoding/decoding.dart';
 import 'package:encryption_app/modules/bottom_sheet/bottom_sheet_bottuns.dart';
 import 'package:encryption_app/shared/components/components/alert_dialog/decoding_alerts.dart';
@@ -62,7 +61,8 @@ void bottomSheetFilter(
   // decrypt cases
   final bool incorrectPassword = (cubit.textResult == 'invalid password'.tr());
   final bool versionNotFound = (cubit.textResult == 'version_not_found'.tr());
-  final bool laterVersion = (cubit.textResult == 'later_version_warning_title'.tr());
+  final bool laterVersion =
+      (cubit.textResult == 'later_version_warning_title'.tr());
 
   if (incorrectPassword) {
     incorrectPasswordAlert(context);
@@ -113,10 +113,10 @@ class BottomSheetWidget extends StatelessWidget {
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(20.sp),
         ),
-        color: contrastColor,
-        boxShadow: const [
+        color: Theme.of(context).scaffoldBackgroundColor,
+        boxShadow: [
           BoxShadow(
-            color: shadowColor,
+            color: Theme.of(context).shadowColor,
             blurRadius: 5,
           ),
         ],
@@ -132,7 +132,7 @@ class BottomSheetWidget extends StatelessWidget {
             width: 10.w,
             height: 3.7.sp,
             decoration: BoxDecoration(
-              color: lightGrayColor.withAlpha(85),
+              color: Theme.of(context).colorScheme.onSecondary.withAlpha(85),
               borderRadius: BorderRadius.circular(50),
             ),
           ),
@@ -146,7 +146,7 @@ class BottomSheetWidget extends StatelessWidget {
                 ? '${'encrypted text'.tr()} :'
                 : '${'decrypted message'.tr()} :',
             style: TextStyle(
-              color: lightGrayColor,
+              color: Theme.of(context).colorScheme.onSecondary,
               fontWeight: FontWeight.w400,
               fontSize: 10.sp,
             ),

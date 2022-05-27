@@ -1,11 +1,9 @@
-import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
-import 'package:sizer/sizer.dart';
 
 class MainButton extends StatefulWidget {
   const MainButton({required this.onPressed, required this.isEncrypt, Key? key})
@@ -31,12 +29,12 @@ class _MainButtonState extends State<MainButton> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 50),
           decoration: BoxDecoration(
-            color: bGColor,
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(13),
             boxShadow: widget.onPressed != null && !isPressed
                 ? [
                     BoxShadow(
-                      color: shadowColor,
+                      color: Theme.of(context).shadowColor,
                       offset: const Offset(3, 3),
                       blurRadius: 4,
                       spreadRadius: 1,

@@ -25,7 +25,7 @@ class DialogButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.sp),
       ),
       color: isBold? color : Colors.transparent,
-      textColor: isBold? contrastColor : color,
+      textColor: isBold? Theme.of(context).scaffoldBackgroundColor : color,
       focusColor: Colors.transparent,
       highlightColor: Colors.transparent,
       hoverColor: Colors.transparent,

@@ -1,4 +1,3 @@
-import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -10,18 +9,19 @@ class MenuBG extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 20.h,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            mainColor,
-            bGColor,
-            mainColor,
-            // BGColor,
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
+      // todo: handle menu background header
+      // decoration: const BoxDecoration(
+      //   gradient: LinearGradient(
+      //     colors: [
+      //       mainColor,
+      //       bGColor,
+      //       mainColor,
+      //       // BGColor,
+      //     ],
+      //     begin: Alignment.topCenter,
+      //     end: Alignment.bottomCenter,
+      //   ),
+      // ),
       padding: EdgeInsets.symmetric(
         vertical: 3.h,
       ),

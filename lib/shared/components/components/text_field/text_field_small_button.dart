@@ -1,3 +1,5 @@
+import 'package:encryption_app/cubit/app_cubit/cubit.dart';
+import 'package:encryption_app/cubit/material_cubit/material_cubit.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
@@ -27,6 +29,8 @@ class _TextFieldQuickActionsState extends State<TextFieldQuickActions> {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
+
     return GestureDetector(
       onTap: widget.onPressed,
       child: Listener(
@@ -35,19 +39,19 @@ class _TextFieldQuickActionsState extends State<TextFieldQuickActions> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 60),
           decoration: BoxDecoration(
-            color: bGColor,
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(15),
             boxShadow: widget.onPressed != null && !isPressed
                 ? [
               BoxShadow(
-                color: shadowColor.withOpacity(0.55),
+                color: Theme.of(context).shadowColor.withOpacity(0.55),
                 offset: const Offset(1.7, 1.7),
                 blurRadius: 3,
                 spreadRadius: 1,
                 inset: isPressed,
               ),
               BoxShadow(
-                color: Colors.white.withOpacity(0.9),
+                color: highLightColor(MaterialCubit.get(context).isDarkMode).withOpacity(0.9),
                 offset: const Offset(-1.7, -1.7),
                 blurRadius: 3,
                 spreadRadius: 1,
@@ -62,27 +66,6 @@ class _TextFieldQuickActionsState extends State<TextFieldQuickActions> {
           ),
           child: _ButtonDesign(widget.icon, widget.title),
         ),
-      ),
-    );
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: 2.5.sp,
-        horizontal: 3.5.sp,
-      ),
-      child: MaterialButton(
-        onPressed: widget.onPressed,
-        onLongPress: widget.onLongPress,
-        color: smallButtonsColor,
-        splashColor: mainColor.withAlpha(50),
-        textColor: buttonsTitleColor,
-        elevation: 0,
-        focusElevation: 0,
-        hoverElevation: 0,
-        highlightElevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: _ButtonDesign(widget.icon, widget.title),
       ),
     );
   }
