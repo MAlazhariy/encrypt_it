@@ -5,13 +5,13 @@ import 'package:sizer/sizer.dart';
 class MenuItemWidget extends StatelessWidget {
   const MenuItemWidget({
     Key? key,
-    required this.onTap,
+    this.onTap,
     required this.title,
     this.subtitle = '',
     required this.icon,
   }) : super(key: key);
 
-  final GestureTapCallback onTap;
+  final void Function()? onTap;
   final String title;
   final String subtitle;
   final IconData icon;
@@ -22,15 +22,14 @@ class MenuItemWidget extends StatelessWidget {
       title: Text(
         title,
         style: TextStyle(
-            // color: Colors.grey[800],
-            color: Theme.of(context).colorScheme.secondary.withAlpha(210),
+            color: titlesColor(context),
             fontSize: 11.sp,
             fontWeight: FontWeight.w600),
       ),
       subtitle: subtitle.isNotEmpty ? Text(subtitle) : null,
       leading: Icon(
         icon,
-        color: Theme.of(context).colorScheme.onSecondary,
+        color: iconsGrayColor,
       ),
       onTap: onTap,
     );

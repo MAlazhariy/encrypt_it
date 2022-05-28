@@ -23,6 +23,9 @@
 class StoreModel {
   List<GroupModel>? groups;
 
+  StoreModel(List<GroupModel> groupModels) {
+    groups = groupModels;
+  }
   StoreModel.fromJson(Map? json) {
     if (json != null) {
       groups = List.generate(
@@ -43,22 +46,6 @@ class StoreModel {
               ),
             ),
       );
-
-      // for (int i = 0; i < jsonGroups.length; i++) {
-      //   groups!.add(
-      //     StoreGroupModel(
-      //       groupName: jsonGroups.keys.toList()[i],
-      //       group: List.generate(
-      //         jsonGroups.values.toList()[i].keys.toList().length,
-      //         (index) => GroupModel(
-      //           title: jsonGroups.values.toList()[i].keys.toList()[index],
-      //           ciphertext:
-      //               jsonGroups.values.toList()[i].values.toList()[index],
-      //         ),
-      //       ),
-      //     ),
-      //   );
-      // }
     }
   }
   Map<String, Map>? toMap() {

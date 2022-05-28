@@ -1,9 +1,47 @@
 import 'package:flutter/material.dart';
 
-Color highLightColor(bool isDarkMode) {
-  if (isDarkMode) return const Color(0xFF5A5A5A);
+Color highLightColor(BuildContext context, {int darkAlpha = 217}) {
+  if (Theme.of(context).brightness == Brightness.dark) {
+    return const Color(0xFF454649).withAlpha(darkAlpha);
+  }
   return Colors.white;
 }
+
+Color shadowColor(BuildContext context, {int lightAlpha = 135}) {
+  if (Theme.of(context).brightness == Brightness.dark) {
+    return Theme.of(context).shadowColor;
+  }
+  return Theme.of(context).shadowColor.withAlpha(lightAlpha);
+}
+
+Color smallButtonsContentColor(BuildContext context) {
+  // colored small buttons
+  // & text store group titles
+  // & drawer icon
+  // & textSpan
+  // & appBar title
+  // & done button in edit screen
+  if (Theme.of(context).brightness == Brightness.dark) {
+    return const Color(0xFFECF0F3);
+  }
+  return mainColor;
+}
+
+Color dialogButtonColor(BuildContext context) {
+  if (Theme.of(context).brightness == Brightness.dark) {
+    return const Color(0xFFECF0F3);
+  }
+  return mainColor;
+}
+
+Color titlesColor(BuildContext context) {
+  if (Theme.of(context).brightness == Brightness.dark) {
+    return const Color(0xFFC8C8CC);
+  }
+  return const Color(0xFF595a5d);
+}
+
+const Color iconsGrayColor = Color(0xFF98989a);
 
 const mainColor = Colors.deepPurple;
 const mainSwatch = MaterialColor(

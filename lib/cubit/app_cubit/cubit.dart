@@ -16,6 +16,9 @@ class AppCubit extends Cubit<AppStates>{
   Fields currentTextField = Fields.none;
   PackageInfo appInfo = PackageInfo(appName: '   '.tr(), packageName: '', version: '   ', buildNumber: '');
 
+  TextEditingController messageCtrl = TextEditingController();
+  TextEditingController passCtrl = TextEditingController();
+
   static AppCubit get(BuildContext context){
     return BlocProvider.of(context);
   }

@@ -147,6 +147,8 @@
   "showcase_clear_description": "Click here to clear the field",
   "showcase_clearAll_description": "Click here to clear all fields",
 
-  "showcase_add_to_store_description": "Click here to add the ciphertext to the @:message_store"
+  "showcase_add_to_store_description": "Click here to add the ciphertext to the @:message_store",
+
+  "dark_mode" : "Dark mode"
 
 }

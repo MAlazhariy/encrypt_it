@@ -33,6 +33,7 @@ class _TextFieldQuickActionsState extends State<TextFieldQuickActions> {
 
     return GestureDetector(
       onTap: widget.onPressed,
+      onLongPress: widget.onLongPress,
       child: Listener(
         onPointerUp: (_) => setState(()=> isPressed = false),
         onPointerDown: (_) => setState(()=> isPressed = true),
@@ -44,16 +45,16 @@ class _TextFieldQuickActionsState extends State<TextFieldQuickActions> {
             boxShadow: widget.onPressed != null && !isPressed
                 ? [
               BoxShadow(
-                color: Theme.of(context).shadowColor.withOpacity(0.55),
-                offset: const Offset(1.7, 1.7),
-                blurRadius: 3,
+                color: shadowColor(context),
+                offset: const Offset(1, 1.7),
+                blurRadius: 4,
                 spreadRadius: 1,
                 inset: isPressed,
               ),
               BoxShadow(
-                color: highLightColor(MaterialCubit.get(context).isDarkMode).withOpacity(0.9),
-                offset: const Offset(-1.7, -1.7),
-                blurRadius: 3,
+                color: highLightColor(context).withOpacity(0.9),
+                offset: const Offset(-1, -1.7),
+                blurRadius: 4,
                 spreadRadius: 1,
                 inset: isPressed,
               ),
@@ -95,7 +96,7 @@ class _ButtonDesign extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: buttonsTitleColor,
+            color: smallButtonsContentColor(context),
             size: 13.sp,
           ),
           SizedBox(
@@ -104,7 +105,7 @@ class _ButtonDesign extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: buttonsTitleColor,
+              color: smallButtonsContentColor(context),
               fontSize: 9.75.sp,
               fontWeight: FontWeight.w700,
             ),

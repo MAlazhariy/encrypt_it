@@ -5,7 +5,7 @@ import 'package:encryption_app/shared/network/local/text_store_cache.dart';
 class Groups {
 
   static bool isGroupExists(String groupName) {
-    return groups?.toMap()?.keys.contains(groupName) ?? false;
+    return groups?.groups?.firstWhere((element) => element.groupName == groupName) != null;
   }
 
   static bool isTitleExists({
@@ -19,7 +19,8 @@ class Groups {
   }
 
   static int getGroupIndex(String groupName) {
-    return groups!.groups!.indexWhere((element) => element.groupName == groupName);
+    return groups?.groups?.indexWhere((element) => element.groupName == groupName)
+        ?? -1;
   }
 
   static void addToExistGroup({
@@ -34,12 +35,22 @@ class Groups {
     required String groupName,
     required GroupContentModel groupModel,
   }) {
-    groups!.groups!.add(
-      GroupModel(
-        groupName: groupName,
-        groupContent: [groupModel],
-      ),
-    );
+    if(groups?.groups == null){
+      groups = StoreModel([
+        GroupModel(
+          groupName: groupName,
+          groupContent: [groupModel],
+        ),
+      ]);
+    } else {
+      groups!.groups!.add(
+        GroupModel(
+          groupName: groupName,
+          groupContent: [groupModel],
+        ),
+      );
+    }
+
     TextStoreCache.setGroups(groups!.toMap()!);
   }
 

@@ -116,7 +116,9 @@ class BottomSheetWidget extends StatelessWidget {
         color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).shadowColor,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.black87 // dark mode
+                : Theme.of(context).shadowColor,
             blurRadius: 5,
           ),
         ],

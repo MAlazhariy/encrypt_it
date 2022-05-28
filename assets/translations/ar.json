@@ -147,7 +147,9 @@
   "showcase_clear_description": "اضغط هنا لمحو الخانة",
   "showcase_clearAll_description": "اضغط هنا لمحو جميع الخانات",
 
-  "showcase_add_to_store_description": "اضغط هنا لإضافة النص المشفر إلى @:message_store"
+  "showcase_add_to_store_description": "اضغط هنا لإضافة النص المشفر إلى @:message_store",
+
+  "dark_mode" : "الوضع المظلم"
 
 
 }

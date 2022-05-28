@@ -1,3 +1,4 @@
+import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/shared/components/components/alert_dialog/custom_alert_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
 import 'package:encryption_app/shared/components/constants.dart';
@@ -36,7 +37,7 @@ void invalidCharactersAlert({
                   fontSize: 11.sp,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Cairo',
-                  color: Colors.grey[800],
+                  color: titlesColor(context),
                 ),
               ),
               TextSpan(
@@ -45,7 +46,7 @@ void invalidCharactersAlert({
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Cairo',
-                  color: Colors.grey[900],
+                  // color: Colors.grey[900],
                 ),
               ),
               TextSpan(
@@ -54,7 +55,7 @@ void invalidCharactersAlert({
                   fontSize: 11.sp,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Cairo',
-                  color: Colors.grey[800],
+                  color: titlesColor(context),
                 ),
               ),
             ],
@@ -68,15 +69,13 @@ void invalidCharactersAlert({
                 text: 'there_problem'.tr(),
                 style: TextStyle(
                   fontSize: 11.sp,
-                  color: Colors.grey[800],
-                  fontWeight: FontWeight.w600,
                 ),
               ),
               TextSpan(
                 text: 'contact_us'.tr(),
                 style: TextStyle(
                   fontSize: 11.sp,
-                  color: mainColor,
+                  color: smallButtonsContentColor(context),
                   fontWeight: FontWeight.w600,
                   decoration: TextDecoration.underline,
                 ),
@@ -85,7 +84,8 @@ void invalidCharactersAlert({
                       Uri.parse(
                         Links.mailUs(
                           subject:
-                              '${'report_bug'.tr()} - ${'undefined_chars'.tr()}',
+                              '${'undefined_chars'.tr()} - ${AppCubit.get(context).appInfo.version}',
+                          body: '$undefinedChars\n',
                         ),
                       ),
                     );

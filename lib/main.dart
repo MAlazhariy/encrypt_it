@@ -6,8 +6,6 @@ import 'dart:developer';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:encryption_app/cubit/app_cubit/cubit.dart';
-import 'package:encryption_app/cubit/app_cubit/states.dart';
 import 'package:encryption_app/cubit/material_cubit/material_cubit.dart';
 import 'package:encryption_app/cubit/material_cubit/material_states.dart';
 import 'package:encryption_app/layout/on_board_screen.dart';
@@ -21,6 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sizer/sizer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'cubit/app_cubit/cubit.dart';
 import 'layout/home_screen.dart';
 import 'shared/components/constants.dart';
 
@@ -65,45 +64,48 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => MaterialCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => MaterialCubit()),
+        BlocProvider(create: (context) => AppCubit()),
+      ],
       child: Sizer(
-        builder: (context, orientation, deviceType) {
-          log('Sizer builder');
+          builder: (context, orientation, deviceType) {
+            log('Sizer builder');
 
-          return BlocConsumer<MaterialCubit, MaterialStates>(
-            listener: (context, state){},
-            builder: (context, state){
-              log('Bloc builder');
-              return MaterialApp(
-                // localization methods
-                localizationsDelegates: context.localizationDelegates,
-                supportedLocales: context.supportedLocales,
-                locale: context.locale,
+            return BlocConsumer<MaterialCubit, MaterialStates>(
+              listener: (context, state){},
+              builder: (context, state){
+                log('Bloc builder');
+                return MaterialApp(
+                  // localization methods
+                  localizationsDelegates: context.localizationDelegates,
+                  supportedLocales: context.supportedLocales,
+                  locale: context.locale,
 
-                debugShowCheckedModeBanner: false,
-                // locale: DevicePreview.locale(context),
-                builder: (context, myWidget) {
-                  myWidget = BotToastInit()(context, myWidget);
-                  // myWidget = DevicePreview.appBuilder(context, myWidget);
-                  return myWidget;
-                },
-                navigatorObservers: [BotToastNavigatorObserver()],
+                  debugShowCheckedModeBanner: false,
+                  // locale: DevicePreview.locale(context),
+                  builder: (context, myWidget) {
+                    myWidget = BotToastInit()(context, myWidget);
+                    // myWidget = DevicePreview.appBuilder(context, myWidget);
+                    return myWidget;
+                  },
+                  navigatorObservers: [BotToastNavigatorObserver()],
 
-                home: BoardCache.isBoardSkipped()
-                    ? HomeScreen()
-                    : const OnBoardScreen(),
+                  home: BoardCache.isBoardSkipped()
+                      ? HomeScreen()
+                      : const OnBoardScreen(),
 
-                theme: lightTheme,
-                darkTheme: darkTheme,
-                themeMode: MaterialCubit.get(context).isDarkMode == null
-                    ? ThemeMode.system
-                    : MaterialCubit.get(context).isDarkMode ? ThemeMode.dark : ThemeMode.light,
-              );
-            },
-          );
-        },
-      ),
-    );
+                  theme: lightTheme,
+                  darkTheme: darkTheme,
+                  themeMode: MaterialCubit.get(context).isDarkMode == null
+                      ? ThemeMode.system
+                      : MaterialCubit.get(context).isDarkMode! ? ThemeMode.dark : ThemeMode.light,
+                );
+              },
+            );
+          },
+        ),
+      );
   }
 }

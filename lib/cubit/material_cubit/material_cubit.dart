@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:encryption_app/cubit/material_cubit/material_states.dart';
+import 'package:encryption_app/shared/network/local/color_theme_cache.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// This block is for changing the color theme
@@ -10,13 +14,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MaterialCubit extends Cubit<MaterialStates>{
   MaterialCubit() : super(MaterialInitState());
 
-  bool isDarkMode = false;
+  // bool? isDarkMode = ThemeCache.isDarkMode();
+  // todo: remove this testing line
+  bool? isDarkMode = null;
 
   static MaterialCubit get (context) => BlocProvider.of(context);
 
-  void changeThemeMode(){
-    isDarkMode = !isDarkMode;
+  void changeThemeMode(bool value){
+    log('color mode changed to ${value?'dark mode':'light mode'}');
+    isDarkMode = value;
+    ThemeCache.setDarkMode(value);
     emit(MaterialChangeThemeModeState());
   }
-
 }

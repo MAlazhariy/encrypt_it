@@ -37,7 +37,7 @@ void showCustomDialog({
 
           ],
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.sp),
+            borderRadius: BorderRadius.circular(13),
           ),
         );
     },

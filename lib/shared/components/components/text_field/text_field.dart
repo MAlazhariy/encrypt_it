@@ -47,17 +47,17 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(13),
         boxShadow: [
             BoxShadow(
-              color: Theme.of(context).shadowColor,
+              color: shadowColor(context, lightAlpha: 155),
               offset: const Offset(3, 3),
               blurRadius: 4,
               spreadRadius: 1,
               inset: true,
             ),
           BoxShadow(
-            color: highLightColor(MaterialCubit.get(context).isDarkMode),
-            offset: const Offset(-3, -3),
+            color: highLightColor(context),
+            offset: const Offset(-0.8, -2.5),
             blurRadius: 4,
-            spreadRadius: 1,
+            spreadRadius: 0.6,
             inset: true,
           ),
         ],

@@ -5,20 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class DialogButton extends StatelessWidget {
-  const DialogButton({
+  DialogButton({
     Key? key,
     required this.title,
     this.isBold = false,
     required this.onPressed,
-    this.color = mainColor,
+    this.color,
   }) : super(key: key);
   final String title;
   final bool isBold;
   final VoidCallback onPressed;
-  final Color color;
+  Color? color;
 
   @override
   Widget build(BuildContext context) {
+    color ??= dialogButtonColor(context);
     return RaisedButton(
       onPressed: onPressed,
       shape: RoundedRectangleBorder(
