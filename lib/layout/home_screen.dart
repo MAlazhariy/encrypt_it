@@ -710,8 +710,9 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      if (OperationCounterCache.getCounter() >= 2)
-                        const AdBanner(),
+
+                      // if (OperationCounterCache.getCounter() >= 2)
+                      //   const AdBanner(),
                     ],
                   ),
                 ),
