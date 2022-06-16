@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/decoding/decoding.dart';
+import 'package:encryption_app/modules/ads/banner_ad_model.dart';
 import 'package:encryption_app/modules/bottom_sheet/bottom_sheet_bottuns.dart';
 import 'package:encryption_app/shared/components/components/alert_dialog/decoding_alerts.dart';
 import 'package:encryption_app/modules/bottom_sheet/text_result_widgets.dart';
@@ -107,8 +108,9 @@ class BottomSheetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = AppCubit.get(context);
+
     return Container(
-      width: double.infinity,
+      width: double.maxFinite,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(20.sp),
@@ -126,44 +128,37 @@ class BottomSheetWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          SizedBox(height: 13.sp),
+
           // small dash
-          SizedBox(
-            height: 13.sp,
-          ),
           Container(
             width: 10.w,
             height: 3.7.sp,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onSecondary.withAlpha(85),
+              color: iconsGrayColor.withAlpha(85),
               borderRadius: BorderRadius.circular(50),
             ),
           ),
+          SizedBox(height: 9.sp),
 
           // action title ['encrypt' or 'decrypt']
-          SizedBox(
-            height: 9.5.sp,
-          ),
           Text(
             isEncrypt
                 ? '${'encrypted text'.tr()} :'
                 : '${'decrypted message'.tr()} :',
             style: TextStyle(
-              color: Theme.of(context).colorScheme.onSecondary,
+              color: titlesColor(context),
               fontWeight: FontWeight.w400,
-              fontSize: 10.sp,
+              fontSize: 9.sp,
             ),
           ),
+          SizedBox(height: 4.5.sp),
 
           // text result widget
-          SizedBox(
-            height: 4.5.sp,
-          ),
           TextResultFilterWidget(isEncrypt),
+          // SizedBox(height: 4.sp),
 
           // bottom buttons
-          SizedBox(
-            height: 12.sp,
-          ),
           BottomSheetButtons(
             cubit.textResult,
             password,

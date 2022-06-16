@@ -28,6 +28,9 @@ Color smallButtonsContentColor(BuildContext context) {
 }
 
 Color dialogButtonColor(BuildContext context) {
+  // dialog buttons
+  // & add to store text fields background
+  // & toast background
   if (Theme.of(context).brightness == Brightness.dark) {
     return const Color(0xFFECF0F3);
   }
@@ -39,6 +42,13 @@ Color titlesColor(BuildContext context) {
     return const Color(0xFFC8C8CC);
   }
   return const Color(0xFF595a5d);
+}
+
+Color dropdownContainerColor(BuildContext context) {
+  if (Theme.of(context).brightness == Brightness.dark) {
+    return const Color(0xFF262626);
+  }
+  return Colors.white;
 }
 
 const Color iconsGrayColor = Color(0xFF98989a);

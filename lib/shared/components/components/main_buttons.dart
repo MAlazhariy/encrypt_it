@@ -62,7 +62,7 @@ class _MainButtonState extends State<MainButton> {
               SizedBox(
                 // width: 25,
                 child: Icon(
-                  widget.isEncrypt ? MyIcons.lock_stars : MyIcons.unlock_stars,
+                  widget.isEncrypt ? MyIcons.lock : MyIcons.lock_open,
                   size: !isPressed ? 21 : 20,
                   color: widget.onPressed != null
                       ? widget.isEncrypt
@@ -76,7 +76,7 @@ class _MainButtonState extends State<MainButton> {
                 widget.isEncrypt ? 'encrypt'.tr() : 'decrypt'.tr(),
                 style: TextStyle(
                   fontSize: !isPressed ? 18 : 17,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
                   color: widget.onPressed != null
                       ? widget.isEncrypt
                           ? encryptedTextColor

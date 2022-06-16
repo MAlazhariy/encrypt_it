@@ -1,13 +1,11 @@
-import 'package:encryption_app/cubit/app_cubit/cubit.dart';
-import 'package:encryption_app/cubit/material_cubit/material_cubit.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:sizer/sizer.dart';
 
 
-class TextFieldQuickActions extends StatefulWidget {
-  const TextFieldQuickActions({
+class SmallButton extends StatefulWidget {
+  const SmallButton({
     required this.title,
     required this.onPressed,
     required this.icon,
@@ -21,16 +19,14 @@ class TextFieldQuickActions extends StatefulWidget {
   final String title;
 
   @override
-  State<TextFieldQuickActions> createState() => _TextFieldQuickActionsState();
+  State<SmallButton> createState() => _SmallButtonState();
 }
 
-class _TextFieldQuickActionsState extends State<TextFieldQuickActions> {
+class _SmallButtonState extends State<SmallButton> {
   bool isPressed = false;
 
   @override
   Widget build(BuildContext context) {
-    var cubit = AppCubit.get(context);
-
     return GestureDetector(
       onTap: widget.onPressed,
       onLongPress: widget.onLongPress,

@@ -52,3 +52,5 @@ app.*.map.json
 /android/app/src/main/AndroidManifest.xml
 /lib/modules/ads/ad_helper.dart
 /lib/decoding/encrypt_abstract.dart
+/lib/shared/styles/my_icons_icons.dart
+/fonts/MyIcons.ttf

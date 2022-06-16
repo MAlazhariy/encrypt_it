@@ -5,9 +5,10 @@ import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/modules/ads/interstitial_ad_textstore_model.dart';
 import 'package:encryption_app/cubit/add_to_store_cubit/store_cubit.dart';
 import 'package:encryption_app/cubit/add_to_store_cubit/store_states.dart';
-import 'package:encryption_app/modules/text_store/text_store_functions.dart';
+import 'package:encryption_app/helpers/text_store_functions.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
+import 'package:encryption_app/shared/components/components/custom_dialog/full_custom_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_toast.dart';
 import 'package:encryption_app/shared/components/components/dismiss_keyboard.dart';
 import 'package:encryption_app/shared/components/constants.dart';
@@ -17,13 +18,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 class AddToTextStore {
-  void add(BuildContext context, String encryptedMessage) {
+  /// We do not save any private data here
+  /// we save only the encrypted text.
+  void add(BuildContext context, String encryptedText) {
     AdInterstitialAddToStore.loadAd();
 
-    showCustomDialog(
+    showCustomFullDialog(
       context: context,
       title: 'add_to_storage'.tr(),
-      content: ContentDesign(encryptedText: encryptedMessage),
+      content: ContentDesign(encryptedText: encryptedText),
     );
   }
 }
@@ -44,7 +47,7 @@ class ContentDesign extends StatelessWidget {
     final TextStyle _infoStyle = TextStyle(
       overflow: TextOverflow.ellipsis,
       fontSize: 8.sp,
-      color: Theme.of(context).colorScheme.onSecondary,
+      color: titlesColor(context),
       fontWeight: FontWeight.normal,
     );
 
@@ -65,7 +68,7 @@ class ContentDesign extends StatelessWidget {
                   child: Text(
                     'choose_or_add_group'.tr(),
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: titlesColor(context),
                     ),
                   ),
                 ),
@@ -77,7 +80,7 @@ class ContentDesign extends StatelessWidget {
               /// group
               Container(
                 decoration: BoxDecoration(
-                  color: mainColor.withAlpha(20),
+                  color: dialogButtonColor(context).withAlpha(15),
                   borderRadius: BorderRadius.circular(15.sp),
                 ),
                 padding: EdgeInsets.symmetric(
@@ -88,12 +91,16 @@ class ContentDesign extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // choose group
-                    GroupDropDown(
+                    groups?.groups?.isNotEmpty ?? false
+                        ? GroupDropDown(
                       groupCtrl: groupCtrl,
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
+                    )
+                        : Container(),
+
+                    groups?.groups?.isNotEmpty ?? false
+                        ? SizedBox(height: 1.h)
+                        : Container(),
+
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -133,7 +140,7 @@ class ContentDesign extends StatelessWidget {
                   child: Text(
                     'type_the_title'.tr(),
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: titlesColor(context),
                     ),
                   ),
                 ),
@@ -141,7 +148,7 @@ class ContentDesign extends StatelessWidget {
               if (cubit.isGroupCompleted)
                 Container(
                   decoration: BoxDecoration(
-                    color: mainColor.withAlpha(20),
+                    color: dialogButtonColor(context).withAlpha(15),
                     borderRadius: BorderRadius.circular(15.sp),
                   ),
                   padding: EdgeInsets.symmetric(
@@ -266,8 +273,8 @@ class GroupDropDown extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15.sp),
+        color: dropdownContainerColor(context),
+        borderRadius: BorderRadius.circular(15),
       ),
       padding: EdgeInsets.symmetric(
         vertical: 3.sp,
@@ -275,32 +282,34 @@ class GroupDropDown extends StatelessWidget {
       ),
       child: DropdownButton<String>(
         value: group,
-        borderRadius: BorderRadius.circular(20.sp),
+        borderRadius: BorderRadius.circular(15),
         hint: Text(
           'choose_group'.tr(),
           style: TextStyle(
-              color: Theme.of(context).colorScheme.onSecondary,
+              color: titlesColor(context),
               fontSize: 12.sp,
               fontWeight: FontWeight.w600,
-              fontFamily: 'Cairo'),
+              fontFamily: 'Cairo',
+          ),
         ),
         alignment: AlignmentDirectional.centerStart,
         isExpanded: true,
         // fill the parent width
-        focusColor: mainColor,
+        // focusColor: mainColor,
         underline: Container(),
         enableFeedback: true,
         style: TextStyle(
-            color: Colors.grey[900],
+            color: titlesColor(context),
             fontSize: 12.sp,
             fontWeight: FontWeight.w500,
-            fontFamily: 'Cairo'),
+            fontFamily: 'Cairo',
+        ),
         autofocus: true,
         menuMaxHeight: 75.h,
-        dropdownColor: Colors.white,
+        dropdownColor: highLightColor(context, darkAlpha: 255),
         icon: Icon(
           Icons.arrow_drop_down,
-          color: Theme.of(context).colorScheme.onSecondary,
+          color: titlesColor(context),
           size: 20.sp,
         ),
         items: dropdownItems.map<DropdownMenuItem<String>>((String value) {
@@ -455,8 +464,7 @@ void onSuccessfulAdd({
 
   showToast(
     title: 'added_successfully'.tr(),
-    textColor: mainColor,
-    contentFillColor: Theme.of(context).colorScheme.onPrimary,
+    context: context,
     mSeconds: 3000,
   );
 

@@ -21,6 +21,7 @@ ThemeData lightTheme = ThemeData(
   shadowColor: const Color(0xFF9E9E9E),
 );
 
+
 ThemeData darkTheme = ThemeData(
   colorScheme: const ColorScheme.dark(
     error: Color(0xFFFF4C7C), // The color to use for input validation errors, e.g. for InputDecoration.errorText.
