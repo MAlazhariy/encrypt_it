@@ -5,7 +5,10 @@ import 'package:encryption_app/shared/network/local/text_store_cache.dart';
 class Groups {
 
   static bool isGroupExists(String groupName) {
-    return groups?.groups?.firstWhere((element) => element.groupName == groupName) != null;
+    if(groups == null || groups?.groups == null){
+      return false;
+    }
+    return groups!.groups!.where((element) => element.groupName == groupName).isNotEmpty;
   }
 
   static bool isTitleExists({

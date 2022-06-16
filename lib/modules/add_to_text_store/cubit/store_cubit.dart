@@ -1,4 +1,4 @@
-import 'package:encryption_app/cubit/add_to_store_cubit/store_states.dart';
+import 'package:encryption_app/modules/add_to_text_store/cubit/store_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

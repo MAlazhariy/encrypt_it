@@ -1,5 +1,5 @@
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
-import 'package:encryption_app/modules/menu_items/thanks.dart';
+import 'package:encryption_app/modules/menu/thanks.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_group_items.dart';
 import 'package:flutter/material.dart';
 

@@ -37,10 +37,6 @@ class ChangeLanguageMenuItem extends StatelessWidget {
                   changeLang(context);
                   Navigator.pop(context);
                   Navigator.pop(context);
-                  // change bottons Pressable to false
-                  // cause the text field & password field have been empty
-                  // and the main button have to be unable to press
-                  cubit.setButtonsPressable(false);
                 }
             ),
           ],

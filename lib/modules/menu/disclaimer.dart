@@ -1,4 +1,4 @@
-import 'package:encryption_app/modules/menu_items/report_ad_dialog.dart';
+import 'package:encryption_app/modules/menu/report_ad_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_item.dart';
