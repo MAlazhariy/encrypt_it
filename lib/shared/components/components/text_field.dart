@@ -1,9 +1,11 @@
-import 'package:encryption_app/cubit/app_cubit/cubit.dart';
-import 'package:encryption_app/cubit/material_cubit/material_cubit.dart';
+import 'dart:math' as math;
+
+import 'package:encryption_app/shared/components/components/my_directionality.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:sizer/sizer.dart';
+
 
 
 class CustomTextField extends StatelessWidget {
@@ -40,8 +42,6 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = AppCubit.get(context);
-
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(13),
@@ -86,7 +86,7 @@ class CustomTextField extends StatelessWidget {
             hintText: hintText,
             labelText: labelText,
             suffixIcon: suffixIcon,
-            prefixIcon: prefixIcon,
+            prefixIcon: MyDirectionality(child: prefixIcon),
             prefixIconConstraints: BoxConstraints(
               minHeight: 30.sp,
               minWidth: 34.sp,
