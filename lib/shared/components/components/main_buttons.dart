@@ -1,6 +1,5 @@
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:encryption_app/cubit/material_cubit/material_cubit.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;

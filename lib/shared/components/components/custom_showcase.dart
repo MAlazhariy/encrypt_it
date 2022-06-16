@@ -1,4 +1,3 @@
-import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:sizer/sizer.dart';

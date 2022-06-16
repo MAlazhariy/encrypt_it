@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/decoding/decoding.dart';
-import 'package:encryption_app/modules/ads/banner_ad_model.dart';
 import 'package:encryption_app/modules/bottom_sheet/bottom_sheet_bottuns.dart';
 import 'package:encryption_app/shared/components/components/alert_dialog/decoding_alerts.dart';
 import 'package:encryption_app/modules/bottom_sheet/text_result_widgets.dart';
@@ -26,9 +25,6 @@ void Function()? onPressMainButton({
     return () {
       // increase operations counter
       OperationCounterCache.increaseCounter();
-
-      // load an interstitial ad
-      // AdInterstitialBottomSheet.loadInterstitialAd();
 
       cubit.setCurrentFieldToNone();
       dismissKeyboard(context);
@@ -112,16 +108,14 @@ class BottomSheetWidget extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(20.sp),
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(20),
         ),
         color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.black87 // dark mode
-                : Theme.of(context).shadowColor,
-            blurRadius: 5,
+            color: shadowColor(context),
+            blurRadius: 6,
           ),
         ],
       ),

@@ -71,12 +71,10 @@ class MyApp extends StatelessWidget {
       ],
       child: Sizer(
           builder: (context, orientation, deviceType) {
-            log('Sizer builder');
 
             return BlocConsumer<MaterialCubit, MaterialStates>(
               listener: (context, state){},
               builder: (context, state){
-                log('Bloc builder');
                 return MaterialApp(
                   // localization methods
                   localizationsDelegates: context.localizationDelegates,

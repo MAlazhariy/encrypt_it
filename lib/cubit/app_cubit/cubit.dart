@@ -1,6 +1,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/cubit/app_cubit/states.dart';
+import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info/package_info.dart';
@@ -8,10 +9,10 @@ import 'package:package_info/package_info.dart';
 class AppCubit extends Cubit<AppStates>{
   AppCubit() : super(AppInitState());
 
-  bool isButtonsActive = false;
+  bool isButtonsActive = true;
   String textResult = '';
   bool isPasswordHidden = true;
-  IconData passwordIcon = Icons.visibility;
+  IconData passwordIcon = MyIcons.visibility;
   /// You can know which current field that the user is on through this variable
   Fields currentTextField = Fields.none;
   PackageInfo appInfo = PackageInfo(appName: '   '.tr(), packageName: '', version: '   ', buildNumber: '');
@@ -75,12 +76,12 @@ class AppCubit extends Cubit<AppStates>{
   // password
   void showPassword(){
     isPasswordHidden = false;
-    passwordIcon = Icons.visibility_off;
+    passwordIcon = MyIcons.visibility_off;
     emit(AppShowPasswordState());
   }
   void hidePassword(){
     isPasswordHidden = true;
-    passwordIcon = Icons.visibility;
+    passwordIcon = MyIcons.visibility;
     emit(AppHidePasswordState());
   }
   void showAndHidePassword(){

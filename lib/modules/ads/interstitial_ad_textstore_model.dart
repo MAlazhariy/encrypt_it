@@ -5,10 +5,10 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdInterstitialAddToStore {
 
-  static late InterstitialAd _interstitialAd;
+  static InterstitialAd? _interstitialAd;
   static bool isAdReady = false;
-  static const int _maxFailedLoadAttempts = 1;
-  static int _numBannerLoadAttempts = 0;
+  // static const int _maxFailedLoadAttempts = 1;
+  // static int _numBannerLoadAttempts = 0;
 
   static void loadAd(){
     if(OperationCounterCache.getCounter() >= 5){
@@ -22,10 +22,10 @@ class AdInterstitialAddToStore {
             },
             onAdFailedToLoad: (LoadAdError error) {
               log('text store InterstitialAd failed to load: ${error.message}');
-              _numBannerLoadAttempts += 1;
-              if (_numBannerLoadAttempts <= _maxFailedLoadAttempts) {
-                loadAd();
-              }
+              // _numBannerLoadAttempts += 1;
+              // if (_numBannerLoadAttempts <= _maxFailedLoadAttempts) {
+              //   loadAd();
+              // }
             },
           ));
     }
@@ -33,10 +33,13 @@ class AdInterstitialAddToStore {
 
   static void showAd(){
     if(isAdReady){
-      _interstitialAd.show();
+      _interstitialAd?.show();
       isAdReady = false;
     }
+  }
 
+  static void disposeAd(){
+    _interstitialAd?.dispose();
   }
 
 }

@@ -1,10 +1,9 @@
 import 'package:clipboard/clipboard.dart';
-import 'package:encryption_app/modules/add_to_text_store_widget.dart';
+import 'package:encryption_app/modules/add_to_text_store/add_to_text_store_screen.dart';
 import 'package:encryption_app/shared/components/components/custom_showcase.dart';
 import 'package:encryption_app/shared/components/components/custom_toast.dart';
 import 'package:encryption_app/shared/components/components/small_button.dart';
 import 'package:encryption_app/shared/network/local/showcase_cache.dart';
-import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -24,9 +23,7 @@ class BottomSheetButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8.0),
-      margin: const EdgeInsetsDirectional.only(
-        bottom: 5
-      ),
+      margin: const EdgeInsetsDirectional.only(bottom: 5),
       width: double.maxFinite,
       alignment: AlignmentDirectional.center,
       child: Wrap(
@@ -44,13 +41,13 @@ class BottomSheetButtons extends StatelessWidget {
             },
             onLongPress: isEncrypt
                 ? () {
-              copyAll(
-                text: textResult,
-                password: password,
-                context: context,
-              );
-            }
-            : null,
+                    copyAll(
+                      text: textResult,
+                      password: password,
+                      context: context,
+                    );
+                  }
+                : null,
             icon: MyIcons.copy,
           ),
           // add to store
@@ -62,12 +59,12 @@ class BottomSheetButtons extends StatelessWidget {
 }
 
 class AddToStoreButton extends StatelessWidget {
-  AddToStoreButton(this.isEncrypt, this.textResult, {Key? key}) : super(key: key);
+  AddToStoreButton(this.isEncrypt, this.textResult, {Key? key})
+      : super(key: key);
 
   final bool isEncrypt;
   final String textResult;
   final GlobalKey _addToTextStoreShowcase = GlobalKey();
-
 
   void _showCase(BuildContext context) {
     if (!ShowCaseCache.isAddTextStoreShowCaseViewed()) {
@@ -93,7 +90,12 @@ class AddToStoreButton extends StatelessWidget {
       child: SmallButton(
         title: 'add_to_storage'.tr(),
         onPressed: () {
-          AddToTextStore().add(context, textResult);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddToTextStoreScreen(encryptedText: textResult),
+            ),
+          );
         },
         icon: MyIcons.bookmark_add,
       ),

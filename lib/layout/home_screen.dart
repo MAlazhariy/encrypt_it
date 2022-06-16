@@ -1,12 +1,13 @@
+import 'dart:developer';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/cubit/app_cubit/states.dart';
-import 'package:encryption_app/cubit/material_cubit/material_cubit.dart';
 import 'package:encryption_app/decoding/versions/version_06.dart';
 import 'package:encryption_app/models/text_store_model.dart';
-import 'package:encryption_app/modules/bio_local_authentication.dart';
+import 'package:encryption_app/helpers/bio_authentication_helper.dart';
 import 'package:encryption_app/modules/ads/banner_ad_model.dart';
 import 'package:encryption_app/modules/bottom_sheet/bottom_sheet.dart';
 import 'package:encryption_app/modules/edit_text_store_screen.dart';
@@ -17,8 +18,8 @@ import 'package:encryption_app/shared/components/components/custom_showcase.dart
 import 'package:encryption_app/shared/components/components/custom_toast.dart';
 import 'package:encryption_app/shared/components/components/dismiss_keyboard.dart';
 import 'package:encryption_app/shared/components/components/main_buttons.dart';
-import 'package:encryption_app/shared/components/components/text_field/text_field_small_button.dart';
-import 'package:encryption_app/shared/components/components/text_field/text_field.dart';
+import 'package:encryption_app/shared/components/components/small_button.dart';
+import 'package:encryption_app/shared/components/components/text_field.dart';
 import 'package:encryption_app/shared/components/constants.dart';
 import 'package:encryption_app/shared/network/local/operation_counter_cache.dart';
 import 'package:encryption_app/shared/network/local/showcase_cache.dart';
@@ -36,9 +37,6 @@ class HomeScreen extends StatelessWidget {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   String undefined = '';
-
-  // TextEditingController cubit.messageCtrl = TextEditingController();
-  // TextEditingController cubit.passCtrl = TextEditingController();
 
   final GlobalKey _textFieldShowcase = GlobalKey();
   final GlobalKey _passwordFieldShowcase = GlobalKey();
@@ -172,21 +170,10 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   centerTitle: true,
-                  foregroundColor: smallButtonsContentColor(context),
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  actions: [
-                    Switch(
-                      value: Theme.of(context).brightness == Brightness.dark,
-                      onChanged: (value) {
-                        MaterialCubit.get(context).changeThemeMode(value);
-                      },
-                    ),
-                  ],
-                  iconTheme: IconThemeData(color: smallButtonsContentColor(context)),
                 ),
 
                 drawer: const MyAppDrawer(),
-                // drawer background color
+
                 drawerScrimColor: Theme.of(context).brightness == Brightness.dark
                     ? Colors.white24  // dark mode
                     : Colors.black54, // light mode
@@ -223,8 +210,8 @@ class HomeScreen extends StatelessWidget {
                                     activeButtons(undefined.isEmpty);
                                   },
                                   prefixIcon: Icon(
-                                    MyIcons.text,
-                                    size: 16.sp,
+                                    MyIcons.text_field,
+                                    size: 19.sp,
                                   ),
                                   onTab: () {
                                     cubit.setCurrentFieldToText();
@@ -255,8 +242,8 @@ class HomeScreen extends StatelessWidget {
                                         description:
                                         'showcase_clearAll_description'
                                             .tr(),
-                                        child: TextFieldQuickActions(
-                                            icon: Icons.clear_rounded,
+                                        child: SmallButton(
+                                            icon: MyIcons.clear_all,
                                             title: 'clear all'.tr(),
                                             onPressed: () {
                                               cubit.messageCtrl.text = '';
@@ -276,8 +263,8 @@ class HomeScreen extends StatelessWidget {
                                         description:
                                         'showcase_clear_description'.tr(),
                                         // title: 'clear'.tr(),
-                                        child: TextFieldQuickActions(
-                                          icon: Icons.highlight_remove_outlined,
+                                        child: SmallButton(
+                                          icon: MyIcons.clear,
                                           title: 'clear'.tr(),
                                           onPressed: () {
                                             cubit.messageCtrl.text = '';
@@ -294,8 +281,8 @@ class HomeScreen extends StatelessWidget {
                                         // title: 'paste'.tr(),
                                         description:
                                         'showcase_paste_description'.tr(),
-                                        child: TextFieldQuickActions(
-                                          icon: Icons.paste_outlined,
+                                        child: SmallButton(
+                                          icon: MyIcons.paste,
                                           title: 'paste'.tr(),
                                           // paste in password field on single press
                                           onPressed: () {
@@ -326,8 +313,8 @@ class HomeScreen extends StatelessWidget {
                                         'showcase_text_store_description'
                                             .tr(),
                                         title: 'message_store'.tr(),
-                                        child: TextFieldQuickActions(
-                                          icon: Icons.enhanced_encryption,
+                                        child: SmallButton(
+                                          icon: MyIcons.bookmark,
                                           title: 'message_store'.tr(),
                                           onPressed: () async {
                                             // Map? groups =
@@ -449,8 +436,7 @@ class HomeScreen extends StatelessWidget {
 
                                                                         showToast(
                                                                           title: 'msg copied'.tr(),
-                                                                          textColor: dialogButtonColor(context),
-                                                                          contentFillColor: mainColor,
+                                                                          context: context,
                                                                         );
                                                                       },
                                                                       iconSize:
@@ -557,8 +543,8 @@ class HomeScreen extends StatelessWidget {
                                     activeButtons(undefined.isEmpty);
                                   },
                                   prefixIcon: Icon(
-                                    MyIcons.key_lock,
-                                    size: 16.sp,
+                                    MyIcons.key,
+                                    size: 19.sp,
                                   ),
                                   suffixIcon: IconButton(
                                     onPressed: () {
@@ -566,7 +552,7 @@ class HomeScreen extends StatelessWidget {
                                     },
                                     icon: Icon(
                                       cubit.passwordIcon,
-                                      size: 19.sp,
+                                      size: 17.sp,
                                     ),
                                   ),
                                   isPassword: true,
@@ -611,7 +597,7 @@ class HomeScreen extends StatelessWidget {
                                     runSpacing: 15,
                                     children: [
                                       /// clear all
-                                      TextFieldQuickActions(
+                                      SmallButton(
                                         onPressed: () {
                                           cubit.messageCtrl.text = '';
                                           cubit.passCtrl.text = '';
@@ -622,13 +608,13 @@ class HomeScreen extends StatelessWidget {
 
                                           dismissKeyboard(context);
                                         },
-                                        icon: Icons.clear_rounded,
+                                        icon: MyIcons.clear_all,
                                         title: 'clear all'.tr(),
                                       ),
 
                                       /// clear password field
-                                      TextFieldQuickActions(
-                                        icon: Icons.highlight_remove_outlined,
+                                      SmallButton(
+                                        icon: MyIcons.clear,
                                         title: 'clear'.tr(),
                                         onPressed: () {
                                           cubit.passCtrl.text = '';
@@ -640,8 +626,8 @@ class HomeScreen extends StatelessWidget {
                                       ),
 
                                       /// paste
-                                      TextFieldQuickActions(
-                                        icon: Icons.paste_outlined,
+                                      SmallButton(
+                                        icon: MyIcons.paste,
                                         title: 'paste'.tr(),
                                         // paste in text field on single press
                                         onPressed: () {
@@ -718,7 +704,7 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(
-                                height: 4.h,
+                                height: 26.h,
                               ),
                             ],
                           ),

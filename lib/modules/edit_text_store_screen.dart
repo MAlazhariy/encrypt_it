@@ -1,7 +1,6 @@
-import 'dart:developer';
 
 import 'package:encryption_app/models/text_store_model.dart';
-import 'package:encryption_app/modules/text_store/text_store_functions.dart';
+import 'package:encryption_app/helpers/text_store_functions.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
 import 'package:encryption_app/shared/components/constants.dart';
@@ -307,7 +306,6 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     if (choosedGroup == null)
@@ -613,11 +611,11 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                 },
                 color: smallButtonsContentColor(context),
                 minWidth: 50.w,
-                padding: EdgeInsets.symmetric(
-                  vertical: 10.sp,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.sp),
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 splashColor: Colors.white.withAlpha(25),
                 highlightColor: Colors.white.withAlpha(10),
@@ -667,7 +665,7 @@ class _CustomInputTextFormState extends State<_CustomInputTextForm> {
         decoration: InputDecoration(
           hintText: widget.hintText ?? 'type_a_new_name'.tr(),
           hintStyle: TextStyle(
-            color: Theme.of(context).colorScheme.onSecondary,
+            color: titlesColor(context).withAlpha(100),
           ),
           errorStyle: const TextStyle(
             color: redColor,
@@ -675,7 +673,7 @@ class _CustomInputTextFormState extends State<_CustomInputTextForm> {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.sp),
             borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.onSecondary,
+              color: titlesColor(context).withAlpha(100),
               width: 1.7,
             ),
           ),

@@ -13,12 +13,23 @@ ThemeData lightTheme = ThemeData(
     onError: Colors.white, // A color that's clearly legible when drawn on error. [...]
     shadow: Color(0xFF9E9E9E),
   ),
+  // change color in appBar too
   scaffoldBackgroundColor: const Color(0xFFECF0F3),
   fontFamily: 'Cairo',
   primaryColor: mainColor,
   primarySwatch: mainSwatch,
   canvasColor: Colors.transparent,
   shadowColor: const Color(0xFF9E9E9E),
+  appBarTheme: AppBarTheme(
+    /// scaffold background color
+    backgroundColor: const Color(0xFFECF0F3),
+    foregroundColor: mainColor,
+    iconTheme: const IconThemeData(
+      color: mainColor,
+    ),
+    /// shadow color
+    shadowColor: const Color(0xFF9E9E9E).withAlpha(50),
+  ),
 );
 
 
@@ -35,4 +46,14 @@ ThemeData darkTheme = ThemeData(
   primarySwatch: mainSwatch,
   canvasColor: Colors.transparent,
   shadowColor: const Color(0xFF262626),
+  appBarTheme: const AppBarTheme(
+    /// scaffold background color
+    backgroundColor: Color(0xFF303135),
+    foregroundColor: Color(0xFFECF0F3),
+    iconTheme: IconThemeData(
+      color: Color(0xFFECF0F3),
+    ),
+    /// shadow color
+    shadowColor: Color(0xFF262626),
+  ),
 );
