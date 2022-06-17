@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
                   },
                   navigatorObservers: [BotToastNavigatorObserver()],
 
-                  home: BoardCache.isBoardSkipped() && false
+                  home: BoardCache.isBoardSkipped()
                       ? HomeScreen()
                       : const OnBoardScreen(),
 
