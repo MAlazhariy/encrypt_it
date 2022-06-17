@@ -24,11 +24,9 @@ void showReportAdDialog(BuildContext context){
         isBold: true,
         onPressed: () async {
           await launchUrl(
-            Uri.parse(
-              Links.mailUs(
-                subject: 'report_an_ad'.tr(),
-                body: 'report_ad_mail_body'.tr(),
-              ),
+            Links.mailUs(
+              subject: 'report_an_ad'.tr(),
+              body: 'report_ad_mail_body'.tr(),
             ),
           ).then((value) => Navigator.pop(context));
         },

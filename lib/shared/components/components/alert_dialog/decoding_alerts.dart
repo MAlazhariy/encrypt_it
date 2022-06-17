@@ -81,12 +81,10 @@ void invalidCharactersAlert({
                 ),
                 recognizer: TapGestureRecognizer()..onTap = () async {
                   await launchUrl(
-                      Uri.parse(
-                        Links.mailUs(
-                          subject:
-                              '${'undefined_chars'.tr()} - ${AppCubit.get(context).appInfo.version}',
-                          body: '$undefinedChars\n',
-                        ),
+                      Links.mailUs(
+                        subject:
+                            '${'undefined_chars'.tr()} - ${AppCubit.get(context).appInfo.version}',
+                        body: '$undefinedChars\n',
                       ),
                     );
                   },
@@ -174,10 +172,8 @@ void laterVersionAlert(BuildContext context){
         title: 'update_app'.tr(),
         onPressed: () async {
           await launchUrl(
-            Uri.parse(
-              Links.appOnGooglePlay,
-            ),
-          ).then((value){
+            Links.appOnGooglePlay,
+          ).then((value) {
             Navigator.pop(context);
           });
         },

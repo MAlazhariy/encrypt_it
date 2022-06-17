@@ -17,7 +17,7 @@ ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: const Color(0xFFECF0F3),
   fontFamily: 'Cairo',
   primaryColor: mainColor,
-  primarySwatch: mainSwatch,
+  primarySwatch: mainColor,
   canvasColor: Colors.transparent,
   shadowColor: const Color(0xFF9E9E9E),
   appBarTheme: AppBarTheme(
@@ -43,7 +43,7 @@ ThemeData darkTheme = ThemeData(
   fontFamily: 'Cairo',
   focusColor: mainColor,
   primaryColor: mainColor,
-  primarySwatch: mainSwatch,
+  primarySwatch: mainColor,
   canvasColor: Colors.transparent,
   shadowColor: const Color(0xFF262626),
   appBarTheme: const AppBarTheme(

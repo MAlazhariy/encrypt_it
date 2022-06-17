@@ -92,9 +92,7 @@ class ThanksMenuItem extends StatelessWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async {
                           await launchUrl(
-                            Uri.parse(
-                              Links.facebookPage,
-                            ),
+                            Links.facebookPage,
                           );
                         },
                     ),
@@ -122,10 +120,8 @@ class ThanksMenuItem extends StatelessWidget {
                 isBold: true,
                 onPressed: () async {
                   await launchUrl(
-                    Uri.parse(
-                      Links.mailUs(
-                        subject: '${'report_bug'.tr()} - $appVersion',
-                      ),
+                    Links.mailUs(
+                      subject: '${'report_bug'.tr()} - $appVersion',
                     ),
                   ).then((value) {
                     Navigator.pop(context);

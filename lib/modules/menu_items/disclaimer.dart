@@ -1,7 +1,8 @@
-import 'package:encryption_app/modules/menu/report_ad_dialog.dart';
+import 'package:encryption_app/modules/menu_items/report_ad_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_item.dart';
+import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -12,8 +13,8 @@ class DisclaimerMenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return MenuItemWidget(
       title: 'disclaimer'.tr(),
-      icon: Icons.task_alt_outlined,
-      // icon: Icons.wysiwyg_outlined,
+      // icon: Icons.task_alt_outlined,
+      icon: MyIcons.check_circle,
       onTap: (){
         showCustomDialog(
           context: context,

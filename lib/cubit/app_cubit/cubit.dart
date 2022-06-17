@@ -9,7 +9,7 @@ import 'package:package_info/package_info.dart';
 class AppCubit extends Cubit<AppStates>{
   AppCubit() : super(AppInitState());
 
-  bool isButtonsActive = true;
+  bool isButtonsActive = false;
   String textResult = '';
   bool isPasswordHidden = true;
   IconData passwordIcon = MyIcons.visibility;

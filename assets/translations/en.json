@@ -97,7 +97,7 @@
 
   "share_app": "Share",
   "welcome_text": "Welcome to Encrypt it :)",
-  "share_app_message": "{encrypted_text}\nWhat is that?!\nThis is a text encrypted with a special algorithm and protected by a password, and no one will be able to decrypt it or know the original text without the password.\n\nIf you want to create an encrypted text like this, download the @:appName app from Google Play now: https://play.google.com/store/apps/details?id=malazhariy.encryptIt\n\nHey, if you want to decrypt the ciphertext at the beginning of the message, copy it into the application after downloading and then decrypt it with the password: \"{password}\" 😉",
+  "share_app_message": "Hello, do you have any important texts you want to encrypt with a password?\nHere is the best app to help you with that, download the @:appName app from here:\n{appLink}",
   "rate_app": "Please rate the app",
   "rate_app_description": "Would you mind taking a moment to rate our app on Google play? It really helps us and it won't take more than a minute.",
   "rate_app_title": "Rate us",

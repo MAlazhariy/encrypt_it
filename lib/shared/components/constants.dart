@@ -23,14 +23,18 @@ String currentLang(BuildContext context){
 
 class Links{
   // static const String contactUs = 'https://m.me/encryptitapp';
-  static String mailUs({
+  static Uri mailUs({
     required String subject,
     String body = '',
-}) {
-    const String email = 'encryptitapp@gmail.com';
-    return 'mailto:$email?subject=$subject&body=$body';
-}
-  static const String privacyPolicy = 'https://sites.google.com/view/ceen-privace-policy';
-  static const String facebookPage = 'https://www.facebook.com/encryptitapp';
-  static const String appOnGooglePlay = 'https://play.google.com/store/apps/details?id=malazhariy.encryptIt';
+  }) {
+    const email = 'encryptitapp@gmail.com';
+    return Uri.parse(
+      'mailto:$email?subject=$subject&body=$body',
+    );
+  }
+
+  static final privacyPolicy = Uri.parse('https://sites.google.com/view/ceen-privace-policy');
+  static final facebookPage = Uri.parse('https://www.facebook.com/encryptitapp');
+  static final appOnGooglePlay = Uri.parse('https://play.google.com/store/apps/details?id=malazhariy.encryptIt');
+  static final githubRepository = Uri.parse('https://github.com/MAlazhariy/Encryption_App');
 }

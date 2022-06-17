@@ -8,7 +8,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/cubit/material_cubit/material_cubit.dart';
 import 'package:encryption_app/cubit/material_cubit/material_states.dart';
-import 'package:encryption_app/layout/on_board_screen.dart';
+import 'package:encryption_app/layout/on_board/on_board_screen.dart';
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/shared/network/local/on_board_cache.dart';
 import 'package:encryption_app/shared/network/local/text_store_cache.dart';
@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
                   },
                   navigatorObservers: [BotToastNavigatorObserver()],
 
-                  home: BoardCache.isBoardSkipped()
+                  home: BoardCache.isBoardSkipped() && false
                       ? HomeScreen()
                       : const OnBoardScreen(),
 

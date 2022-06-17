@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/helpers/text_store_functions.dart';
 import 'package:encryption_app/modules/add_to_text_store/cubit/store_cubit.dart';
@@ -13,7 +14,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-import '../ads/interstitial_ad_bottomsheet_model.dart';
 
 /// We do not save any private data here
 /// we save only the encrypted text.
@@ -40,13 +40,19 @@ class AddToTextStoreScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => StoreCubit(),
       child: BlocConsumer<StoreCubit, StoreStates>(
-        listener: (BuildContext context, state) {
+        listener: (context, state) {
           if (state is StoreInitState) {
-            AdInterstitialAddToStore.loadAd();
+            // todo: report this bug
+            log('initial state :)');
           }
         },
-        builder: (BuildContext context, state) {
+        builder: (context, state) {
           StoreCubit cubit = StoreCubit.get(context);
+
+          if (state is StoreInitState) {
+            log('load ad');
+            AdInterstitialAddToStore.loadAd();
+          }
 
           return Scaffold(
             appBar: AppBar(
@@ -466,14 +472,13 @@ class TitleTextForm extends StatelessWidget {
 void doneAndBack(BuildContext context) {
   Navigator.pop(context);
 
-  Future.delayed(const Duration(seconds: 1)).then((_) {
+  Future.delayed(const Duration(milliseconds: 500)).then((_) {
     AdInterstitialAddToStore.showAd();
   });
 }
 
 void back(BuildContext context) {
   Navigator.pop(context);
-  AdInterstitialAddToStore.disposeAd();
 }
 
 void onSuccessfulAdd({

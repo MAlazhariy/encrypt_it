@@ -1,12 +1,9 @@
 import 'dart:math' as math;
-
 import 'package:encryption_app/shared/components/components/my_directionality.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:sizer/sizer.dart';
-
-
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({

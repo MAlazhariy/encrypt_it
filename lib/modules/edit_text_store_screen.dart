@@ -5,6 +5,7 @@ import 'package:encryption_app/shared/components/components/custom_dialog/custom
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
 import 'package:encryption_app/shared/components/constants.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
+import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sizer/sizer.dart';
@@ -425,7 +426,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                         width: 5.sp,
                                       ),
                                       Icon(
-                                        Icons.edit,
+                                        MyIcons.edit,
                                         color: titlesColor(context),
                                         size: 14.sp,
                                       ),
@@ -469,7 +470,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                         width: 5.sp,
                                       ),
                                       Icon(
-                                        Icons.delete_outline,
+                                        MyIcons.delete,
                                         size: 14.sp,
                                         color: Theme.of(context).errorColor,
                                       ),
@@ -556,7 +557,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                       }
                                     },
                                     icon: const Icon(
-                                      Icons.delete_outline,
+                                      MyIcons.delete,
                                       color: iconsGrayColor,
                                     ),
                                     splashRadius: 13.sp,
@@ -572,7 +573,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                       editTitleName(titleIndex);
                                     },
                                     icon: const Icon(
-                                      Icons.edit,
+                                      MyIcons.edit,
                                       color: iconsGrayColor,
                                     ),
                                     splashRadius: 13.sp,

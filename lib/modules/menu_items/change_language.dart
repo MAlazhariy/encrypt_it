@@ -13,8 +13,6 @@ class ChangeLanguageMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = AppCubit.get(context);
-    
     return MenuItemWidget(
       title: 'change lang'.tr(),
       icon: Icons.translate,
