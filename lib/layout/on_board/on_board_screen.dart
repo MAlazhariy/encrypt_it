@@ -8,162 +8,11 @@ import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-/// board pages
-class BoardPage1 extends StatelessWidget {
-  const BoardPage1({Key? key}) : super(key: key);
+import 'page_1.dart';
+import 'page_2.dart';
+import 'page_3.dart';
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.sp,
-      ),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 5.sp,
-          ),
 
-          // image
-          SizedBox(
-            // height: 50.h,
-            child: Image.asset(
-              (currentLang(context) == 'ar')
-                  ? 'assets/images/encryption animation ar.gif'
-                  : 'assets/images/encryption animation.gif',
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-
-          // headline title
-          Text(
-            'onBoard_headline_1'.tr(),
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.secondary,
-              fontFamily: 'Cairo',
-              fontWeight: FontWeight.w600,
-              fontSize: 13.sp,
-            ),
-            textAlign: TextAlign.center,
-          ),
-
-          // subtitle
-          Text(
-            'onBoard_subtitle_1'.tr(),
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSecondary,
-              fontFamily: 'Cairo',
-              fontWeight: FontWeight.w500,
-              fontSize: 10.sp,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class BoardPage2 extends StatelessWidget {
-  const BoardPage2({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.sp,
-      ),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 5.sp,
-          ),
-
-          // image
-          SizedBox(
-            child: Image.asset(
-              'assets/images/main-animation.gif',
-              // 'assets/images/icon.png',
-              fit: BoxFit.contain,
-              color: Theme.of(context).colorScheme.onSecondary,
-              // color: Theme.of(context).colorScheme.secondary.withAlpha(250),
-            ),
-          ),
-
-          // headline title
-          Text(
-            'onBoard_headline_2'.tr(),
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.secondary,
-              fontFamily: 'Cairo',
-              fontWeight: FontWeight.w600,
-              fontSize: 13.sp,
-            ),
-            textAlign: TextAlign.center,
-          ),
-
-          // subtitle
-          Text(
-            'onBoard_subtitle_2'.tr(),
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSecondary,
-              fontFamily: 'Cairo',
-              fontWeight: FontWeight.w500,
-              fontSize: 10.sp,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class BoardPage3 extends StatelessWidget {
-  const BoardPage3({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.sp,
-      ),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // image
-            SizedBox(
-              child: Icon(
-                Icons.favorite_outlined,
-                color: mainColor,
-                size: 100.sp,
-              ),
-            ),
-
-            SizedBox(
-              height: 10.sp,
-            ),
-
-            // headline title
-            Text(
-              'onBoard_headline_3'.tr(),
-              style: TextStyle(
-                color: mainColor,
-                fontFamily: 'Cairo',
-                fontWeight: FontWeight.w500,
-                fontSize: 12.sp,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// On boarding screen widget
 class OnBoardScreen extends StatefulWidget {
   const OnBoardScreen({Key? key}) : super(key: key);
 
@@ -188,13 +37,14 @@ class OnBoardScreenState extends State<OnBoardScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xFFECF0F3),
       body: SafeArea(
-        child: Padding(
+        child: Container(
           padding: EdgeInsets.symmetric(
             vertical: 20.sp,
             // horizontal: 20.sp,
           ),
+          alignment: Alignment.center,
           child: Column(
             children: [
               /// skip button
@@ -228,7 +78,7 @@ class OnBoardScreenState extends State<OnBoardScreen> {
               //     ),
               //   ),
 
-              /// pages design
+              /// widget design
               Expanded(
                 child: PageView.builder(
                   onPageChanged: (int value) {
@@ -277,7 +127,7 @@ class OnBoardScreenState extends State<OnBoardScreen> {
                     },
                     color: isLast
                         ? mainColor
-                        : Theme.of(context).colorScheme.secondary,
+                        : darkBlueColor,
                     minWidth: constraints.maxWidth - 30.w,
                     padding: EdgeInsets.symmetric(
                       vertical: 10.sp,
@@ -325,8 +175,8 @@ class OnBoardScreenState extends State<OnBoardScreen> {
                   controller: boardController,
                   count: boardItems.length,
                   effect: WormEffect(
-                    activeDotColor: Theme.of(context).colorScheme.onSecondary,
-                    dotColor: Colors.grey.withAlpha(90),
+                    activeDotColor: const Color(0xFF454649),
+                    dotColor: const Color(0xFF454649).withAlpha(90),
                     dotHeight: 2.w,
                     dotWidth: 2.w,
                     spacing: 1.5.w,

@@ -45,12 +45,16 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Custom
-/lib/decoding/versions/
+# Others
 /assets/images/
 /android/app/proguard-rules.pro
 /android/app/src/main/AndroidManifest.xml
 /lib/modules/ads/ad_helper.dart
+
+# Encryption algorithms
+/lib/decoding/versions/
 /lib/decoding/encrypt_abstract.dart
+
+# My icons
 /lib/shared/styles/my_icons_icons.dart
 /fonts/MyIcons.ttf
