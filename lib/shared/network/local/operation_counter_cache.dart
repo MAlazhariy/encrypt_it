@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 class OperationCounterCache{
 
   static Box box = Hive.box('myBox');
+
   static int getCounter(){
     return box.get('operationCounter',defaultValue: 0);
   }

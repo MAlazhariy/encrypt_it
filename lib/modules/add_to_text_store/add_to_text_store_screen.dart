@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:encryption_app/models/text_store_model.dart';
-import 'package:encryption_app/helpers/text_store_functions.dart';
+import 'package:encryption_app/helpers/text_store_helper.dart';
 import 'package:encryption_app/modules/add_to_text_store/cubit/store_cubit.dart';
 import 'package:encryption_app/modules/add_to_text_store/cubit/store_states.dart';
 import 'package:encryption_app/modules/ads/interstitial_ad_textstore_model.dart';

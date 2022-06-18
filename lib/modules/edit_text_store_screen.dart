@@ -1,6 +1,6 @@
 
 import 'package:encryption_app/models/text_store_model.dart';
-import 'package:encryption_app/helpers/text_store_functions.dart';
+import 'package:encryption_app/helpers/text_store_helper.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
 import 'package:encryption_app/shared/components/constants.dart';

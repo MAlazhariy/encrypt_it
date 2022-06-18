@@ -4,10 +4,11 @@ import 'operation_counter_cache.dart';
 
 class RateCache {
 
+  static Box rateBox = Hive.box('myBox');
+
   static const int _minToRate = 30;
   static const int _rateFrequency = 15;
 
-  static Box rateBox = Hive.box('myBox');
   static bool isAppRated(){
     return rateBox.get('isRated',defaultValue: false);
   }

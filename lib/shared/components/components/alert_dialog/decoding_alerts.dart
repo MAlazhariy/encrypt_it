@@ -3,6 +3,7 @@ import 'package:encryption_app/shared/components/components/alert_dialog/custom_
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
 import 'package:encryption_app/shared/components/constants.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
+import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,7 +21,7 @@ void invalidCharactersAlert({
   customUndefinedCharsAlertDialog(
     context: context,
     title: 'contains_undefined_chars'.tr(),
-    alertIcon: Icons.warning_amber_rounded,
+    alertIcon: MyIcons.error_amber,
     content: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -140,7 +141,7 @@ void versionNotFoundAlert(BuildContext context) {
   customAlertDialog(
     context: context,
     title: 'version_not_found'.tr(),
-    alertIcon: Icons.error_outline,
+    alertIcon: MyIcons.error_circle,
     alertDescription: 'version_not_found_description'.tr(),
     buttons: [
       DialogButton(
@@ -160,7 +161,7 @@ void laterVersionAlert(BuildContext context) {
     context: context,
     title: 'later_version_warning_title'.tr(),
     // alertIcon: Icons.warning_amber_rounded,
-    alertIcon: Icons.update,
+    alertIcon: MyIcons.share_up,
     alertDescription: 'later_version_warning_message'.tr(),
     buttons: [
       DialogButton(

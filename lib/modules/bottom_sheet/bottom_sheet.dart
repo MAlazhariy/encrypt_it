@@ -78,7 +78,6 @@ void openBottomSheet(
   GlobalKey<ScaffoldState> scaffoldKey,
   BuildContext context,
 ) {
-  // todo: test this widget
   scaffoldKey.currentState
       ?.showBottomSheet(
         (context) {

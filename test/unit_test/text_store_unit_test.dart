@@ -1,12 +1,7 @@
-import 'dart:developer';
-
-import 'package:encryption_app/helpers/text_store_functions.dart';
+import 'package:encryption_app/helpers/text_store_helper.dart';
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/shared/components/constants.dart';
-import 'package:encryption_app/shared/network/local/text_store_cache.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {

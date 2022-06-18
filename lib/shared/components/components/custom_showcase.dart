@@ -24,7 +24,7 @@ class CustomShowcase extends StatelessWidget {
       description: description,
       titleTextStyle: TextStyle(
         fontSize: 10.sp,
-        color: Theme.of(context).colorScheme.onSecondary,
+        color: const Color(0xFF595a5d),
         fontWeight: FontWeight.w600,
       ),
       descTextStyle: TextStyle(

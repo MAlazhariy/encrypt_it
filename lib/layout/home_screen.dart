@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bot_toast/bot_toast.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -8,7 +6,6 @@ import 'package:encryption_app/cubit/app_cubit/states.dart';
 import 'package:encryption_app/decoding/versions/version_06.dart';
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/helpers/bio_authentication_helper.dart';
-import 'package:encryption_app/modules/ads/banner_ad_model.dart';
 import 'package:encryption_app/modules/bottom_sheet/bottom_sheet.dart';
 import 'package:encryption_app/modules/edit_text_store_screen.dart';
 import 'package:encryption_app/modules/my_app_drawer.dart';
@@ -21,7 +18,6 @@ import 'package:encryption_app/shared/components/components/main_buttons.dart';
 import 'package:encryption_app/shared/components/components/small_button.dart';
 import 'package:encryption_app/shared/components/components/text_field.dart';
 import 'package:encryption_app/shared/components/constants.dart';
-import 'package:encryption_app/shared/network/local/operation_counter_cache.dart';
 import 'package:encryption_app/shared/network/local/showcase_cache.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
@@ -317,16 +313,12 @@ class HomeScreen extends StatelessWidget {
                                           icon: MyIcons.bookmark,
                                           title: 'message_store'.tr(),
                                           onPressed: () async {
-                                            // Map? groups =
-                                            //     TextStoreCache.getGroups();
 
                                             if (!authenticated) {
                                               final bool hasBio =
-                                              await LocalAuthApi
-                                                  .hasBiometrics();
+                                              await LocalAuthApi.hasBiometrics();
                                               authenticated = hasBio
-                                                  ? await LocalAuthApi
-                                                  .authenticate()
+                                                  ? await LocalAuthApi.authenticate()
                                                   : true;
                                             }
 
@@ -346,12 +338,6 @@ class HomeScreen extends StatelessWidget {
                                                         .length,
                                                     // +1 only if want to show AD
                                                         (index) {
-                                                      // /// bannerAd
-                                                      // if(index==groups.length){
-                                                      //   return const AdNative();
-                                                      // }
-
-                                                      // final String groupName = groups.keys.toList()[index];
                                                       GroupModel
                                                       group =
                                                       groups!.groups![
@@ -460,10 +446,10 @@ class HomeScreen extends StatelessWidget {
                                                   CrossAxisAlignment
                                                       .center,
                                                   children: [
-                                                    Icon(
-                                                      Icons.add_box,
-                                                      // color: Theme.of(context).colorScheme.onSecondary,
-                                                      size: 50.sp,
+                                                    const Icon(
+                                                      MyIcons.bookmark_add,
+                                                      color: iconsGrayColor,
+                                                      size: 55,
                                                     ),
                                                     Text(
                                                       'add_store_message'
