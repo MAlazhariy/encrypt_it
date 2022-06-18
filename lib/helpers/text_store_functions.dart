@@ -26,7 +26,26 @@ class Groups {
         ?? -1;
   }
 
-  static void addToExistGroup({
+  static void addTitleToGroup({
+    required String groupName,
+    required GroupContentModel groupModel,
+  }) {
+    if (isGroupExists(groupName)) {
+      _addToExistGroup(
+        groupName: groupName,
+        groupModel: groupModel,
+      );
+    } else {
+      _addGroup(
+        groupName: groupName,
+        groupModel: groupModel,
+      );
+    }
+
+    TextStoreCache.setGroups(groups!.toMap()!);
+  }
+
+  static void _addToExistGroup({
     required String groupName,
     required GroupContentModel groupModel,
   }) {
@@ -34,7 +53,7 @@ class Groups {
     TextStoreCache.setGroups(groups!.toMap()!);
   }
 
-  static void addGroup({
+  static void _addGroup({
     required String groupName,
     required GroupContentModel groupModel,
   }) {
@@ -57,26 +76,8 @@ class Groups {
     TextStoreCache.setGroups(groups!.toMap()!);
   }
 
-  static void addTextToGroup({
-    required String groupName,
-    required GroupContentModel groupModel,
-  }) {
-    if (isGroupExists(groupName)) {
-      addToExistGroup(
-        groupName: groupName,
-        groupModel: groupModel,
-      );
-    } else {
-      addGroup(
-        groupName: groupName,
-        groupModel: groupModel,
-      );
-    }
-
-    TextStoreCache.setGroups(groups!.toMap()!);
-  }
-
   static void deleteGroup(int groupIndex) {
+    if (groupIndex == -1) return;
     groups!.groups!.removeAt(groupIndex);
     TextStoreCache.setGroups(groups!.toMap()!);
   }
@@ -91,7 +92,6 @@ class Groups {
 
   static void changeGroupName({
     required int groupIndex,
-    required GroupModel groupModel,
     required String newName,
   }) {
     groups!.groups![groupIndex].groupName = newName;

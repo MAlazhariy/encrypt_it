@@ -487,7 +487,7 @@ void onSuccessfulAdd({
   required String groupName,
   required String messageResult,
 }) {
-  Groups.addTextToGroup(
+  Groups.addTitleToGroup(
     groupName: groupName,
     groupModel: GroupContentModel(
       title: textTitle,
