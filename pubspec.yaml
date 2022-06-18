@@ -51,7 +51,6 @@ dependencies:
   google_mobile_ads: ^1.2.0
   showcaseview: ^1.1.4
   local_auth: ^1.1.10
-  mockito: ^5.2.0
   flutter_inset_box_shadow: ^1.0.8
 
 
@@ -61,6 +60,7 @@ dev_dependencies:
     sdk: flutter
   hive_generator: ^1.1.1
   build_runner: ^2.1.5
+  mockito: ^5.2.0
 
 
   # The "flutter_lints" package below contains a set of recommended lints to

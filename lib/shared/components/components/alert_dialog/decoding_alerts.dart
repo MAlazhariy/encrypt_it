@@ -12,15 +12,14 @@ import 'custom_undefined_chars_alert_dialog.dart';
 
 // password alert dialog
 
-
 // encryption alert dialogs
 void invalidCharactersAlert({
   required BuildContext context,
   required String undefinedChars,
-}){
+}) {
   customUndefinedCharsAlertDialog(
     context: context,
-    title: 'undefined_chars'.tr(),
+    title: 'contains_undefined_chars'.tr(),
     alertIcon: Icons.warning_amber_rounded,
     content: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -69,6 +68,7 @@ void invalidCharactersAlert({
                 text: 'there_problem'.tr(),
                 style: TextStyle(
                   fontSize: 11.sp,
+                  color: titlesColor(context),
                 ),
               ),
               TextSpan(
@@ -79,12 +79,13 @@ void invalidCharactersAlert({
                   fontWeight: FontWeight.w600,
                   decoration: TextDecoration.underline,
                 ),
-                recognizer: TapGestureRecognizer()..onTap = () async {
-                  await launchUrl(
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () async {
+                    await launchUrl(
                       Links.mailUs(
                         subject:
                             '${'undefined_chars'.tr()} - ${AppCubit.get(context).appInfo.version}',
-                        body: '$undefinedChars\n',
+                        body: 'undefined_chars_mail'.tr(args: [undefinedChars]),
                       ),
                     );
                   },
@@ -105,7 +106,7 @@ void invalidCharactersAlert({
     buttons: [
       DialogButton(
         title: 'ok'.tr(),
-        onPressed: (){
+        onPressed: () {
           Navigator.pop(context);
         },
         isBold: true,
@@ -116,7 +117,7 @@ void invalidCharactersAlert({
 }
 
 // decryption bottom sheet alert dialogs
-void incorrectPasswordAlert(BuildContext context){
+void incorrectPasswordAlert(BuildContext context) {
   customAlertDialog(
     context: context,
     title: 'invalid password'.tr(),
@@ -125,7 +126,7 @@ void incorrectPasswordAlert(BuildContext context){
     buttons: [
       DialogButton(
         title: 'ok'.tr(),
-        onPressed: (){
+        onPressed: () {
           Navigator.pop(context);
         },
         isBold: true,
@@ -134,7 +135,8 @@ void incorrectPasswordAlert(BuildContext context){
     ],
   );
 }
-void versionNotFoundAlert(BuildContext context){
+
+void versionNotFoundAlert(BuildContext context) {
   customAlertDialog(
     context: context,
     title: 'version_not_found'.tr(),
@@ -143,7 +145,7 @@ void versionNotFoundAlert(BuildContext context){
     buttons: [
       DialogButton(
         title: 'ok'.tr(),
-        onPressed: (){
+        onPressed: () {
           Navigator.pop(context);
         },
         isBold: true,
@@ -152,7 +154,8 @@ void versionNotFoundAlert(BuildContext context){
     ],
   );
 }
-void laterVersionAlert(BuildContext context){
+
+void laterVersionAlert(BuildContext context) {
   customAlertDialog(
     context: context,
     title: 'later_version_warning_title'.tr(),
@@ -162,7 +165,7 @@ void laterVersionAlert(BuildContext context){
     buttons: [
       DialogButton(
         title: 'cancel'.tr(),
-        onPressed: (){
+        onPressed: () {
           Navigator.pop(context);
         },
         isBold: false,

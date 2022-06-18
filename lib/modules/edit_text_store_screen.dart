@@ -26,12 +26,6 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
   // todo: test this entire widget
 
   void deleteChoosedGroup() {
-    // todo: important to test this unit
-    // assert(choosedGroup == null, 'choosed group can not be null when deleting a group');
-
-    // final String deletedGroupName = choosedGroup!;
-    // final Map deletedGroupValue = TextStoreCache.getGroups()![deletedGroupName];
-    // final int deletedGroupIndex = TextStoreCache.getGroups()!.keys.toList().indexOf(deletedGroupName);
     final deletedGroupIndex = groupIndex!;
     final deletedGroup = groups!.groups![deletedGroupIndex];
 
@@ -147,7 +141,6 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
               setState(() {
                 Groups.changeGroupName(
                   groupIndex: groupIndex!,
-                  groupModel: group,
                   newName: newGroupName,
                 );
                 Navigator.pop(context);

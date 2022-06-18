@@ -13,9 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MaterialCubit extends Cubit<MaterialStates>{
   MaterialCubit() : super(MaterialInitState());
 
-  // bool? isDarkMode = ThemeCache.isDarkMode();
-  // todo: remove this testing line
-  bool? isDarkMode = null;
+  bool? isDarkMode = ThemeCache.isDarkMode();
 
   static MaterialCubit get (context) => BlocProvider.of(context);
 

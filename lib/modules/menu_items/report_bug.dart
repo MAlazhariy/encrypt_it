@@ -3,6 +3,7 @@ import 'package:encryption_app/shared/components/components/custom_dialog/custom
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_item.dart';
 import 'package:encryption_app/shared/components/constants.dart';
+import 'package:encryption_app/shared/network/local/operation_counter_cache.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -56,7 +57,7 @@ class ReportABugMenuItem extends StatelessWidget {
               onPressed: () async {
                 await launchUrl(
                   Links.mailUs(
-                    subject: '${'report_bug'.tr()} - $appVersion',
+                    subject: '${'report_bug'.tr()} - $appVersion - ${OperationCounterCache.getCounter()}',
                   ),
                 ).then((value) {
                   Navigator.pop(context);

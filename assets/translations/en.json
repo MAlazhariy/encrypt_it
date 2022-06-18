@@ -20,8 +20,10 @@
   "pasted success": "Pasted successfully",
   "fail paste": "Failed to paste all",
 
-  "undefined_chars": "Text contains undefined characters",
+  "undefined_chars": "Undefined characters",
+  "contains_undefined_chars": "Text contains undefined characters",
   "undefined_chars_title": "Please delete the undefined characters \"{}\"",
+  "undefined_chars_mail": "These undefined characters have been omitted: \"{}\".\n------\n- Do you see these characters important?\n\n- Do you think it should be added in future releases or is it not necessary?\n",
   "undefined_chars_description": "The app works on Arabic and English characters and some numbers and symbols only, so we have deleted the following entries :",
   "invalid password" : "Incorrect password",
   "invalid_password_description": "The password you entered is incorrect. Make sure you type the correct password, taking into account the uppercase and lowercase letters (Aa), and try again.",
@@ -111,7 +113,7 @@
 
   "report_an_ad": "Report an ad",
   "report_an_ad_description": "To report an inappropriate ad please take a screenshot of the ad and send it to us.",
-  "report_ad_mail_body": "I would like to report an ad that I think is unethical, and this is the screenshot of the ad (or a description of the ad's content and the name of the organization or company behind this ad) :\n",
+  "report_ad_mail_body": "I would like to report an advertisement that I believe is unethical.\n<Please answer the specific questions to help us identify and block the offending ad>\n------\nDid the offending ad appear in the last 10 minutes?\n- \n\nWhere did the ad appear?\n(After the text store edit page / After adding text to the text store)\n- \n\n- Describe the content of the advertisement, the name of the company behind this infringing advertisement, or any other details that may help us.\n- \n\n- Please attach a screenshot (if any) of the offending advertisement.\n- ",
 
   "undo": "Undo",
   "delete": "Delete",
