@@ -1,14 +1,22 @@
 # Encrypt It
 
-### Encrypt It is an application that encrypts texts with complex mathematical equations and specific encryption algorithms with a complete change in the text letters and their arrangement, which gives more protection and security.
+Encrypt It is an application that encrypts texts with complex mathematical equations and specific encryption algorithms with a complete change in the text letters and their arrangement, which gives more protection and security.
+
+
+## content
+- [What is encryption?](#what-is-text-encryption)
+- [What is special about this app?](#what-is-special-about-this-app)
+- [Why not use UTF-16?](#why-not-use-utf-16)
+- [Skills used in the project](#skills-used-in-the-project)
+- Screenshots *(working on)*
+
+
+<img src="https://user-images.githubusercontent.com/87443208/165843645-4c46cfba-5069-4d03-9c7d-bd8c2b4dfa5e.gif" alt="" width="400"/>
 
 
 ## What is text encryption?
 
 Encryption is a process of converting plain text characters into other characters and symbols to produce an unintelligible ciphertext to keep the original text secret.
-
-
-<img src="https://user-images.githubusercontent.com/87443208/165843645-4c46cfba-5069-4d03-9c7d-bd8c2b4dfa5e.gif" alt="" width="400"/>
 
 
 ## What is special about this app?
