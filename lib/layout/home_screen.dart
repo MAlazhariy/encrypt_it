@@ -260,7 +260,7 @@ class HomeScreen extends StatelessWidget {
                                         'showcase_clear_description'.tr(),
                                         // title: 'clear'.tr(),
                                         child: SmallButton(
-                                          icon: MyIcons.clear,
+                                          icon: Icons.clear,
                                           title: 'clear'.tr(),
                                           onPressed: () {
                                             cubit.messageCtrl.text = '';

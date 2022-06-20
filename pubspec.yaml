@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # Do not change the first number of the app version
 #  unless the encryption algorithm has been changed.
-version: 6.2.2+13
+version: 6.2.3+14
 
 environment:
   sdk: ">=2.16.1 <3.0.0"

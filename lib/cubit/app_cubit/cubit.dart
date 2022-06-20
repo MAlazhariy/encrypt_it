@@ -94,7 +94,7 @@ class AppCubit extends Cubit<AppStates>{
   void clearAllFields(){
     // make password field hidden
     isPasswordHidden = true;
-    passwordIcon = Icons.visibility;
+    passwordIcon = MyIcons.visibility;
 
     // deactivate the main buttons
     isButtonsActive = false;
