@@ -22,6 +22,7 @@ class EditTextStoreScreen extends StatefulWidget {
 class EditTextStoreScreenState extends State<EditTextStoreScreen> {
   String? choosedGroup;
   int? groupIndex;
+  final _animationKey = GlobalKey<AnimatedListState>();
 
   // todo: test this entire widget
 
@@ -159,12 +160,29 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
     required GroupContentModel content,
     required int titleIndex,
   }) {
-    setState(() {
-      Groups.deleteTitle(
+    final GroupContentModel contentModel = groups!
+        .groups![Groups.getGroupIndex(choosedGroup!)].groupContent[titleIndex];
+
+    // delete from animated list
+    _animationKey.currentState?.removeItem(
+      titleIndex,
+      (context, animation) => SizeTransition(
+        sizeFactor: animation,
+        child: _TitleBuilder(
+          deleteChoosedGroup: deleteChoosedGroup,
+          deleteTitle: deleteTitle,
+          editTitleName: editTitleName,
+          groupIndex: groupIndex,
+          contentModel: contentModel,
+          titleIndex: titleIndex,
+        ),
+      ),
+    );
+
+    Groups.deleteTitle(
         groupIndex: groupIndex!,
         titleIndex: titleIndex,
       );
-    });
 
     // show snack bar to restore deleted title
     ScaffoldMessenger.of(context).showSnackBar(
@@ -181,13 +199,13 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
           textColor: Theme.of(context).colorScheme.onPrimary,
           label: 'undo'.tr(),
           onPressed: () {
-            setState(() {
               Groups.insertTitle(
                 groupIndex: groupIndex!,
                 titleIndex: titleIndex,
                 content: content,
               );
-            });
+
+              _animationKey.currentState?.insertItem(titleIndex);
           },
         ),
       ),
@@ -451,7 +469,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                       Text(
                                         'delete_the_group'.tr(),
                                         style: TextStyle(
-                                          color: Theme.of(context).errorColor,
+                                          color: titlesColor(context),
                                           fontSize: 10.sp,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -462,7 +480,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                       Icon(
                                         MyIcons.delete,
                                         size: 14.sp,
-                                        color: Theme.of(context).errorColor,
+                                        color: titlesColor(context),
                                       ),
                                     ],
                                   ),
@@ -484,99 +502,26 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
 
                     /// Content Titles
                     if (choosedGroup != null)
-                      ListView.builder(
-                        itemBuilder: (context, titleIndex) {
+                      AnimatedList(
+                        key: _animationKey,
+                        initialItemCount: groups!.groups![groupIndex!].groupContent.length,
+                        itemBuilder: (context, titleIndex, animation) {
                           final GroupContentModel contentModel = groups!
                               .groups![Groups.getGroupIndex(choosedGroup!)]
                               .groupContent[titleIndex];
 
-                          return Container(
-                            width: double.maxFinite,
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            padding: EdgeInsetsDirectional.only(
-                              start: 15.sp,
-                              end: 10.sp,
-                              top: 5.sp,
-                              bottom: 5.sp,
-                            ),
-                            decoration: BoxDecoration(
-                              color: highLightColor(context, darkAlpha: 255),
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                  color: shadowColor(context, lightAlpha: 100),
-                                  offset: const Offset(0, 4),
-                                  blurRadius: 6,
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Align(
-                                    alignment:
-                                        AlignmentDirectional.centerStart,
-                                    child: Text(
-                                      contentModel.title,
-                                      style: TextStyle(
-                                        color: titlesColor(context),
-                                        fontSize: 12.sp,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-
-                                /// delete button
-                                Material(
-                                  shape: const CircleBorder(),
-                                  child: IconButton(
-                                    onPressed: () {
-                                      final bool isLastTitleInGroup = groups!
-                                              .groups![groupIndex!]
-                                              .groupContent
-                                              .length == 1;
-
-                                      if (isLastTitleInGroup) {
-                                        deleteChoosedGroup();
-                                      } else {
-                                        deleteTitle(
-                                          titleIndex: titleIndex,
-                                          content: contentModel,
-                                        );
-                                      }
-                                    },
-                                    icon: const Icon(
-                                      MyIcons.delete,
-                                      color: iconsGrayColor,
-                                    ),
-                                    splashRadius: 13.sp,
-                                  ),
-                                  color: highLightColor(context),
-                                ),
-
-                                /// edit title name
-                                Material(
-                                  shape: const CircleBorder(),
-                                  child: IconButton(
-                                    onPressed: () {
-                                      editTitleName(titleIndex);
-                                    },
-                                    icon: const Icon(
-                                      MyIcons.edit,
-                                      color: iconsGrayColor,
-                                    ),
-                                    splashRadius: 13.sp,
-                                    splashColor: smallButtonsContentColor(context).withAlpha(50),
-                                  ),
-                                  color: highLightColor(context),
-                                ),
-                              ],
+                          return SizeTransition(
+                            sizeFactor: animation,
+                            child: _TitleBuilder(
+                              deleteChoosedGroup: deleteChoosedGroup,
+                              deleteTitle: deleteTitle,
+                              editTitleName: editTitleName,
+                              groupIndex: groupIndex,
+                              contentModel: contentModel,
+                              titleIndex: titleIndex,
                             ),
                           );
                         },
-                        itemCount:
-                            groups!.groups![groupIndex!].groupContent.length,
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                       ),
@@ -686,3 +631,116 @@ class _CustomInputTextFormState extends State<_CustomInputTextForm> {
     );
   }
 }
+
+class _TitleBuilder extends StatelessWidget {
+  const _TitleBuilder({
+    Key? key,
+    required this.deleteChoosedGroup,
+    required this.deleteTitle,
+    required this.editTitleName,
+    required this.groupIndex,
+    required this.contentModel,
+    required this.titleIndex,
+  }) : super(key: key);
+
+  final Function deleteChoosedGroup;
+  final Function({
+    required GroupContentModel content,
+    required int titleIndex,
+  }) deleteTitle;
+  final Function(int titleIndex) editTitleName;
+  final int? groupIndex;
+  final GroupContentModel contentModel;
+  final int titleIndex;
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    return Container(
+      width: double.maxFinite,
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      padding: EdgeInsetsDirectional.only(
+        start: 15.sp,
+        end: 10.sp,
+        top: 5.sp,
+        bottom: 5.sp,
+      ),
+      decoration: BoxDecoration(
+        color: highLightColor(context, darkAlpha: 255),
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: shadowColor(context, lightAlpha: 100),
+            offset: const Offset(0, 4),
+            blurRadius: 6,
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Align(
+              alignment:
+              AlignmentDirectional.centerStart,
+              child: Text(
+                contentModel.title,
+                style: TextStyle(
+                  color: titlesColor(context),
+                  fontSize: 12.sp,
+                ),
+              ),
+            ),
+          ),
+
+          /// delete button
+          Material(
+            shape: const CircleBorder(),
+            child: IconButton(
+              onPressed: () {
+                final bool isLastTitleInGroup = groups!
+                    .groups![groupIndex!]
+                    .groupContent
+                    .length == 1;
+
+                if (isLastTitleInGroup) {
+                  deleteChoosedGroup();
+                } else {
+                  deleteTitle(
+                    titleIndex: titleIndex,
+                    content: contentModel,
+                  );
+                }
+              },
+              icon: const Icon(
+                MyIcons.delete,
+                color: iconsGrayColor,
+              ),
+              splashRadius: 13.sp,
+            ),
+            color: highLightColor(context),
+          ),
+
+          /// edit title name
+          Material(
+            shape: const CircleBorder(),
+            child: IconButton(
+              onPressed: () {
+                editTitleName(titleIndex);
+              },
+              icon: const Icon(
+                MyIcons.edit,
+                color: iconsGrayColor,
+              ),
+              splashRadius: 13.sp,
+              splashColor: smallButtonsContentColor(context).withAlpha(50),
+            ),
+            color: highLightColor(context),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
