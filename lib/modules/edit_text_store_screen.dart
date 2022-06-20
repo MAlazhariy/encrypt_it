@@ -2,7 +2,7 @@
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/helpers/text_store_helper.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
-import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
+import 'package:encryption_app/shared/components/components/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/shared/components/constants.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
@@ -432,9 +432,6 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                             // delete the group
                             Card(
                               color: highLightColor(context),
-                              // color: Theme.of(context).brightness == Brightness.dark
-                              //     ? Theme.of(context).errorColor
-                              //     : Colors.white,
                               elevation: 5,
                               shadowColor: shadowColor(context, lightAlpha: 100),
                               shape: RoundedRectangleBorder(
