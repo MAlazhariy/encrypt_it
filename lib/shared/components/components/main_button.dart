@@ -4,6 +4,7 @@ import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:sizer/sizer.dart';
 
 class MainButton extends StatefulWidget {
   const MainButton({required this.onPressed, required this.isEncrypt, Key? key})
@@ -62,7 +63,7 @@ class _MainButtonState extends State<MainButton> {
                 // width: 25,
                 child: Icon(
                   widget.isEncrypt ? MyIcons.lock : MyIcons.lock_open,
-                  size: !isPressed ? 21 : 20,
+                  size: !isPressed ? 18.sp : 17.sp,
                   color: widget.onPressed != null
                       ? widget.isEncrypt
                           ? encryptedTextColor
@@ -74,7 +75,7 @@ class _MainButtonState extends State<MainButton> {
               Text(
                 widget.isEncrypt ? 'encrypt'.tr() : 'decrypt'.tr(),
                 style: TextStyle(
-                  fontSize: !isPressed ? 18 : 17,
+                  fontSize: !isPressed ? 15.sp : 14.sp,
                   fontWeight: FontWeight.w600,
                   color: widget.onPressed != null
                       ? widget.isEncrypt

@@ -1,5 +1,8 @@
+// ignore_for_file: unused_import
+
 import 'package:clipboard/clipboard.dart';
 import 'package:encryption_app/modules/add_to_text_store/add_to_text_store_screen.dart';
+import 'package:encryption_app/shared/components/components/bottomsheet_button.dart';
 import 'package:encryption_app/shared/components/components/custom_showcase.dart';
 import 'package:encryption_app/shared/components/components/custom_toast.dart';
 import 'package:encryption_app/shared/components/components/small_button.dart';
@@ -26,33 +29,39 @@ class BottomSheetButtons extends StatelessWidget {
       margin: const EdgeInsetsDirectional.only(bottom: 5),
       width: double.maxFinite,
       alignment: AlignmentDirectional.center,
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        spacing: 10.sp,
-        children: [
-          // copy
-          SmallButton(
-            title: 'copy'.tr(),
-            onPressed: () {
-              copy(
-                text: textResult,
-                context: context,
-              );
-            },
-            onLongPress: isEncrypt
-                ? () {
-                    copyAll(
-                      text: textResult,
-                      password: password,
-                      context: context,
-                    );
-                  }
-                : null,
-            icon: MyIcons.copy,
-          ),
-          // add to store
-          if (isEncrypt) AddToStoreButton(isEncrypt, textResult),
-        ],
+      child: Padding(
+        padding: EdgeInsetsDirectional.only(
+          top: 5.sp,
+          bottom: 12.sp,
+        ),
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 10.sp,
+          children: [
+            // copy
+            BottomSheetButton(
+              title: 'copy'.tr(),
+              onPressed: () {
+                copy(
+                  text: textResult,
+                  context: context,
+                );
+              },
+              onLongPress: isEncrypt
+                  ? () {
+                      copyAll(
+                        text: textResult,
+                        password: password,
+                        context: context,
+                      );
+                    }
+                  : null,
+              icon: MyIcons.copy,
+            ),
+            // add to store
+            if (isEncrypt) AddToStoreButton(isEncrypt, textResult),
+          ],
+        ),
       ),
     );
   }
@@ -87,7 +96,7 @@ class AddToStoreButton extends StatelessWidget {
       globalKey: _addToTextStoreShowcase,
       title: 'add_to_storage'.tr(),
       description: 'showcase_add_to_store_description'.tr(),
-      child: SmallButton(
+      child: BottomSheetButton(
         title: 'add_to_storage'.tr(),
         onPressed: () {
           Navigator.push(
