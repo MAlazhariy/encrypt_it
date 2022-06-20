@@ -1,6 +1,6 @@
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
-import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
+import 'package:encryption_app/shared/components/components/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +34,7 @@ class AboutAppMenuItem extends StatelessWidget {
                     'assets/images/icon.png',
                   ),
                   width: 150.sp,
+                  color: dialogButtonColor(context),
                 ),
               ),
               // app name
@@ -42,8 +43,8 @@ class AboutAppMenuItem extends StatelessWidget {
                   cubit.appInfo.appName,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 14.sp,
-                    color: mainColor,
+                    fontSize: 15.sp,
+                    color: smallButtonsContentColor(context),
                   ),
                 ),
               ),

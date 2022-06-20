@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'colors.dart';
 
@@ -18,6 +19,7 @@ ThemeData lightTheme = ThemeData(
   fontFamily: 'Cairo',
   primaryColor: mainColor,
   primarySwatch: mainColor,
+  errorColor: const Color(0xFFFF4C7C),
   canvasColor: Colors.transparent,
   shadowColor: const Color(0xFF9E9E9E),
   appBarTheme: AppBarTheme(
@@ -29,6 +31,11 @@ ThemeData lightTheme = ThemeData(
     ),
     /// shadow color
     shadowColor: const Color(0xFF9E9E9E).withAlpha(50),
+    /// status bar color
+    systemOverlayStyle: const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
   ),
 );
 
@@ -44,6 +51,7 @@ ThemeData darkTheme = ThemeData(
   focusColor: mainColor,
   primaryColor: mainColor,
   primarySwatch: mainColor,
+  errorColor: const Color(0xFFFF4C7C),
   canvasColor: Colors.transparent,
   shadowColor: const Color(0xFF262626),
   appBarTheme: const AppBarTheme(
@@ -55,5 +63,10 @@ ThemeData darkTheme = ThemeData(
     ),
     /// shadow color
     shadowColor: Color(0xFF262626),
+    /// status bar color
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ),
   ),
 );
