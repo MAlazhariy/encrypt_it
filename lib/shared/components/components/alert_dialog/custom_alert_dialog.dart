@@ -42,7 +42,7 @@ void customAlertDialog({
 
               // alert widget
               SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
+                // physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 15.sp,
@@ -57,7 +57,7 @@ void customAlertDialog({
                         style: TextStyle(
                           color: redColor,
                           fontWeight: FontWeight.w900,
-                          fontSize: 12.sp,
+                          fontSize: 15.sp,
                         ),
                       ),
                       SizedBox(height: 3.sp,),
@@ -66,7 +66,7 @@ void customAlertDialog({
                         style: TextStyle(
                           // color: Colors.grey[600],
                           fontWeight: FontWeight.w500,
-                          fontSize: 10.sp,
+                          fontSize: 13.sp,
                         ),
                       ),
                     ],

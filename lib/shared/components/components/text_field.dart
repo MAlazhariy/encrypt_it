@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:encryption_app/shared/components/components/my_directionality.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;

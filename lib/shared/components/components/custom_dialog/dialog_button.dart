@@ -23,7 +23,7 @@ class DialogButton extends StatelessWidget {
     return RaisedButton(
       onPressed: onPressed,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.sp),
+        borderRadius: BorderRadius.circular(30),
       ),
       color: isBold
           ? color ?? dialogButtonColor(context)
@@ -44,6 +44,7 @@ class DialogButton extends StatelessWidget {
           fontWeight: isBold
               ? FontWeight.w700
               : FontWeight.w500,
+          fontSize: 11.sp,
         ),
       ),
     );

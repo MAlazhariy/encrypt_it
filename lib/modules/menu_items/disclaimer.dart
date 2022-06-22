@@ -1,10 +1,11 @@
 import 'package:encryption_app/modules/menu_items/report_ad_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
-import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
+import 'package:encryption_app/shared/components/components/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_item.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:sizer/sizer.dart';
 
 class DisclaimerMenuItem extends StatelessWidget {
   const DisclaimerMenuItem({Key? key}) : super(key: key);
@@ -24,6 +25,9 @@ class DisclaimerMenuItem extends StatelessWidget {
             children: [
               Text(
                 'disclaimer_description'.tr(),
+                style: TextStyle(
+                  fontSize: 12.sp,
+                ),
               ),
             ],
           ),

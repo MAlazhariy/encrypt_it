@@ -1,9 +1,10 @@
+// ignore_for_file: unused_import
+
 /*
 * © Mostafa Alazhariy 2021
 */
 
 import 'dart:developer';
-
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/cubit/material_cubit/material_cubit.dart';
@@ -12,7 +13,8 @@ import 'package:encryption_app/layout/on_board/on_board_screen.dart';
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/shared/network/local/on_board_cache.dart';
 import 'package:encryption_app/shared/network/local/text_store_cache.dart';
-import 'package:encryption_app/shared/styles/themes.dart';
+import 'package:encryption_app/shared/styles/themes/dark_theme.dart';
+import 'package:encryption_app/shared/styles/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,9 +82,9 @@ class MyApp extends StatelessWidget {
                   localizationsDelegates: context.localizationDelegates,
                   supportedLocales: context.supportedLocales,
                   locale: context.locale,
+                  // locale: DevicePreview.locale(context), // Devise preview
 
                   debugShowCheckedModeBanner: false,
-                  // locale: DevicePreview.locale(context),
                   builder: (context, myWidget) {
                     myWidget = BotToastInit()(context, myWidget);
                     // myWidget = DevicePreview.appBuilder(context, myWidget);

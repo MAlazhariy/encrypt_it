@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:clipboard/clipboard.dart';
 import 'package:encryption_app/decoding/decoding.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_item.dart';

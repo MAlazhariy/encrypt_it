@@ -1,9 +1,12 @@
+// ignore_for_file: unused_import
+
 import 'package:encryption_app/modules/menu_items/about_app.dart';
 import 'package:encryption_app/modules/menu_items/change_language.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_group_items.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
-import 'menu_items/change_theme.dart';
+import 'menu_items/dark_mode.dart';
 import 'menu_items/disclaimer.dart';
 import 'menu_items/rate_app.dart';
 import 'menu_items/report_bug.dart';

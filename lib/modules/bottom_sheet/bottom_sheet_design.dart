@@ -20,8 +20,8 @@ class BottomSheetDesign extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(20),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(15.sp),
         ),
         color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [

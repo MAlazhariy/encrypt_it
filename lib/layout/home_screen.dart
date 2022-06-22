@@ -1,20 +1,19 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/cubit/app_cubit/states.dart';
 import 'package:encryption_app/decoding/versions/version_06.dart';
+import 'package:encryption_app/helpers/main_button_helper.dart';
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/helpers/bio_authentication_helper.dart';
-import 'package:encryption_app/modules/bottom_sheet/bottom_sheet.dart';
 import 'package:encryption_app/modules/edit_text_store_screen.dart';
 import 'package:encryption_app/modules/my_app_drawer.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
-import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
+import 'package:encryption_app/shared/components/components/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/shared/components/components/custom_showcase.dart';
 import 'package:encryption_app/shared/components/components/custom_toast.dart';
 import 'package:encryption_app/shared/components/components/dismiss_keyboard.dart';
-import 'package:encryption_app/shared/components/components/main_buttons.dart';
+import 'package:encryption_app/shared/components/components/main_button.dart';
 import 'package:encryption_app/shared/components/components/small_button.dart';
 import 'package:encryption_app/shared/components/components/text_field.dart';
 import 'package:encryption_app/shared/components/constants.dart';
@@ -126,30 +125,18 @@ class HomeScreen extends StatelessWidget {
                         TextPosition(offset: cubit.messageCtrl.text.length));
 
                     /// Show successful toast
-                    BotToast.showText(
-                      text: 'pasted success'.tr(),
-                      duration: const Duration(milliseconds: 800),
-                      contentColor: Theme.of(context).colorScheme.onPrimary,
-                      textStyle: const TextStyle(
-                        color: mainColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      borderRadius: BorderRadius.circular(12.sp),
-                      clickClose: true,
+                    showToast(
+                      title: 'pasted success'.tr(),
+                      context: context,
+                      mSeconds: 800,
+                      contrast: true,
                     );
                   } else {
-                    // The copied text does not contain ciphertext & password
                     // Show fail toast
-                    BotToast.showText(
-                      text: 'fail paste'.tr(),
-                      duration: const Duration(seconds: 3),
-                      contentColor: mainColor,
-                      textStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      borderRadius: BorderRadius.circular(12.sp),
-                      clickClose: true,
+                    showToast(
+                      title: 'fail paste'.tr(),
+                      context: context,
+                      contrast: true,
                     );
                   }
                 });
@@ -306,14 +293,24 @@ class HomeScreen extends StatelessWidget {
                                       CustomShowcase(
                                         globalKey: _textStoreShowcase,
                                         description:
-                                        'showcase_text_store_description'
-                                            .tr(),
+                                        'showcase_text_store_description'.tr(),
                                         title: 'message_store'.tr(),
                                         child: SmallButton(
                                           icon: MyIcons.bookmark,
                                           title: 'message_store'.tr(),
-                                          onPressed: () async {
+                                          // open edit text store screen when long press
+                                          // if groups is not empty
+                                          onLongPress: groups?.groups?.isNotEmpty ?? false ? (){
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => const EditTextStoreScreen(),
+                                              ),
+                                            );
+                                          } : null,
 
+                                          onPressed: () async {
+                                            // todo: important handle bio
                                             if (!authenticated) {
                                               final bool hasBio =
                                               await LocalAuthApi.hasBiometrics();
@@ -322,121 +319,108 @@ class HomeScreen extends StatelessWidget {
                                                   : true;
                                             }
 
-                                            // todo: important handle bio
                                             if (authenticated) {
                                               showCustomDialog(
                                                 context: context,
-                                                title: 'choose_message'.tr(),
-                                                content:
-                                                groups?.groups
-                                                    ?.isNotEmpty ??
-                                                    false
+                                                title: 'message_store'.tr(),
+                                                content: groups?.groups?.isNotEmpty ?? false
                                                     ? Column(
-                                                  children:
-                                                  List.generate(
-                                                    groups!.groups!
-                                                        .length,
-                                                    // +1 only if want to show AD
-                                                        (index) {
-                                                      GroupModel
-                                                      group =
-                                                      groups!.groups![
-                                                      index];
+                                                  children: [
+                                                    ...List.generate(
+                                                      groups!.groups!
+                                                          .length,
+                                                      // +1 only if want to show AD
+                                                          (groupIndex) {
+                                                        GroupModel
+                                                        group =
+                                                        groups!.groups![
+                                                        groupIndex];
 
-                                                      // groups
-                                                      return ExpansionTile(
-                                                        title: Text(
-                                                          group
-                                                              .groupName,
-                                                          style:
-                                                          const TextStyle(
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .w500,
+                                                        // group
+                                                        return ExpansionTile(
+                                                          title: Text(
+                                                            group.groupName,
+                                                            style: TextStyle(
+                                                              fontWeight: FontWeight.w500,
+                                                              fontSize: 14.sp,
+                                                            ),
                                                           ),
-                                                        ),
-                                                        collapsedIconColor: smallButtonsContentColor(context),
-                                                        collapsedTextColor: smallButtonsContentColor(context),
-                                                        iconColor: smallButtonsContentColor(context),
-                                                        textColor: smallButtonsContentColor(context),
-                                                        backgroundColor: shadowColor(context).withAlpha(40),
-                                                        children: List.generate(
-                                                            group
-                                                                .groupContent
-                                                                .length,
-                                                                (index2) {
-                                                              String title = group
-                                                                  .groupContent[
-                                                              index2]
-                                                                  .title;
-                                                              String storedEncryptedText = group
-                                                                  .groupContent[
-                                                              index2]
-                                                                  .ciphertext;
+                                                          collapsedIconColor: smallButtonsContentColor(context),
+                                                          collapsedTextColor: smallButtonsContentColor(context),
+                                                          iconColor: smallButtonsContentColor(context),
+                                                          // leading: Icon(
+                                                          //   MyIcons.folder,
+                                                          //   size: 15.sp,
+                                                          // ),
+                                                          textColor: smallButtonsContentColor(context),
+                                                          backgroundColor: shadowColor(context).withAlpha(40),
+                                                          children: List.generate(
+                                                              group.groupContent.length,
+                                                                  (contentIndex) {
+                                                                final content = group.groupContent[contentIndex];
 
-                                                              // group titles
-                                                              return Container(
-                                                                width: double
-                                                                    .infinity,
-                                                                padding:
-                                                                EdgeInsets
-                                                                    .symmetric(
-                                                                  horizontal:
-                                                                  15.sp,
-                                                                ),
-                                                                child:
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                  MainAxisAlignment.center,
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child:
-                                                                      TextButton(
-                                                                        onPressed: () {
-                                                                          cubit.messageCtrl.text = storedEncryptedText;
-                                                                          activeButtons();
-                                                                          Navigator.pop(context);
-                                                                        },
-                                                                        child: Align(
-                                                                          alignment: AlignmentDirectional.centerStart,
-                                                                          child: Text(
-                                                                            title,
-                                                                            style: TextStyle(
-                                                                              color: titlesColor(context),
-                                                                              fontWeight: FontWeight.w500,
-                                                                              fontSize: 15,
+                                                                // group titles
+                                                                return Container(
+                                                                  width: double.infinity,
+                                                                  padding: EdgeInsets.symmetric(
+                                                                    horizontal: 15.sp,
+                                                                  ),
+                                                                  child:
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                    MainAxisAlignment.center,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                        TextButton(
+                                                                          onPressed: () {
+                                                                            cubit.messageCtrl.text = content.ciphertext;
+                                                                            activeButtons();
+                                                                            Navigator.pop(context);
+                                                                          },
+                                                                          child: Align(
+                                                                            alignment: AlignmentDirectional.centerStart,
+                                                                            child: Text(
+                                                                              content.title,
+                                                                              style: TextStyle(
+                                                                                color: titlesColor(context),
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 12.sp,
+                                                                              ),
                                                                             ),
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                    // text store copy title
-                                                                    IconButton(
-                                                                      icon:
-                                                                      const Icon(
-                                                                        Icons.copy,
+                                                                      // copy button
+                                                                      GestureDetector(
+                                                                        child:
+                                                                        Padding(
+                                                                          padding: EdgeInsets.symmetric(
+                                                                            horizontal: 5.sp,
+                                                                          ),
+                                                                          child: Icon(
+                                                                            MyIcons.copy,
+                                                                            size: 15.sp,
+                                                                            color: iconsGrayColor,
+                                                                          ),
+                                                                        ),
+                                                                        onTap:
+                                                                            () {
+                                                                          FlutterClipboard.copy(content.ciphertext);
+                                                                          showToast(
+                                                                            title: 'msg copied'.tr(),
+                                                                            context: context,
+                                                                          );
+                                                                        },
                                                                       ),
-                                                                      onPressed:
-                                                                          () {
-                                                                        FlutterClipboard.copy(storedEncryptedText);
-
-                                                                        showToast(
-                                                                          title: 'msg copied'.tr(),
-                                                                          context: context,
-                                                                        );
-                                                                      },
-                                                                      iconSize:
-                                                                      13.sp,
-                                                                      color: iconsGrayColor,
-                                                                      padding: EdgeInsets.zero,
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              );
-                                                            }),
-                                                      );
-                                                    },
-                                                  ),
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              }),
+                                                        );
+                                                      },
+                                                    ),
+                                                  ],
                                                 )
                                                     : Column(
                                                   mainAxisSize:
@@ -446,10 +430,10 @@ class HomeScreen extends StatelessWidget {
                                                   CrossAxisAlignment
                                                       .center,
                                                   children: [
-                                                    const Icon(
+                                                    Icon(
                                                       MyIcons.bookmark_add,
                                                       color: iconsGrayColor,
-                                                      size: 55,
+                                                      size: 45.sp,
                                                     ),
                                                     Text(
                                                       'add_store_message'
@@ -469,9 +453,13 @@ class HomeScreen extends StatelessWidget {
                                                   ],
                                                 ),
                                                 buttons: [
-                                                  if (groups?.groups
-                                                      ?.isNotEmpty ??
-                                                      false)
+                                                  DialogButton(
+                                                    title: 'back'.tr(),
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ),
+                                                  if (groups?.groups?.isNotEmpty ?? false)
                                                     DialogButton(
                                                       title: 'edit'.tr(),
                                                       isBold: true,
@@ -486,12 +474,6 @@ class HomeScreen extends StatelessWidget {
                                                             ));
                                                       },
                                                     ),
-                                                  DialogButton(
-                                                    title: 'back'.tr(),
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    },
-                                                  ),
                                                 ],
                                               );
                                             }

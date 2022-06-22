@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:encryption_app/shared/components/constants.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';

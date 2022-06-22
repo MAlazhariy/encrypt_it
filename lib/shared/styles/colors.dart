@@ -21,6 +21,7 @@ Color smallButtonsContentColor(BuildContext context) {
   // & textSpan
   // & appBar title
   // & done button in edit screen
+  // & about app' app name
   if (Theme.of(context).brightness == Brightness.dark) {
     return const Color(0xFFECF0F3);
   }
@@ -31,6 +32,7 @@ Color dialogButtonColor(BuildContext context) {
   // dialog buttons
   // & add to store text fields background
   // & toast background
+  // & about app' icon logo
   if (Theme.of(context).brightness == Brightness.dark) {
     return const Color(0xFFECF0F3);
   }

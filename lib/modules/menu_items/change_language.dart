@@ -1,9 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_item.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
-import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
+import 'package:encryption_app/shared/components/components/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/shared/components/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 
 class ChangeLanguageMenuItem extends StatelessWidget {
@@ -19,7 +20,12 @@ class ChangeLanguageMenuItem extends StatelessWidget {
         showCustomDialog(
           title: 'change lang'.tr(),
           context: context,
-          content: Text('sure change lang'.tr()),
+          content: Text(
+            'sure change lang'.tr(),
+            style: TextStyle(
+              fontSize: 13.sp,
+            ),
+          ),
           buttons: [
             DialogButton(
                 title: 'cancel'.tr(),

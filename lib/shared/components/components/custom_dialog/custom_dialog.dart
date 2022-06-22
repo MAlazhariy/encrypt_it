@@ -11,8 +11,13 @@ void showCustomDialog({
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-          title: Text(title),
-          content: SizedBox(
+        title: Text(
+          title,
+          style: TextStyle(
+            fontSize: 14.5.sp,
+          ),
+        ),
+        content: SizedBox(
             width: 65.w,
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),

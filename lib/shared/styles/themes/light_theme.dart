@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
 
-import 'colors.dart';
+import '../colors.dart';
 
 ThemeData lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
@@ -22,12 +23,15 @@ ThemeData lightTheme = ThemeData(
   errorColor: const Color(0xFFFF4C7C),
   canvasColor: Colors.transparent,
   shadowColor: const Color(0xFF9E9E9E),
+  /// appBar
   appBarTheme: AppBarTheme(
     /// scaffold background color
     backgroundColor: const Color(0xFFECF0F3),
     foregroundColor: mainColor,
-    iconTheme: const IconThemeData(
+    // toolbarHeight: 23.sp,
+    iconTheme: IconThemeData(
       color: mainColor,
+      size: 16.sp,
     ),
     /// shadow color
     shadowColor: const Color(0xFF9E9E9E).withAlpha(50),
@@ -36,37 +40,21 @@ ThemeData lightTheme = ThemeData(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ),
-  ),
-);
-
-
-ThemeData darkTheme = ThemeData(
-  colorScheme: const ColorScheme.dark(
-    error: Color(0xFFFF4C7C), // The color to use for input validation errors, e.g. for InputDecoration.errorText.
-    onError: Colors.white, // A color that's clearly legible when drawn on error. [...]
-    shadow: Color(0xFF262626),
-  ),
-  scaffoldBackgroundColor: const Color(0xFF303135),
-  fontFamily: 'Cairo',
-  focusColor: mainColor,
-  primaryColor: mainColor,
-  primarySwatch: mainColor,
-  errorColor: const Color(0xFFFF4C7C),
-  canvasColor: Colors.transparent,
-  shadowColor: const Color(0xFF262626),
-  appBarTheme: const AppBarTheme(
-    /// scaffold background color
-    backgroundColor: Color(0xFF303135),
-    foregroundColor: Color(0xFFECF0F3),
-    iconTheme: IconThemeData(
-      color: Color(0xFFECF0F3),
+    /// title style
+    titleTextStyle: TextStyle(
+      fontSize: 15.sp,
+      fontFamily: 'Cairo',
+      color: mainColor,
     ),
-    /// shadow color
-    shadowColor: Color(0xFF262626),
-    /// status bar color
-    systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
+  ),
+  /// drawer width
+  drawerTheme: DrawerThemeData(
+    width: 70.w,
+  ),
+  /// text button
+  textTheme: TextTheme(
+    button: TextStyle(
+      fontSize: 12.sp,
     ),
   ),
 );

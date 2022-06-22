@@ -22,8 +22,14 @@ class LocalAuthApi {
 
   static Future<bool> hasBiometrics() async {
     try {
+      _auth.isDeviceSupported().then((value){
+        log('isDeviceSupported : $value');
+      });
       return await _auth.canCheckBiometrics;
     } on PlatformException {
+      return false;
+    } catch (e){
+      log('error in hasBiometrics(): ${e.toString()}');
       return false;
     }
   }
@@ -40,10 +46,12 @@ class LocalAuthApi {
 
   static Future<bool> authenticate() async {
     final isAvailable = await hasBiometrics();
-    if (!isAvailable) return false;
+
+    if (!isAvailable) {
+      return false;
+    }
 
     try {
-      // ignore: deprecated_member_use
       return await _auth.authenticateWithBiometrics(
         useErrorDialogs: true,
         stickyAuth: true,
@@ -54,8 +62,8 @@ class LocalAuthApi {
       log('PlatformException');
       return true;
     } catch (e){
-      log('exception in authenticate method: ${e.toString()}');
-      return false;
+      log('exception in authenticate(): ${e.toString()}');
+      return true;
     }
   }
 }

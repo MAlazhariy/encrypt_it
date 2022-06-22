@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/layout/home_screen.dart';
-import 'package:encryption_app/shared/components/constants.dart';
 import 'package:encryption_app/shared/network/local/on_board_cache.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +77,7 @@ class OnBoardScreenState extends State<OnBoardScreen> {
               //     ),
               //   ),
 
-              /// widget design
+              /// page design
               Expanded(
                 child: PageView.builder(
                   onPageChanged: (int value) {
@@ -101,65 +100,68 @@ class OnBoardScreenState extends State<OnBoardScreen> {
               /// main button
               LayoutBuilder(
                 builder: (_, constraints) {
-                  return MaterialButton(
-                    autofocus: true,
-                    onPressed: () {
-                      if (isLast) {
-                        BoardCache.boardHasOpened();
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomeScreen(),
-                          ),
-                          (route) => false,
-                        );
-                      } else {
-                        /// go to next page
-                        setState(() {
-                          boardController.nextPage(
-                            duration: const Duration(
-                              milliseconds: 700,
+                  return Tooltip(
+                    message: isLast ? 'get_started'.tr() : 'next'.tr(),
+                    child: MaterialButton(
+                      autofocus: true,
+                      onPressed: () {
+                        if (isLast) {
+                          BoardCache.boardHasOpened();
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreen(),
                             ),
-                            curve: Curves.fastLinearToSlowEaseIn,
+                            (route) => false,
                           );
-                        });
-                      }
-                    },
-                    color: isLast
-                        ? mainColor
-                        : darkBlueColor,
-                    minWidth: constraints.maxWidth - 30.w,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10.sp,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.sp),
-                    ),
-                    splashColor: Colors.white.withAlpha(25),
-                    highlightColor: Colors.white.withAlpha(10),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          isLast ? 'get_started'.tr() : 'next'.tr(),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12.sp,
-                            fontWeight:
-                                isLast ? FontWeight.w600 : FontWeight.w500,
+                        } else {
+                          /// go to next page
+                          setState(() {
+                            boardController.nextPage(
+                              duration: const Duration(
+                                milliseconds: 700,
+                              ),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                            );
+                          });
+                        }
+                      },
+                      color: isLast
+                          ? mainColor
+                          : darkBlueColor,
+                      minWidth: constraints.maxWidth - 30.w,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10.sp,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.sp),
+                      ),
+                      splashColor: Colors.white.withAlpha(25),
+                      highlightColor: Colors.white.withAlpha(10),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            isLast ? 'get_started'.tr() : 'next'.tr(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.sp,
+                              fontWeight:
+                                  isLast ? FontWeight.w600 : FontWeight.w500,
+                            ),
                           ),
-                        ),
-                        if (!isLast)
-                          SizedBox(
-                            width: 2.sp,
-                          ),
-                        if (!isLast)
-                          const Icon(
-                            Icons.navigate_next,
-                            color: Colors.white,
-                          ),
-                      ],
+                          if (!isLast)
+                            SizedBox(
+                              width: 2.sp,
+                            ),
+                          if (!isLast)
+                            const Icon(
+                              Icons.navigate_next,
+                              color: Colors.white,
+                            ),
+                        ],
+                      ),
                     ),
                   );
                 },

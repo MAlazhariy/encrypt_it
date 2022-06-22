@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # Do not change the first number of the app version
 #  unless the encryption algorithm has been changed.
-version: 6.2.3+14
+version: 6.2.4+15
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
@@ -38,7 +38,6 @@ dependencies:
   clipboard: ^0.1.3
   package_info: ^2.0.2
   smooth_page_indicator: ^1.0.0+2
-  #  device_preview: ^0.7.4
   sizer: ^2.0.15
   cupertino_icons: ^1.0.4
   easy_localization: ^3.0.1
@@ -52,6 +51,7 @@ dependencies:
   showcaseview: ^1.1.4
   local_auth: ^1.1.10
   flutter_inset_box_shadow: ^1.0.8
+#  device_preview: ^1.1.0
 
 
 

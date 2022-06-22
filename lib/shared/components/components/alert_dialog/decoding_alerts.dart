@@ -1,6 +1,6 @@
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/shared/components/components/alert_dialog/custom_alert_dialog.dart';
-import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
+import 'package:encryption_app/shared/components/components/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/shared/components/constants.dart';
 import 'package:encryption_app/shared/styles/colors.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';

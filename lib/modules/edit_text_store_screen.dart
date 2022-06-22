@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sizer/sizer.dart';
 
-import 'ads/interstitial_ad_bottomsheet_model.dart';
+import 'ads/interstitial_ad_edit_store_module.dart';
 
 class EditTextStoreScreen extends StatefulWidget {
   const EditTextStoreScreen({Key? key}) : super(key: key);
@@ -38,6 +38,9 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
           'sure_to_delete_group'.tr(
             args: [deletedGroup.groupName],
           ),
+          style: TextStyle(
+            fontSize: 12.sp,
+          ),
         ),
         buttons: [
           DialogButton(
@@ -55,10 +58,10 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                 SnackBar(
                   content: Text(
                     'group_deleted'.tr(args: [deletedGroup.groupName]),
-                    style: const TextStyle(
-                      // color: redColor,
+                    style: TextStyle(
                       fontFamily: 'Cairo',
                       fontWeight: FontWeight.w600,
+                      fontSize: 12.sp,
                     ),
                   ),
                   backgroundColor: redColor,
@@ -73,8 +76,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                       );
                       setState(() {
                         choosedGroup = deletedGroup.groupName;
-                        groupIndex =
-                            Groups.getGroupIndex(deletedGroup.groupName);
+                        groupIndex = deletedGroupIndex;
                       });
                     },
                   ),
@@ -109,7 +111,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
       title: 'edit_group_name'.tr(),
       content: _CustomInputTextForm(
         formGroupKey: formGroupKey,
-        messageTitleController: messageTitleController,
+        titleController: messageTitleController,
         hintText: group.groupName,
         validator: (String? value) {
           if (value?.isEmpty ?? true) {
@@ -163,7 +165,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
     final GroupContentModel contentModel = groups!
         .groups![Groups.getGroupIndex(choosedGroup!)].groupContent[titleIndex];
 
-    // delete from animated list
+    /// delete from animated list
     _animationKey.currentState?.removeItem(
       titleIndex,
       (context, animation) => SizeTransition(
@@ -179,19 +181,21 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
       ),
     );
 
+    /// delete from model then save changes to local db
     Groups.deleteTitle(
         groupIndex: groupIndex!,
         titleIndex: titleIndex,
       );
 
-    // show snack bar to restore deleted title
+    /// show snack bar to restore deleted title
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           'title_deleted'.tr(args: [content.title]),
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'Cairo',
             fontWeight: FontWeight.w600,
+            fontSize: 12.sp,
           ),
         ),
         elevation: 0,
@@ -222,7 +226,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
       title: 'edit_title_name'.tr(),
       content: _CustomInputTextForm(
         formGroupKey: formGroupKey,
-        messageTitleController: messageTitleController,
+        titleController: messageTitleController,
         hintText: groups!.groups![groupIndex!].groupContent[titleIndex].title,
         validator: (value) {
           if (value!.isEmpty) {
@@ -320,13 +324,16 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    if (choosedGroup == null)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 15),
-                        child: Text(
-                          'choose_group_to_edit_text_store'.tr(),
-                        ),
-                      ),
+                    // if (choosedGroup == null)
+                    //   Padding(
+                    //     padding: const EdgeInsets.only(bottom: 15),
+                    //     child: Text(
+                    //       'choose_group_to_edit_text_store'.tr(),
+                    //       style: TextStyle(
+                    //         fontSize: 12.sp,
+                    //       ),
+                    //     ),
+                    //   ),
 
                     // groups dropDown menu
                     Container(
@@ -354,7 +361,8 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                               color: titlesColor(context),
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w600,
-                              fontFamily: 'Cairo'),
+                              fontFamily: 'Cairo',
+                          ),
                         ),
                         alignment: AlignmentDirectional.centerStart,
                         // fill the parent width
@@ -370,6 +378,9 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                         ),
                         autofocus: true,
                         menuMaxHeight: 70.h,
+                        itemHeight: 22.sp >= kMinInteractiveDimension // 48
+                            ? 22.sp
+                            : 48,
                         dropdownColor: highLightColor(context, darkAlpha: 255),
                         icon: Icon(
                           Icons.arrow_drop_down,
@@ -576,13 +587,13 @@ class _CustomInputTextForm extends StatefulWidget {
   const _CustomInputTextForm({
     Key? key,
     required this.formGroupKey,
-    required this.messageTitleController,
+    required this.titleController,
     required this.validator,
     this.hintText,
   }) : super(key: key);
 
   final GlobalKey<FormState> formGroupKey;
-  final TextEditingController messageTitleController;
+  final TextEditingController titleController;
   final FormFieldValidator<String> validator;
   final String? hintText;
 
@@ -596,15 +607,20 @@ class _CustomInputTextFormState extends State<_CustomInputTextForm> {
     return Form(
       key: widget.formGroupKey,
       child: TextFormField(
-        controller: widget.messageTitleController,
+        controller: widget.titleController,
+        style: TextStyle(
+          fontSize: 12.sp,
+        ),
         autofocus: true,
         decoration: InputDecoration(
           hintText: widget.hintText ?? 'type_a_new_name'.tr(),
           hintStyle: TextStyle(
             color: titlesColor(context).withAlpha(100),
+            fontSize: 12.sp,
           ),
-          errorStyle: const TextStyle(
+          errorStyle: TextStyle(
             color: redColor,
+            fontSize: 10.sp,
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.sp),
@@ -713,9 +729,10 @@ class _TitleBuilder extends StatelessWidget {
                   );
                 }
               },
-              icon: const Icon(
+              icon: Icon(
                 MyIcons.delete,
                 color: iconsGrayColor,
+                size: 13.sp,
               ),
               splashRadius: 13.sp,
             ),
@@ -729,9 +746,10 @@ class _TitleBuilder extends StatelessWidget {
               onPressed: () {
                 editTitleName(titleIndex);
               },
-              icon: const Icon(
+              icon: Icon(
                 MyIcons.edit,
                 color: iconsGrayColor,
+                size: 13.sp,
               ),
               splashRadius: 13.sp,
               splashColor: smallButtonsContentColor(context).withAlpha(50),

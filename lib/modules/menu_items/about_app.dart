@@ -70,19 +70,25 @@ class AboutAppMenuItem extends StatelessWidget {
               ),
               Text(
                 'onBoard_subtitle_1'.tr(),
+                style: TextStyle(
+                  fontSize: 12.sp,
+                ),
               ),
 
-              // app idea
+              // how we protect your data
               SizedBox(height: 17.sp,),
               Text(
-                'app_idea'.tr(),
+                'how_protect'.tr(),
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 12.sp,
                 ),
               ),
               Text(
-                'app_idea_description'.tr(),
+                'how_protect_description'.tr(),
+                style: TextStyle(
+                  fontSize: 12.sp,
+                ),
               ),
 
               // // privacy policy
@@ -103,7 +109,7 @@ class AboutAppMenuItem extends StatelessWidget {
               //           fontSize: 12.sp,
               //           fontWeight: FontWeight.w500,
               //           fontFamily: 'Cairo',
-              //           color: Colors.grey[900],
+              //           color: titlesColor(context),
               //         ),
               //       ),
               //       TextSpan(
@@ -112,11 +118,11 @@ class AboutAppMenuItem extends StatelessWidget {
               //           fontSize: 12.sp,
               //           fontWeight: FontWeight.w600,
               //           fontFamily: 'Cairo',
-              //           color: mainColor,
+              //           color: smallButtonsContentColor(context),
               //           decoration: TextDecoration.underline,
               //         ),
               //         recognizer: TapGestureRecognizer()..onTap = () async {
-              //           await launch(Links.privacyPolicy);
+              //           await launchUrl(Links.privacyPolicy);
               //         },
               //       ),
               //       TextSpan(
@@ -124,7 +130,7 @@ class AboutAppMenuItem extends StatelessWidget {
               //         style: TextStyle(
               //           fontSize: 12.sp,
               //           fontWeight: FontWeight.w500,
-              //           color: Colors.grey[700],
+              //           color: titlesColor(context),
               //           fontFamily: 'Cairo',
               //         ),
               //       ),
@@ -145,6 +151,9 @@ class AboutAppMenuItem extends StatelessWidget {
               // ),
               // Text(
               //   'how_protect_description'.tr(),
+              //   style: TextStyle(
+              //     fontSize: 13.sp,
+              //   ),
               // ),
             ],
           ),

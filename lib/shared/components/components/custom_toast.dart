@@ -23,6 +23,7 @@ void showToast({
           ? Theme.of(context).scaffoldBackgroundColor
           : smallButtonsContentColor(context),
       fontWeight: FontWeight.w600,
+      fontSize: 10.sp,
     ),
     borderRadius: BorderRadius.circular(12.sp),
     clickClose: true,

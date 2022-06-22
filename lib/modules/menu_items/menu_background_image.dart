@@ -9,7 +9,6 @@ class MenuBG extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 20.h,
-      // todo: handle menu background header
       // decoration: const BoxDecoration(
       //   gradient: LinearGradient(
       //     colors: [

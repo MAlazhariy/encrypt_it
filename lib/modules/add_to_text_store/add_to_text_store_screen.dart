@@ -3,8 +3,8 @@ import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/helpers/text_store_helper.dart';
 import 'package:encryption_app/modules/add_to_text_store/cubit/store_cubit.dart';
 import 'package:encryption_app/modules/add_to_text_store/cubit/store_states.dart';
-import 'package:encryption_app/modules/ads/interstitial_ad_textstore_model.dart';
-import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
+import 'package:encryption_app/modules/ads/interstitial_ad_add_to_textstore_module.dart';
+import 'package:encryption_app/shared/components/components/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/shared/components/components/custom_toast.dart';
 import 'package:encryption_app/shared/components/components/dismiss_keyboard.dart';
 import 'package:encryption_app/shared/components/constants.dart';
@@ -32,7 +32,7 @@ class AddToTextStoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextStyle _infoStyle = TextStyle(
       overflow: TextOverflow.ellipsis,
-      fontSize: 8.sp,
+      fontSize: 8.5.sp,
       color: titlesColor(context),
       fontWeight: FontWeight.normal,
     );
@@ -50,14 +50,13 @@ class AddToTextStoreScreen extends StatelessWidget {
           StoreCubit cubit = StoreCubit.get(context);
 
           if (state is StoreInitState) {
-            log('load ad');
             AdInterstitialAddToStore.loadAd();
           }
 
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                'edit_text_store'.tr(),
+                'add_to_storage'.tr(),
               ),
               elevation: 0,
               leading: IconButton(
@@ -83,6 +82,7 @@ class AddToTextStoreScreen extends StatelessWidget {
                               'choose_or_add_group'.tr(),
                               style: TextStyle(
                                 color: titlesColor(context),
+                                fontSize: 10.sp,
                               ),
                             ),
                           ),
@@ -116,7 +116,12 @@ class AddToTextStoreScreen extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     groups?.groups?.isNotEmpty ?? false
-                                        ? Text('${'or'.tr()} ')
+                                        ? Text(
+                                      '${'or'.tr()} ',
+                                      style: TextStyle(
+                                        fontSize: 10.sp,
+                                      ),
+                                    )
                                         : Container(),
                                     Expanded(
                                       child: GroupTextForm(
@@ -151,6 +156,7 @@ class AddToTextStoreScreen extends StatelessWidget {
                                 'type_the_title'.tr(),
                                 style: TextStyle(
                                   color: titlesColor(context),
+                                  fontSize: 10.sp,
                                 ),
                               ),
                             ),
@@ -173,43 +179,36 @@ class AddToTextStoreScreen extends StatelessWidget {
                           const Divider(),
 
                           /// details
-                          // cipher text
                           Align(
                             alignment: AlignmentDirectional.centerStart,
                             child: SizedBox(
-                              width: 50.w,
-                              child: Text(
-                                '${'encrypted text'.tr()}: $encryptedText',
-                                style: _infoStyle,
+                              width: 85.w,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // cipher text
+                                  Text(
+                                    '${'encrypted text'.tr()}: $encryptedText',
+                                    style: _infoStyle,
+                                  ),
+
+                                  // group name
+                                  if (cubit.groupName.isNotEmpty)
+                                    Text(
+                                      '${'the_group'.tr()}: ${cubit.groupName}',
+                                      style: _infoStyle,
+                                    ),
+
+                                  // title
+                                  if (cubit.title.isNotEmpty && cubit.isGroupCompleted)
+                                    Text(
+                                      '${'the_title'.tr()}: ${cubit.title}',
+                                      style: _infoStyle,
+                                    ),
+                                ],
                               ),
                             ),
                           ),
-
-                          // group name
-                          if (cubit.groupName.isNotEmpty)
-                            Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: SizedBox(
-                                width: 50.w,
-                                child: Text(
-                                  '${'the_group'.tr()}: ${cubit.groupName}',
-                                  style: _infoStyle,
-                                ),
-                              ),
-                            ),
-
-                          // title
-                          if (cubit.title.isNotEmpty && cubit.isGroupCompleted)
-                            Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: SizedBox(
-                                width: 50.w,
-                                child: Text(
-                                  '${'the_title'.tr()}: ${cubit.title}',
-                                  style: _infoStyle,
-                                ),
-                              ),
-                            ),
                         ],
                       ),
                     ),
@@ -315,6 +314,9 @@ class GroupDropDown extends StatelessWidget {
         ),
         alignment: AlignmentDirectional.centerStart,
         isExpanded: true,
+        itemHeight: 22.sp >= kMinInteractiveDimension // 48
+            ? 22.sp
+            : 48,
         // fill the parent width
         // focusColor: mainColor,
         underline: Container(),
@@ -370,13 +372,23 @@ class GroupTextForm extends StatelessWidget {
       key: groupFormKey,
       child: TextFormField(
         controller: groupCtrl,
+        style: TextStyle(
+          fontSize: 12.sp,
+        ),
         decoration: InputDecoration(
           hintText: 'add_new_group'.tr(),
-          prefixIcon: const Icon(Icons.add),
+          hintStyle: TextStyle(
+            fontSize: 12.sp,
+          ),
+          prefixIcon: Icon(
+            Icons.add,
+            size: 12.sp,
+          ),
           border: InputBorder.none,
           errorBorder: const UnderlineInputBorder(),
-          errorStyle: const TextStyle(
+          errorStyle: TextStyle(
             color: redColor,
+            fontSize: 12.sp,
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.sp),
@@ -428,11 +440,18 @@ class TitleTextForm extends StatelessWidget {
       key: cubit.titleFormKey,
       child: TextFormField(
         controller: titleCtrl,
+        style: TextStyle(
+          fontSize: 12.sp,
+        ),
         decoration: InputDecoration(
           hintText: 'enter_title_here'.tr(),
+          hintStyle: TextStyle(
+            fontSize: 12.sp,
+          ),
           border: InputBorder.none,
-          errorStyle: const TextStyle(
+          errorStyle: TextStyle(
             color: redColor,
+            fontSize: 10.sp,
           ),
           errorBorder: const UnderlineInputBorder(),
           focusedErrorBorder: OutlineInputBorder(

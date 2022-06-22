@@ -1,6 +1,6 @@
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
-import 'package:encryption_app/shared/components/components/custom_dialog/dialog_buttons.dart';
+import 'package:encryption_app/shared/components/components/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_item.dart';
 import 'package:encryption_app/shared/components/constants.dart';
 import 'package:encryption_app/shared/network/local/operation_counter_cache.dart';
@@ -42,6 +42,9 @@ class ReportABugMenuItem extends StatelessWidget {
               SizedBox(height: 15.sp,),
               Text(
                 'report_bug_description'.tr(),
+                style: TextStyle(
+                  fontSize: 12.sp,
+                ),
               ),
             ],
           ),
