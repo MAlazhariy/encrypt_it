@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/helpers/text_store_helper.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
@@ -22,7 +24,6 @@ class EditTextStoreScreen extends StatefulWidget {
 class EditTextStoreScreenState extends State<EditTextStoreScreen> {
   String? choosedGroup;
   int? groupIndex;
-  final _animationKey = GlobalKey<AnimatedListState>();
 
   // todo: test this entire widget
 
@@ -162,30 +163,13 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
     required GroupContentModel content,
     required int titleIndex,
   }) {
-    final GroupContentModel contentModel = groups!
-        .groups![Groups.getGroupIndex(choosedGroup!)].groupContent[titleIndex];
-
-    /// delete from animated list
-    _animationKey.currentState?.removeItem(
-      titleIndex,
-      (context, animation) => SizeTransition(
-        sizeFactor: animation,
-        child: _TitleBuilder(
-          deleteChoosedGroup: deleteChoosedGroup,
-          deleteTitle: deleteTitle,
-          editTitleName: editTitleName,
-          groupIndex: groupIndex,
-          contentModel: contentModel,
-          titleIndex: titleIndex,
-        ),
-      ),
-    );
-
-    /// delete from model then save changes to local db
-    Groups.deleteTitle(
+    setState(() {
+      /// delete from model then save changes to local db
+      Groups.deleteTitle(
         groupIndex: groupIndex!,
         titleIndex: titleIndex,
       );
+    });
 
     /// show snack bar to restore deleted title
     ScaffoldMessenger.of(context).showSnackBar(
@@ -203,13 +187,13 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
           textColor: Theme.of(context).colorScheme.onPrimary,
           label: 'undo'.tr(),
           onPressed: () {
+            setState((){
               Groups.insertTitle(
                 groupIndex: groupIndex!,
                 titleIndex: titleIndex,
                 content: content,
               );
-
-              _animationKey.currentState?.insertItem(titleIndex);
+            });
           },
         ),
       ),
@@ -402,6 +386,8 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                             value != null
                                 ? groupIndex = Groups.getGroupIndex(value)
                                 : groupIndex = null;
+                            log('choosedGroup: $choosedGroup');
+                            log('groupIndex: $groupIndex');
                           });
                         },
                       ),
@@ -512,25 +498,19 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                       const SizedBox(height: 12),
 
                     /// Content Titles
-                    if (choosedGroup != null)
-                      AnimatedList(
-                        key: _animationKey,
-                        initialItemCount: groups!.groups![groupIndex!].groupContent.length,
-                        itemBuilder: (context, titleIndex, animation) {
-                          final GroupContentModel contentModel = groups!
-                              .groups![Groups.getGroupIndex(choosedGroup!)]
-                              .groupContent[titleIndex];
+                    if (choosedGroup != null && groupIndex != null)
+                      ListView.builder(
+                        itemCount: groups!.groups![groupIndex!].groupContent.length,
+                        itemBuilder: (context, titleIndex) {
+                          final contentModel = groups!.groups![groupIndex!].groupContent[titleIndex];
 
-                          return SizeTransition(
-                            sizeFactor: animation,
-                            child: _TitleBuilder(
-                              deleteChoosedGroup: deleteChoosedGroup,
-                              deleteTitle: deleteTitle,
-                              editTitleName: editTitleName,
-                              groupIndex: groupIndex,
-                              contentModel: contentModel,
-                              titleIndex: titleIndex,
-                            ),
+                          return _TitleBuilder(
+                            deleteChoosedGroup: deleteChoosedGroup,
+                            deleteTitle: deleteTitle,
+                            editTitleName: editTitleName,
+                            groupIndex: groupIndex,
+                            contentModel: contentModel,
+                            titleIndex: titleIndex,
                           );
                         },
                         shrinkWrap: true,
