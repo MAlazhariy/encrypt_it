@@ -1,6 +1,6 @@
 import 'package:encryption_app/modules/menu_items/report_ad_dialog.dart';
-import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
-import 'package:encryption_app/shared/components/components/custom_dialog/dialog_button.dart';
+import 'package:encryption_app/shared/components/components/custom_dialogs/custom_dialog/custom_dialog.dart';
+import 'package:encryption_app/shared/components/components/custom_dialogs/dialog_button.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_item.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart';

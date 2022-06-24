@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/shared/components/components/menu/menu_item.dart';
-import 'package:encryption_app/shared/components/components/rate_app.dart';
+import 'package:encryption_app/helpers/rate_app_helper.dart';
 import 'package:encryption_app/shared/styles/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 
