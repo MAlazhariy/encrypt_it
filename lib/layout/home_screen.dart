@@ -1,10 +1,13 @@
+// ignore_for_file: unused_import
+
 import 'package:clipboard/clipboard.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/cubit/app_cubit/cubit.dart';
 import 'package:encryption_app/cubit/app_cubit/states.dart';
 import 'package:encryption_app/decoding/versions/version_06.dart';
 import 'package:encryption_app/helpers/main_button_helper.dart';
-import 'package:encryption_app/models/text_store_model.dart';
+import 'package:encryption_app/models/text_store_model/group_model.dart';
+import 'package:encryption_app/models/text_store_model/text_store_model.dart';
 import 'package:encryption_app/helpers/bio_authentication_helper.dart';
 import 'package:encryption_app/modules/edit_text_store_screen.dart';
 import 'package:encryption_app/modules/my_app_drawer.dart';

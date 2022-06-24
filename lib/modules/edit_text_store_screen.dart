@@ -1,7 +1,8 @@
 
 import 'dart:developer';
 
-import 'package:encryption_app/models/text_store_model.dart';
+import 'package:encryption_app/models/text_store_model/group_content_model.dart';
+import 'package:encryption_app/models/text_store_model/group_model.dart';
 import 'package:encryption_app/helpers/text_store_helper.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/shared/components/components/custom_dialog/dialog_button.dart';

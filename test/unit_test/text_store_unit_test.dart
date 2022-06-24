@@ -1,5 +1,9 @@
+// ignore_for_file: unused_import
+
 import 'package:encryption_app/helpers/text_store_helper.dart';
-import 'package:encryption_app/models/text_store_model.dart';
+import 'package:encryption_app/models/text_store_model/group_content_model.dart';
+import 'package:encryption_app/models/text_store_model/group_model.dart';
+import 'package:encryption_app/models/text_store_model/text_store_model.dart';
 import 'package:encryption_app/shared/components/constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';

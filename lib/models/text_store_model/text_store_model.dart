@@ -20,6 +20,9 @@
 */
 
 
+import 'package:encryption_app/models/text_store_model/group_content_model.dart';
+import 'package:encryption_app/models/text_store_model/group_model.dart';
+
 class StoreModel {
   List<GroupModel>? groups;
 
@@ -66,24 +69,4 @@ class StoreModel {
       },
     );
   }
-}
-
-class GroupModel {
-  String groupName;
-  List<GroupContentModel> groupContent;
-
-  GroupModel({
-    required this.groupName,
-    required this.groupContent,
-  });
-}
-
-class GroupContentModel {
-  String title;
-  String ciphertext;
-
-  GroupContentModel({
-    required this.title,
-    required this.ciphertext,
-  });
 }

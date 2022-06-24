@@ -55,6 +55,8 @@ UTF-16 is a universal fixed-order encoding, but its use makes it easier to hack 
 - Bloc state management *(Cubit)*
 - Google play console
 - Clean code
+- SOLID principles
+  - Single repository
 - Model class
 - Localization *(Arabic & English)*
 - Local storage with Hive *(CRUD)*

@@ -1,4 +1,6 @@
-import 'package:encryption_app/models/text_store_model.dart';
+import 'package:encryption_app/models/text_store_model/group_content_model.dart';
+import 'package:encryption_app/models/text_store_model/group_model.dart';
+import 'package:encryption_app/models/text_store_model/text_store_model.dart';
 import 'package:encryption_app/shared/components/constants.dart';
 import 'package:encryption_app/shared/network/local/text_store_cache.dart';
 

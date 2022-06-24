@@ -1,5 +1,8 @@
+// ignore_for_file: unused_import
+
 import 'dart:developer';
-import 'package:encryption_app/models/text_store_model.dart';
+import 'package:encryption_app/models/text_store_model/group_content_model.dart';
+import 'package:encryption_app/models/text_store_model/text_store_model.dart';
 import 'package:encryption_app/helpers/text_store_helper.dart';
 import 'package:encryption_app/modules/add_to_text_store/cubit/store_cubit.dart';
 import 'package:encryption_app/modules/add_to_text_store/cubit/store_states.dart';
