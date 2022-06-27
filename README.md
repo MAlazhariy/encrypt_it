@@ -56,7 +56,8 @@ UTF-16 is a universal fixed-order encoding, but its use makes it easier to hack 
 - Google play console
 - Clean code
 - SOLID principles
-  - Single repository
+  - Single responsibility
+  - Open-closed
 - Model class
 - Localization *(Arabic & English)*
 - Local storage with Hive *(CRUD)*
@@ -81,7 +82,6 @@ UTF-16 is a universal fixed-order encoding, but its use makes it easier to hack 
 
 ---
 
-#### Note: The code on GitHub does not contain encryption algorithms.
-
+### Note: This code does not contain the encryption algorithms.
 
 
