@@ -2,12 +2,15 @@
 
 Encrypt It is an application that encrypts texts with complex mathematical equations and specific encryption algorithms with a complete change in the text letters and their arrangement, which gives more protection and security.
 
+#### Note: This code does not contain the encryption algorithms.
+
 
 ## content
 - [What is encryption?](#what-is-text-encryption)
 - [What is special about this app?](#what-is-special-about-this-app)
 - [Why not use UTF-16?](#why-not-use-utf-16)
 - [Skills used in the project](#skills-used-in-the-project)
+- [Screenshots](#screenshots)
 
 
 <img src="https://user-images.githubusercontent.com/87443208/165843645-4c46cfba-5069-4d03-9c7d-bd8c2b4dfa5e.gif" alt="" width="400"/>
@@ -24,7 +27,10 @@ Encryption is a process of converting plain text characters into other character
 - A **completely different** ciphertext every time the same text is encrypted (which gives more protection and security). 💪🔐
 - Encrypt and protect the text using a password typed by the user. The text can only be decrypted using that password. 🔑
 - Easily store encrypted texts in the ***Text Store*** for easy access at any time later and decrypt them using their password. ⚡
-- Simple interface and ease of use. 🔥👍
+- Simple interface and ease of use. 👍
+
+### [Try the app now 🔥](https://play.google.com/store/apps/details?id=malazhariy.encryptIt)
+
 
 
 .
@@ -40,11 +46,6 @@ UTF-16 is a universal fixed-order encoding, but its use makes it easier to hack 
 **So I have adopted the second case in my application to give more protection and security in the encryption process.**
 
 
-### [Try the app now!](https://play.google.com/store/apps/details?id=malazhariy.encryptIt)
-
-[<img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google play icon" width="210"/>](https://play.google.com/store/apps/details?id=malazhariy.encryptIt)
-
----
 
 ## Skills used in the project:
 
@@ -80,8 +81,10 @@ UTF-16 is a universal fixed-order encoding, but its use makes it easier to hack 
     - Neumorphism
     - Custom icons
 
----
+## Screenshots:
 
-### Note: This code does not contain the encryption algorithms.
+<img src="https://user-images.githubusercontent.com/87443208/176006539-c544ba8b-8864-4225-9210-7218de166648.jpg" alt="" width="230"/> <img src="https://user-images.githubusercontent.com/87443208/176006573-1901d1b0-3eef-444b-bac0-0439b4a7c69d.jpg" alt="" width="230"/> <img src="https://user-images.githubusercontent.com/87443208/176006612-53e92730-7285-4a66-98fe-0575dcb48c77.jpg" alt="" width="230"/> <img src="https://user-images.githubusercontent.com/87443208/176006649-1bcb11f7-3039-4681-9550-55c7012546de.jpg" alt="" width="230"/>
+
+[<img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google play icon" width="230"/>](https://play.google.com/store/apps/details?id=malazhariy.encryptIt)
 
 
