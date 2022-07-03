@@ -1,6 +1,6 @@
 # Encrypt It
 
-Encrypt It is an application that encrypts texts with complex mathematical equations and specific encryption algorithms with a complete change in the text letters and their arrangement, which gives more protection and security.
+Encrypt It is an application that encrypts texts with unique encryption algorithms with a complete change in text letters and their arrangement, which gives more protection and security.
 
 #### Note: This code does not contain the encryption algorithms.
 
