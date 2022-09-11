@@ -52,6 +52,8 @@ class LocalAuthApi {
     }
 
     try {
+      // todo: deprecated function
+      // ignore: deprecated_member_use
       return await _auth.authenticateWithBiometrics(
         useErrorDialogs: true,
         stickyAuth: true,

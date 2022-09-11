@@ -1,23 +1,16 @@
-import 'dart:developer';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/controllers/material_cubit/material_cubit.dart';
 import 'package:encryption_app/controllers/material_cubit/material_states.dart';
 import 'package:encryption_app/view/screens/on_board/on_board_screen.dart';
-import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/network/local/on_board_cache.dart';
-import 'package:encryption_app/network/local/text_store_cache.dart';
 import 'package:encryption_app/utils/style/themes/dark_theme.dart';
 import 'package:encryption_app/utils/style/themes/light_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sizer/sizer.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'controllers/app_cubit/cubit.dart';
 import 'view/screens/home/home_screen.dart';
-import 'utils/constants.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

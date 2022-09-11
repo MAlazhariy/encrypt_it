@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_for_elements_to_map_fromiterable
+
 import 'package:encryption_app/models/group_content_model.dart';
 import 'package:encryption_app/models/group_model.dart';
 
