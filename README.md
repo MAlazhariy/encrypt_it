@@ -49,36 +49,36 @@ UTF-16 is a universal fixed-order encoding, but its use makes it easier to hack 
 
 ## Skills used in the project:
 
-- Flutter
+- Flutter & Dart
 - OOP
-- Testing
-    - Unit testing
-- Bloc state management *(Cubit)*
-- Google play console
+- State management *(Cubit)*
+- MVC architecture pattern
+- Responsive UI
+- Localization
 - Clean code
 - SOLID principles
   - Single responsibility
   - Open-closed
-- Model class
-- Localization *(Arabic & English)*
-- Local storage with Hive *(CRUD)*
+- Testing
+    - Unit testing
 - Handling alerts *(user-level Alert dialogs)*
-- Responsive UI
+- Local storage *(Hive)*
 - Dark & Light themes
-- Biometric authentication
+- Google play console
 - Google Admob ADs
     - Banner ad
     - Interstitial ad
     - Rewarded ad
     - Native ad
+- Biometric authentication
 - First-Open showcase
 - On-boarding screen
 - Native splash screen
 - Graphic design
-    - UX & UI principles
-    - Logo design
-    - Animated gifs
     - Neumorphism
+    - Logo design
+    - UI-UX principles
+    - Animated gifs
     - Custom icons
 
 ## Screenshots:

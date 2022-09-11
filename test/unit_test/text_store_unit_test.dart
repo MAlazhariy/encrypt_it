@@ -1,10 +1,10 @@
 // ignore_for_file: unused_import
 
-import 'package:encryption_app/helpers/text_store_helper.dart';
-import 'package:encryption_app/models/text_store_model/group_content_model.dart';
-import 'package:encryption_app/models/text_store_model/group_model.dart';
-import 'package:encryption_app/models/text_store_model/text_store_model.dart';
-import 'package:encryption_app/shared/components/constants.dart';
+import 'package:encryption_app/utils/helpers/text_store_helper.dart';
+import 'package:encryption_app/models/group_content_model.dart';
+import 'package:encryption_app/models/group_model.dart';
+import 'package:encryption_app/models/text_store_model.dart';
+import 'package:encryption_app/utils/constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -17,21 +17,21 @@ void main() async {
 
     test('is group exists', () {
       groups = null;
-      final isGroupExists = Groups.isGroupExists('test');
+      final isGroupExists = StoreHelper.isGroupExists('test');
       expect(isGroupExists, false);
     });
 
     test('group index', () {
       groups = null;
-      final groupIndex = Groups.getGroupIndex('test');
+      final groupIndex = StoreHelper.getGroupIndex('test');
       expect(groupIndex, -1);
     });
 
     test('is title exists', () {
       groups = null;
-      final isTitleExists = Groups.isTitleExists(
+      final isTitleExists = StoreHelper.isTitleExists(
         title: 'testTitle',
-        groupIndex: Groups.getGroupIndex('test'),
+        groupIndex: StoreHelper.getGroupIndex('test'),
       );
       expect(isTitleExists, false);
     });
@@ -39,7 +39,7 @@ void main() async {
     test('add title to group', () {
       groups = null;
 
-      Groups.addTitleToGroup(
+      StoreHelper.addTitleToGroup(
         groupName: 'test',
         groupModel: GroupContentModel(
           title: 'testTitle',
@@ -65,43 +65,43 @@ void main() async {
       ciphertext: 'ciphertext',
     );
 
-    Groups.addTitleToGroup(
+    StoreHelper.addTitleToGroup(
       groupName: groupName,
       groupModel: groupModel,
     );
 
     test('is group exists', () {
-      bool isGroupExists = Groups.isGroupExists(groupName);
+      bool isGroupExists = StoreHelper.isGroupExists(groupName);
       expect(isGroupExists, true);
 
-      isGroupExists = Groups.isGroupExists('different group');
+      isGroupExists = StoreHelper.isGroupExists('different group');
       expect(isGroupExists, false);
     });
 
     test('is title exists', () {
-      bool isTitleExists = Groups.isTitleExists(
+      bool isTitleExists = StoreHelper.isTitleExists(
         title: groupModel.title,
-        groupIndex: Groups.getGroupIndex(groupName),
+        groupIndex: StoreHelper.getGroupIndex(groupName),
       );
       expect(isTitleExists, true);
 
-      isTitleExists = Groups.isTitleExists(
+      isTitleExists = StoreHelper.isTitleExists(
         title: groupModel.title,
-        groupIndex: Groups.getGroupIndex('different group'),
+        groupIndex: StoreHelper.getGroupIndex('different group'),
       );
       expect(isTitleExists, false);
     });
 
     test('get group index', () {
-      int groupIndex = Groups.getGroupIndex(groupName);
+      int groupIndex = StoreHelper.getGroupIndex(groupName);
       expect(groupIndex, 0);
 
-      groupIndex = Groups.getGroupIndex('different group');
+      groupIndex = StoreHelper.getGroupIndex('different group');
       expect(groupIndex, -1);
     });
 
     test('add text to exists group', () {
-      Groups.addTitleToGroup(
+      StoreHelper.addTitleToGroup(
         groupName: groupName,
         groupModel: GroupContentModel(
           title: 'another title added',
@@ -115,14 +115,14 @@ void main() async {
           groups!.groups!.first.groupContent.last.title, 'another title added');
 
       // delete added title
-      Groups.deleteTitle(
-        groupIndex: Groups.getGroupIndex(groupName),
+      StoreHelper.deleteTitle(
+        groupIndex: StoreHelper.getGroupIndex(groupName),
         titleIndex: groups!.groups!.first.groupContent.length - 1,
       );
     });
 
     test('add text to not exists group', () {
-      Groups.addTitleToGroup(
+      StoreHelper.addTitleToGroup(
         groupName: 'different group',
         groupModel: GroupContentModel(
           title: 'new title',
@@ -136,7 +136,7 @@ void main() async {
       expect(groups!.groups!.last.groupContent.last.title, 'new title');
 
       // delete added title
-      Groups.deleteGroup(Groups.getGroupIndex('different group'));
+      StoreHelper.deleteGroup(StoreHelper.getGroupIndex('different group'));
     });
 
     test('insert a group to specific index then delete it', () {
@@ -152,7 +152,7 @@ void main() async {
 
       expect(groups!.groups!.length, 1);
 
-      Groups.insertGroup(
+      StoreHelper.insertGroup(
         groupIndex: 0,
         groupModel: group,
       );
@@ -163,22 +163,22 @@ void main() async {
           group.groupContent.first.title);
       expect(groups!.groups!.last.groupName, groupName);
 
-      Groups.deleteGroup(0);
+      StoreHelper.deleteGroup(0);
 
       expect(groups!.groups!.first.groupName, groupName);
     });
 
     test('delete the group then restore it', () {
-      final deletedGroupIndex = Groups.getGroupIndex(groupName);
+      final deletedGroupIndex = StoreHelper.getGroupIndex(groupName);
       final deletedGroup = groups!.groups![deletedGroupIndex];
 
       expect(groups!.groups!.length, 1);
 
-      Groups.deleteGroup(deletedGroupIndex);
+      StoreHelper.deleteGroup(deletedGroupIndex);
 
       expect(groups!.groups!.length, 0);
 
-      Groups.insertGroup(
+      StoreHelper.insertGroup(
         groupIndex: deletedGroupIndex,
         groupModel: deletedGroup,
       );
@@ -193,7 +193,7 @@ void main() async {
       expect(groups!.groups!.length, 1);
 
       // add a title
-      Groups.addTitleToGroup(
+      StoreHelper.addTitleToGroup(
         groupName: groupName,
         groupModel: GroupContentModel(
           title: 'title two',
@@ -205,15 +205,15 @@ void main() async {
       expect(groups!.groups!.first.groupContent[1].title, 'title two');
 
       // delete the title
-      Groups.deleteTitle(
-        groupIndex: Groups.getGroupIndex(groupName),
+      StoreHelper.deleteTitle(
+        groupIndex: StoreHelper.getGroupIndex(groupName),
         titleIndex: 1,
       );
 
       expect(groups!.groups!.first.groupContent.length, 1);
 
       // restore the title
-      Groups.insertTitle(
+      StoreHelper.insertTitle(
         groupIndex: 0,
         titleIndex: 1,
         content: GroupContentModel(
@@ -225,28 +225,28 @@ void main() async {
       expect(groups!.groups!.first.groupContent[1].title, 'title two');
 
       // restore changes - delete the added title
-      Groups.deleteTitle(
+      StoreHelper.deleteTitle(
         groupIndex: 0,
         titleIndex: 1,
       );
     });
 
     test('edit group name', () {
-      Groups.changeGroupName(
+      StoreHelper.changeGroupName(
         groupIndex: 0,
         newName: 'newName',
       );
       expect(groups!.groups!.first.groupName, 'newName');
 
       // restore changes
-      Groups.changeGroupName(
+      StoreHelper.changeGroupName(
         groupIndex: 0,
         newName: groupName,
       );
     });
 
     test('edit title name', () {
-      Groups.editTitle(
+      StoreHelper.editTitle(
         groupIndex: 0,
         titleIndex: 0,
         newTitle: 'newTitle',
@@ -255,7 +255,7 @@ void main() async {
       expect(groups!.groups!.first.groupContent.first.title, 'newTitle');
 
       // restore changes
-      Groups.editTitle(
+      StoreHelper.editTitle(
         groupIndex: 0,
         titleIndex: 0,
         newTitle: 'testTitle',
@@ -264,5 +264,4 @@ void main() async {
       expect(groups!.groups!.first.groupContent.first.title, 'testTitle');
     });
   });
-
 }

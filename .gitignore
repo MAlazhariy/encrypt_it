@@ -49,7 +49,7 @@ app.*.map.json
 /assets/images/
 /android/app/proguard-rules.pro
 /android/app/src/main/AndroidManifest.xml
-/lib/helpers/ad_helper.dart
+/lib/utils/helpers/ad_helper.dart
 android/*.jks
 
 # Encryption algorithms
@@ -57,6 +57,5 @@ android/*.jks
 /lib/decoding/encrypt_abstract.dart
 
 # My icons
-/lib/shared/styles/my_icons_icons.dart
 /fonts/MyIcons.ttf
-/lib/helpers/ad_helper.dart
+/lib/utils/helpers/ad_helper.dart

@@ -7,24 +7,24 @@
 import 'dart:developer';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:encryption_app/cubit/material_cubit/material_cubit.dart';
-import 'package:encryption_app/cubit/material_cubit/material_states.dart';
-import 'package:encryption_app/layout/on_board/on_board_screen.dart';
-import 'package:encryption_app/models/text_store_model/text_store_model.dart';
-import 'package:encryption_app/shared/network/local/on_board_cache.dart';
-import 'package:encryption_app/shared/network/local/text_store_cache.dart';
-import 'package:encryption_app/shared/styles/themes/dark_theme.dart';
-import 'package:encryption_app/shared/styles/themes/light_theme.dart';
+import 'package:encryption_app/controllers/material_cubit/material_cubit.dart';
+import 'package:encryption_app/controllers/material_cubit/material_states.dart';
+import 'package:encryption_app/my_app.dart';
+import 'package:encryption_app/view/screens/on_board/on_board_screen.dart';
+import 'package:encryption_app/models/text_store_model.dart';
+import 'package:encryption_app/network/local/on_board_cache.dart';
+import 'package:encryption_app/network/local/text_store_cache.dart';
+import 'package:encryption_app/utils/style/themes/dark_theme.dart';
+import 'package:encryption_app/utils/style/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sizer/sizer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'cubit/app_cubit/cubit.dart';
-import 'layout/home_screen.dart';
-import 'shared/components/constants.dart';
-
+import 'controllers/app_cubit/cubit.dart';
+import 'view/screens/home/home_screen.dart';
+import 'utils/constants.dart';
 
 void main() async {
   // insure the future methods are executed first before run app
@@ -45,7 +45,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   await Hive.initFlutter();
-  await Hive.openBox('myBox');
+  await Hive.openLazyBox('myBox');
 
   groups = StoreModel.fromJson(TextStoreCache.getGroups());
 
@@ -58,54 +58,4 @@ void main() async {
       child: const MyApp(),
     ),
   );
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => MaterialCubit()),
-        BlocProvider(create: (context) => AppCubit()),
-      ],
-      child: Sizer(
-          builder: (context, orientation, deviceType) {
-
-            return BlocConsumer<MaterialCubit, MaterialStates>(
-              listener: (context, state){},
-              builder: (context, state){
-                return MaterialApp(
-                  // localization methods
-                  localizationsDelegates: context.localizationDelegates,
-                  supportedLocales: context.supportedLocales,
-                  locale: context.locale,
-                  // locale: DevicePreview.locale(context), // Devise preview
-
-                  debugShowCheckedModeBanner: false,
-                  builder: (context, myWidget) {
-                    myWidget = BotToastInit()(context, myWidget);
-                    // myWidget = DevicePreview.appBuilder(context, myWidget);
-                    return myWidget;
-                  },
-                  navigatorObservers: [BotToastNavigatorObserver()],
-
-                  home: BoardCache.isBoardSkipped()
-                      ? HomeScreen()
-                      : const OnBoardScreen(),
-
-                  theme: lightTheme,
-                  darkTheme: darkTheme,
-                  themeMode: MaterialCubit.get(context).isDarkMode == null
-                      ? ThemeMode.system
-                      : MaterialCubit.get(context).isDarkMode! ? ThemeMode.dark : ThemeMode.light,
-                );
-              },
-            );
-          },
-        ),
-      );
-  }
 }
