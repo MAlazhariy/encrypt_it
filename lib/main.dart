@@ -45,7 +45,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   await Hive.initFlutter();
-  await Hive.openLazyBox('myBox');
+  await Hive.openBox('myBox');
 
   groups = StoreModel.fromJson(TextStoreCache.getGroups());
 
