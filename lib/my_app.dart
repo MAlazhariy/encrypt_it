@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
                 supportedLocales: context.supportedLocales,
                 locale: context.locale,
                 // locale: DevicePreview.locale(context), // Devise preview
+                title: 'Encrypt It',
 
                 debugShowCheckedModeBanner: false,
                 builder: (context, myWidget) {
