@@ -42,6 +42,7 @@ void invalidCharactersAlert({
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Cairo',
+                  color: titlesColor(context),
                   // color: Colors.grey[900],
                 ),
               ),
