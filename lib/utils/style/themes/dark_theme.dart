@@ -15,7 +15,7 @@ ThemeData darkTheme = ThemeData(
   fontFamily: 'Cairo',
   focusColor: mainColor,
   primaryColor: mainColor,
-  primarySwatch: mainColor,
+  primarySwatch: mainSwatch,
   errorColor: const Color(0xFFFF4C7C),
   canvasColor: Colors.transparent,
   shadowColor: const Color(0xFF262626),

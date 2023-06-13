@@ -19,7 +19,7 @@ ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: const Color(0xFFECF0F3),
   fontFamily: 'Cairo',
   primaryColor: mainColor,
-  primarySwatch: mainColor,
+  primarySwatch: mainSwatch,
   errorColor: const Color(0xFFFF4C7C),
   canvasColor: Colors.transparent,
   shadowColor: const Color(0xFF9E9E9E),

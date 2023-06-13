@@ -58,23 +58,23 @@ const Color iconsGrayColor = Color(0xFF98989a);
 // 000032
 // 0000ff
 const darkBlueColor = Color(0xFF3A3A3C);
-const mainColor = Colors.deepPurple;
-// const mainSwatch = MaterialColor(
-//   0xff0340F3,
-//   // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch.
-//   <int, Color>{
-//     50: Color(0xff033adb), //10%
-//     100: Color(0xff0233c2), //20%
-//     200: Color(0xff022daa), //30%
-//     300: Color(0xff022692), //40%
-//     400: Color(0xff02207a), //50%
-//     500: Color(0xff011a61), //60%
-//     600: Color(0xff011349), //70%
-//     700: Color(0xff010d31), //80%
-//     800: Color(0xff000618), //90%
-//     900: Color(0xff000000), //100%
-//   },
-// );
+const mainColor = Colors.black;
+final mainSwatch = MaterialColor(
+  mainColor.value,
+  // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch.
+  <int, Color>{
+    50: mainColor.withOpacity(0.1), //10%
+    100: mainColor.withOpacity(0.2), //20%
+    200: mainColor.withOpacity(0.3), //30%
+    300: mainColor.withOpacity(0.4), //40%
+    400: mainColor.withOpacity(0.5), //50%
+    500: mainColor.withOpacity(0.6), //60%
+    600: mainColor.withOpacity(0.7), //70%
+    700: mainColor.withOpacity(0.8), //80%
+    800: mainColor.withOpacity(0.9), //90%
+    900: mainColor.withOpacity(1), //100%
+  },
+);
 
 const Color redColor = Color(0xFFFF4C7C);
 const Color encryptedTextColor = redColor;
