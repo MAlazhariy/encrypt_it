@@ -1,8 +1,6 @@
 name: encryption_app
 description: Encrypt text with password
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-# Do not change the first number of the app version
-#  unless the encryption algorithm has been changed.
 version: 6.4.6+18
 
 environment:
@@ -26,7 +24,6 @@ dependencies:
   share_plus: ^4.0.4
   selectable_autolink_text: ^2.3.0
   in_app_review: ^2.0.4
-  google_mobile_ads: ^1.2.0
   showcaseview: ^1.1.4
   local_auth: ^1.1.10
   flutter_inset_box_shadow: ^1.0.8

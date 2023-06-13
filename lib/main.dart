@@ -19,7 +19,6 @@ import 'package:encryption_app/utils/style/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sizer/sizer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'controllers/app_cubit/cubit.dart';
@@ -30,12 +29,6 @@ void main() async {
   // insure the future methods are executed first before run app
   WidgetsFlutterBinding.ensureInitialized();
 
-  // RequestConfiguration config = RequestConfiguration(
-  //   testDeviceIds: <String>['4A92A9DE35E8C65AF79B64ABF57D1274'],
-  // );
-  // MobileAds.instance.updateRequestConfiguration(config);
-  MobileAds.instance.initialize();
-
   // prevent device orientation changes & force portrait
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]
@@ -44,6 +37,7 @@ void main() async {
   // Bloc.observer = MyBlocObserver();
   await EasyLocalization.ensureInitialized();
 
+  // todo: remove
   await Hive.initFlutter();
   await Hive.openBox('myBox');
 

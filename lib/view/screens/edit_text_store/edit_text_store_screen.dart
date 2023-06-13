@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../widgets/ads/interstitial_ad_edit_store_module.dart';
 
 class EditTextStoreScreen extends StatefulWidget {
   const EditTextStoreScreen({Key? key}) : super(key: key);
@@ -255,21 +254,14 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
     );
   }
 
-  void doneAndBack() {
-    Navigator.pop(context);
-    AdInterstitialEditStore.showAd();
-  }
-
   @override
   void initState() {
     super.initState();
-    AdInterstitialEditStore.loadAd();
   }
 
   @override
   void dispose() {
     super.dispose();
-    AdInterstitialEditStore.disposeAd();
   }
 
   @override
@@ -289,7 +281,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            doneAndBack();
+            Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back),
         ),
@@ -536,7 +528,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
               ),
               child: MaterialButton(
                 onPressed: () {
-                  doneAndBack();
+                  Navigator.pop(context);
                 },
                 color: smallButtonsContentColor(context),
                 minWidth: 50.w,

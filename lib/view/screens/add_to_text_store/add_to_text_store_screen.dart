@@ -6,7 +6,6 @@ import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/utils/helpers/text_store_helper.dart';
 import 'package:encryption_app/controllers/store_cubit/store_cubit.dart';
 import 'package:encryption_app/controllers/store_cubit/store_states.dart';
-import 'package:encryption_app/view/widgets/ads/interstitial_ad_add_to_textstore_module.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/view/widgets/custom_toast.dart';
 import 'package:encryption_app/utils/helpers/dismiss_keyboard.dart';
@@ -50,10 +49,6 @@ class AddToTextStoreScreen extends StatelessWidget {
         },
         builder: (context, state) {
           StoreCubit cubit = StoreCubit.get(context);
-
-          if (state is StoreInitState) {
-            AdInterstitialAddToStore.loadAd();
-          }
 
           return Scaffold(
             appBar: AppBar(
@@ -492,14 +487,6 @@ class TitleTextForm extends StatelessWidget {
   }
 }
 
-void doneAndBack(BuildContext context) {
-  Navigator.pop(context);
-
-  Future.delayed(const Duration(milliseconds: 500)).then((_) {
-    AdInterstitialAddToStore.showAd();
-  });
-}
-
 void back(BuildContext context) {
   Navigator.pop(context);
 }
@@ -524,5 +511,5 @@ void onSuccessfulAdd({
     mSeconds: 3000,
   );
 
-  doneAndBack(context);
+  Navigator.pop(context);
 }

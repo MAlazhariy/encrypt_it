@@ -11,7 +11,6 @@ import 'package:encryption_app/models/group_model.dart';
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/utils/helpers/bio_authentication_helper.dart';
 import 'package:encryption_app/view/screens/edit_text_store/edit_text_store_screen.dart';
-import 'package:encryption_app/view/widgets/ads/banner_ad_module.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/view/widgets/drawer/my_app_drawer.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/dialog_button.dart';
@@ -622,7 +621,6 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      if (OperationCounterCache.getCounter() >= 2) const AdBanner(),
                     ],
                   ),
                 ),
