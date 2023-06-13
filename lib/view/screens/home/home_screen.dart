@@ -5,11 +5,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/controllers/app_cubit/cubit.dart';
 import 'package:encryption_app/controllers/app_cubit/states.dart';
 import 'package:encryption_app/decoding/versions/version_06.dart';
+import 'package:encryption_app/network/local/operation_counter_cache.dart';
 import 'package:encryption_app/utils/helpers/main_button_helper.dart';
 import 'package:encryption_app/models/group_model.dart';
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/utils/helpers/bio_authentication_helper.dart';
 import 'package:encryption_app/view/screens/edit_text_store/edit_text_store_screen.dart';
+import 'package:encryption_app/view/widgets/ads/banner_ad_module.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/view/widgets/drawer/my_app_drawer.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/dialog_button.dart';
@@ -63,17 +65,12 @@ class HomeScreen extends StatelessWidget {
               }
 
               // main showcase
-              if (state is AppGetVersionState &&
-                  !ShowCaseCache.isMainShowCaseViewed()) {
+              if (state is AppGetVersionState && !ShowCaseCache.isMainShowCaseViewed()) {
                 WidgetsBinding.instance.addPostFrameCallback(
                   (_) => Future.delayed(
                     const Duration(milliseconds: 100),
-                    () => ShowCaseWidget.of(context)?.startShowCase([
-                      _textFieldShowcase,
-                      _passwordFieldShowcase,
-                      _encryptButtonShowcase,
-                      _decryptButtonShowcase
-                    ]),
+                    () => ShowCaseWidget.of(context)
+                        ?.startShowCase([_textFieldShowcase, _passwordFieldShowcase, _encryptButtonShowcase, _decryptButtonShowcase]),
                   ),
                 );
 
@@ -81,8 +78,7 @@ class HomeScreen extends StatelessWidget {
               }
 
               // text field showcase
-              if (cubit.isCurrentFieldText &&
-                  !ShowCaseCache.isButtonsShowCaseViewed()) {
+              if (cubit.isCurrentFieldText && !ShowCaseCache.isButtonsShowCaseViewed()) {
                 WidgetsBinding.instance.addPostFrameCallback(
                   (_) => ShowCaseWidget.of(context)?.startShowCase([
                     _pasteShowcase,
@@ -97,9 +93,7 @@ class HomeScreen extends StatelessWidget {
 
               // this function activate or deactivate main buttons
               void activeButtons([validate = true]) {
-                cubit.setButtonsPressable((cubit.messageCtrl.text.isNotEmpty &&
-                    cubit.passCtrl.text.isNotEmpty &&
-                    validate));
+                cubit.setButtonsPressable((cubit.messageCtrl.text.isNotEmpty && cubit.passCtrl.text.isNotEmpty && validate));
               }
 
               // this fuction paste the text in its field
@@ -107,8 +101,7 @@ class HomeScreen extends StatelessWidget {
               void pasteAll() {
                 FlutterClipboard.paste().then((value) {
                   // ensure if value contains ciphertext & password
-                  if (value.startsWith('Ciphertext: "') &&
-                      value.contains('\nPassword: "')) {
+                  if (value.startsWith('Ciphertext: "') && value.contains('\nPassword: "')) {
                     /// paste message in its area
                     cubit.messageCtrl.text = value.substring(
                       value.indexOf('Ciphertext: "') + 13,
@@ -124,8 +117,7 @@ class HomeScreen extends StatelessWidget {
                     activeButtons(undefined.isEmpty);
 
                     /// set cursor to the end of text field
-                    cubit.messageCtrl.selection = TextSelection.fromPosition(
-                        TextPosition(offset: cubit.messageCtrl.text.length));
+                    cubit.messageCtrl.selection = TextSelection.fromPosition(TextPosition(offset: cubit.messageCtrl.text.length));
 
                     /// Show successful toast
                     showToast(
@@ -160,10 +152,10 @@ class HomeScreen extends StatelessWidget {
 
                 drawer: const MyAppDrawer(),
 
-                drawerScrimColor:
-                    Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white24 // dark mode
-                        : Colors.black54, // light mode
+                drawerScrimColor: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white24 // dark mode
+                    : Colors.black54,
+                // light mode
 
                 // makes keyboard shown over the bottom sheet
                 resizeToAvoidBottomInset: false,
@@ -187,8 +179,7 @@ class HomeScreen extends StatelessWidget {
                               CustomShowcase(
                                 globalKey: _textFieldShowcase,
                                 title: 'showcase_text_field_title'.tr(),
-                                description:
-                                    'showcase_text_field_description'.tr(),
+                                description: 'showcase_text_field_description'.tr(),
                                 child: CustomTextField(
                                   theKey: textKey,
                                   controller: cubit.messageCtrl,
@@ -203,8 +194,7 @@ class HomeScreen extends StatelessWidget {
                                   onTab: () {
                                     cubit.setCurrentFieldToText();
                                   },
-                                  isEnabled:
-                                      (!cubit.isCurrentFieldNoneAndInactivated),
+                                  isEnabled: (!cubit.isCurrentFieldNoneAndInactivated),
                                 ),
                               ),
                               if (cubit.isCurrentFieldText)
@@ -226,9 +216,7 @@ class HomeScreen extends StatelessWidget {
                                       CustomShowcase(
                                         globalKey: _clearAllShowcase,
                                         // title: 'clear all'.tr(),
-                                        description:
-                                            'showcase_clearAll_description'
-                                                .tr(),
+                                        description: 'showcase_clearAll_description'.tr(),
                                         child: SmallButton(
                                             icon: MyIcons.clear_all,
                                             title: 'clear all'.tr(),
@@ -247,8 +235,7 @@ class HomeScreen extends StatelessWidget {
                                       /// clear
                                       CustomShowcase(
                                         globalKey: _clearShowcase,
-                                        description:
-                                            'showcase_clear_description'.tr(),
+                                        description: 'showcase_clear_description'.tr(),
                                         // title: 'clear'.tr(),
                                         child: SmallButton(
                                           icon: Icons.clear,
@@ -266,25 +253,18 @@ class HomeScreen extends StatelessWidget {
                                       CustomShowcase(
                                         globalKey: _pasteShowcase,
                                         // title: 'paste'.tr(),
-                                        description:
-                                            'showcase_paste_description'.tr(),
+                                        description: 'showcase_paste_description'.tr(),
                                         child: SmallButton(
                                           icon: MyIcons.paste,
                                           title: 'paste'.tr(),
                                           // paste in password field on single press
                                           onPressed: () {
-                                            FlutterClipboard.paste()
-                                                .then((value) {
+                                            FlutterClipboard.paste().then((value) {
                                               cubit.messageCtrl.text = value;
                                               activeButtons(undefined.isEmpty);
 
                                               cubit.messageCtrl.selection =
-                                                  TextSelection.fromPosition(
-                                                      TextPosition(
-                                                          offset: cubit
-                                                              .messageCtrl
-                                                              .text
-                                                              .length));
+                                                  TextSelection.fromPosition(TextPosition(offset: cubit.messageCtrl.text.length));
                                             });
                                           },
 
@@ -298,198 +278,142 @@ class HomeScreen extends StatelessWidget {
                                       /// text store
                                       CustomShowcase(
                                         globalKey: _textStoreShowcase,
-                                        description:
-                                            'showcase_text_store_description'
-                                                .tr(),
+                                        description: 'showcase_text_store_description'.tr(),
                                         title: 'message_store'.tr(),
                                         child: SmallButton(
                                           icon: MyIcons.bookmark,
                                           title: 'message_store'.tr(),
                                           // open edit text store screen when long press
                                           // if groups is not empty
-                                          onLongPress:
-                                              groups?.groups?.isNotEmpty ??
-                                                      false
-                                                  ? () {
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              const EditTextStoreScreen(),
-                                                        ),
-                                                      );
-                                                    }
-                                                  : null,
+                                          onLongPress: groups?.groups?.isNotEmpty ?? false
+                                              ? () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) => const EditTextStoreScreen(),
+                                                    ),
+                                                  );
+                                                }
+                                              : null,
 
                                           onPressed: () async {
-                                            // todo: important handle bio
+                                            // todo: handle bio
                                             if (!authenticated) {
-                                              final bool hasBio =
-                                                  await LocalAuthApi
-                                                      .hasBiometrics();
-                                              authenticated = hasBio
-                                                  ? await LocalAuthApi
-                                                      .authenticate()
-                                                  : true;
+                                              final bool hasBio = await LocalAuthApi.hasBiometrics();
+                                              authenticated = hasBio ? await LocalAuthApi.authenticate() : true;
                                             }
 
                                             if (authenticated) {
                                               showCustomDialog(
                                                 context: context,
                                                 title: 'message_store'.tr(),
-                                                content:
-                                                    groups?.groups
-                                                                ?.isNotEmpty ??
-                                                            false
-                                                        ? Column(
-                                                            children: [
-                                                              ...List.generate(
-                                                                groups!.groups!
-                                                                    .length,
-                                                                // +1 only if want to show AD
-                                                                (groupIndex) {
-                                                                  GroupModel
-                                                                      group =
-                                                                      groups!.groups![
-                                                                          groupIndex];
+                                                content: groups?.groups?.isNotEmpty ?? false
+                                                    ? Column(
+                                                        children: [
+                                                          ...List.generate(
+                                                            groups!.groups!.length,
+                                                            // +1 only if want to show AD
+                                                            (groupIndex) {
+                                                              GroupModel group = groups!.groups![groupIndex];
 
-                                                                  // group
-                                                                  return ExpansionTile(
-                                                                    title: Text(
-                                                                      group
-                                                                          .groupName,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
-                                                                        fontSize:
-                                                                            14.sp,
-                                                                      ),
-                                                                    ),
-                                                                    collapsedIconColor:
-                                                                        smallButtonsContentColor(
-                                                                            context),
-                                                                    collapsedTextColor:
-                                                                        smallButtonsContentColor(
-                                                                            context),
-                                                                    iconColor:
-                                                                        smallButtonsContentColor(
-                                                                            context),
-                                                                    // leading: Icon(
-                                                                    //   MyIcons.folder,
-                                                                    //   size: 15.sp,
-                                                                    // ),
-                                                                    textColor:
-                                                                        smallButtonsContentColor(
-                                                                            context),
-                                                                    backgroundColor: shadowColor(
-                                                                            context)
-                                                                        .withAlpha(
-                                                                            40),
-                                                                    children: List.generate(
-                                                                        group
-                                                                            .groupContent
-                                                                            .length,
-                                                                        (contentIndex) {
-                                                                      final content =
-                                                                          group.groupContent[
-                                                                              contentIndex];
-
-                                                                      // group titles
-                                                                      return Container(
-                                                                        width: double
-                                                                            .infinity,
-                                                                        padding:
-                                                                            EdgeInsets.symmetric(
-                                                                          horizontal:
-                                                                              15.sp,
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Expanded(
-                                                                              child: TextButton(
-                                                                                onPressed: () {
-                                                                                  cubit.messageCtrl.text = content.ciphertext;
-                                                                                  activeButtons();
-                                                                                  Navigator.pop(context);
-                                                                                },
-                                                                                child: Align(
-                                                                                  alignment: AlignmentDirectional.centerStart,
-                                                                                  child: Text(
-                                                                                    content.title,
-                                                                                    style: TextStyle(
-                                                                                      color: titlesColor(context),
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                      fontSize: 12.sp,
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                            // copy button
-                                                                            GestureDetector(
-                                                                              child: Padding(
-                                                                                padding: EdgeInsets.symmetric(
-                                                                                  horizontal: 5.sp,
-                                                                                ),
-                                                                                child: Icon(
-                                                                                  MyIcons.copy,
-                                                                                  size: 15.sp,
-                                                                                  color: iconsGrayColor,
-                                                                                ),
-                                                                              ),
-                                                                              onTap: () {
-                                                                                FlutterClipboard.copy(content.ciphertext);
-                                                                                showToast(
-                                                                                  title: 'msg copied'.tr(),
-                                                                                  context: context,
-                                                                                );
-                                                                              },
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      );
-                                                                    }),
-                                                                  );
-                                                                },
-                                                              ),
-                                                            ],
-                                                          )
-                                                        : Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .min,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Icon(
-                                                                MyIcons
-                                                                    .bookmark_add,
-                                                                color:
-                                                                    iconsGrayColor,
-                                                                size: 45.sp,
-                                                              ),
-                                                              Text(
-                                                                'add_store_message'
-                                                                    .tr(),
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                          .grey[
-                                                                      500],
-                                                                  fontSize:
-                                                                      12.sp,
+                                                              // group
+                                                              return ExpansionTile(
+                                                                title: Text(
+                                                                  group.groupName,
+                                                                  style: TextStyle(
+                                                                    fontWeight: FontWeight.w500,
+                                                                    fontSize: 14.sp,
+                                                                  ),
                                                                 ),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                              ),
-                                                            ],
+                                                                collapsedIconColor: smallButtonsContentColor(context),
+                                                                collapsedTextColor: smallButtonsContentColor(context),
+                                                                iconColor: smallButtonsContentColor(context),
+                                                                // leading: Icon(
+                                                                //   MyIcons.folder,
+                                                                //   size: 15.sp,
+                                                                // ),
+                                                                textColor: smallButtonsContentColor(context),
+                                                                backgroundColor: shadowColor(context).withAlpha(40),
+                                                                children: List.generate(group.groupContent.length, (contentIndex) {
+                                                                  final content = group.groupContent[contentIndex];
+
+                                                                  // group titles
+                                                                  return Container(
+                                                                    width: double.infinity,
+                                                                    padding: EdgeInsets.symmetric(
+                                                                      horizontal: 15.sp,
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                      children: [
+                                                                        Expanded(
+                                                                          child: TextButton(
+                                                                            onPressed: () {
+                                                                              cubit.messageCtrl.text = content.ciphertext;
+                                                                              activeButtons();
+                                                                              Navigator.pop(context);
+                                                                            },
+                                                                            child: Align(
+                                                                              alignment: AlignmentDirectional.centerStart,
+                                                                              child: Text(
+                                                                                content.title,
+                                                                                style: TextStyle(
+                                                                                  color: titlesColor(context),
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  fontSize: 12.sp,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        // copy button
+                                                                        GestureDetector(
+                                                                          child: Padding(
+                                                                            padding: EdgeInsets.symmetric(
+                                                                              horizontal: 5.sp,
+                                                                            ),
+                                                                            child: Icon(
+                                                                              MyIcons.copy,
+                                                                              size: 15.sp,
+                                                                              color: iconsGrayColor,
+                                                                            ),
+                                                                          ),
+                                                                          onTap: () {
+                                                                            FlutterClipboard.copy(content.ciphertext);
+                                                                            showToast(
+                                                                              title: 'msg copied'.tr(),
+                                                                              context: context,
+                                                                            );
+                                                                          },
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  );
+                                                                }),
+                                                              );
+                                                            },
                                                           ),
+                                                        ],
+                                                      )
+                                                    : Column(
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        children: [
+                                                          Icon(
+                                                            MyIcons.bookmark_add,
+                                                            color: iconsGrayColor,
+                                                            size: 45.sp,
+                                                          ),
+                                                          Text(
+                                                            'add_store_message'.tr(),
+                                                            style: TextStyle(
+                                                              color: Colors.grey[500],
+                                                              fontSize: 12.sp,
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ],
+                                                      ),
                                                 buttons: [
                                                   DialogButton(
                                                     title: 'back'.tr(),
@@ -497,9 +421,7 @@ class HomeScreen extends StatelessWidget {
                                                       Navigator.pop(context);
                                                     },
                                                   ),
-                                                  if (groups?.groups
-                                                          ?.isNotEmpty ??
-                                                      false)
+                                                  if (groups?.groups?.isNotEmpty ?? false)
                                                     DialogButton(
                                                       title: 'edit'.tr(),
                                                       isBold: true,
@@ -509,8 +431,7 @@ class HomeScreen extends StatelessWidget {
                                                         Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  const EditTextStoreScreen(),
+                                                              builder: (context) => const EditTextStoreScreen(),
                                                             ));
                                                       },
                                                     ),
@@ -530,8 +451,7 @@ class HomeScreen extends StatelessWidget {
                               CustomShowcase(
                                 globalKey: _passwordFieldShowcase,
                                 title: 'showcase_password_field_title'.tr(),
-                                description:
-                                    'showcase_password_field_description'.tr(),
+                                description: 'showcase_password_field_description'.tr(),
                                 child: CustomTextField(
                                   theKey: passKey,
                                   controller: cubit.passCtrl,
@@ -546,9 +466,7 @@ class HomeScreen extends StatelessWidget {
                                   // },
                                   validate: undefined.isEmpty,
                                   onChange: (value) {
-                                    undefined =
-                                        V06('', cubit.passCtrl.text, context)
-                                            .getUndefinedChars(value);
+                                    undefined = V06('', cubit.passCtrl.text, context).getUndefinedChars(value);
                                     activeButtons(undefined.isEmpty);
                                   },
                                   prefixIcon: Icon(
@@ -569,8 +487,7 @@ class HomeScreen extends StatelessWidget {
                                   onTab: () {
                                     cubit.setCurrentFieldToPassword();
                                   },
-                                  isEnabled:
-                                      (!cubit.isCurrentFieldNoneAndInactivated),
+                                  isEnabled: (!cubit.isCurrentFieldNoneAndInactivated),
                                 ),
                               ),
 
@@ -578,15 +495,10 @@ class HomeScreen extends StatelessWidget {
                               if (undefined.isNotEmpty)
                                 Container(
                                   alignment: AlignmentDirectional.centerStart,
-                                  padding: const EdgeInsetsDirectional.only(
-                                      start: 8),
+                                  padding: const EdgeInsetsDirectional.only(start: 8),
                                   child: Text(
-                                    'undefined_chars_title'
-                                        .tr(args: [undefined]),
-                                    style: const TextStyle(
-                                        color: redColor,
-                                        fontSize: 13.5,
-                                        fontWeight: FontWeight.w600),
+                                    'undefined_chars_title'.tr(args: [undefined]),
+                                    style: const TextStyle(color: redColor, fontSize: 13.5, fontWeight: FontWeight.w600),
                                   ),
                                 ),
 
@@ -640,16 +552,11 @@ class HomeScreen extends StatelessWidget {
                                         title: 'paste'.tr(),
                                         // paste in text field on single press
                                         onPressed: () {
-                                          FlutterClipboard.paste()
-                                              .then((value) {
+                                          FlutterClipboard.paste().then((value) {
                                             cubit.passCtrl.text = value;
                                             activeButtons(undefined.isEmpty);
 
-                                            cubit.passCtrl.selection =
-                                                TextSelection.fromPosition(
-                                                    TextPosition(
-                                                        offset: cubit.passCtrl
-                                                            .text.length));
+                                            cubit.passCtrl.selection = TextSelection.fromPosition(TextPosition(offset: cubit.passCtrl.text.length));
                                           });
                                         },
 
@@ -674,9 +581,7 @@ class HomeScreen extends StatelessWidget {
                                   // encrypt
                                   CustomShowcase(
                                     globalKey: _encryptButtonShowcase,
-                                    description:
-                                        'showcase_encrypt_button_description'
-                                            .tr(),
+                                    description: 'showcase_encrypt_button_description'.tr(),
                                     child: SizedBox(
                                       child: MainButton(
                                         onPressed: onPressMainButton(
@@ -694,9 +599,7 @@ class HomeScreen extends StatelessWidget {
                                   // decrypt
                                   CustomShowcase(
                                     globalKey: _decryptButtonShowcase,
-                                    description:
-                                        'showcase_decrypt_button_description'
-                                            .tr(),
+                                    description: 'showcase_decrypt_button_description'.tr(),
                                     child: SizedBox(
                                       child: MainButton(
                                         onPressed: onPressMainButton(
@@ -713,15 +616,13 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(
-                                height: 26.h,
+                                height: 45.h,
                               ),
                             ],
                           ),
                         ),
                       ),
-
-                      // if (OperationCounterCache.getCounter() >= 2)
-                      //   const AdBanner(),
+                      if (OperationCounterCache.getCounter() >= 2) const AdBanner(),
                     ],
                   ),
                 ),
