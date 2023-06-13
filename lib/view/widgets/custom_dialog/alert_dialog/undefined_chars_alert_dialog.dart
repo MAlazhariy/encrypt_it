@@ -56,7 +56,7 @@ void customUndefinedCharsAlertDialog({
                         title,
                         style: TextStyle(
                           color: redColor,
-                          fontWeight: FontWeight.w900,
+                          fontWeight: FontWeight.w700,
                           fontSize: 12.sp,
                         ),
                       ),
