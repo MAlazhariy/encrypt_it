@@ -32,7 +32,7 @@ class CustomShowcase extends StatelessWidget {
         color: Theme.of(context).colorScheme.secondary,
         fontWeight: FontWeight.w500,
       ),
-      radius: BorderRadius.circular(13),
+      // radius: BorderRadius.circular(13),
       overlayOpacity: 0.5,
       child: child,
     );
