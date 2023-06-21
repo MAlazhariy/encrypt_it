@@ -152,6 +152,9 @@
 
   "showcase_add_to_store_description": "Click here to add the ciphertext to the @:message_store",
 
-  "dark_mode" : "Dark mode"
+  "dark_mode" : "Dark mode",
 
+  "about_developer": "Who is the Developer?",
+  "developer_summary": "A developer specializing in mobile apps (Android & iOS), who has worked on more than 25 projects for companies, especially e-commerce and digital education apps.",
+  "social_media": "Social Media"
 }
