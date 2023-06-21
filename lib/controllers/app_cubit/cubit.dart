@@ -38,6 +38,11 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  void updateMessage(String text) {
+    messageCtrl.text = text;
+    emit(AppUpdateMessageTextState());
+  }
+
   // current field functions
   void setCurrentFieldToText() {
     currentTextField = Fields.text;

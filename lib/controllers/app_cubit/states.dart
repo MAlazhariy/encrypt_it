@@ -2,6 +2,7 @@ abstract class AppStates {}
 
 class AppInitState extends AppStates {}
 class AppGetVersionState extends AppStates {}
+class AppUpdateMessageTextState extends AppStates {}
 
 class AppActiveButtonsState extends AppStates {}
 class AppSetTextResultState extends AppStates {}

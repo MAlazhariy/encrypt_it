@@ -1,5 +1,7 @@
 // ignore_for_file: unused_import
 
+import 'dart:async';
+
 import 'package:clipboard/clipboard.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/controllers/app_cubit/cubit.dart';
@@ -26,26 +28,81 @@ import 'package:encryption_app/utils/style/colors.dart';
 import 'package:encryption_app/view/widgets/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:receive_intent/receive_intent.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:sizer/sizer.dart';
 
 // ignore: use_key_in_widget_constructors, must_be_immutable
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   var textKey = GlobalKey<FormState>();
+
   var passKey = GlobalKey<FormState>();
+
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   String undefined = '';
 
   final GlobalKey _textFieldShowcase = GlobalKey();
+
   final GlobalKey _passwordFieldShowcase = GlobalKey();
+
   final GlobalKey _encryptButtonShowcase = GlobalKey();
+
   final GlobalKey _decryptButtonShowcase = GlobalKey();
 
   final GlobalKey _textStoreShowcase = GlobalKey();
+
   final GlobalKey _pasteShowcase = GlobalKey();
+
   final GlobalKey _clearShowcase = GlobalKey();
+
   final GlobalKey _clearAllShowcase = GlobalKey();
+
+  StreamSubscription? _intentDataStreamSubscription;
+
+  void _onGetIntentMessage(String text){
+      // debugPrint("CAUGHT INTENT: \"$text\"");
+      AppCubit.get(context).updateMessage(text);
+  }
+
+  Future<void> _getIntentMessage() async {
+    try {
+      // For sharing or opening urls/text coming from outside the app while the app is in the memory
+      _intentDataStreamSubscription = ReceiveSharingIntent.getTextStream().listen((value) => _onGetIntentMessage, onError: (err) {
+        print("getLinkStream error: $err");
+      },);
+
+      // For sharing or opening urls/text coming from outside the app while the app is closed
+      ReceiveSharingIntent.getInitialText().then((value) {
+        if(value?.isNotEmpty == true){
+          _onGetIntentMessage(value!);
+        }
+      });
+    } catch (_) {
+      // Handle exception
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _getIntentMessage();
+    });
+  }
+
+  @override
+  void dispose() {
+    _intentDataStreamSubscription?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
