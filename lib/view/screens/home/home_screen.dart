@@ -28,7 +28,6 @@ import 'package:encryption_app/utils/style/colors.dart';
 import 'package:encryption_app/view/widgets/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:receive_intent/receive_intent.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:sizer/sizer.dart';
