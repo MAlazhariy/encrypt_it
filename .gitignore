@@ -48,7 +48,6 @@ app.*.map.json
 # Others
 /assets/images/
 /android/app/proguard-rules.pro
-/android/app/src/main/AndroidManifest.xml
 /lib/utils/helpers/ad_helper.dart
 android/*.jks
 
@@ -58,4 +57,3 @@ android/*.jks
 
 # My icons
 /fonts/MyIcons.ttf
-/lib/utils/helpers/ad_helper.dart
