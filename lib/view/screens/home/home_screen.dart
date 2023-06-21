@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       // For sharing or opening urls/text coming from outside the app while the app is in the memory
       _intentDataStreamSubscription = ReceiveSharingIntent.getTextStream().listen((value) => _onGetIntentMessage, onError: (err) {
-        print("getLinkStream error: $err");
+        debugPrint("getLinkStream error: $err");
       },);
 
       // For sharing or opening urls/text coming from outside the app while the app is closed
@@ -358,7 +358,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               authenticated = hasBio ? await LocalAuthApi.authenticate() : true;
                                             }
 
-                                            if (authenticated) {
+                                            if (authenticated && mounted) {
                                               showCustomDialog(
                                                 context: context,
                                                 title: 'message_store'.tr(),
