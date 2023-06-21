@@ -11,8 +11,8 @@ class AppConstants {
   static const String appName = "Encrypt It";
 }
 
-void changeLang(BuildContext context){
-  if(getCurrentLang(context)=='ar'){
+void changeLang(BuildContext context) {
+  if (getCurrentLang(context) == 'ar') {
     context.locale = const Locale('en');
   } else {
     context.locale = const Locale('ar');
@@ -21,9 +21,7 @@ void changeLang(BuildContext context){
 
 String getCurrentLang(BuildContext context) => context.locale.languageCode;
 
-
-
-class Links{
+class Links {
   // static const String contactUs = 'https://m.me/encryptitapp';
   static Uri mailUs({
     required String subject,
@@ -39,4 +37,9 @@ class Links{
   static final facebookPage = Uri.parse('https://www.facebook.com/encryptitapp');
   static final appOnGooglePlay = Uri.parse('https://play.google.com/store/apps/details?id=malazhariy.encryptIt');
   static final gitHubRepository = Uri.parse('https://github.com/MAlazhariy/encrypt_it');
+
+  // my social media
+  static final gitHubProfile = Uri.parse('https://github.com/MAlazhariy');
+  static final linkedInProfile = Uri.parse('https://www.linkedin.com/in/malazhariy/');
+  static final youtubeChannel = Uri.parse('https://www.youtube.com/@MAlazhariy');
 }
