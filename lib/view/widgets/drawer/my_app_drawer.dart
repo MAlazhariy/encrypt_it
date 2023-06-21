@@ -1,5 +1,6 @@
 import 'package:encryption_app/view/widgets/drawer/drawer_group_items.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/about_app.dart';
+import 'package:encryption_app/view/widgets/drawer/drawer_items/about_developer.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/change_language.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/dark_mode.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/disclaimer.dart';
@@ -38,8 +39,14 @@ class MyAppDrawer extends StatelessWidget {
                 RateAppMenuItem(),
                 ShareAppMenuItem(),
                 AboutAppMenuItem(),
-                DisclaimerMenuItem(),
+                // DisclaimerMenuItem(),
                 ReportABugMenuItem(),
+              ]),
+              Divider(),
+
+              /// others
+              MenuGroupItems([
+                AboutDeveloperMenuItem(),
               ]),
               Divider(),
 
