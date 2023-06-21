@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/controllers/app_cubit/states.dart';
+import 'package:encryption_app/utils/constants.dart';
 import 'package:encryption_app/view/widgets/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,11 @@ class AppCubit extends Cubit<AppStates> {
   /// You can know which current field that the user is on through this variable
   Fields currentTextField = Fields.none;
   PackageInfo appInfo = PackageInfo(
-      appName: '   '.tr(), packageName: '', version: '   ', buildNumber: '');
+    appName: AppConstants.appName,
+    packageName: '',
+    version: '   ',
+    buildNumber: '',
+  );
 
   TextEditingController messageCtrl = TextEditingController();
   TextEditingController passCtrl = TextEditingController();

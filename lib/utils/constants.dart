@@ -7,6 +7,10 @@ import 'package:flutter/material.dart';
 bool authenticated = false;
 StoreModel? groups;
 
+class AppConstants {
+  static const String appName = "Encrypt It";
+}
+
 void changeLang(BuildContext context){
   if(getCurrentLang(context)=='ar'){
     context.locale = const Locale('en');
