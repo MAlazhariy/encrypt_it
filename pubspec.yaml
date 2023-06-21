@@ -23,7 +23,7 @@ dependencies:
   url_launcher: ^6.1.2
   share_plus: ^7.0.2
   selectable_autolink_text: ^2.3.0
-  in_app_review: ^2.0.4
+  in_app_review: ^2.0.6
   showcaseview: ^2.0.3
   local_auth: ^1.1.10
   flutter_inset_box_shadow: ^1.0.8
