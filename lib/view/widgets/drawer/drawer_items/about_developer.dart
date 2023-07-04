@@ -53,11 +53,11 @@ class AboutDeveloperMenuItem extends StatelessWidget {
                 children: [
                   IconButton(
                     icon: const Icon(MyIcons.linkedin),
-                    onPressed: () async => launchUrl(Links.linkedInProfile),
+                    onPressed: () async => launchUrl(Links.linkedInProfile, mode: LaunchMode.externalApplication),
                   ),
                   IconButton(
                     icon: const Icon(MyIcons.github),
-                    onPressed: () async => launchUrl(Links.gitHubProfile),
+                    onPressed: () async => launchUrl(Links.gitHubProfile, mode: LaunchMode.externalApplication),
                   ),
                   // IconButton(
                   //   icon: const Icon(MyIcons.youtube),
