@@ -72,7 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _getIntentMessage() async {
     try {
-      // For sharing or opening urls/text coming from outside the app while the app is in the memory
       _intentDataStreamSubscription = ReceiveSharingIntent.instance.getMediaStream().listen(
         (value) => _onGetIntentMessage,
         onError: (err) {
@@ -80,10 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       );
 
-      // For sharing or opening urls/text coming from outside the app while the app is closed
       ReceiveSharingIntent.instance.getInitialMedia().then((value) {
         if (value.isNotEmpty == true) {
-          _onGetIntentMessage(value.first.toString());
+          final text = value.first.path;
+          _onGetIntentMessage(text);
         }
       });
     } catch (_) {

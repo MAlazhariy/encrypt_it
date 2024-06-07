@@ -53,7 +53,7 @@ class EncryptedResultWidget extends StatelessWidget {
           color: encryptedTextColor,
           fontSize: 16.sp,
           fontWeight: FontWeight.w600,
-          fontFamily: 'Cairo',
+          fontFamily: 'Baloo',
         ),
       ),
     );
@@ -78,7 +78,7 @@ class DecryptedResultWidget extends StatelessWidget {
           color: decryptedTextColor,
           fontSize: 16.sp,
           fontWeight: FontWeight.w600,
-          fontFamily: 'Cairo',
+          fontFamily: 'Baloo',
         ),
         textAlign: TextAlign.center,
         linkStyle: const TextStyle(
@@ -121,7 +121,7 @@ class LargeResultWidget extends StatelessWidget {
               color: decryptedTextColor,
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
-              fontFamily: 'Cairo',
+              fontFamily: 'Baloo',
             ),
             textAlign: TextAlign.center,
             linkStyle: const TextStyle(

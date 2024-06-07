@@ -32,7 +32,7 @@ void invalidCharactersAlert({
                 style: TextStyle(
                   fontSize: 11.sp,
                   fontWeight: FontWeight.w500,
-                  fontFamily: 'Cairo',
+                  fontFamily: 'Baloo',
                   color: titlesColor(context),
                 ),
               ),
@@ -41,7 +41,7 @@ void invalidCharactersAlert({
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w700,
-                  fontFamily: 'Cairo',
+                  fontFamily: 'Baloo',
                   color: titlesColor(context),
                   // color: Colors.grey[900],
                 ),
@@ -51,7 +51,7 @@ void invalidCharactersAlert({
                 style: TextStyle(
                   fontSize: 11.sp,
                   fontWeight: FontWeight.w500,
-                  fontFamily: 'Cairo',
+                  fontFamily: 'Baloo',
                   color: titlesColor(context),
                 ),
               ),

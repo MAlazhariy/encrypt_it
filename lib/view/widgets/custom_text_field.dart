@@ -73,7 +73,7 @@ class CustomTextField extends StatelessWidget {
           validator: validator,
           onTap: onTab,
           style: TextStyle(
-            fontFamily: 'Cairo',
+            fontFamily: 'Baloo',
             fontSize: 15.sp,
           ),
           decoration: InputDecoration(

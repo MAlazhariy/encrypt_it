@@ -15,7 +15,7 @@ ThemeData darkTheme = ThemeData(
   ),
 
   scaffoldBackgroundColor: const Color(0xFF303135),
-  fontFamily: 'Cairo',
+  fontFamily: 'Baloo',
   focusColor: mainColor,
   primaryColor: mainColor,
   primarySwatch: mainSwatch,
@@ -43,7 +43,7 @@ ThemeData darkTheme = ThemeData(
     /// title style
     titleTextStyle: TextStyle(
       fontSize: 15.sp,
-      fontFamily: 'Cairo',
+      fontFamily: 'Baloo',
       color: const Color(0xFFECF0F3),
     ),
     surfaceTintColor: Colors.red,
@@ -59,4 +59,7 @@ ThemeData darkTheme = ThemeData(
   //     fontSize: 12.sp,
   //   ),
   // ),
+  dividerTheme: const DividerThemeData(
+    thickness: 0.3,
+  ),
 );

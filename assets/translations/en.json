@@ -13,7 +13,7 @@
   "clear": "clear",
   "clear all": "clear all",
   "copy": "Copy",
-  "message_store": "Text store",
+  "message_store": "Text vault",
 
   "msg copied": "Text copied",
   "all copied": "All copied",
@@ -30,7 +30,7 @@
   "there_problem": "If you think there is a problem, please ",
 
   "version_not_found": "Cannot decrypt text that is already unencrypted",
-  "version_not_found_description": "Make sure that the text entered is a ciphertext and the app version number is at the end of the ciphertext.",
+  "version_not_found_description": "Make sure that the text entered is actually encrypted text, and then try again.",
 
   "change lang": "Change language",
   "sure change lang": "Are you sure you want to change to Arabic?",
@@ -46,11 +46,13 @@
 
   "about_app": "About the app",
   "app_idea": "App idea",
+  "how_app_works": "How does the app work?",
+  "how_algorithm_works": "How are texts encrypted?",
   "app_idea_description": "The application encrypts the text with more than one layer of protection with complex mathematical equations and a special encryption algorithm with a complete change in the text characters and their arrangement so that the ciphertext is completely different every time the same text is encrypted, which gives more protection and security and makes any attempt to know the original text difficult, nor The text can only be decrypted by the application using the password that you created.",
   "privacy_policy": "Privacy policy",
   "privacy_policy_description": "We respect you and your personal data, so we do not store, save or send any of your personal data, passwords, encrypted texts or any data about you on our servers, as described in the ",
   "how_protect": "How do we protect your data?",
-  "how_protect_description": "We encrypt your text data on more than one step with complex mathematical equations and our own algorithms so that it is never easy for hackers to access your encrypted data, and no one can access the original encrypted text except through the application's own algorithm and the password that you created when you encrypted the text.",
+  "how_protect_description": "The application encrypts the text at more than one stage with application-specific algorithms (based on Caesar's Cipher), so that the original text cannot be decrypted and accessed except by decrypting it with the password through the application.\n\nNote: When you forget the password with which you encrypted the text, the original text cannot be accessed; Therefore, make sure to write a strong password that is not easy for you to forget so that you can decrypt the text again.",
 
   "about programmer": "About the programmer",
   "about programmer description": "Developed by Mostafa Alazhariy.\nAll rights reserved.",

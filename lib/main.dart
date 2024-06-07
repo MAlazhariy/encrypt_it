@@ -37,7 +37,6 @@ void main() async {
   // Bloc.observer = MyBlocObserver();
   await EasyLocalization.ensureInitialized();
 
-  // todo: remove
   await Hive.initFlutter();
   await Hive.openBox('myBox');
 

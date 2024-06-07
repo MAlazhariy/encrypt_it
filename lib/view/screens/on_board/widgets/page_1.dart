@@ -37,7 +37,7 @@ class BoardPage1 extends StatelessWidget {
               'onBoard_headline_1'.tr(),
               style: TextStyle(
                 color: darkBlueColor,
-                fontFamily: 'Cairo',
+                fontFamily: 'Baloo',
                 fontWeight: FontWeight.w600,
                 fontSize: 13.sp,
               ),
@@ -49,7 +49,7 @@ class BoardPage1 extends StatelessWidget {
               'onBoard_subtitle_1'.tr(),
               style: TextStyle(
                 color: darkBlueColor.withAlpha(180),
-                fontFamily: 'Cairo',
+                fontFamily: 'Baloo',
                 fontWeight: FontWeight.w500,
                 fontSize: 10.sp,
               ),

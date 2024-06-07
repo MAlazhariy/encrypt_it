@@ -1,10 +1,11 @@
+import 'package:encryption_app/view/widgets/drawer/drawer_background_image.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_group_items.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/about_app.dart';
-import 'package:encryption_app/view/widgets/drawer/drawer_items/about_developer.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/change_language.dart';
+import 'package:encryption_app/view/widgets/drawer/drawer_items/contact_us.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/dark_mode.dart';
+import 'package:encryption_app/view/widgets/drawer/drawer_items/how_app_works.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/rate_app.dart';
-import 'package:encryption_app/view/widgets/drawer/drawer_items/report_bug.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/share_app.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,6 @@ class MyAppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Theme(
       data: Theme.of(context).copyWith(
         canvasColor: Theme.of(context).scaffoldBackgroundColor,
@@ -23,7 +23,7 @@ class MyAppDrawer extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.zero,
             children: const [
-              // MenuBG(),
+              MenuBG(),
               // Divider(),
 
               /// change language group
@@ -35,19 +35,19 @@ class MyAppDrawer extends StatelessWidget {
 
               /// app group
               MenuGroupItems([
+                HowAppWorksMenuItem(),
                 RateAppMenuItem(),
                 ShareAppMenuItem(),
-                AboutAppMenuItem(),
                 // DisclaimerMenuItem(),
-                ReportABugMenuItem(),
+                ContactUsMenuItem(),
               ]),
               Divider(),
 
               /// others
-              MenuGroupItems([
-                AboutDeveloperMenuItem(),
-              ]),
-              Divider(),
+              // MenuGroupItems([
+              //   AboutDeveloperMenuItem(),
+              // ]),
+              // Divider(),
 
               /// thanks
               // const ThanksGroup(),

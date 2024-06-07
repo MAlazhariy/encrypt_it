@@ -8,19 +8,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:sizer/sizer.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_item.dart';
 
-class AboutAppMenuItem extends StatelessWidget {
-  const AboutAppMenuItem({super.key});
+class HowAppWorksMenuItem extends StatelessWidget {
+  const HowAppWorksMenuItem({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MenuItemWidget(
-      title: 'about_app'.tr(),
+      title: 'how_app_works'.tr(),
+      subtitle: 'how_algorithm_works'.tr(),
       icon: MyIcons.info_circle,
       // icon: Icons.info_outlined,
       onTap: () {
         showCustomDialog(
           context: context,
-          title: 'about_app'.tr(),
+          title: 'how_app_works'.tr(),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -38,13 +39,11 @@ class AboutAppMenuItem extends StatelessWidget {
                   fontSize: 12.sp,
                 ),
               ),
+              SizedBox(height: 17.sp),
 
               // how we protect your data
-              SizedBox(
-                height: 17.sp,
-              ),
               Text(
-                'how_protect'.tr(),
+                'how_algorithm_works'.tr(),
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 12.sp,

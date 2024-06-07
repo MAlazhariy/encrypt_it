@@ -59,7 +59,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                   content: Text(
                     'group_deleted'.tr(args: [deletedGroup.groupName]),
                     style: TextStyle(
-                      fontFamily: 'Cairo',
+                      fontFamily: 'Baloo',
                       fontWeight: FontWeight.w600,
                       fontSize: 12.sp,
                     ),
@@ -176,7 +176,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
         content: Text(
           'title_deleted'.tr(args: [content.title]),
           style: TextStyle(
-            fontFamily: 'Cairo',
+            fontFamily: 'Baloo',
             fontWeight: FontWeight.w600,
             fontSize: 12.sp,
           ),
@@ -336,7 +336,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                             color: titlesColor(context),
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
-                            fontFamily: 'Cairo',
+                            fontFamily: 'Baloo',
                           ),
                         ),
                         alignment: AlignmentDirectional.centerStart,
@@ -349,7 +349,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                           color: titlesColor(context),
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
-                          fontFamily: 'Cairo',
+                          fontFamily: 'Baloo',
                         ),
                         autofocus: true,
                         menuMaxHeight: 70.h,

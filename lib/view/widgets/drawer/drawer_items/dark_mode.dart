@@ -6,39 +6,31 @@ import 'package:sizer/sizer.dart';
 
 
 class ChangeThemeMenuItem extends StatelessWidget {
-  const ChangeThemeMenuItem({Key? key}) : super(key: key);
+  const ChangeThemeMenuItem({super.key});
 
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: MenuItemWidget(
-            title: 'dark_mode'.tr(),
-            icon: Icons.dark_mode_outlined,
-            onTap: (){
-              MaterialCubit.get(context).changeThemeMode(
-                  !(Theme.of(context).brightness == Brightness.dark)
-              );
+    return MenuItemWidget(
+      title: 'dark_mode'.tr(),
+      icon: Icons.dark_mode_outlined,
+      suffixIcon: SizedBox(
+        width: 35.sp,
+        child: FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Switch(
+            value: Theme.of(context).brightness == Brightness.dark,
+            onChanged: (value) {
+              MaterialCubit.get(context).changeThemeMode(value);
             },
           ),
         ),
-
-        SizedBox(
-          width: 35.sp,
-          child: FittedBox(
-            fit: BoxFit.fitWidth,
-            child: Switch(
-              value: Theme.of(context).brightness == Brightness.dark,
-              onChanged: (value) {
-                MaterialCubit.get(context).changeThemeMode(value);
-              },
-            ),
-          ),
-        ),
-        const SizedBox(width: 15),
-      ],
+      ),
+      onTap: (){
+        MaterialCubit.get(context).changeThemeMode(
+            !(Theme.of(context).brightness == Brightness.dark)
+        );
+      },
     );
   }
 }

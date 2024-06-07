@@ -11,7 +11,7 @@ import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ReportABugMenuItem extends StatelessWidget {
-  const ReportABugMenuItem({Key? key}) : super(key: key);
+  const ReportABugMenuItem({super.key});
 
   @override
   Widget build(BuildContext context) {

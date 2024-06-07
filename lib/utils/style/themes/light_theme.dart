@@ -18,7 +18,7 @@ ThemeData lightTheme = ThemeData(
   ),
   // change color in appBar too
   scaffoldBackgroundColor: const Color(0xFFECF0F3),
-  fontFamily: 'Cairo',
+  fontFamily: 'Baloo',
   primaryColor: mainColor,
   primarySwatch: mainSwatch,
   canvasColor: Colors.transparent,
@@ -43,7 +43,7 @@ ThemeData lightTheme = ThemeData(
     /// title style
     titleTextStyle: TextStyle(
       fontSize: 15.sp,
-      fontFamily: 'Cairo',
+      fontFamily: 'Baloo',
       color: mainColor,
     ),
   ),
@@ -57,4 +57,7 @@ ThemeData lightTheme = ThemeData(
   //     fontSize: 12.sp,
   //   ),
   // ),
+  dividerTheme: const DividerThemeData(
+    thickness: 0.3,
+  ),
 );

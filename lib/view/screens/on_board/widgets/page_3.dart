@@ -34,7 +34,7 @@ class BoardPage3 extends StatelessWidget {
               'onBoard_headline_3'.tr(),
               style: TextStyle(
                 color: mainColor,
-                fontFamily: 'Cairo',
+                fontFamily: 'Baloo',
                 fontWeight: FontWeight.w500,
                 fontSize: 12.sp,
               ),

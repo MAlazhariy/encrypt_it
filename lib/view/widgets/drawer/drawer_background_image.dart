@@ -1,14 +1,16 @@
+import 'package:encryption_app/controllers/app_cubit/cubit.dart';
+import 'package:encryption_app/utils/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class MenuBG extends StatelessWidget {
-  const MenuBG({Key? key}) : super(key: key);
+  const MenuBG({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
     return Container(
       width: double.infinity,
-      height: 20.h,
       // decoration: const BoxDecoration(
       //   gradient: LinearGradient(
       //     colors: [
@@ -24,11 +26,36 @@ class MenuBG extends StatelessWidget {
       padding: EdgeInsets.symmetric(
         vertical: 3.h,
       ),
-      child: const Image(
-        // image: AssetImage('assets/images/main-animation.gif'),
-        image: AssetImage('assets/images/icon.png'),
-        fit: BoxFit.contain,
-        color: Colors.white,
+      child: Column(
+        children: [
+          // logo image
+          Image(
+            image: const AssetImage(
+              'assets/images/icon.png',
+            ),
+            height: 55.sp,
+            color: dialogButtonColor(context),
+          ),
+          SizedBox(height: 3.sp),
+          // app name
+          Text(
+            cubit.appInfo.appName,
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 12.sp,
+              color: smallButtonsContentColor(context),
+            ),
+          ),
+          // app version
+          // SizedBox(height: 2.sp),
+          Text(
+            cubit.appInfo.version,
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 11.sp,
+            ),
+          ),
+        ],
       ),
       // child: Center(
       //   child: Text(
