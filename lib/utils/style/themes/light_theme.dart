@@ -5,14 +5,15 @@ import 'package:sizer/sizer.dart';
 import '../colors.dart';
 
 ThemeData lightTheme = ThemeData(
+  useMaterial3: true,
   colorScheme: const ColorScheme.light(
-    brightness: Brightness.light, // A color that typically appears behind scrollable content.
-    primary: mainColor, // The color displayed most frequently across your app’s screens and components.
-    onPrimary: Colors.white, // A color that's clearly legible when drawn on primary. [...]
-    secondary: Color(0xFF4B4453), // darkGray // An accent color used for less prominent components in the UI, such as filter chips, while expanding the opportunity for color expression.
-    onSecondary: Color(0xFFB0A8B9), // lightGray // A color that's clearly legible when drawn on secondary. [...]
-    error: Color(0xFFFF4C7C), // The color to use for input validation errors, e.g. for InputDecoration.errorText.
-    onError: Colors.white, // A color that's clearly legible when drawn on error. [...]
+    brightness: Brightness.light,
+    primary: mainColor,
+    onPrimary: Colors.white,
+    secondary: Color(0xFF4B4453),
+    onSecondary: Color(0xFFB0A8B9),
+    error: kErrorColor,
+    onError: Colors.white,
     shadow: Color(0xFF9E9E9E),
   ),
   // change color in appBar too
@@ -20,7 +21,6 @@ ThemeData lightTheme = ThemeData(
   fontFamily: 'Cairo',
   primaryColor: mainColor,
   primarySwatch: mainSwatch,
-  errorColor: const Color(0xFFFF4C7C),
   canvasColor: Colors.transparent,
   shadowColor: const Color(0xFF9E9E9E),
   /// appBar
@@ -52,9 +52,9 @@ ThemeData lightTheme = ThemeData(
     width: 70.w,
   ),
   /// text button
-  textTheme: TextTheme(
-    button: TextStyle(
-      fontSize: 12.sp,
-    ),
-  ),
+  // textTheme: TextTheme(
+  //   button: TextStyle(
+  //     fontSize: 12.sp,
+  //   ),
+  // ),
 );

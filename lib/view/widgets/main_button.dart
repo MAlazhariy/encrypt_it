@@ -6,8 +6,11 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:sizer/sizer.dart';
 
 class MainButton extends StatefulWidget {
-  const MainButton({required this.onPressed, required this.isEncrypt, Key? key})
-      : super(key: key);
+  const MainButton({
+    required this.onPressed,
+    required this.isEncrypt,
+    super.key,
+  });
 
   final void Function()? onPressed;
   final bool isEncrypt;

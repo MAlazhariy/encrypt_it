@@ -3,14 +3,13 @@ import 'package:encryption_app/view/widgets/drawer/drawer_items/about_app.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/about_developer.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/change_language.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/dark_mode.dart';
-import 'package:encryption_app/view/widgets/drawer/drawer_items/disclaimer.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/rate_app.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/report_bug.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/share_app.dart';
 import 'package:flutter/material.dart';
 
 class MyAppDrawer extends StatelessWidget {
-  const MyAppDrawer({key}) : super(key: key);
+  const MyAppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {

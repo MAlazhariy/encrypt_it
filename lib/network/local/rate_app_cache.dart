@@ -6,7 +6,7 @@ class RateCache {
 
   static Box rateBox = Hive.box('myBox');
 
-  static const int _minToRate = 30;
+  static const int _minToRate = 35;
   static const int _rateFrequency = 15;
 
   static bool isAppRated(){

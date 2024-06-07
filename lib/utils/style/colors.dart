@@ -76,11 +76,14 @@ final mainSwatch = MaterialColor(
   },
 );
 
-const Color redColor = Color(0xFFFF4C7C);
-const Color encryptedTextColor = redColor;
+const Color redColor = kErrorColor;
+const Color encryptedTextColor = Color(0xFFFF4C7C);
 const Color decryptedTextColor = Color(0xFF00B397);
 // const Color decryptedTextColor = Color(0xFF40CB68);
 const Color linkColor = decryptedTextColor;
+
+const kErrorColor = Color(0xFFFF5C68);
+const kSuccessColor = Color(0xff6FD39A);
 
 // main text fields small buttons
 const Color buttonsTitleColor = mainColor;

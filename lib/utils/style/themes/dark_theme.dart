@@ -4,19 +4,21 @@ import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 ThemeData darkTheme = ThemeData(
+  // material 3
+  useMaterial3: true,
   colorScheme: const ColorScheme.dark(
-    error: Color(0xFFFF4C7C),
+    error: kErrorColor,
     // The color to use for input validation errors, e.g. for InputDecoration.errorText.
     onError: Colors.white,
     // A color that's clearly legible when drawn on error. [...]
     shadow: Color(0xFF262626),
   ),
+
   scaffoldBackgroundColor: const Color(0xFF303135),
   fontFamily: 'Cairo',
   focusColor: mainColor,
   primaryColor: mainColor,
   primarySwatch: mainSwatch,
-  errorColor: const Color(0xFFFF4C7C),
   canvasColor: Colors.transparent,
   shadowColor: const Color(0xFF262626),
   appBarTheme: AppBarTheme(
@@ -52,9 +54,9 @@ ThemeData darkTheme = ThemeData(
     width: 70.w,
   ),
   /// text button
-  textTheme: TextTheme(
-    button: TextStyle(
-      fontSize: 12.sp,
-    ),
-  ),
+  // textTheme: TextTheme(
+  //   button: TextStyle(
+  //     fontSize: 12.sp,
+  //   ),
+  // ),
 );

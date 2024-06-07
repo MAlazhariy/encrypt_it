@@ -1,10 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/controllers/app_cubit/states.dart';
 import 'package:encryption_app/utils/constants.dart';
 import 'package:encryption_app/view/widgets/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitState());

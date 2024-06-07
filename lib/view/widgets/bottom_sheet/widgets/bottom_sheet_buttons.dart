@@ -79,7 +79,7 @@ class AddToStoreButton extends StatelessWidget {
     if (!ShowCaseCache.isAddTextStoreShowCaseViewed()) {
       WidgetsBinding.instance.addPostFrameCallback((_) => Future.delayed(
             const Duration(milliseconds: 500),
-            () => ShowCaseWidget.of(context)?.startShowCase([
+            () => ShowCaseWidget.of(context).startShowCase([
               _addToTextStoreShowcase,
             ]),
           ));

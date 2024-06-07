@@ -18,7 +18,9 @@ void Function()? onPressMainButton({
   if (cubit.isButtonsActive) {
     return () {
       // increase operations counter
-      OperationCounterCache.increaseCounter();
+      if(!isEncrypt) {
+        OperationCounterCache.increaseCounter();
+      }
 
       cubit.setCurrentFieldToNone();
       dismissKeyboard(context);
