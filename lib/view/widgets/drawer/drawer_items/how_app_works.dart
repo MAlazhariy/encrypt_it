@@ -1,3 +1,6 @@
+import 'package:encryption_app/my_app.dart';
+import 'package:encryption_app/network/local/showcase_cache.dart';
+import 'package:encryption_app/view/screens/home/home_screen.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/view/widgets/my_icons_icons.dart';
@@ -122,10 +125,27 @@ class HowAppWorksMenuItem extends StatelessWidget {
           ),
           buttons: [
             DialogButton(
-                title: 'back'.tr(),
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
+              title: 'back'.tr(),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            // DialogButton(
+            //   title: 'show_tour'.tr(),
+            //   isBold: true,
+            //   onPressed: () {
+            //     // Navigator.pop(context);
+            //     // Navigator.pop(context);
+            //     ShowCaseCache.mainShowCaseViewed(false);
+            //     Navigator.pushReplacement(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => HomeScreen(),
+            //       ),
+            //       // (route) => false,
+            //     );
+            //   },
+            // ),
           ],
         );
       },
