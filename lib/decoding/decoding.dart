@@ -3,7 +3,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/decoding/versions/version_05.dart';
 import 'package:encryption_app/decoding/versions/version_06.dart';
-import 'package:flutter/material.dart';
 
 class Decoding {
   Decoding();
@@ -11,26 +10,25 @@ class Decoding {
   String decoder({
     required String text,
     required String password,
-    required BuildContext context,
     required bool isEncrypt,
   }) {
     /// encrypt algorithm
     if (isEncrypt) {
-      return V06(text, password, context).encrypt();
+      return V05(text: text, password: password).encrypt();
     }
 
-    if(text.length <= password.length + 2){
+    if (text.length <= password.length + 2) {
       return 'version_not_found'.tr();
     }
 
     /// decrypt filter conditions
     String version = text.substring(text.length - 2, text.length);
-    String textWithoutVersion = text.substring(0, text.length - 2);
+    String textValue = text.substring(0, text.length - 2);
 
     if (version == '06') {
-      return V06(textWithoutVersion, password, context).decrypt();
+      return V06(text: textValue, password: password).decrypt();
     } else if (version == '05') {
-      return V05(textWithoutVersion, password, context).decrypt();
+      return V05(text: textValue, password: password).decrypt();
     }
 
     // else
