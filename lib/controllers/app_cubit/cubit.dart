@@ -29,7 +29,7 @@ class AppCubit extends Cubit<AppStates> {
     final text = messageCtrl.text;
     final password = passCtrl.text;
 
-    if (text.length <= password.length + 2) {
+    if (password.isEmpty || text.length <= password.length + 2) {
       return false;
     }
 
