@@ -57,11 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final GlobalKey _textStoreShowcase = GlobalKey();
 
-  final GlobalKey _pasteShowcase = GlobalKey();
-
-  final GlobalKey _clearShowcase = GlobalKey();
-
-  final GlobalKey _clearAllShowcase = GlobalKey();
+  // final GlobalKey _pasteShowcase = GlobalKey();
+  //
+  // final GlobalKey _clearShowcase = GlobalKey();
+  //
+  // final GlobalKey _clearAllShowcase = GlobalKey();
 
   StreamSubscription? _intentDataStreamSubscription;
 
@@ -125,8 +125,12 @@ class _HomeScreenState extends State<HomeScreen> {
               WidgetsBinding.instance.addPostFrameCallback(
                 (_) => Future.delayed(
                   const Duration(milliseconds: 100),
-                  () => ShowCaseWidget.of(context)
-                      .startShowCase([_textFieldShowcase, _passwordFieldShowcase, _encryptButtonShowcase, _decryptButtonShowcase]),
+                  () => ShowCaseWidget.of(context).startShowCase([
+                    _textFieldShowcase,
+                    _passwordFieldShowcase,
+                    _encryptButtonShowcase,
+                    _decryptButtonShowcase,
+                  ]),
                 ),
               );
 
@@ -137,9 +141,9 @@ class _HomeScreenState extends State<HomeScreen> {
             if (cubit.isCurrentFieldText && !ShowCaseCache.isButtonsShowCaseViewed()) {
               WidgetsBinding.instance.addPostFrameCallback(
                 (_) => ShowCaseWidget.of(context).startShowCase([
-                  _pasteShowcase,
-                  _clearShowcase,
-                  _clearAllShowcase,
+                  // _pasteShowcase,
+                  // _clearShowcase,
+                  // _clearAllShowcase,
                   _textStoreShowcase,
                 ]),
               );
@@ -269,66 +273,51 @@ class _HomeScreenState extends State<HomeScreen> {
                                   runSpacing: 15,
                                   children: [
                                     /// clear all
-                                    CustomShowcase(
-                                      globalKey: _clearAllShowcase,
-                                      // title: 'clear all'.tr(),
-                                      description: 'showcase_clearAll_description'.tr(),
-                                      child: SmallButton(
-                                          icon: MyIcons.clear_all,
-                                          title: 'clear all'.tr(),
-                                          onPressed: () {
-                                            cubit.messageCtrl.text = '';
-                                            cubit.passCtrl.text = '';
-                                            undefined = '';
-
-                                            activeButtons();
-                                            cubit.clearAllFields();
-
-                                            dismissKeyboard(context);
-                                          }),
-                                    ),
-
-                                    /// clear
-                                    CustomShowcase(
-                                      globalKey: _clearShowcase,
-                                      description: 'showcase_clear_description'.tr(),
-                                      // title: 'clear'.tr(),
-                                      child: SmallButton(
-                                        icon: Icons.clear,
-                                        title: 'clear'.tr(),
+                                    SmallButton(
+                                        icon: MyIcons.clear_all,
+                                        title: 'clear all'.tr(),
                                         onPressed: () {
                                           cubit.messageCtrl.text = '';
-                                          activeButtons(undefined.isEmpty);
+                                          cubit.passCtrl.text = '';
+                                          undefined = '';
+
+                                          activeButtons();
+                                          cubit.clearAllFields();
 
                                           dismissKeyboard(context);
-                                        },
-                                      ),
+                                        }),
+
+                                    /// clear
+                                    SmallButton(
+                                      icon: Icons.clear,
+                                      title: 'clear'.tr(),
+                                      onPressed: () {
+                                        cubit.messageCtrl.text = '';
+                                        activeButtons(undefined.isEmpty);
+
+                                        dismissKeyboard(context);
+                                      },
                                     ),
 
                                     /// paste
-                                    CustomShowcase(
-                                      globalKey: _pasteShowcase,
-                                      // title: 'paste'.tr(),
-                                      description: 'showcase_paste_description'.tr(),
-                                      child: SmallButton(
-                                        icon: MyIcons.paste,
-                                        title: 'paste'.tr(),
-                                        // paste in password field on single press
-                                        onPressed: () {
-                                          FlutterClipboard.paste().then((value) {
-                                            cubit.messageCtrl.text = value;
-                                            activeButtons(undefined.isEmpty);
+                                    SmallButton(
+                                      icon: MyIcons.paste,
+                                      title: 'paste'.tr(),
+                                      // paste in password field on single press
+                                      onPressed: () {
+                                        FlutterClipboard.paste().then((value) {
+                                          cubit.messageCtrl.text = value;
+                                          activeButtons(undefined.isEmpty);
 
-                                            cubit.messageCtrl.selection =
-                                                TextSelection.fromPosition(TextPosition(offset: cubit.messageCtrl.text.length));
-                                          });
-                                        },
+                                          cubit.messageCtrl.selection =
+                                              TextSelection.fromPosition(TextPosition(offset: cubit.messageCtrl.text.length));
+                                        });
+                                      },
 
-                                        // on long press .. paste all
-                                        onLongPress: () {
-                                          pasteAll();
-                                        },
-                                      ),
+                                      // on long press .. paste all
+                                      onLongPress: () {
+                                        pasteAll();
+                                      },
                                     ),
 
                                     /// text store
@@ -628,17 +617,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(height: 25),
 
                             /// Encrypt & Decrypt buttons
-                            Wrap(
-                              alignment: WrapAlignment.center,
-                              direction: Axis.horizontal,
-                              spacing: 17,
-                              runSpacing: 15,
+                            // Wrap(
+                            Row(
+                              // alignment: WrapAlignment.center,
+                              // direction: Axis.horizontal,
+                              // spacing: 17,
+                              // runSpacing: 15,
                               children: [
                                 // encrypt
-                                CustomShowcase(
-                                  globalKey: _encryptButtonShowcase,
-                                  description: 'showcase_encrypt_button_description'.tr(),
-                                  child: SizedBox(
+                                Expanded(
+                                  child: CustomShowcase(
+                                    globalKey: _encryptButtonShowcase,
+                                    description: 'showcase_encrypt_button_description'.tr(),
                                     child: MainButton(
                                       onPressed: onPressMainButton(
                                         context: context,
@@ -653,22 +643,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
 
                                 // decrypt
-                                CustomShowcase(
-                                  globalKey: _decryptButtonShowcase,
-                                  description: 'showcase_decrypt_button_description'.tr(),
-                                  child: SizedBox(
-                                    child: MainButton(
-                                      onPressed: onPressMainButton(
-                                        context: context,
-                                        msg: cubit.messageCtrl.text,
-                                        pass: cubit.passCtrl.text,
-                                        scaffoldKey: scaffoldKey,
+                                if (cubit.showDecryptionButton) ...[
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: CustomShowcase(
+                                      globalKey: _decryptButtonShowcase,
+                                      description: 'showcase_decrypt_button_description'.tr(),
+                                      child: MainButton(
+                                        onPressed: onPressMainButton(
+                                          context: context,
+                                          msg: cubit.messageCtrl.text,
+                                          pass: cubit.passCtrl.text,
+                                          scaffoldKey: scaffoldKey,
+                                          isEncrypt: false,
+                                        ),
                                         isEncrypt: false,
                                       ),
-                                      isEncrypt: false,
                                     ),
                                   ),
-                                ),
+                                ],
                               ],
                             ),
                             SizedBox(

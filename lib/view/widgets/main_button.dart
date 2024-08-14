@@ -56,10 +56,11 @@ class _MainButtonState extends State<MainButton> {
           ),
           padding: const EdgeInsets.symmetric(
             horizontal: 17,
-            vertical: 6.5,
+            vertical: 10,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 // width: 25,

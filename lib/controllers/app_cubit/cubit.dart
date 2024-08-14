@@ -25,6 +25,20 @@ class AppCubit extends Cubit<AppStates> {
   TextEditingController messageCtrl = TextEditingController();
   TextEditingController passCtrl = TextEditingController();
 
+  bool get showDecryptionButton {
+    final text = messageCtrl.text;
+    final password = passCtrl.text;
+
+    if (text.length <= password.length + 2) {
+      return false;
+    }
+
+    /// decrypt filter conditions
+    String version = text.substring(text.length - 2, text.length);
+    final endWithNumber = int.tryParse(version) != null;
+    return endWithNumber;
+  }
+
   static AppCubit get(BuildContext context) {
     return BlocProvider.of(context);
   }

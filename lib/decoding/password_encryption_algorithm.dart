@@ -33,6 +33,4 @@ class PasswordEncryptionAlgorithm {
     required int shiftingCharIndex,
     required int passKey,
   }) decryptionMethod;
-
-
 }
