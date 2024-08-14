@@ -1,7 +1,7 @@
 name: encryption_app
 description: Encrypt text with password
 publish_to: 'none'
-version: 6.9.0+22
+version: 6.9.1+23
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
