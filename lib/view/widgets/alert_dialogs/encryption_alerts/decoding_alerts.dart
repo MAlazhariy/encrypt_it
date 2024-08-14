@@ -1,4 +1,5 @@
 import 'package:encryption_app/controllers/app_cubit/cubit.dart';
+import 'package:encryption_app/main.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/alert_dialog/undefined_chars_alert_dialog.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/utils/constants.dart';
@@ -11,9 +12,9 @@ import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void invalidCharactersAlert({
-  required BuildContext context,
   required String undefinedChars,
 }) {
+  final context = navigatorKey.currentContext!;
   customUndefinedCharsAlertDialog(
     context: context,
     title: 'contains_undefined_chars'.tr(),

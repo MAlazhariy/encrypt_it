@@ -521,7 +521,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 // },
                                 validate: undefined.isEmpty,
                                 onChange: (value) {
-                                  undefined = V06('', cubit.passCtrl.text, context).getUndefinedChars(value);
+                                  undefined = V06(text: '', password: cubit.passCtrl.text).getUndefinedChars(value);
                                   activeButtons(undefined.isEmpty);
                                 },
                                 prefixIcon: Icon(

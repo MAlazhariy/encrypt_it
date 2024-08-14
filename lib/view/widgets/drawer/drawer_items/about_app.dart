@@ -1,7 +1,5 @@
-import 'package:encryption_app/controllers/app_cubit/cubit.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/dialog_button.dart';
-import 'package:encryption_app/utils/style/colors.dart';
 import 'package:encryption_app/view/widgets/my_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';

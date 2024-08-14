@@ -29,7 +29,6 @@ void Function()? onPressMainButton({
       // to show in bottom sheet
       cubit.setTextResult(
         Decoding().decoder(
-          context: context,
           text: msg,
           password: pass,
           isEncrypt: isEncrypt,

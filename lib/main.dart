@@ -25,6 +25,8 @@ import 'controllers/app_cubit/cubit.dart';
 import 'view/screens/home/home_screen.dart';
 import 'utils/constants.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   // insure the future methods are executed first before run app
   WidgetsFlutterBinding.ensureInitialized();

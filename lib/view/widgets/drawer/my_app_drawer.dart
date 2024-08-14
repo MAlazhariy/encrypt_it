@@ -1,6 +1,5 @@
 import 'package:encryption_app/view/widgets/drawer/drawer_background_image.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_group_items.dart';
-import 'package:encryption_app/view/widgets/drawer/drawer_items/about_app.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/change_language.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/contact_us.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/dark_mode.dart';
@@ -8,6 +7,13 @@ import 'package:encryption_app/view/widgets/drawer/drawer_items/how_app_works.da
 import 'package:encryption_app/view/widgets/drawer/drawer_items/rate_app.dart';
 import 'package:encryption_app/view/widgets/drawer/drawer_items/share_app.dart';
 import 'package:flutter/material.dart';
+
+
+// todo: clean code for the encryption algorithm.
+// todo: add "HOW TO USE THE APP?" to the menu (1. type the text in the encription field, 2. ...etc)
+// todo: disable decryption button if the input is not an "encrypted text"
+
+// todo: [optional] add "desclaimer" to show how the app work and prefer to use strong algorithms instead of the application
 
 class MyAppDrawer extends StatelessWidget {
   const MyAppDrawer({super.key});
