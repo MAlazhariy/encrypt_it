@@ -4,6 +4,8 @@ import 'package:sizer/sizer.dart';
 
 import '../colors.dart';
 
+const _scaffoldBackgroundColor = Color(0xFFECF0F3);
+
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   colorScheme: const ColorScheme.light(
@@ -17,7 +19,7 @@ ThemeData lightTheme = ThemeData(
     shadow: Color(0xFF9E9E9E),
   ),
   // change color in appBar too
-  scaffoldBackgroundColor: const Color(0xFFECF0F3),
+  scaffoldBackgroundColor: _scaffoldBackgroundColor,
   fontFamily: 'Baloo',
   primaryColor: mainColor,
   primarySwatch: mainSwatch,
@@ -39,6 +41,11 @@ ThemeData lightTheme = ThemeData(
     systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
+
+      // systemNavigationBarColor: _scaffoldBackgroundColor,
+      systemNavigationBarColor: _scaffoldBackgroundColor,
+      // systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light, // For iOS (dark icons)
     ),
     /// title style
     titleTextStyle: TextStyle(

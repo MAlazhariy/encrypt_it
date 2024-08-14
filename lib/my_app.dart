@@ -15,7 +15,7 @@ import 'controllers/app_cubit/cubit.dart';
 import 'view/screens/home/home_screen.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

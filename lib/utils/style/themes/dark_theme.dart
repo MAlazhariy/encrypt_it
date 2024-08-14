@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
+  const _scaffoldBackgroundColor = Color(0xFF303135);
 ThemeData darkTheme = ThemeData(
+
   // material 3
   useMaterial3: true,
   colorScheme: const ColorScheme.dark(
@@ -14,7 +16,7 @@ ThemeData darkTheme = ThemeData(
     shadow: Color(0xFF262626),
   ),
 
-  scaffoldBackgroundColor: const Color(0xFF303135),
+  scaffoldBackgroundColor: _scaffoldBackgroundColor,
   fontFamily: 'Baloo',
   focusColor: mainColor,
   primaryColor: mainColor,
@@ -38,6 +40,10 @@ ThemeData darkTheme = ThemeData(
     systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
+
+      systemNavigationBarColor: _scaffoldBackgroundColor,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.dark, // For iOS (dark icons)
     ),
 
     /// title style

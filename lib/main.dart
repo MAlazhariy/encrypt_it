@@ -10,6 +10,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:encryption_app/controllers/material_cubit/material_cubit.dart';
 import 'package:encryption_app/controllers/material_cubit/material_states.dart';
 import 'package:encryption_app/my_app.dart';
+import 'package:encryption_app/utils/style/system_overlay_style.dart';
 import 'package:encryption_app/view/screens/on_board/on_board_screen.dart';
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/network/local/on_board_cache.dart';
@@ -31,10 +32,16 @@ void main() async {
   // insure the future methods are executed first before run app
   WidgetsFlutterBinding.ensureInitialized();
 
+  // SystemChrome.setSystemUIOverlayStyle(
+  //   const SystemUiOverlayStyle(
+  //     systemNavigationBarColor: Colors.transparent,
+  //   ),
+  // );
   // prevent device orientation changes & force portrait
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]
-  );
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   // Bloc.observer = MyBlocObserver();
   await EasyLocalization.ensureInitialized();
@@ -46,7 +53,7 @@ void main() async {
 
   runApp(
     EasyLocalization(
-      supportedLocales: const[Locale('en'), Locale('ar')],
+      supportedLocales: const [Locale('en'), Locale('ar')],
       path: 'assets/translations',
       fallbackLocale: const Locale('en'),
       useOnlyLangCode: true,
