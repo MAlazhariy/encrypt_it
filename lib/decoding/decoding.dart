@@ -14,7 +14,7 @@ class Decoding {
   }) {
     /// encrypt algorithm
     if (isEncrypt) {
-      return V05(text: text, password: password).encrypt();
+      return V06(text: text, password: password).encrypt();
     }
 
     if (text.length <= password.length + 2) {
