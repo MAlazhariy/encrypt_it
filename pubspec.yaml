@@ -29,7 +29,6 @@ dependencies:
   flutter_inset_box_shadow: ^1.0.8
   receive_sharing_intent: ^1.8.1
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -40,6 +39,7 @@ dev_dependencies:
 
 dependency_overrides:
   win32: ^5.7.1
+  lints: ^5.0.0
 
 flutter:
   uses-material-design: true
