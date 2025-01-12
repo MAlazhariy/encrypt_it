@@ -33,7 +33,7 @@ class AddToTextStoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextStyle _infoStyle = TextStyle(
       overflow: TextOverflow.ellipsis,
-      fontSize: 8.5.sp,
+      fontSize: 8.5+5,
       color: titlesColor(context),
       fontWeight: FontWeight.normal,
     );
@@ -78,12 +78,12 @@ class AddToTextStoreScreen extends StatelessWidget {
                               'choose_or_add_group'.tr(),
                               style: TextStyle(
                                 color: titlesColor(context),
-                                fontSize: 10.sp,
+                                fontSize: 10+5,
                               ),
                             ),
                           ),
                           SizedBox(
-                            height: 5.sp,
+                            height: 5+5,
                           ),
 
                           /// group section
@@ -93,8 +93,8 @@ class AddToTextStoreScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             padding: EdgeInsets.symmetric(
-                              horizontal: 10.sp,
-                              vertical: 10.sp,
+                              horizontal: 10+5,
+                              vertical: 10+5,
                             ),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -115,7 +115,7 @@ class AddToTextStoreScreen extends StatelessWidget {
                                         ? Text(
                                             '${'or'.tr()} ',
                                             style: TextStyle(
-                                              fontSize: 10.sp,
+                                              fontSize: 10+5,
                                             ),
                                           )
                                         : Container(),
@@ -154,7 +154,7 @@ class AddToTextStoreScreen extends StatelessWidget {
                                 'type_the_title'.tr(),
                                 style: TextStyle(
                                   color: titlesColor(context),
-                                  fontSize: 10.sp,
+                                  fontSize: 10+5,
                                 ),
                               ),
                             ),
@@ -166,8 +166,8 @@ class AddToTextStoreScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               padding: EdgeInsets.symmetric(
-                                horizontal: 10.sp,
-                                vertical: 10.sp,
+                                horizontal: 10+5,
+                                vertical: 10+5,
                               ),
                               child: TitleTextForm(
                                 titleCtrl: titleCtrl,
@@ -255,7 +255,7 @@ class AddToTextStoreScreen extends StatelessWidget {
                         'add'.tr(),
                         style: TextStyle(
                           color: Theme.of(context).scaffoldBackgroundColor,
-                          fontSize: 12.sp,
+                          fontSize: 12+5,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -296,8 +296,8 @@ class GroupDropDown extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       padding: EdgeInsets.symmetric(
-        vertical: 3.sp,
-        horizontal: 13.sp,
+        vertical: 3+5,
+        horizontal: 13+5,
       ),
       child: DropdownButton<String>(
         value: group,
@@ -306,15 +306,15 @@ class GroupDropDown extends StatelessWidget {
           'choose_group'.tr(),
           style: TextStyle(
             color: titlesColor(context),
-            fontSize: 12.sp,
+            fontSize: 12+5,
             fontWeight: FontWeight.w600,
             fontFamily: 'Baloo',
           ),
         ),
         alignment: AlignmentDirectional.centerStart,
         isExpanded: true,
-        itemHeight: 22.sp >= kMinInteractiveDimension // 48
-            ? 22.sp
+        itemHeight: 22+5 >= kMinInteractiveDimension // 48
+            ? 22+5
             : 48,
         // fill the parent width
         // focusColor: mainColor,
@@ -322,7 +322,7 @@ class GroupDropDown extends StatelessWidget {
         enableFeedback: true,
         style: TextStyle(
           color: titlesColor(context),
-          fontSize: 12.sp,
+          fontSize: 12+5,
           fontWeight: FontWeight.w500,
           fontFamily: 'Baloo',
         ),
@@ -332,7 +332,7 @@ class GroupDropDown extends StatelessWidget {
         icon: Icon(
           Icons.arrow_drop_down,
           color: titlesColor(context),
-          size: 20.sp,
+          size: 20+5,
         ),
         items: dropdownItems.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
@@ -372,25 +372,25 @@ class GroupTextForm extends StatelessWidget {
       child: TextFormField(
         controller: groupCtrl,
         style: TextStyle(
-          fontSize: 12.sp,
+          fontSize: 12+5,
         ),
         decoration: InputDecoration(
           hintText: 'add_new_group'.tr(),
           hintStyle: TextStyle(
-            fontSize: 12.sp,
+            fontSize: 12+5,
           ),
           prefixIcon: Icon(
             Icons.add,
-            size: 12.sp,
+            size: 12+5,
           ),
           border: InputBorder.none,
           errorBorder: const UnderlineInputBorder(),
           errorStyle: TextStyle(
             color: redColor,
-            fontSize: 12.sp,
+            fontSize: 12+5,
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.sp),
+            borderRadius: BorderRadius.circular(10+5),
             borderSide: const BorderSide(
               color: redColor,
               width: 1.7,
@@ -440,21 +440,21 @@ class TitleTextForm extends StatelessWidget {
       child: TextFormField(
         controller: titleCtrl,
         style: TextStyle(
-          fontSize: 12.sp,
+          fontSize: 12+5,
         ),
         decoration: InputDecoration(
           hintText: 'enter_title_here'.tr(),
           hintStyle: TextStyle(
-            fontSize: 12.sp,
+            fontSize: 12+5,
           ),
           border: InputBorder.none,
           errorStyle: TextStyle(
             color: redColor,
-            fontSize: 10.sp,
+            fontSize: 10+5,
           ),
           errorBorder: const UnderlineInputBorder(),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.sp),
+            borderRadius: BorderRadius.circular(10+5),
             borderSide: const BorderSide(
               color: redColor,
               width: 1.7,

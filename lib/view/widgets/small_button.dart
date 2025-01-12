@@ -77,8 +77,8 @@ class _ButtonDesign extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: 0.9.sp,
-        vertical: 2.3.sp,
+        horizontal: 0.9+5,
+        vertical: 2.3+5,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -86,16 +86,16 @@ class _ButtonDesign extends StatelessWidget {
           Icon(
             icon,
             color: smallButtonsContentColor(context),
-            size: 13.sp,
+            size: 13+5,
           ),
           SizedBox(
-            width: 3.sp,
+            width: 3+5,
           ),
           Text(
             title,
             style: TextStyle(
               color: smallButtonsContentColor(context),
-              fontSize: 9.75.sp,
+              fontSize: 9.75+5,
               fontWeight: FontWeight.w700,
             ),
           ),

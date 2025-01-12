@@ -22,9 +22,9 @@ void showToast({
           ? Theme.of(context).scaffoldBackgroundColor
           : smallButtonsContentColor(context),
       fontWeight: FontWeight.w600,
-      fontSize: 10.sp,
+      fontSize: 10+5,
     ),
-    borderRadius: BorderRadius.circular(12.sp),
+    borderRadius: BorderRadius.circular(12+5),
     clickClose: true,
   );
 }

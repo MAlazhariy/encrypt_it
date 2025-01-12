@@ -11,14 +11,14 @@ class BoardPage1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: 20.sp,
+        horizontal: 20+5,
       ),
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: 5.sp,
+              height: 5+5,
             ),
 
             // image
@@ -39,7 +39,7 @@ class BoardPage1 extends StatelessWidget {
                 color: darkBlueColor,
                 fontFamily: 'Baloo',
                 fontWeight: FontWeight.w600,
-                fontSize: 13.sp,
+                fontSize: 13+5,
               ),
               textAlign: TextAlign.center,
             ),
@@ -51,7 +51,7 @@ class BoardPage1 extends StatelessWidget {
                 color: darkBlueColor.withAlpha(180),
                 fontFamily: 'Baloo',
                 fontWeight: FontWeight.w500,
-                fontSize: 10.sp,
+                fontSize: 10+5,
               ),
               textAlign: TextAlign.center,
             ),

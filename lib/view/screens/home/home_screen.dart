@@ -249,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                                 prefixIcon: Icon(
                                   MyIcons.text_field,
-                                  size: 19.sp,
+                                  size: 19+5,
                                 ),
                                 onTab: () {
                                   cubit.setCurrentFieldToText();
@@ -366,7 +366,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 group.groupName,
                                                                 style: TextStyle(
                                                                   fontWeight: FontWeight.w500,
-                                                                  fontSize: 14.sp,
+                                                                  fontSize: 14+5,
                                                                 ),
                                                               ),
                                                               collapsedIconColor: smallButtonsContentColor(context),
@@ -374,7 +374,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               iconColor: smallButtonsContentColor(context),
                                                               // leading: Icon(
                                                               //   MyIcons.folder,
-                                                              //   size: 15.sp,
+                                                              //   size: 15+5,
                                                               // ),
                                                               textColor: smallButtonsContentColor(context),
                                                               backgroundColor: shadowColor(context).withAlpha(40),
@@ -385,7 +385,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 return Container(
                                                                   width: double.infinity,
                                                                   padding: EdgeInsets.symmetric(
-                                                                    horizontal: 15.sp,
+                                                                    horizontal: 15+5,
                                                                   ),
                                                                   child: Row(
                                                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -404,7 +404,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               style: TextStyle(
                                                                                 color: titlesColor(context),
                                                                                 fontWeight: FontWeight.w500,
-                                                                                fontSize: 12.sp,
+                                                                                fontSize: 12+5,
                                                                               ),
                                                                             ),
                                                                           ),
@@ -414,11 +414,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       GestureDetector(
                                                                         child: Padding(
                                                                           padding: EdgeInsets.symmetric(
-                                                                            horizontal: 5.sp,
+                                                                            horizontal: 5+5,
                                                                           ),
                                                                           child: Icon(
                                                                             MyIcons.copy,
-                                                                            size: 15.sp,
+                                                                            size: 15+5,
                                                                             color: iconsGrayColor,
                                                                           ),
                                                                         ),
@@ -446,13 +446,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         Icon(
                                                           MyIcons.bookmark_add,
                                                           color: iconsGrayColor,
-                                                          size: 45.sp,
+                                                          size: 45+5,
                                                         ),
                                                         Text(
                                                           'add_store_message'.tr(),
                                                           style: TextStyle(
                                                             color: Colors.grey[500],
-                                                            fontSize: 12.sp,
+                                                            fontSize: 12+5,
                                                           ),
                                                           textAlign: TextAlign.center,
                                                         ),
@@ -515,7 +515,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                                 prefixIcon: Icon(
                                   MyIcons.key,
-                                  size: 19.sp,
+                                  size: 19+5,
                                 ),
                                 suffixIcon: IconButton(
                                   onPressed: () {
@@ -523,7 +523,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   icon: Icon(
                                     cubit.passwordIcon,
-                                    size: 17.sp,
+                                    size: 17+5,
                                   ),
                                 ),
                                 isPassword: true,

@@ -23,19 +23,19 @@ void customAlertDialog({
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(
-                  vertical: 20.sp,
-                  horizontal: 5.sp,
+                  vertical: 20+5,
+                  horizontal: 5+5,
                 ),
                 decoration: BoxDecoration(
                   color: redColor,
                   borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(12.sp),
-                    topLeft: Radius.circular(12.sp),
+                    topRight: Radius.circular(12+5),
+                    topLeft: Radius.circular(12+5),
                   ),
                 ),
                 child: Icon(
                   alertIcon,
-                  size: 50.sp,
+                  size: 50+5,
                   color: Colors.white,
                 ),
               ),
@@ -45,7 +45,7 @@ void customAlertDialog({
                 // physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 15.sp,
+                    horizontal: 15+5,
                     vertical: 15,
                   ),
                   child: Column(
@@ -57,18 +57,18 @@ void customAlertDialog({
                         style: TextStyle(
                           color: redColor,
                           fontWeight: FontWeight.w900,
-                          fontSize: 15.sp,
+                          fontSize: 15+5,
                         ),
                       ),
                       SizedBox(
-                        height: 3.sp,
+                        height: 3+5,
                       ),
                       Text(
                         alertDescription,
                         style: TextStyle(
                           // color: Colors.grey[600],
                           fontWeight: FontWeight.w500,
-                          fontSize: 13.sp,
+                          fontSize: 13+5,
                         ),
                       ),
                     ],
@@ -83,14 +83,14 @@ void customAlertDialog({
             width: double.infinity,
             child: Center(
               child: Wrap(
-                spacing: 4.sp,
+                spacing: 4+5,
                 children: buttons,
               ),
             ),
           ),
         ],
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.sp),
+          borderRadius: BorderRadius.circular(12+5),
         ),
       );
     },

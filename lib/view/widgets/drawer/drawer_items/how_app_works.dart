@@ -31,39 +31,39 @@ class HowAppWorksMenuItem extends StatelessWidget {
                 'onBoard_headline_1'.tr(),
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
-                  fontSize: 12.sp,
+                  fontSize: 12+5,
                 ),
               ),
               Text(
                 'onBoard_subtitle_1'.tr(),
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 12+5,
                 ),
               ),
-              SizedBox(height: 17.sp),
+              SizedBox(height: 17+5),
 
               // how we protect your data
               Text(
                 'how_algorithm_works'.tr(),
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
-                  fontSize: 12.sp,
+                  fontSize: 12+5,
                 ),
               ),
               Text(
                 'how_protect_description'.tr(),
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 12+5,
                 ),
               ),
 
               // // privacy policy
-              // SizedBox(height: 17.sp,),
+              // SizedBox(height: 17+5,),
               // Text(
               //   'privacy_policy'.tr(),
               //   style: TextStyle(
               //     fontWeight: FontWeight.w700,
-              //     fontSize: 12.sp,
+              //     fontSize: 12+5,
               //   ),
               // ),
               // RichText(
@@ -72,7 +72,7 @@ class HowAppWorksMenuItem extends StatelessWidget {
               //       TextSpan(
               //         text: 'privacy_policy_description'.tr(),
               //         style: TextStyle(
-              //           fontSize: 12.sp,
+              //           fontSize: 12+5,
               //           fontWeight: FontWeight.w500,
               //           fontFamily: 'Baloo',
               //           color: titlesColor(context),
@@ -81,7 +81,7 @@ class HowAppWorksMenuItem extends StatelessWidget {
               //       TextSpan(
               //         text: 'privacy_policy'.tr(),
               //         style: TextStyle(
-              //           fontSize: 12.sp,
+              //           fontSize: 12+5,
               //           fontWeight: FontWeight.w600,
               //           fontFamily: 'Baloo',
               //           color: smallButtonsContentColor(context),
@@ -94,7 +94,7 @@ class HowAppWorksMenuItem extends StatelessWidget {
               //       TextSpan(
               //         text: '.',
               //         style: TextStyle(
-              //           fontSize: 12.sp,
+              //           fontSize: 12+5,
               //           fontWeight: FontWeight.w500,
               //           color: titlesColor(context),
               //           fontFamily: 'Baloo',
@@ -107,18 +107,18 @@ class HowAppWorksMenuItem extends StatelessWidget {
               /**/
 
               // // how we protect your data
-              // SizedBox(height: 17.sp,),
+              // SizedBox(height: 17+5,),
               // Text(
               //   'how_protect'.tr(),
               //   style: TextStyle(
               //     fontWeight: FontWeight.w700,
-              //     fontSize: 12.sp,
+              //     fontSize: 12+5,
               //   ),
               // ),
               // Text(
               //   'how_protect_description'.tr(),
               //   style: TextStyle(
-              //     fontSize: 13.sp,
+              //     fontSize: 13+5,
               //   ),
               // ),
             ],

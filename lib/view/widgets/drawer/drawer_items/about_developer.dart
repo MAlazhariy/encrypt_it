@@ -27,25 +27,25 @@ class AboutDeveloperMenuItem extends StatelessWidget {
               //   'about_developer'.tr(),
               //   style: TextStyle(
               //     fontWeight: FontWeight.w700,
-              //     fontSize: 12.sp,
+              //     fontSize: 12+5,
               //   ),
               // ),
               Text(
                 'developer_summary'.tr(),
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 12+5,
                 ),
               ),
 
               // how we protect your data
               SizedBox(
-                height: 14.sp,
+                height: 14+5,
               ),
               Text(
                 'social_media'.tr(),
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
-                  fontSize: 12.sp,
+                  fontSize: 12+5,
                 ),
               ),
               Row(

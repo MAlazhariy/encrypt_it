@@ -33,26 +33,26 @@ class MenuBG extends StatelessWidget {
             image: const AssetImage(
               'assets/images/icon.png',
             ),
-            height: 55.sp,
+            height: 55+5,
             color: dialogButtonColor(context),
           ),
-          SizedBox(height: 3.sp),
+          SizedBox(height: 3+5),
           // app name
           Text(
             cubit.appInfo.appName,
             style: TextStyle(
               fontWeight: FontWeight.w700,
-              fontSize: 12.sp,
+              fontSize: 12+5,
               color: smallButtonsContentColor(context),
             ),
           ),
           // app version
-          // SizedBox(height: 2.sp),
+          // SizedBox(height: 2+5),
           Text(
             cubit.appInfo.version,
             style: TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: 11.sp,
+              fontSize: 11+5,
             ),
           ),
         ],
@@ -61,7 +61,7 @@ class MenuBG extends StatelessWidget {
       //   child: Text(
       //     'menu_headline'.tr(),
       //     style: TextStyle(
-      //       fontSize: 17.sp,
+      //       fontSize: 17+5,
       //       color: Colors.white,
       //       fontWeight: FontWeight.w600,
       //     ),

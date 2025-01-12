@@ -28,7 +28,7 @@ class MenuItemWidget extends StatelessWidget {
               title,
               style: TextStyle(
                 color: titlesColor(context),
-                fontSize: 13.5.sp,
+                fontSize: 13.5+5,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -41,17 +41,17 @@ class MenuItemWidget extends StatelessWidget {
               subtitle,
               style: TextStyle(
                 color: titlesColor(context),
-                fontSize: 10.sp,
+                fontSize: 10+5,
                 fontWeight: FontWeight.w500,
               ),
             )
           : null,
       // width between leading icon and title
-      minLeadingWidth: 16.sp,
+      minLeadingWidth: 16+5,
       leading: Icon(
         icon,
         color: iconsGrayColor,
-        size: 15.sp,
+        size: 15+5,
       ),
       onTap: onTap,
     );

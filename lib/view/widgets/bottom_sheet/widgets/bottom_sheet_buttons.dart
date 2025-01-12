@@ -31,12 +31,12 @@ class BottomSheetButtons extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       child: Padding(
         padding: EdgeInsetsDirectional.only(
-          top: 5.sp,
-          bottom: 12.sp,
+          top: 5+5,
+          bottom: 12+5,
         ),
         child: Wrap(
           alignment: WrapAlignment.center,
-          spacing: 10.sp,
+          spacing: 10+5,
           children: [
             // copy
             BottomSheetButton(

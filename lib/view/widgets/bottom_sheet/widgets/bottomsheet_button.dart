@@ -62,8 +62,8 @@ class _BottomSheetButtonState extends State<BottomSheetButton> {
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 0.9.sp,
-              vertical: 2.3.sp,
+              horizontal: 0.9+5,
+              vertical: 2.3+5,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -71,16 +71,16 @@ class _BottomSheetButtonState extends State<BottomSheetButton> {
                 Icon(
                   widget.icon,
                   color: smallButtonsContentColor(context),
-                  size: 15.sp,
+                  size: 15+5,
                 ),
                 SizedBox(
-                  width: 3.sp,
+                  width: 3+5,
                 ),
                 Text(
                   widget.title,
                   style: TextStyle(
                     color: smallButtonsContentColor(context),
-                    fontSize: 11.5.sp,
+                    fontSize: 11.5+5,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

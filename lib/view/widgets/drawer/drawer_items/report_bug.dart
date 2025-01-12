@@ -33,18 +33,18 @@ class ReportABugMenuItem extends StatelessWidget {
                 child: Center(
                   child: Icon(
                     Icons.assistant_outlined,
-                    size: 80.sp,
+                    size: 80+5,
                     color: Colors.grey[300],
                   ),
                 ),
               ),
               SizedBox(
-                height: 15.sp,
+                height: 15+5,
               ),
               Text(
                 'report_bug_description'.tr(),
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 12+5,
                 ),
               ),
             ],

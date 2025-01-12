@@ -26,7 +26,7 @@ class DisclaimerMenuItem extends StatelessWidget {
               Text(
                 'disclaimer_description'.tr(),
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 12+5,
                 ),
               ),
             ],

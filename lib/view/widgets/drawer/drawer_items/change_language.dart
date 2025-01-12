@@ -21,7 +21,7 @@ class ChangeLanguageMenuItem extends StatelessWidget {
           content: Text(
             'sure change lang'.tr(),
             style: TextStyle(
-              fontSize: 13.sp,
+              fontSize: 13+5,
             ),
           ),
           buttons: [

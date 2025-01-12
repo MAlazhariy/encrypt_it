@@ -40,9 +40,9 @@ class EncryptedResultWidget extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(
-        // bottom: 18.sp,
-        right: 18.sp,
-        left: 18.sp,
+        // bottom: 18+5,
+        right: 18+5,
+        left: 18+5,
       ),
       child: Text(
         cubit.textResult,
@@ -51,7 +51,7 @@ class EncryptedResultWidget extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           color: encryptedTextColor,
-          fontSize: 16.sp,
+          fontSize: 16+5,
           fontWeight: FontWeight.w600,
           fontFamily: 'Baloo',
         ),
@@ -69,14 +69,14 @@ class DecryptedResultWidget extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(
-        right: 18.sp,
-        left: 18.sp,
+        right: 18+5,
+        left: 18+5,
       ),
       child: SelectableAutoLinkText(
         cubit.textResult,
         style: TextStyle(
           color: decryptedTextColor,
-          fontSize: 16.sp,
+          fontSize: 16+5,
           fontWeight: FontWeight.w600,
           fontFamily: 'Baloo',
         ),
@@ -113,13 +113,13 @@ class LargeResultWidget extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: 22.sp,
+            horizontal: 22+5,
           ),
           child: SelectableAutoLinkText(
             cubit.textResult,
             style: TextStyle(
               color: decryptedTextColor,
-              fontSize: 16.sp,
+              fontSize: 16+5,
               fontWeight: FontWeight.w600,
               fontFamily: 'Baloo',
             ),

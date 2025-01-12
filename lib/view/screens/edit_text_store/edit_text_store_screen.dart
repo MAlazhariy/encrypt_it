@@ -39,7 +39,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
             args: [deletedGroup.groupName],
           ),
           style: TextStyle(
-            fontSize: 12.sp,
+            fontSize: 12+5,
           ),
         ),
         buttons: [
@@ -61,7 +61,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                     style: TextStyle(
                       fontFamily: 'Baloo',
                       fontWeight: FontWeight.w600,
-                      fontSize: 12.sp,
+                      fontSize: 12+5,
                     ),
                   ),
                   backgroundColor: redColor,
@@ -178,7 +178,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
           style: TextStyle(
             fontFamily: 'Baloo',
             fontWeight: FontWeight.w600,
-            fontSize: 12.sp,
+            fontSize: 12+5,
           ),
         ),
         elevation: 0,
@@ -288,10 +288,10 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
       ),
       body: Padding(
         padding: EdgeInsetsDirectional.only(
-          top: 15.sp,
-          bottom: 5.sp,
-          start: 15.sp,
-          end: 15.sp,
+          top: 15+5,
+          bottom: 5+5,
+          start: 15+5,
+          end: 15+5,
         ),
         child: Column(
           children: [
@@ -305,7 +305,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                     //     child: Text(
                     //       'choose_group_to_edit_text_store'.tr(),
                     //       style: TextStyle(
-                    //         fontSize: 12.sp,
+                    //         fontSize: 12+5,
                     //       ),
                     //     ),
                     //   ),
@@ -314,7 +314,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                     Container(
                       decoration: BoxDecoration(
                         color: highLightColor(context),
-                        borderRadius: BorderRadius.circular(15.sp),
+                        borderRadius: BorderRadius.circular(15+5),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
                             color: shadowColor(context, lightAlpha: 100),
@@ -324,8 +324,8 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                         ],
                       ),
                       padding: EdgeInsets.symmetric(
-                        vertical: 6.sp,
-                        horizontal: 13.sp,
+                        vertical: 6+5,
+                        horizontal: 13+5,
                       ),
                       child: DropdownButton<String>(
                         value: choosedGroup,
@@ -334,7 +334,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                           'choose_group'.tr(),
                           style: TextStyle(
                             color: titlesColor(context),
-                            fontSize: 12.sp,
+                            fontSize: 12+5,
                             fontWeight: FontWeight.w600,
                             fontFamily: 'Baloo',
                           ),
@@ -347,20 +347,20 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                         enableFeedback: true,
                         style: TextStyle(
                           color: titlesColor(context),
-                          fontSize: 12.sp,
+                          fontSize: 12+5,
                           fontWeight: FontWeight.w500,
                           fontFamily: 'Baloo',
                         ),
                         autofocus: true,
                         menuMaxHeight: 70.h,
-                        itemHeight: 22.sp >= kMinInteractiveDimension // 48
-                            ? 22.sp
+                        itemHeight: 22+5 >= kMinInteractiveDimension // 48
+                            ? 22+5
                             : 48,
                         dropdownColor: highLightColor(context, darkAlpha: 255),
                         icon: Icon(
                           Icons.arrow_drop_down,
                           color: titlesColor(context),
-                          size: 20.sp,
+                          size: 20+5,
                         ),
                         items: dropdownItems
                             .map<DropdownMenuItem<String>>((String value) {
@@ -385,7 +385,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                     ),
 
                     SizedBox(
-                      height: 10.sp,
+                      height: 10+5,
                     ),
 
                     // group actions
@@ -419,17 +419,17 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                         'edit_group_name'.tr(),
                                         style: TextStyle(
                                           color: titlesColor(context),
-                                          fontSize: 10.sp,
+                                          fontSize: 10+5,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 5.sp,
+                                        width: 5+5,
                                       ),
                                       Icon(
                                         MyIcons.edit,
                                         color: titlesColor(context),
-                                        size: 14.sp,
+                                        size: 14+5,
                                       ),
                                     ],
                                   ),
@@ -462,16 +462,16 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                         'delete_the_group'.tr(),
                                         style: TextStyle(
                                           color: titlesColor(context),
-                                          fontSize: 10.sp,
+                                          fontSize: 10+5,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 5.sp,
+                                        width: 5+5,
                                       ),
                                       Icon(
                                         MyIcons.delete,
-                                        size: 14.sp,
+                                        size: 14+5,
                                         color: titlesColor(context),
                                       ),
                                     ],
@@ -513,7 +513,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
 
                     if (choosedGroup != null)
                       SizedBox(
-                        height: 10.sp,
+                        height: 10+5,
                       ),
                   ],
                 ),
@@ -523,8 +523,8 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
             /// Done
             Padding(
               padding: EdgeInsetsDirectional.only(
-                top: 5.sp,
-                bottom: 5.sp,
+                top: 5+5,
+                bottom: 5+5,
               ),
               child: MaterialButton(
                 onPressed: () {
@@ -544,7 +544,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                   'done'.tr(),
                   style: TextStyle(
                     color: Theme.of(context).scaffoldBackgroundColor,
-                    fontSize: 12.sp,
+                    fontSize: 12+5,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -583,21 +583,21 @@ class _CustomInputTextFormState extends State<_CustomInputTextForm> {
       child: TextFormField(
         controller: widget.titleController,
         style: TextStyle(
-          fontSize: 12.sp,
+          fontSize: 12+5,
         ),
         autofocus: true,
         decoration: InputDecoration(
           hintText: widget.hintText ?? 'type_a_new_name'.tr(),
           hintStyle: TextStyle(
             color: titlesColor(context).withAlpha(100),
-            fontSize: 12.sp,
+            fontSize: 12+5,
           ),
           errorStyle: TextStyle(
             color: redColor,
-            fontSize: 10.sp,
+            fontSize: 10+5,
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.sp),
+            borderRadius: BorderRadius.circular(10+5),
             borderSide: BorderSide(
               color: titlesColor(context).withAlpha(100),
               width: 1.7,
@@ -605,7 +605,7 @@ class _CustomInputTextFormState extends State<_CustomInputTextForm> {
           ),
           errorBorder: const UnderlineInputBorder(),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.sp),
+            borderRadius: BorderRadius.circular(10+5),
             borderSide: const BorderSide(
               color: redColor,
               width: 1.7,
@@ -649,10 +649,10 @@ class _TitleBuilder extends StatelessWidget {
       width: double.maxFinite,
       margin: const EdgeInsets.symmetric(vertical: 5),
       padding: EdgeInsetsDirectional.only(
-        start: 15.sp,
-        end: 10.sp,
-        top: 5.sp,
-        bottom: 5.sp,
+        start: 15+5,
+        end: 10+5,
+        top: 5+5,
+        bottom: 5+5,
       ),
       decoration: BoxDecoration(
         color: highLightColor(context, darkAlpha: 255),
@@ -675,7 +675,7 @@ class _TitleBuilder extends StatelessWidget {
                 contentModel.title,
                 style: TextStyle(
                   color: titlesColor(context),
-                  fontSize: 12.sp,
+                  fontSize: 12+5,
                 ),
               ),
             ),
@@ -701,9 +701,9 @@ class _TitleBuilder extends StatelessWidget {
               icon: Icon(
                 MyIcons.delete,
                 color: iconsGrayColor,
-                size: 13.sp,
+                size: 13+5,
               ),
-              splashRadius: 13.sp,
+              splashRadius: 13+5,
             ),
             color: highLightColor(context),
           ),
@@ -718,9 +718,9 @@ class _TitleBuilder extends StatelessWidget {
               icon: Icon(
                 MyIcons.edit,
                 color: iconsGrayColor,
-                size: 13.sp,
+                size: 13+5,
               ),
-              splashRadius: 13.sp,
+              splashRadius: 13+5,
               splashColor: smallButtonsContentColor(context).withAlpha(50),
             ),
             color: highLightColor(context),

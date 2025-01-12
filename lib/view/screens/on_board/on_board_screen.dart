@@ -39,8 +39,8 @@ class OnBoardScreenState extends State<OnBoardScreen> {
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.symmetric(
-            vertical: 20.sp,
-            // horizontal: 20.sp,
+            vertical: 20+5,
+            // horizontal: 20+5,
           ),
           alignment: Alignment.center,
           child: Column(
@@ -53,7 +53,7 @@ class OnBoardScreenState extends State<OnBoardScreen> {
               //         !isLast ? 'skip'.tr() : '',
               //         style: TextStyle(
               //           color: Theme.of(context).colorScheme.onSecondary,
-              //           fontSize: 9.sp,
+              //           fontSize: 9+5,
               //           fontWeight: FontWeight.w500,
               //         ),
               //       ),
@@ -128,10 +128,10 @@ class OnBoardScreenState extends State<OnBoardScreen> {
                       color: isLast ? mainColor : darkBlueColor,
                       minWidth: constraints.maxWidth - 30.w,
                       padding: EdgeInsets.symmetric(
-                        vertical: 10.sp,
+                        vertical: 10+5,
                       ),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.sp),
+                        borderRadius: BorderRadius.circular(15+5),
                       ),
                       splashColor: Colors.white.withAlpha(25),
                       highlightColor: Colors.white.withAlpha(10),
@@ -143,14 +143,14 @@ class OnBoardScreenState extends State<OnBoardScreen> {
                             isLast ? 'get_started'.tr() : 'next'.tr(),
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 12.sp,
+                              fontSize: 12+5,
                               fontWeight:
                                   isLast ? FontWeight.w600 : FontWeight.w500,
                             ),
                           ),
                           if (!isLast)
                             SizedBox(
-                              width: 2.sp,
+                              width: 2+5,
                             ),
                           if (!isLast)
                             const Icon(
@@ -165,7 +165,7 @@ class OnBoardScreenState extends State<OnBoardScreen> {
               ),
 
               SizedBox(
-                height: 25.sp,
+                height: 25+5,
               ),
 
               /// indicator

@@ -13,7 +13,7 @@ void showReportAdDialog(BuildContext context) {
     content: Text(
       'report_an_ad_description'.tr(),
       style: TextStyle(
-        fontSize: 12.sp,
+        fontSize: 12+5,
       ),
     ),
     buttons: [

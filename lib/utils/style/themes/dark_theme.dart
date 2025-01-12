@@ -27,10 +27,10 @@ ThemeData darkTheme = ThemeData(
     /// scaffold background color
     backgroundColor: const Color(0xFF303135),
     foregroundColor: const Color(0xFFECF0F3),
-    // toolbarHeight: 23.sp,
+    // toolbarHeight: 23+5,
     iconTheme: IconThemeData(
       color: const Color(0xFFECF0F3),
-      size: 16.sp,
+      size: 16+5,
     ),
 
     /// shadow color
@@ -48,7 +48,7 @@ ThemeData darkTheme = ThemeData(
 
     /// title style
     titleTextStyle: TextStyle(
-      fontSize: 15.sp,
+      fontSize: 15+5,
       fontFamily: 'Baloo',
       color: const Color(0xFFECF0F3),
     ),
@@ -62,7 +62,7 @@ ThemeData darkTheme = ThemeData(
   /// text button
   // textTheme: TextTheme(
   //   button: TextStyle(
-  //     fontSize: 12.sp,
+  //     fontSize: 12+5,
   //   ),
   // ),
   dividerTheme: const DividerThemeData(

@@ -37,7 +37,7 @@ void showCustomFullDialog({
                 width: double.infinity,
                 child: Center(
                   child: Wrap(
-                    spacing: 4.sp,
+                    spacing: 4+5,
                     children: buttons,
                   ),
                 ),

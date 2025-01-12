@@ -14,7 +14,7 @@ void showCustomDialog({
         title: Text(
           title,
           style: TextStyle(
-            fontSize: 14.5.sp,
+            fontSize: 14.5+5,
           ),
         ),
         content: SizedBox(
@@ -34,7 +34,7 @@ void showCustomDialog({
               width: double.infinity,
               child: Center(
                 child: Wrap(
-                  spacing: 4.sp,
+                  spacing: 4+5,
                   children: buttons,
                 ),
               ),

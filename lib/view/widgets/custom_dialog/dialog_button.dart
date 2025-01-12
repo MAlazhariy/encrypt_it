@@ -40,7 +40,7 @@ class DialogButton extends StatelessWidget {
         title,
         style: TextStyle(
           fontWeight: isBold ? FontWeight.w700 : FontWeight.w500,
-          fontSize: 11.sp,
+          fontSize: 11+5,
         ),
       ),
     );

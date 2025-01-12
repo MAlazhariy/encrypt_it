@@ -10,7 +10,7 @@ class BoardPage3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: 20.sp,
+        horizontal: 20+5,
       ),
       child: Center(
         child: Column(
@@ -21,12 +21,12 @@ class BoardPage3 extends StatelessWidget {
               child: Icon(
                 Icons.favorite_outlined,
                 color: mainColor,
-                size: 100.sp,
+                size: 100+5,
               ),
             ),
 
             SizedBox(
-              height: 10.sp,
+              height: 10+5,
             ),
 
             // headline title
@@ -36,7 +36,7 @@ class BoardPage3 extends StatelessWidget {
                 color: mainColor,
                 fontFamily: 'Baloo',
                 fontWeight: FontWeight.w500,
-                fontSize: 12.sp,
+                fontSize: 12+5,
               ),
               textAlign: TextAlign.center,
             ),

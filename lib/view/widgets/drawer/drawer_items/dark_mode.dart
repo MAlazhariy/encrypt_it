@@ -15,7 +15,7 @@ class ChangeThemeMenuItem extends StatelessWidget {
       title: 'dark_mode'.tr(),
       icon: Icons.dark_mode_outlined,
       suffixIcon: SizedBox(
-        width: 35.sp,
+        width: 35+5,
         child: FittedBox(
           fit: BoxFit.fitWidth,
           child: Switch(

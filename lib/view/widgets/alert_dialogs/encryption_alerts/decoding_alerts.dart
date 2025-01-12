@@ -31,7 +31,7 @@ void invalidCharactersAlert({
               TextSpan(
                 text: '"',
                 style: TextStyle(
-                  fontSize: 11.sp,
+                  fontSize: 11+5,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Baloo',
                   color: titlesColor(context),
@@ -40,7 +40,7 @@ void invalidCharactersAlert({
               TextSpan(
                 text: undefinedChars,
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 12+5,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Baloo',
                   color: titlesColor(context),
@@ -50,7 +50,7 @@ void invalidCharactersAlert({
               TextSpan(
                 text: '"',
                 style: TextStyle(
-                  fontSize: 11.sp,
+                  fontSize: 11+5,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Baloo',
                   color: titlesColor(context),
@@ -66,14 +66,14 @@ void invalidCharactersAlert({
               TextSpan(
                 text: 'there_problem'.tr(),
                 style: TextStyle(
-                  fontSize: 11.sp,
+                  fontSize: 11+5,
                   color: titlesColor(context),
                 ),
               ),
               TextSpan(
                 text: 'contact_us'.tr(),
                 style: TextStyle(
-                  fontSize: 11.sp,
+                  fontSize: 11+5,
                   color: smallButtonsContentColor(context),
                   fontWeight: FontWeight.w600,
                   decoration: TextDecoration.underline,
@@ -92,7 +92,7 @@ void invalidCharactersAlert({
               TextSpan(
                 text: '.',
                 style: TextStyle(
-                  fontSize: 11.sp,
+                  fontSize: 11+5,
                   color: Colors.grey[800],
                   fontWeight: FontWeight.w600,
                 ),

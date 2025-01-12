@@ -21,7 +21,7 @@ class BottomSheetDesign extends StatelessWidget {
       width: double.maxFinite,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(15.sp),
+          top: Radius.circular(15+5),
         ),
         color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
@@ -34,18 +34,18 @@ class BottomSheetDesign extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 13.sp),
+          SizedBox(height: 13+5),
 
           // small dash
           Container(
             width: 10.w,
-            height: 3.7.sp,
+            height: 3.7+5,
             decoration: BoxDecoration(
               color: iconsGrayColor.withAlpha(85),
               borderRadius: BorderRadius.circular(50),
             ),
           ),
-          SizedBox(height: 9.sp),
+          SizedBox(height: 9+5),
 
           // action title ['encrypt' or 'decrypt']
           Text(
@@ -55,14 +55,14 @@ class BottomSheetDesign extends StatelessWidget {
             style: TextStyle(
               color: titlesColor(context),
               fontWeight: FontWeight.w400,
-              fontSize: 9.sp,
+              fontSize: 9+5,
             ),
           ),
-          SizedBox(height: 4.5.sp),
+          SizedBox(height: 4.5+5),
 
           // text result widget
           TextResultFilterWidget(isEncrypt),
-          // SizedBox(height: 4.sp),
+          // SizedBox(height: 4+5),
 
           // bottom buttons
           BottomSheetButtons(

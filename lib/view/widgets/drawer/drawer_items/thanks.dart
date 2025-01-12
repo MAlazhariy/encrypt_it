@@ -32,17 +32,17 @@ class ThanksMenuItem extends StatelessWidget {
                   child: Icon(
                     Icons.favorite_outlined,
                     color: redColor,
-                    size: 20.sp,
+                    size: 20+5,
                   ),
                 ),
               ),
               SizedBox(
-                height: 15.sp,
+                height: 15+5,
               ),
               Text(
                 'thanks_description'.tr(),
                 style: TextStyle(
-                  fontSize: 11.sp,
+                  fontSize: 11+5,
                   color: Colors.grey[800],
                   fontWeight: FontWeight.w600,
                 ),
@@ -53,13 +53,13 @@ class ThanksMenuItem extends StatelessWidget {
                 color: mainColor.withAlpha(8),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    vertical: 5.sp,
-                    horizontal: 5.sp,
+                    vertical: 5+5,
+                    horizontal: 5+5,
                   ),
                   child: Text(
                     'thanks_names'.tr(),
                     style: TextStyle(
-                      fontSize: 13.sp,
+                      fontSize: 13+5,
                       color: mainColor,
                       fontWeight: FontWeight.w600,
                     ),
@@ -68,7 +68,7 @@ class ThanksMenuItem extends StatelessWidget {
               ),
               const Divider(),
               SizedBox(
-                height: 5.sp,
+                height: 5+5,
               ),
               RichText(
                 text: TextSpan(
@@ -76,7 +76,7 @@ class ThanksMenuItem extends StatelessWidget {
                     TextSpan(
                       text: 'contact_to_report'.tr(),
                       style: TextStyle(
-                        fontSize: 11.sp,
+                        fontSize: 11+5,
                         color: Colors.grey[800],
                         fontWeight: FontWeight.w600,
                       ),
@@ -84,7 +84,7 @@ class ThanksMenuItem extends StatelessWidget {
                     TextSpan(
                       text: 'facebook_page'.tr(),
                       style: TextStyle(
-                        fontSize: 11.sp,
+                        fontSize: 11+5,
                         color: mainColor,
                         fontWeight: FontWeight.w600,
                         decoration: TextDecoration.underline,
@@ -99,7 +99,7 @@ class ThanksMenuItem extends StatelessWidget {
                     TextSpan(
                       text: '.',
                       style: TextStyle(
-                        fontSize: 11.sp,
+                        fontSize: 11+5,
                         color: Colors.grey[800],
                         fontWeight: FontWeight.w600,
                       ),

@@ -30,10 +30,10 @@ ThemeData lightTheme = ThemeData(
     /// scaffold background color
     backgroundColor: const Color(0xFFECF0F3),
     foregroundColor: mainColor,
-    // toolbarHeight: 23.sp,
+    // toolbarHeight: 23+5,
     iconTheme: IconThemeData(
       color: mainColor,
-      size: 16.sp,
+      size: 16+5,
     ),
     /// shadow color
     shadowColor: const Color(0xFF9E9E9E).withAlpha(50),
@@ -49,7 +49,7 @@ ThemeData lightTheme = ThemeData(
     ),
     /// title style
     titleTextStyle: TextStyle(
-      fontSize: 15.sp,
+      fontSize: 15+5,
       fontFamily: 'Baloo',
       color: mainColor,
     ),
@@ -61,7 +61,7 @@ ThemeData lightTheme = ThemeData(
   /// text button
   // textTheme: TextTheme(
   //   button: TextStyle(
-  //     fontSize: 12.sp,
+  //     fontSize: 12+5,
   //   ),
   // ),
   dividerTheme: const DividerThemeData(

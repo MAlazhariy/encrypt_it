@@ -74,7 +74,7 @@ class CustomTextField extends StatelessWidget {
           onTap: onTab,
           style: TextStyle(
             fontFamily: 'Baloo',
-            fontSize: 15.sp,
+            fontSize: 15+5,
           ),
           decoration: InputDecoration(
             hintText: hintText,
@@ -82,8 +82,8 @@ class CustomTextField extends StatelessWidget {
             suffixIcon: suffixIcon,
             prefixIcon: MyDirectionality(child: prefixIcon),
             prefixIconConstraints: BoxConstraints(
-              minHeight: 30.sp,
-              minWidth: 34.sp,
+              minHeight: 30+5,
+              minWidth: 34+5,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(13),

@@ -29,8 +29,8 @@ void showRateDialog(BuildContext context) {
                 /// stars
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 14.sp,
-                    vertical: 5.sp,
+                    horizontal: 14+5,
+                    vertical: 5+5,
                   ),
                   child: GestureDetector(
                     child: Row(
@@ -53,23 +53,23 @@ void showRateDialog(BuildContext context) {
                 /// rate description
                 Padding(
                   padding: EdgeInsetsDirectional.only(
-                    bottom: 5.sp,
-                    start: 15.sp,
-                    end: 15.sp,
+                    bottom: 5+5,
+                    start: 15+5,
+                    end: 15+5,
                   ),
                   child: Center(
                     child: Text(
                       'rate_app_description'.tr(),
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary,
-                        fontSize: 10.sp,
+                        fontSize: 10+5,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 8.sp,
+                  height: 8+5,
                 ),
 
                 /// rate button
@@ -88,7 +88,7 @@ void showRateDialog(BuildContext context) {
                   child: Container(
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(
-                      vertical: 3.sp,
+                      vertical: 3+5,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -96,12 +96,12 @@ void showRateDialog(BuildContext context) {
                         // const Icon(
                         //   Icons.favorite_rounded,
                         // ),
-                        // SizedBox(width: 5.sp,),
+                        // SizedBox(width: 5+5,),
                         Text(
                           'rate_app_title'.tr(),
                           style: TextStyle(
                             fontWeight: FontWeight.w800,
-                            fontSize: 13.sp,
+                            fontSize: 13+5,
                           ),
                         ),
                       ],
@@ -124,18 +124,18 @@ void showRateDialog(BuildContext context) {
                         disabledElevation: 0,
                         hoverElevation: 0,
                         padding: EdgeInsets.symmetric(
-                          vertical: 2.sp,
+                          vertical: 2+5,
                         ),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadiusDirectional.only(
-                          bottomStart: Radius.circular(12.sp),
+                          bottomStart: Radius.circular(12+5),
                         )),
                         child: Text(
                           'remind_later'.tr(),
                           style: TextStyle(
                             color: redColor,
                             fontWeight: FontWeight.w500,
-                            fontSize: 10.5.sp,
+                            fontSize: 10.5+5,
                           ),
                         ),
                       ),
@@ -151,11 +151,11 @@ void showRateDialog(BuildContext context) {
                         disabledElevation: 0,
                         hoverElevation: 0,
                         padding: EdgeInsets.symmetric(
-                          vertical: 2.sp,
+                          vertical: 2+5,
                         ),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadiusDirectional.only(
-                          bottomEnd: Radius.circular(12.sp),
+                          bottomEnd: Radius.circular(12+5),
                         )),
                         onPressed: () {
                           RateCache.appRatedSuccessfully();
@@ -166,7 +166,7 @@ void showRateDialog(BuildContext context) {
                           style: TextStyle(
                             color: redColor.withAlpha(210),
                             fontWeight: FontWeight.w500,
-                            fontSize: 10.5.sp,
+                            fontSize: 10.5+5,
                           ),
                         ),
                       ),
@@ -179,7 +179,7 @@ void showRateDialog(BuildContext context) {
         ),
         contentPadding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.sp),
+          borderRadius: BorderRadius.circular(12+5),
         ),
       );
     },
