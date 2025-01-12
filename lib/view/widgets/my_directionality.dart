@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 /// based on current locale directionality
 class MyDirectionality extends StatelessWidget {
   const MyDirectionality({
-    Key? key,
+    super.key,
     required this.child,
     this.defaultDirectionality = 'rtl',
-  }) : super(key: key);
+  });
 
   final Widget child;
   final String defaultDirectionality;
@@ -18,9 +18,7 @@ class MyDirectionality extends StatelessWidget {
     return Transform(
       alignment: Alignment.center,
       transform: Matrix4.rotationY(
-        Directionality.of(context).name == defaultDirectionality
-            ? 0
-            : math.pi,
+        Directionality.of(context).name == defaultDirectionality ? 0 : math.pi,
       ),
       child: child,
     );

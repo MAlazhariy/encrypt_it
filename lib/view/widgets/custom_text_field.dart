@@ -6,7 +6,7 @@ import 'package:sizer/sizer.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
-    Key? key,
+    super.key,
     required this.theKey,
     required this.controller,
     this.isPassword = false,
@@ -20,7 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.obscureText = false,
     required this.isEnabled,
-  }) : super(key: key);
+  });
 
   final GlobalKey<FormState> theKey;
   final TextEditingController controller;
@@ -82,9 +82,13 @@ class CustomTextField extends StatelessWidget {
             suffixIcon: suffixIcon,
             prefixIcon: MyDirectionality(child: prefixIcon),
             prefixIconConstraints: BoxConstraints(
-              minHeight: 30+5,
-              minWidth: 34+5,
+              minHeight: 35,
+              minWidth: 60,
             ),
+            // contentPadding: const EdgeInsets.symmetric(
+            //   horizontal: 150,
+            //   vertical: 15,
+            // ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(13),
               borderSide: BorderSide(
