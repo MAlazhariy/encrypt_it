@@ -79,7 +79,7 @@ class _MainButtonState extends State<MainButton> {
                 widget.isEncrypt ? 'encrypt'.tr() : 'decrypt'.tr(),
                 style: TextStyle(
                   fontSize: !isPressed ? 15+5 : 14+5,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.bold,
                   color: widget.onPressed != null
                       ? widget.isEncrypt
                           ? encryptedTextColor

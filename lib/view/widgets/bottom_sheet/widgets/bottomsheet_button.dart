@@ -81,7 +81,7 @@ class _BottomSheetButtonState extends State<BottomSheetButton> {
                   style: TextStyle(
                     color: smallButtonsContentColor(context),
                     fontSize: 11.5+5,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ],

@@ -39,7 +39,7 @@ class DialogButton extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-          fontWeight: isBold ? FontWeight.w700 : FontWeight.w500,
+          fontWeight: isBold ? FontWeight.normal : FontWeight.w500,
           fontSize: 11+5,
         ),
       ),

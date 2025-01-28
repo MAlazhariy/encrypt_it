@@ -137,7 +137,7 @@ class CustomTextField extends StatelessWidget {
               height: 0,
               color: Colors.transparent,
               fontSize: 0,
-              // fontWeight: FontWeight.w600,
+              // fontWeight: FontWeight.normal,
             ),
           ),
         ),

@@ -542,7 +542,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: const EdgeInsetsDirectional.only(start: 8),
                                 child: Text(
                                   'undefined_chars_title'.tr(args: [undefined]),
-                                  style: const TextStyle(color: redColor, fontSize: 13.5, fontWeight: FontWeight.w600),
+                                  style: const TextStyle(color: redColor, fontSize: 13.5, fontWeight: FontWeight.normal),
                                 ),
                               ),
 

@@ -41,7 +41,7 @@ class MenuBG extends StatelessWidget {
           Text(
             cubit.appInfo.appName,
             style: TextStyle(
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.normal,
               fontSize: 12+5,
               color: smallButtonsContentColor(context),
             ),
@@ -63,7 +63,7 @@ class MenuBG extends StatelessWidget {
       //     style: TextStyle(
       //       fontSize: 17+5,
       //       color: Colors.white,
-      //       fontWeight: FontWeight.w600,
+      //       fontWeight: FontWeight.normal,
       //     ),
       //   ),
       // ),

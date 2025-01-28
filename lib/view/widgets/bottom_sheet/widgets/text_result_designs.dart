@@ -52,7 +52,7 @@ class EncryptedResultWidget extends StatelessWidget {
         style: TextStyle(
           color: encryptedTextColor,
           fontSize: 16+5,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.normal,
           fontFamily: 'Baloo',
         ),
       ),
@@ -77,7 +77,7 @@ class DecryptedResultWidget extends StatelessWidget {
         style: TextStyle(
           color: decryptedTextColor,
           fontSize: 16+5,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.normal,
           fontFamily: 'Baloo',
         ),
         textAlign: TextAlign.center,
@@ -89,7 +89,7 @@ class DecryptedResultWidget extends StatelessWidget {
         highlightedLinkStyle: TextStyle(
           color: Theme.of(context).colorScheme.onPrimary,
           backgroundColor: mainColor,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.normal,
         ),
         onTap: (String url) {
           launchUrl(
@@ -120,7 +120,7 @@ class LargeResultWidget extends StatelessWidget {
             style: TextStyle(
               color: decryptedTextColor,
               fontSize: 16+5,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
               fontFamily: 'Baloo',
             ),
             textAlign: TextAlign.center,
@@ -132,7 +132,7 @@ class LargeResultWidget extends StatelessWidget {
             highlightedLinkStyle: const TextStyle(
               color: Colors.white,
               backgroundColor: mainColor,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.normal,
             ),
             onTap: (String url) {
               launchUrl(

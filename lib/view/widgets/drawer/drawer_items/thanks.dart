@@ -44,7 +44,7 @@ class ThanksMenuItem extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 11+5,
                   color: Colors.grey[800],
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               const Divider(),
@@ -61,7 +61,7 @@ class ThanksMenuItem extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13+5,
                       color: mainColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ),
@@ -78,7 +78,7 @@ class ThanksMenuItem extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 11+5,
                         color: Colors.grey[800],
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                     TextSpan(
@@ -86,7 +86,7 @@ class ThanksMenuItem extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 11+5,
                         color: mainColor,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.normal,
                         decoration: TextDecoration.underline,
                       ),
                       recognizer: TapGestureRecognizer()
@@ -101,7 +101,7 @@ class ThanksMenuItem extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 11+5,
                         color: Colors.grey[800],
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ],

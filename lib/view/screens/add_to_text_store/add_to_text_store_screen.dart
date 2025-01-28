@@ -256,7 +256,7 @@ class AddToTextStoreScreen extends StatelessWidget {
                         style: TextStyle(
                           color: Theme.of(context).scaffoldBackgroundColor,
                           fontSize: 12+5,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ),
@@ -307,7 +307,7 @@ class GroupDropDown extends StatelessWidget {
           style: TextStyle(
             color: titlesColor(context),
             fontSize: 12+5,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.normal,
             fontFamily: 'Baloo',
           ),
         ),

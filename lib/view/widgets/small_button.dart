@@ -96,7 +96,7 @@ class _ButtonDesign extends StatelessWidget {
             style: TextStyle(
               color: smallButtonsContentColor(context),
               fontSize: 9.75+5,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.normal,
             ),
           ),
         ],

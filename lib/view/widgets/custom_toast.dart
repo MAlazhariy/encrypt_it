@@ -21,7 +21,7 @@ void showToast({
       color: contrast
           ? Theme.of(context).scaffoldBackgroundColor
           : smallButtonsContentColor(context),
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.normal,
       fontSize: 10+5,
     ),
     borderRadius: BorderRadius.circular(12+5),

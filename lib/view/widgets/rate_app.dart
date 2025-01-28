@@ -15,7 +15,7 @@ void showRateDialog(BuildContext context) {
             'rate_app'.tr(),
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
             ),
           ),
         ),

@@ -60,7 +60,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                     'group_deleted'.tr(args: [deletedGroup.groupName]),
                     style: TextStyle(
                       fontFamily: 'Baloo',
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.normal,
                       fontSize: 12+5,
                     ),
                   ),
@@ -177,7 +177,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
           'title_deleted'.tr(args: [content.title]),
           style: TextStyle(
             fontFamily: 'Baloo',
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.normal,
             fontSize: 12+5,
           ),
         ),
@@ -335,7 +335,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                           style: TextStyle(
                             color: titlesColor(context),
                             fontSize: 12+5,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.normal,
                             fontFamily: 'Baloo',
                           ),
                         ),
@@ -420,7 +420,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                         style: TextStyle(
                                           color: titlesColor(context),
                                           fontSize: 10+5,
-                                          fontWeight: FontWeight.w600,
+                                          fontWeight: FontWeight.normal,
                                         ),
                                       ),
                                       SizedBox(
@@ -463,7 +463,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                                         style: TextStyle(
                                           color: titlesColor(context),
                                           fontSize: 10+5,
-                                          fontWeight: FontWeight.w600,
+                                          fontWeight: FontWeight.normal,
                                         ),
                                       ),
                                       SizedBox(
@@ -545,7 +545,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
                   style: TextStyle(
                     color: Theme.of(context).scaffoldBackgroundColor,
                     fontSize: 12+5,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
