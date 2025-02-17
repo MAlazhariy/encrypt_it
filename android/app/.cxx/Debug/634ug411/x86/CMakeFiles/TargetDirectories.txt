@@ -1,0 +1,2 @@
+/Users/malazhariy/MAlazhariy/Programming/Personal/My Apps/Encrypt It/encrypt_it/android/app/.cxx/Debug/634ug411/x86/CMakeFiles/edit_cache.dir
+/Users/malazhariy/MAlazhariy/Programming/Personal/My Apps/Encrypt It/encrypt_it/android/app/.cxx/Debug/634ug411/x86/CMakeFiles/rebuild_cache.dir

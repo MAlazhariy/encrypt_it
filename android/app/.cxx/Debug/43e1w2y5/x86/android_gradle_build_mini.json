@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/malazhariy/development/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/malazhariy/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/malazhariy/MAlazhariy/Programming/Personal/My Apps/Encrypt It/encrypt_it/android/app/.cxx/Debug/43e1w2y5/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/malazhariy/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/malazhariy/MAlazhariy/Programming/Personal/My Apps/Encrypt It/encrypt_it/android/app/.cxx/Debug/43e1w2y5/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "LINKED_RESOURCES_BINARY_FORMAT",
+    "kind": "Directory"
+  },
+  "applicationId": "malazhariy.encryptIt",
+  "variantName": "profile",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 27,
+      "versionName": "6.9.5",
+      "outputFile": "linked-resources-binary-format-profile.ap_"
+    }
+  ],
+  "elementType": "File"
+}

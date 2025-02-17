@@ -1,0 +1,163 @@
+{
+  "message": "Text",
+  "password" : "Password",
+  "msg here": "Enter text",
+  "pass here": "Enter password",
+
+  "encrypt":"Encrypt",
+  "decrypt": "Decrypt",
+  "decrypted message": "plaintext",
+  "encrypted text": "ciphertext",
+
+  "paste": "paste",
+  "clear": "clear",
+  "clear all": "clear all",
+  "copy": "Copy",
+  "message_store": "Text vault",
+
+  "msg copied": "Text copied",
+  "all copied": "All copied",
+  "pasted success": "Pasted successfully",
+  "fail paste": "Failed to paste all",
+
+  "undefined_chars": "Undefined characters",
+  "contains_undefined_chars": "Text contains undefined characters",
+  "undefined_chars_title": "Please delete the undefined characters \"{}\"",
+  "undefined_chars_mail": "These undefined characters have been omitted: \"{}\".\n------\n- Do you see these characters important?\n\n- Do you think it should be added in future releases or is it not necessary?\n",
+  "undefined_chars_description": "The app works on Arabic and English characters and some numbers and symbols only, so we have deleted the following entries :",
+  "invalid password" : "Incorrect password",
+  "invalid_password_description": "The password you entered is incorrect. Make sure you type the correct password, taking into account the uppercase and lowercase letters (Aa), and try again.",
+  "there_problem": "If you think there is a problem, please ",
+
+  "version_not_found": "Cannot decrypt text that is already unencrypted",
+  "version_not_found_description": "Make sure that the text entered is actually encrypted text, and then try again.",
+
+  "change lang": "Change language",
+  "sure change lang": "Are you sure you want to change to Arabic?",
+  "settings": "Settings",
+
+  "back": "Back",
+  "ok": "Ok",
+  "cancel": "Cancel",
+  "done": "Done",
+  "change": "Change",
+  "skip": "Skip",
+  "next": "Next",
+
+  "about_app": "About the app",
+  "app_idea": "App idea",
+  "how_app_works": "How does the app work?",
+  "how_algorithm_works": "How are texts encrypted?",
+  "app_idea_description": "The application encrypts the text with more than one layer of protection with complex mathematical equations and a special encryption algorithm with a complete change in the text characters and their arrangement so that the ciphertext is completely different every time the same text is encrypted, which gives more protection and security and makes any attempt to know the original text difficult, nor The text can only be decrypted by the application using the password that you created.",
+  "privacy_policy": "Privacy policy",
+  "privacy_policy_description": "We respect you and your personal data, so we do not store, save or send any of your personal data, passwords, encrypted texts or any data about you on our servers, as described in the ",
+  "how_protect": "How do we protect your data?",
+  "how_protect_description": "The application encrypts the text at more than one stage with application-specific algorithms (based on Caesar's Cipher), so that the original text cannot be decrypted and accessed except by decrypting it with the password through the application.\n\nNote: When you forget the password with which you encrypted the text, the original text cannot be accessed; Therefore, make sure to write a strong password that is not easy for you to forget so that you can decrypt the text again.",
+
+  "about programmer": "About the programmer",
+  "about programmer description": "Developed by Mostafa Alazhariy.\nAll rights reserved.",
+  "appName": "Encrypt It",
+
+  "choose_message": "Choose text",
+  "choose_group": "Choose group",
+  "add_message_title": "Add Text title",
+  "enter_title_here": "Enter title here",
+  "can_not_empty": "Cannot be empty",
+  "add_group_name": "Add a group name",
+  "add_to_storage": "Add to Storage",
+  "add_new_group": "Add a group",
+  "group_already_exists": "Group name already exists.",
+  "title_already_exists": "Text name already exists in the group.",
+
+  "choose_or_add_group": "Choose a group or add a new one",
+  "or": "or",
+  "type_the_title": "Type the ciphertext title",
+  "the_group": "The group",
+  "the_title": "The title",
+  "must_choose_group": "Must select a group",
+  "too_big_title": "Too big title",
+  "added_successfully": "Added successfully",
+  "add": "Add",
+
+  "thanks": "Thanks",
+  "thanks_description": "Thank you to everyone who helped us by reporting bugs. Thank you for helping to improve the user experience.",
+  "thanks_names": "Hazem Azzam\nMohammed Al-Yassin\nMahmoud Attia",
+  "contact_to_report": "You can report issues and bugs and send suggestions by contacting us on our ",
+  "contact_us": "Contact us",
+  "facebook_page": "Facebook page",
+  "add_store_message": "No saved texts yet! To add text to the @:message_store, encrypt a text first.",
+
+  "aut_signIn_title": "Authentication required",
+  "auth_hint": "You must verify your identity first before proceeding to the @:message_store",
+  "auth_biometricNotRecognized": "Not recognized",
+
+  "later_version_warning_title": "Update the app to decrypt the text",
+  "later_version_warning_message": "Can not decrypt the encrypted text from a later version, please update the application to the latest version and then try again.",
+  "update_app": "Update app",
+
+  "report": "Report",
+  "report_bug": "Report a bug",
+  "report_bug_description": "We care about improving our users' experience, so if you think there is an issue or would like to suggest something, please contact us and we'll be happy.",
+
+  "share_app": "Share",
+  "welcome_text": "Welcome to Encrypt it :)",
+  "share_app_message": "ˆYErغ،QحةO?‘Sٍ2أَGQرذةV[ُcbKش×صjprWثY0ِ،E\\ص,-03l4sغv:OhزغCج4أآٌD06\nHello, would you like to encrypt some text?\nHere is the best and easiest text encryption application, where you can encrypt text using your own password and without the Internet, download the @:appName application from here:\n{appLink}",
+  "rate_app": "Please rate the app",
+  "rate_app_description": "Would you mind taking a moment to rate our app on Google play? It really helps us and it won't take more than a minute.",
+  "rate_app_title": "Rate us",
+  "remind_later": "Remind me later",
+  "no_thanks": "No, thanks",
+
+  "menu_headline": "Menu",
+
+  "disclaimer": "Disclaimer",
+  "disclaimer_description": "This application is intended for individuals. We disclaim any liability for any unethical use of the application.\nIf you find any adverts to the contrary, please let us know.",
+
+  "report_an_ad": "Report an ad",
+  "report_an_ad_description": "To report an inappropriate ad please take a screenshot of the ad and send it to us.",
+  "report_ad_mail_body": "I would like to report an advertisement that I believe is unethical.\n<Please answer the specific questions to help us identify and block the offending ad>\n------\nDid the offending ad appear in the last 10 minutes?\n- \n\nWhere did the ad appear?\n(After the text store edit page / After adding text to the text store)\n- \n\n- Describe the content of the advertisement, the name of the company behind this infringing advertisement, or any other details that may help us.\n- \n\n- Please attach a screenshot (if any) of the offending advertisement.\n- ",
+
+  "undo": "Undo",
+  "delete": "Delete",
+  "group_deleted": "Group {} has been deleted",
+  "sure_to_delete_group": "Are you sure you want to delete the {} group?",
+  "edit": "Edit",
+  "delete_the_group": "Delete group",
+  "edit_group_name": "Edit group name",
+  "type_a_new_name": "Type the new name",
+  "edit_title_name": "Edit title",
+  "title_deleted": "Text \"{}\" has been deleted.",
+  "edit_text_store": "Edit @:message_store",
+  "choose_group_to_edit_text_store": "Choose a group to edit",
+
+  "get_started": "Get started",
+
+  "onBoard_headline_1": "What is encryption?",
+  "onBoard_subtitle_1": "Encryption is a process of converting plain text characters into other characters and symbols to produce an unintelligible ciphertext to keep the original text secret.",
+
+  "onBoard_headline_2": "Why @:appName?",
+  "onBoard_subtitle_2": "The text is encrypted on more than one stage with a special encryption algorithm, so that the ciphertext is completely different every time the same text is encrypted, while protecting the text with a password that only decrypts the ciphertext.",
+
+  "onBoard_headline_3": "That's it for now\nHope you enjoy the app.",
+
+  "showcase_text_field_title": "text field",
+  "showcase_text_field_description": "Here you enter the text to be encrypted or decrypted",
+  "showcase_password_field_title": "Password field",
+  "showcase_password_field_description": "Here you enter the password",
+  "showcase_encrypt_button_description": "When finished, click here to encrypt the text",
+  "showcase_decrypt_button_description": "Or click here to decrypt the text",
+
+  "showcase_text_store_description": "Important encrypted texts are stored here, press to open the menu",
+  "showcase_paste_description": "Click here to paste a text into the box",
+  "showcase_clear_description": "Click here to clear the field",
+  "showcase_clearAll_description": "Click here to clear all fields",
+
+  "showcase_add_to_store_description": "Click here to add the ciphertext to the @:message_store",
+
+  "dark_mode" : "Dark mode",
+
+  "about_developer": "Who is the Developer?",
+  "developer_summary": "A developer specializing in mobile apps (Android & iOS), who has worked on more than 25 projects for companies, especially e-commerce and digital education apps.",
+  "social_media": "Social Media",
+  "show_tour": "View a tour"
+}
