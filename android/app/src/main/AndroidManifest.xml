@@ -1,5 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="malazhariy.encryptIt">
 
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
@@ -14,9 +13,9 @@
             android:exported="true"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
+            android:taskAffinity=""
             android:theme="@style/LaunchTheme"
-            android:windowSoftInputMode="adjustResize"
-            tools:targetApi="honeycomb">
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme" />
@@ -48,4 +47,10 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT" />
+            <data android:mimeType="text/plain" />
+        </intent>
+    </queries>
 </manifest>
