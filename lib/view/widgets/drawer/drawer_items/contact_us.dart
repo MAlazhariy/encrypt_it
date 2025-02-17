@@ -11,10 +11,16 @@ class ContactUsMenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return MenuItemWidget(
       title: 'contact_us'.tr(),
-      icon: Icons.facebook,
+      icon: Icons.email_outlined,
       onTap: () async {
-        await launchUrl(Links.facebookPage, mode: LaunchMode.externalNonBrowserApplication);
-        if (context.mounted) Navigator.pop(context);
+        Navigator.pop(context);
+        await launchUrl(
+          Links.mailUs(subject: 'contact_us'.tr()),
+        );
+        // await launchUrl(
+        //   Links.facebookPage,
+        //   mode: LaunchMode.externalNonBrowserApplication,
+        // );
       },
     );
   }

@@ -10,7 +10,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShareAppMenuItem extends StatelessWidget {
-  const ShareAppMenuItem({Key? key}) : super(key: key);
+  const ShareAppMenuItem({super.key});
 
   @override
   Widget build(BuildContext context) {
