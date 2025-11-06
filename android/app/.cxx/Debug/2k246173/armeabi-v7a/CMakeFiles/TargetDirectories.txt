@@ -1,2 +1,0 @@
-/Users/malazhariy/MAlazhariy/Programming/Personal/My Apps/Encrypt It/encrypt_it/android/app/.cxx/Debug/2k246173/armeabi-v7a/CMakeFiles/edit_cache.dir
-/Users/malazhariy/MAlazhariy/Programming/Personal/My Apps/Encrypt It/encrypt_it/android/app/.cxx/Debug/2k246173/armeabi-v7a/CMakeFiles/rebuild_cache.dir

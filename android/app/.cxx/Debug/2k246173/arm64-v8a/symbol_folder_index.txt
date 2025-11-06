@@ -1,1 +1,0 @@
-/Users/malazhariy/MAlazhariy/Programming/Personal/My Apps/Encrypt It/encrypt_it/android/app/build/intermediates/cxx/Debug/2k246173/obj/arm64-v8a
