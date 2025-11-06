@@ -122,16 +122,24 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             // main showcase
-            if (state is AppGetVersionState && !ShowCaseCache.isMainShowCaseViewed()) {
+            if (state is AppGetVersionState &&!ShowCaseCache.isMainShowCaseViewed()) {
               WidgetsBinding.instance.addPostFrameCallback(
                 (_) => Future.delayed(
                   const Duration(milliseconds: 100),
-                  () => ShowCaseWidget.of(context).startShowCase([
-                    _textFieldShowcase,
-                    _passwordFieldShowcase,
-                    _encryptButtonShowcase,
-                    _decryptButtonShowcase,
-                  ]),
+                  () {
+                    // Set values
+                    cubit.messageCtrl.text = 'test_message'.tr();
+                    cubit.passCtrl.text = '123456';
+                    cubit.setButtonsPressable(true);
+
+                    // show case view
+                    ShowCaseWidget.of(context).startShowCase([
+                      _textFieldShowcase,
+                      _passwordFieldShowcase,
+                      _encryptButtonShowcase,
+                      // _decryptButtonShowcase,
+                    ]);
+                  },
                 ),
               );
 
@@ -631,6 +639,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: CustomShowcase(
                                     globalKey: _encryptButtonShowcase,
                                     description: 'showcase_encrypt_button_description'.tr(),
+                                    callback: () {
+                                      Future.delayed(
+                                        const Duration(milliseconds: 450),
+                                        () {
+                                          if(!context.mounted) return;
+                                          onPressMainButton(
+                                            context: context,
+                                            msg: cubit.messageCtrl.text,
+                                            pass: cubit.passCtrl.text,
+                                            scaffoldKey: scaffoldKey,
+                                            isEncrypt: true,
+                                          )?.call();
+                                        },
+                                      );
+                                    },
                                     child: MainButton(
                                       onPressed: onPressMainButton(
                                         context: context,

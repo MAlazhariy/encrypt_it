@@ -8,13 +8,15 @@ class CustomShowcase extends StatelessWidget {
     required this.description,
     required this.child,
     this.title,
-    Key? key,
-  }) : super(key: key);
+    this.callback,
+    super.key,
+  });
 
   final Widget child;
   final GlobalKey globalKey;
   final String description;
   final String? title;
+  final VoidCallback? callback;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,9 @@ class CustomShowcase extends StatelessWidget {
       ),
       // radius: BorderRadius.circular(13),
       overlayOpacity: 0.5,
+      onBarrierClick: callback,
+      onTargetClick: callback,
+      disposeOnTap: callback != null ? true : null,
       child: child,
     );
   }

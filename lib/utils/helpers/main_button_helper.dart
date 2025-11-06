@@ -15,6 +15,8 @@ void Function()? onPressMainButton({
 }) {
   var cubit = AppCubit.get(context);
 
+  debugPrint("> onPressMainButton - isButtonsActive: ${cubit.isButtonsActive}");
+
   if (cubit.isButtonsActive) {
     return () {
       // increase operations counter
