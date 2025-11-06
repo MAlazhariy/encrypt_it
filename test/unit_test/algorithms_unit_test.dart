@@ -1,16 +1,18 @@
 import 'dart:math';
 
+import 'package:encryption_app/decoding/encrypt_abstract.dart';
 import 'package:encryption_app/decoding/versions/version_05.dart';
 import 'package:encryption_app/decoding/versions/version_05_old.dart';
 import 'package:encryption_app/decoding/versions/version_06.dart';
 import 'package:encryption_app/decoding/versions/version_06_old.dart';
+import 'package:encryption_app/decoding/versions/version_07.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 class MockBuildContext extends Mock implements BuildContext {}
 
-extension Encryption on String {
+extension EncryptionX on String {
   String getVersion() => substring(length - 2, length);
 
   String removeVersion() => substring(0, length - 2);
@@ -27,6 +29,13 @@ String decrypt({
   }
 
   return V06(text: text.removeVersion(), password: password).decrypt();
+}
+
+int _getRandom({
+  int min = 5,
+  int max = 7,
+}) {
+  return Random().nextInt(max - min + 1) + min;
 }
 
 void main() {
@@ -209,6 +218,29 @@ void main() {
       }
     });
 
+    test('Version 07 test', () {
+      const plainText = 'مصطفى الأزهري \$¥€\nMostafa Alazhariy 123';
+      const password = 'mostafa@123';
+
+      final encryptedTexts = List.generate(
+        500,
+        (index) => V07(text: plainText, password: password).encrypt(),
+      );
+
+      final version = encryptedTexts.first.getVersion();
+
+      final decryptedTexts = List.generate(
+        encryptedTexts.length,
+        (index) => V07(text: encryptedTexts[index].removeVersion(), password: password).decrypt(),
+      );
+
+      expect(version, '07');
+
+      for (var i = 0; i < encryptedTexts.length; i++) {
+        expect(plainText, decryptedTexts[i]);
+      }
+    });
+
     test('Random versions test', () {
       // should be valid characters
       const plainText = 'مصطفى الأزهري mostafa \nalazhariy';
@@ -218,12 +250,18 @@ void main() {
       final encryptedTexts = List.generate(
         count,
         (index) {
-          final isV05 = Random().nextInt(1) == 0;
-          if (isV05) {
-            return V05(text: plainText, password: password).encrypt();
+          final rVersion = _getRandom();
+          late final Encryption enc;
+          switch (rVersion) {
+            case 5:
+              enc = V05(text: plainText, password: password);
+            case 6:
+              enc = V06(text: plainText, password: password);
+            case 7:
+              enc = V07(text: plainText, password: password);
           }
 
-          return V06(text: plainText, password: password).encrypt();
+          return enc.encrypt();
         },
       );
 
@@ -418,55 +456,48 @@ void main() {
         expect(plainText, decryptedTexts3[i]);
       }
     });
-    // test('Random versions test', () {
-    //   // should be valid characters
-    //   const plainText = 'مصطفى الأزهري\n mostafa alazhariy كيف الحال\n\n\n لإاهس This is a test random message';
-    //   const password = '@123-%@###mostafaمصطفىtest';
-    //   const count = 2000;
-    //   const encryptionCount = 3;
-    //
-    //   final encryptedTexts = List.generate(
-    //     count,
-    //     (index) {
-    //       final isV05 = Random().nextInt(1) == 0;
-    //       if (isV05) {
-    //         return V05(text: plainText, password: password).encrypt();
-    //       }
-    //
-    //       return V06(text: plainText, password: password).encrypt();
-    //     },
-    //   );
-    //
-    //   List.generate(
-    //     encryptionCount,
-    //     (index) {
-    //       for (int i = 0; i < count; i++) {
-    //         final isV05 = Random().nextInt(1) == 0;
-    //         if (isV05) {
-    //           encryptedTexts[i] = V05(text: encryptedTexts[i], password: password).encrypt();
-    //         }
-    //
-    //         encryptedTexts[i] = V06(text: encryptedTexts[i], password: password).encrypt();
-    //       }
-    //     },
-    //   );
-    //
-    //   final results = List.from(encryptedTexts);
-    //
-    //   List.generate(
-    //     encryptionCount,
-    //     (index) {
-    //       for (int i = count - 1; i > 0; i--) {
-    //         results[i] = decrypt(text: results[i], password: password);
-    //       }
-    //     },
-    //   );
-    //
-    //
-    //
-    //   for (var i = 0; i < encryptedTexts.length; i++) {
-    //     expect(plainText, results[i]);
-    //   }
-    // });
+    test('V07', () {
+      const plainText = 'مصطفى الأزهري\$¥€\n mostafa alazhariy';
+      const password = '@123';
+      const count = 500;
+
+      final encryptedTexts = List.generate(
+        count,
+        (index) => V07(text: plainText, password: password).encrypt(),
+      );
+
+      final encryptedTexts2 = List.generate(
+        count,
+        (index) => V07(text: encryptedTexts[index], password: password).encrypt(),
+      );
+
+      final encryptedTexts3 = List.generate(
+        count,
+        (index) => V07(text: encryptedTexts2[index], password: password).encrypt(),
+      );
+
+      final version = encryptedTexts3.first.getVersion();
+
+      final decryptedTexts = List.generate(
+        count,
+        (index) => V07(text: encryptedTexts3[index].removeVersion(), password: password).decrypt(),
+      );
+
+      final decryptedTexts2 = List.generate(
+        count,
+        (index) => V07(text: decryptedTexts[index].removeVersion(), password: password).decrypt(),
+      );
+
+      final decryptedTexts3 = List.generate(
+        count,
+        (index) => V07(text: decryptedTexts2[index].removeVersion(), password: password).decrypt(),
+      );
+
+      expect(version, '07');
+
+      for (var i = 0; i < encryptedTexts.length; i++) {
+        expect(plainText, decryptedTexts3[i]);
+      }
+    });
   });
 }
