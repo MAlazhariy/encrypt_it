@@ -44,19 +44,19 @@ class LocalAuthApi {
         authMessages: <AuthMessages>[
           AndroidAuthMessages(
             signInTitle: 'aut_signIn_title'.tr(),
-            biometricHint: 'auth_hint'.tr(),
+            signInHint: 'auth_hint'.tr(),
             cancelButton: 'cancel'.tr(),
-            biometricNotRecognized: 'auth_biometricNotRecognized'.tr(),
+            // biometricNotRecognized: 'auth_biometricNotRecognized'.tr(),
           ),
           IOSAuthMessages(
             cancelButton: 'cancel'.tr(),
           ),
         ],
         localizedReason: 'auth_hint'.tr(),
-        options: const AuthenticationOptions(
-          useErrorDialogs: true,
-          stickyAuth: true,
-        ),
+        // options: const AuthenticationOptions(
+        //   useErrorDialogs: true,
+        //   stickyAuth: true,
+        // ),
       );
     } on PlatformException {
       log('PlatformException');
