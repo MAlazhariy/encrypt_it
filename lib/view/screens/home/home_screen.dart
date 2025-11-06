@@ -160,6 +160,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ShowCaseCache.buttonsShowCaseViewed();
             }
 
+            // unfocus fields when they're inactivated
+            if (cubit.isCurrentFieldNoneAndInactivated) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                FocusScope.of(context).unfocus();
+              });
+            }
+
             // this function activate or deactivate main buttons
             void activeButtons([validate = true]) {
               cubit.setButtonsPressable((cubit.messageCtrl.text.isNotEmpty && cubit.passCtrl.text.isNotEmpty && validate));
@@ -264,7 +271,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onTab: () {
                                   cubit.setCurrentFieldToText();
                                 },
-                                isEnabled: (!cubit.isCurrentFieldNoneAndInactivated),
                               ),
                             ),
                             if (cubit.isCurrentFieldText)
@@ -541,7 +547,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onTab: () {
                                   cubit.setCurrentFieldToPassword();
                                 },
-                                isEnabled: (!cubit.isCurrentFieldNoneAndInactivated),
                               ),
                             ),
 

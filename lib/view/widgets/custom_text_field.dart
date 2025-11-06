@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
     required this.prefixIcon,
     this.suffixIcon,
     this.obscureText = false,
-    required this.isEnabled,
+    this.isEnabled,
   });
 
   final GlobalKey<FormState> theKey;
@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
   final Icon prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
-  final bool isEnabled;
+  final bool? isEnabled;
   final bool validate;
 
   @override
