@@ -20,6 +20,8 @@ import 'package:encryption_app/utils/style/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:path_provider/path_provider.dart' show getApplicationDocumentsDirectory;
 import 'package:sizer/sizer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'controllers/app_cubit/cubit.dart';
@@ -43,11 +45,17 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  // Bloc.observer = MyBlocObserver();
-  await EasyLocalization.ensureInitialized();
-
+  // Init Hive for Caching
   await Hive.initFlutter();
-  await Hive.openBox('myBox');
+
+  await Future.wait([
+    // Init localization
+    EasyLocalization.ensureInitialized(),
+    // Open Hive box
+    Hive.openBox('myBox'),
+    // Init Google ADs
+    MobileAds.instance.initialize(),
+  ]);
 
   groups = StoreModel.fromJson(TextStoreCache.getGroups());
 

@@ -27,7 +27,6 @@
             <!-- Receive Sharing intent -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
@@ -39,13 +38,13 @@
                 <data android:mimeType="text/*" />
             </intent-filter>
         </activity>
-        <!-- Disable Impeller support -->
-        <meta-data
-            android:name="io.flutter.embedding.android.EnableImpeller"
-            android:value="false" />
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- Google AdMob for ADs -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/gms_app_id"/>
     </application>
     <queries>
         <intent>

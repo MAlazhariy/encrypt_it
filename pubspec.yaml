@@ -29,6 +29,8 @@ dependencies:
   flutter_inset_box_shadow:
     path: packages/flutter_inset_box_shadow-1.0.8
   receive_sharing_intent: ^1.8.1
+  path_provider: ^2.1.5
+  google_mobile_ads: ^6.0.0
 
 dev_dependencies:
   flutter_test:

@@ -6,6 +6,7 @@ import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/utils/helpers/text_store_helper.dart';
 import 'package:encryption_app/controllers/store_cubit/store_cubit.dart';
 import 'package:encryption_app/controllers/store_cubit/store_states.dart';
+import 'package:encryption_app/view/widgets/ads/interstitial_ad_edit_store_module.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/view/widgets/custom_toast.dart';
 import 'package:encryption_app/utils/helpers/dismiss_keyboard.dart';
@@ -14,15 +15,16 @@ import 'package:encryption_app/utils/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sizer/sizer.dart';
 
 /// We do not save any private data here
 /// we save only the encrypted text.
 class AddToTextStoreScreen extends StatelessWidget {
   AddToTextStoreScreen({
-    Key? key,
+    super.key,
     required this.encryptedText,
-  }) : super(key: key);
+  });
 
   final String encryptedText;
 
@@ -49,6 +51,10 @@ class AddToTextStoreScreen extends StatelessWidget {
         },
         builder: (context, state) {
           StoreCubit cubit = StoreCubit.get(context);
+
+          if (state is StoreInitState) {
+            AdInterstitialEditStore.loadAd();
+          }
 
           return Scaffold(
             appBar: AppBar(
@@ -272,9 +278,9 @@ class AddToTextStoreScreen extends StatelessWidget {
 
 class GroupDropDown extends StatelessWidget {
   const GroupDropDown({
-    Key? key,
+    super.key,
     required this.groupCtrl,
-  }) : super(key: key);
+  });
 
   final TextEditingController groupCtrl;
 
@@ -354,10 +360,10 @@ class GroupDropDown extends StatelessWidget {
 
 class GroupTextForm extends StatelessWidget {
   const GroupTextForm({
-    Key? key,
+    super.key,
     required this.groupFormKey,
     required this.groupCtrl,
-  }) : super(key: key);
+  });
 
   final GlobalKey<FormState> groupFormKey;
   final TextEditingController groupCtrl;
@@ -425,9 +431,9 @@ class GroupTextForm extends StatelessWidget {
 
 class TitleTextForm extends StatelessWidget {
   const TitleTextForm({
-    Key? key,
+    super.key,
     required this.titleCtrl,
-  }) : super(key: key);
+  });
 
   final TextEditingController titleCtrl;
 
@@ -487,6 +493,14 @@ class TitleTextForm extends StatelessWidget {
   }
 }
 
+void doneAndBack(BuildContext context) {
+  Navigator.pop(context);
+
+  Future.delayed(const Duration(milliseconds: 500)).then((_) {
+    AdInterstitialEditStore.showAd();
+  });
+}
+
 void back(BuildContext context) {
   Navigator.pop(context);
 }
@@ -511,5 +525,5 @@ void onSuccessfulAdd({
     mSeconds: 3000,
   );
 
-  Navigator.pop(context);
+  doneAndBack(context);
 }

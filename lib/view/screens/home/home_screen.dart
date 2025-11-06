@@ -13,6 +13,7 @@ import 'package:encryption_app/models/group_model.dart';
 import 'package:encryption_app/models/text_store_model.dart';
 import 'package:encryption_app/utils/helpers/bio_authentication_helper.dart';
 import 'package:encryption_app/view/screens/edit_text_store/edit_text_store_screen.dart';
+import 'package:encryption_app/view/widgets/ads/banner_ad_module.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/view/widgets/drawer/my_app_drawer.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/dialog_button.dart';
@@ -227,6 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Column(
                   children: [
+                    // Content
                     Expanded(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
@@ -249,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                                 prefixIcon: Icon(
                                   MyIcons.text_field,
-                                  size: 19+5,
+                                  size: 19 + 5,
                                 ),
                                 onTab: () {
                                   cubit.setCurrentFieldToText();
@@ -366,7 +368,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 group.groupName,
                                                                 style: TextStyle(
                                                                   fontWeight: FontWeight.w500,
-                                                                  fontSize: 14+5,
+                                                                  fontSize: 14 + 5,
                                                                 ),
                                                               ),
                                                               collapsedIconColor: smallButtonsContentColor(context),
@@ -385,7 +387,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 return Container(
                                                                   width: double.infinity,
                                                                   padding: EdgeInsets.symmetric(
-                                                                    horizontal: 15+5,
+                                                                    horizontal: 15 + 5,
                                                                   ),
                                                                   child: Row(
                                                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -404,7 +406,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               style: TextStyle(
                                                                                 color: titlesColor(context),
                                                                                 fontWeight: FontWeight.w500,
-                                                                                fontSize: 12+5,
+                                                                                fontSize: 12 + 5,
                                                                               ),
                                                                             ),
                                                                           ),
@@ -414,11 +416,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       GestureDetector(
                                                                         child: Padding(
                                                                           padding: EdgeInsets.symmetric(
-                                                                            horizontal: 5+5,
+                                                                            horizontal: 5 + 5,
                                                                           ),
                                                                           child: Icon(
                                                                             MyIcons.copy,
-                                                                            size: 15+5,
+                                                                            size: 15 + 5,
                                                                             color: iconsGrayColor,
                                                                           ),
                                                                         ),
@@ -446,13 +448,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         Icon(
                                                           MyIcons.bookmark_add,
                                                           color: iconsGrayColor,
-                                                          size: 45+5,
+                                                          size: 45 + 5,
                                                         ),
                                                         Text(
                                                           'add_store_message'.tr(),
                                                           style: TextStyle(
                                                             color: Colors.grey[500],
-                                                            fontSize: 12+5,
+                                                            fontSize: 12 + 5,
                                                           ),
                                                           textAlign: TextAlign.center,
                                                         ),
@@ -515,7 +517,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                                 prefixIcon: Icon(
                                   MyIcons.key,
-                                  size: 19+5,
+                                  size: 19 + 5,
                                 ),
                                 suffixIcon: IconButton(
                                   onPressed: () {
@@ -523,7 +525,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   icon: Icon(
                                     cubit.passwordIcon,
-                                    size: 17+5,
+                                    size: 17 + 5,
                                   ),
                                 ),
                                 isPassword: true,
@@ -664,13 +666,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ],
                             ),
-                            SizedBox(
-                              height: 45.h,
-                            ),
+                            SizedBox(height: 45.h),
                           ],
                         ),
                       ),
                     ),
+                    // Banner AD
+                    if (OperationCounterCache.getCounter() >= 2) const AdBanner(),
                   ],
                 ),
               ),

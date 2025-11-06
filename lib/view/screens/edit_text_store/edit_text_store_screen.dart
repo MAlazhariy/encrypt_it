@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:encryption_app/models/group_content_model.dart';
 import 'package:encryption_app/models/group_model.dart';
 import 'package:encryption_app/utils/helpers/text_store_helper.dart';
+import 'package:encryption_app/view/widgets/ads/interstitial_ad_edit_store_module.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/custom_dialog/custom_dialog.dart';
 import 'package:encryption_app/view/widgets/custom_dialog/dialog_button.dart';
 import 'package:encryption_app/utils/constants.dart';
@@ -254,13 +255,20 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
     );
   }
 
+  void doneAndBack() {
+    Navigator.pop(context);
+    AdInterstitialEditStore.showAd();
+  }
+
   @override
   void initState() {
     super.initState();
+    AdInterstitialEditStore.loadAd();
   }
 
   @override
   void dispose() {
+    AdInterstitialEditStore.disposeAd();
     super.dispose();
   }
 
@@ -281,7 +289,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            doneAndBack();
           },
           icon: const Icon(Icons.arrow_back),
         ),
@@ -528,7 +536,7 @@ class EditTextStoreScreenState extends State<EditTextStoreScreen> {
               ),
               child: MaterialButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  doneAndBack();
                 },
                 color: smallButtonsContentColor(context),
                 minWidth: 50.w,

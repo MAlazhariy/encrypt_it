@@ -13,3 +13,4 @@ key.properties
 **/*.keystore
 **/*.jks
 /app/.cxx/
+/app/src/main/res/values/ads.xml
