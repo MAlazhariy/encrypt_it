@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:encryption_app/decoding/encrypt_abstract.dart';
 import 'package:encryption_app/decoding/versions/version_05.dart';
 import 'package:encryption_app/decoding/versions/version_05_old.dart';
 import 'package:encryption_app/decoding/versions/version_06.dart';
@@ -26,9 +25,11 @@ String decrypt({
 
   if (version == '05') {
     return V05(text: text.removeVersion(), password: password).decrypt();
+  } else if (version == '06') {
+    return V06(text: text.removeVersion(), password: password).decrypt();
+  } else {
+    return V07(text: text.removeVersion(), password: password).decrypt();
   }
-
-  return V06(text: text.removeVersion(), password: password).decrypt();
 }
 
 int _getRandom({
@@ -251,17 +252,16 @@ void main() {
         count,
         (index) {
           final rVersion = _getRandom();
-          late final Encryption enc;
           switch (rVersion) {
             case 5:
-              enc = V05(text: plainText, password: password);
+              return V05(text: plainText, password: password).encrypt();
             case 6:
-              enc = V06(text: plainText, password: password);
+              return V06(text: plainText, password: password).encrypt();
             case 7:
-              enc = V07(text: plainText, password: password);
+              return V07(text: plainText, password: password).encrypt();
+            default:
+              return "";
           }
-
-          return enc.encrypt();
         },
       );
 
@@ -269,6 +269,7 @@ void main() {
         count,
         (index) => decrypt(text: encryptedTexts[index], password: password),
       );
+
       for (var i = 0; i < count; i++) {
         expect(plainText, decryptedTexts[i]);
       }
