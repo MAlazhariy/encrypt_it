@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class BottomSheetDesign extends StatelessWidget {
-  const BottomSheetDesign(this.isEncrypt, this.password, {Key? key})
-      : super(key: key);
+  const BottomSheetDesign(
+    this.isEncrypt,
+    this.password, {
+    super.key,
+  });
 
   final bool isEncrypt;
   final String password;
@@ -21,7 +24,7 @@ class BottomSheetDesign extends StatelessWidget {
       width: double.maxFinite,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(15+5),
+          top: Radius.circular(15 + 5),
         ),
         color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
@@ -34,31 +37,29 @@ class BottomSheetDesign extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 13+5),
+          SizedBox(height: 13 + 5),
 
           // small dash
           Container(
             width: 10.w,
-            height: 3.7+5,
+            height: 3.7 + 5,
             decoration: BoxDecoration(
               color: iconsGrayColor.withAlpha(85),
               borderRadius: BorderRadius.circular(50),
             ),
           ),
-          SizedBox(height: 9+5),
+          SizedBox(height: 9 + 5),
 
           // action title ['encrypt' or 'decrypt']
           Text(
-            isEncrypt
-                ? '${'encrypted text'.tr()} :'
-                : '${'decrypted message'.tr()} :',
+            isEncrypt ? '${'encrypted text'.tr()}:' : '${'decrypted message'.tr()}:',
             style: TextStyle(
               color: titlesColor(context),
               fontWeight: FontWeight.w400,
-              fontSize: 9+5,
+              fontSize: 9 + 5,
             ),
           ),
-          SizedBox(height: 4.5+5),
+          SizedBox(height: 4.5 + 5),
 
           // text result widget
           TextResultFilterWidget(isEncrypt),

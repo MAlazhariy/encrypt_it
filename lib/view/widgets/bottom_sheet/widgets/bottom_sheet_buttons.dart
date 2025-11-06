@@ -14,9 +14,12 @@ import 'package:sizer/sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class BottomSheetButtons extends StatelessWidget {
-  const BottomSheetButtons(this.textResult, this.password, this.isEncrypt,
-      {Key? key})
-      : super(key: key);
+  const BottomSheetButtons(
+    this.textResult,
+    this.password,
+    this.isEncrypt, {
+    super.key,
+  });
 
   final String textResult;
   final String password;
@@ -31,12 +34,12 @@ class BottomSheetButtons extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       child: Padding(
         padding: EdgeInsetsDirectional.only(
-          top: 5+5,
-          bottom: 12+5,
+          top: 5 + 5,
+          bottom: 12 + 5,
         ),
         child: Wrap(
           alignment: WrapAlignment.center,
-          spacing: 10+5,
+          spacing: 10 + 5,
           children: [
             // copy
             BottomSheetButton(
@@ -68,8 +71,7 @@ class BottomSheetButtons extends StatelessWidget {
 }
 
 class AddToStoreButton extends StatelessWidget {
-  AddToStoreButton(this.isEncrypt, this.textResult, {Key? key})
-      : super(key: key);
+  AddToStoreButton(this.isEncrypt, this.textResult, {super.key});
 
   final bool isEncrypt;
   final String textResult;
@@ -102,8 +104,7 @@ class AddToStoreButton extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  AddToTextStoreScreen(encryptedText: textResult),
+              builder: (context) => AddToTextStoreScreen(encryptedText: textResult),
             ),
           );
         },

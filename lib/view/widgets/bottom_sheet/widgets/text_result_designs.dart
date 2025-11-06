@@ -8,7 +8,7 @@ import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TextResultFilterWidget extends StatelessWidget {
-  const TextResultFilterWidget(this.isEncrypt, {Key? key}) : super(key: key);
+  const TextResultFilterWidget(this.isEncrypt, {super.key});
 
   final bool isEncrypt;
 
@@ -32,7 +32,7 @@ class TextResultFilterWidget extends StatelessWidget {
 }
 
 class EncryptedResultWidget extends StatelessWidget {
-  const EncryptedResultWidget({Key? key}) : super(key: key);
+  const EncryptedResultWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class EncryptedResultWidget extends StatelessWidget {
 }
 
 class DecryptedResultWidget extends StatelessWidget {
-  const DecryptedResultWidget({Key? key}) : super(key: key);
+  const DecryptedResultWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +102,7 @@ class DecryptedResultWidget extends StatelessWidget {
 }
 
 class LargeResultWidget extends StatelessWidget {
-  const LargeResultWidget({Key? key}) : super(key: key);
+  const LargeResultWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
