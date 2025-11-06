@@ -18,7 +18,7 @@ class RateCache {
   }
   static bool isReadyShowRate({bool inAppReview = false}){
     int counter = OperationCounterCache.getCounter();
-    debugPrint('> counterCache: $counter');
+    // debugPrint('> counterCache: $counter');
     bool condition = inAppReview
         ? (counter == _minToRate+1) // in app review Panel rate condition
         : (counter % _rateFrequency == 5); // open google play link condition
