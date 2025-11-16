@@ -29,7 +29,7 @@ class ChangeLanguageBottomSheetWidget extends StatelessWidget {
       children: [
         SelectableIconOption(
           title: 'language_arabic'.tr(),
-          icon: Icons.translate,
+          icon: Icons.language,
           isSelected: isArabic,
           onTap: () {
             _changeLanguage('ar', context);
