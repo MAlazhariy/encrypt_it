@@ -1,14 +1,13 @@
 import 'package:hive/hive.dart';
 
 class ThemeCache {
-
   static Box rateBox = Hive.box('myBox');
 
-  static bool? isDarkMode(){
+  static bool? isDarkMode() {
     return rateBox.get('isDarkMode');
   }
-  static void setDarkMode(bool value){
-    rateBox.put('isDarkMode', value);
-  }
 
+  static Future<void> setDarkMode(bool value) async {
+    await rateBox.put('isDarkMode', value);
+  }
 }

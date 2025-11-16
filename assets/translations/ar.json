@@ -155,6 +155,10 @@
   "showcase_add_to_store_description": "اضغط هنا لإضافة النص المشفر إلى @:message_store",
 
   "dark_mode" : "الوضع الليلي",
+  "theme_app_theme": "مظهر التطبيق",
+  "theme_light_mode": "الوضع الفاتح",
+  "theme_dark_mode": "الوضع الليلي",
+  "theme_system_mode": "افتراضي النظام",
 
   "about_developer": "من المطور؟",
   "developer_summary": "مطور متخصص في برمجة تطبيقات الهاتف (أندرويد وiOS)، قام بالعمل على أكثر من 25 مشروع للشركات، وبالأخص تطبيقات التجارة الإلكترونية، والتعليم الرقمي.",
