@@ -34,6 +34,8 @@
 
   "change lang": "Change language",
   "sure change lang": "Are you sure you want to change to Arabic?",
+  "language_arabic": "Arabic",
+  "language_english": "English",
   "settings": "Settings",
 
   "back": "Back",

@@ -11,7 +11,7 @@ class AppConstants {
   static const String appName = "Encrypt It";
 }
 
-void changeLang(BuildContext context) {
+void changeLanguage(BuildContext context) {
   if (getCurrentLang(context) == 'ar') {
     context.locale = const Locale('en');
   } else {
